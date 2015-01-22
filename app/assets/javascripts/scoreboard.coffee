@@ -1,3 +1,30 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  players = Bacon.constant do ->
+    $players = $('.player-list-inactive-players .player-list-player').toArray()
+    _.map $players, (player) -> $(player).text()
+
+  playerActivations = $('.player-list-inactive-players')
+    .asEventStream('click', '.player-list-player')
+    .map (event) -> $(event.target).text()
+
+  activePlayers = playerActivations
+    .scan [], (activePlayers, player) ->
+      activePlayers.push player
+      activePlayers
+    .onValue (activePlayers) ->
+      $activePlayerList = $('.player-list-active-players')
+      $activePlayerList.empty()
+      _.each activePlayers, (player) ->
+        $activePlayerList.append """
+          <div class="player-list-player">#{player}</div>
+        """
+
+  Bacon
+    .combineWith _.difference, players, activePlayers
+    .onValue (inactivePlayers) ->
+      $inactivePlayerList = $('.player-list-inactive-players')
+      $inactivePlayerList.empty()
+      _.each inactivePlayers, (player) ->
+        $inactivePlayerList.append """
+          <div class="player-list-player">#{player}</div>
+        """
