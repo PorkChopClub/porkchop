@@ -44,18 +44,32 @@ $ ->
 
   homePlayerScoring = $('.scoreboard-home-player')
     .asEventStream('click')
-    .map('home')
+    .map ->
+      (match) ->
+        match = _.cloneDeep(match)
+        match.push 'home'
+        match
 
   awayPlayerScoring = $('.scoreboard-away-player')
     .asEventStream('click')
-    .map('away')
+    .map ->
+      (match) ->
+        match = _.cloneDeep(match)
+        match.push 'away'
+        match
+
+  rewinds = $('.scoreboard-rewind')
+    .asEventStream('click')
+    .map ->
+      (match) ->
+        match = _.cloneDeep(match)
+        match.pop()
+        match
 
   matches = homePlayerScoring
     .merge(awayPlayerScoring)
-    .scan [[]], (matchList, point) ->
-      matchList = _.cloneDeep(matchList)
-      matchList[0].push(point)
-      matchList
+    .merge(rewinds)
+    .scan [[]], (matchList, change) -> [change(matchList[0])]
 
   ongoingMatch = matches.map (matchList) -> matchList[0]
 
