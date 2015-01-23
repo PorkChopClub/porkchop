@@ -1,11 +1,25 @@
 $ ->
-  players = Bacon.constant do ->
-    $players = $('.player-list-inactive-players .player-list-player').toArray()
-    _.map $players, (player) -> $(player).text()
+  players = Bacon.constant [
+    "Jared Norman"
+    "Gray Gilmore"
+    "Sean Taylor"
+    "Naomi Aro"
+    "Sonmaz Zehtabi"
+    "Clarke Brunsdon"
+    "Kyria Brown"
+    "Adam Mueller"
+    "Chris Todorov"
+    "Richard Wilson"
+    "Brendan Deere"
+    "Kevin Attfield"
+    "Chris Kelly"
+    "John Hawthorn"
+  ]
 
   playerActivations = $('.player-list-inactive-players')
     .asEventStream('click', '.player-list-player')
     .map (event) -> $(event.target).text()
+    .log()
 
   activePlayers = playerActivations
     .scan [], (activePlayers, player) ->
