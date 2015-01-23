@@ -42,6 +42,35 @@ $ ->
 
   awayPlayer = activePlayers.map (playerList) -> playerList[1]
 
+  homePlayerScoring = $('.scoreboard-home-player')
+    .asEventStream('click')
+    .map('home')
+
+  awayPlayerScoring = $('.scoreboard-away-player')
+    .asEventStream('click')
+    .map('away')
+
+  matches = homePlayerScoring
+    .merge(awayPlayerScoring)
+    .scan [[]], (matchList, point) ->
+      matchList = _.cloneDeep(matchList)
+      matchList[0].push(point)
+      matchList
+
+  ongoingMatch = matches.map (matchList) -> matchList[0]
+
+  homeScore = ongoingMatch
+    .map (scoringList) ->
+      _.filter(scoringList, (who) -> who == 'home').length
+
+  awayScore = ongoingMatch
+    .map (scoringList) ->
+      _.filter(scoringList, (who) -> who == 'away').length
+
+  # Render player scores.
+  homeScore.assign $('.scoreboard-home-player-score'), 'text'
+  awayScore.assign $('.scoreboard-away-player-score'), 'text'
+
   # Render player names.
   homePlayer.assign $('.scoreboard-home-player-name'), 'text'
   awayPlayer.assign $('.scoreboard-away-player-name'), 'text'
