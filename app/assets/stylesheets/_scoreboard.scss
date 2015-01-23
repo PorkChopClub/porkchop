@@ -1,0 +1,84 @@
+.scoreboard {
+  height: 75vh;
+}
+
+.scoreboard-player {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  float: left;
+  color: $lightest-grey;
+  border: 4px solid $lightest-grey;
+}
+
+.scoreboard-player-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 5rem;
+  padding-left: 0.25em;
+  padding-bottom: 0.15em;
+  text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.scoreboard-player-score {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 25rem;
+  padding-right: 0.2em;
+  text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.scoreboard-home-player {
+  background-color: $green;
+}
+
+.scoreboard-away-player {
+  background-color: $darker-green;
+}
+
+.player-lists {
+  font-size: 2rem;
+  padding: 0 1em 1em 1em;
+  color: $dark-blue;
+
+  h2 {
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 200;
+  }
+}
+
+.player-list-player {
+  cursor: pointer;
+
+  .player-list-active-players & {
+    display: list-item;
+    list-style-type: decimal;
+    list-style-position: inside;
+    margin: 0.5em 0;
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      display: none;
+    }
+
+    &:hover {
+      color: $red;
+    }
+  }
+
+  .player-list-inactive-players & {
+    display: inline-block;
+    color: $lightest-grey;
+    background-color: $dark-blue;
+    border-radius: 0.25em;
+    padding: 0.1em 0.25em;
+    margin: 0 0.5em 0.5em 0;
+
+    &:hover {
+      background-color: $darker-blue;
+    }
+  }
+}

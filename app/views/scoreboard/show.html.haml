@@ -1,12 +1,15 @@
 .scoreboard
-  .scoreboard-home-player
-    .scoreboard-home-player-name
-    .scoreboard-home-player-score
-  .scoreboard-away-player
-    .scoreboard-away-player-name
-    .scoreboard-away-player-score
-.player-list
-  %h2 Active Players
-  .player-list-active-players
-  %h2 Inactive Players
-  .player-list-inactive-players
+  .scoreboard-player.scoreboard-home-player
+    .scoreboard-player-name.scoreboard-home-player-name
+    .scoreboard-player-score.scoreboard-home-player-score
+  .scoreboard-player.scoreboard-away-player
+    .scoreboard-player-name.scoreboard-away-player-name
+    .scoreboard-player-score.scoreboard-away-player-score
+
+.player-lists
+  .player-list
+    %h2 Coming up
+    .player-list-active-players
+  .player-list
+    %h2 Available Players
+    .player-list-inactive-players

@@ -1,0 +1,10 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background-color: $lightest-grey;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
