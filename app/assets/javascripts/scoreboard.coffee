@@ -11,6 +11,11 @@ $ ->
     .scan [], (activePlayers, player) ->
       activePlayers.push player
       activePlayers
+
+  inactivePlayers = Bacon.combineWith _.difference, players, activePlayers
+
+  # Render active players.
+  activePlayers
     .onValue (activePlayers) ->
       $activePlayerList = $('.player-list-active-players')
       $activePlayerList.empty()
@@ -18,9 +23,8 @@ $ ->
         $activePlayerList.append """
           <div class="player-list-player">#{player}</div>
         """
-
-  Bacon
-    .combineWith _.difference, players, activePlayers
+  # Render inactive players.
+  inactivePlayers
     .onValue (inactivePlayers) ->
       $inactivePlayerList = $('.player-list-inactive-players')
       $inactivePlayerList.empty()
