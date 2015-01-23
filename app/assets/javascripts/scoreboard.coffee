@@ -18,13 +18,15 @@ $ ->
 
   playerActivations = $('.player-list-inactive-players')
     .asEventStream('click', '.player-list-player')
-    .map (event) -> $(event.target).text()
-    .log()
+    .map (event) ->
+      player = $(event.target).text()
+      (playerList) ->
+        playerList = _.clone(playerList) # I call this "fp in js."
+        playerList.push(player)
+        playerList
 
   activePlayers = playerActivations
-    .scan [], (activePlayers, player) ->
-      activePlayers.push player
-      activePlayers
+    .scan [], (activePlayers, change) -> change(activePlayers)
 
   inactivePlayers = Bacon.combineWith _.difference, players, activePlayers
 
