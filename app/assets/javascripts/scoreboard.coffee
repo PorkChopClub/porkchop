@@ -38,6 +38,14 @@ $ ->
 
   inactivePlayers = Bacon.combineWith _.difference, players, activePlayers
 
+  homePlayer = activePlayers.map (playerList) -> playerList[0]
+
+  awayPlayer = activePlayers.map (playerList) -> playerList[1]
+
+  # Render player names.
+  homePlayer.assign $('.scoreboard-home-player-name'), 'text'
+  awayPlayer.assign $('.scoreboard-away-player-name'), 'text'
+
   # Render active players.
   activePlayers
     .onValue (activePlayers) ->
