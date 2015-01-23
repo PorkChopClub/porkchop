@@ -67,6 +67,19 @@ $ ->
     .map (scoringList) ->
       _.filter(scoringList, (who) -> who == 'away').length
 
+  service = ongoingMatch
+    .map (scoringList) ->
+      if scoringList.length/2 % 2 < 1 then 'home' else 'away'
+
+  homeServing = service.map (service) -> service == 'home'
+  awayServing = service.map (service) -> service == 'away'
+
+  # Set service indicator
+  homeServing
+    .assign $('.scoreboard-home-player'), 'toggleClass', 'has-service'
+  awayServing
+    .assign $('.scoreboard-away-player'), 'toggleClass', 'has-service'
+
   # Render player scores.
   homeScore.assign $('.scoreboard-home-player-score'), 'text'
   awayScore.assign $('.scoreboard-away-player-score'), 'text'

@@ -7,8 +7,13 @@
   width: 50%;
   height: 100%;
   float: left;
+  background-color: $green;
   color: $lightest-grey;
   border: 4px solid $lightest-grey;
+
+  &.has-service {
+    background-color: $orange;
+  }
 }
 
 .scoreboard-player-name {
@@ -28,14 +33,6 @@
   font-size: 25rem;
   padding-right: 0.2em;
   text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-.scoreboard-home-player {
-  background-color: $green;
-}
-
-.scoreboard-away-player {
-  background-color: $darker-green;
 }
 
 .player-lists {
