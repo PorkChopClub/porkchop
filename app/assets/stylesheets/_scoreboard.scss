@@ -1,5 +1,5 @@
 .scoreboard {
-  height: 75vh;
+  height: 100vh;
 }
 
 .scoreboard-player {
@@ -7,12 +7,12 @@
   width: 50%;
   height: 100%;
   float: left;
-  background-color: $green;
-  color: $lightest-grey;
-  border: 4px solid $lightest-grey;
+  background-color: $lightest-grey;
+  color: $dark-blue;
 
   &.has-service {
-    background-color: $orange;
+    background-color: $blue;
+    color: $lightest-grey;
   }
 }
 
@@ -31,51 +31,46 @@
   top: 0;
   right: 0;
   font-size: 25rem;
-  padding-right: 0.2em;
+  margin: -0.12em 0.1em;
   text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
-.player-lists {
-  font-size: 2rem;
-  padding: 0 1em 1em 1em;
-  color: $dark-blue;
+.scoreboard-controls {
+  background-color: $dark-blue;
+  font-size: 1.25rem;
+  padding: 0.5em;
+  text-align: center;
+}
 
-  h2 {
-    font-size: 2rem;
-    font-style: italic;
-    font-weight: 200;
-  }
+.scoreboard-control {
+  color: $lightest-grey;
+  background-color: $dark-blue;
+  border: 2px solid $lightest-grey;
+  font-weight: 600;
+  display: inline-block;
+  border-radius: 0.125em;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+  transition: transform 75ms ease-in-out;
+
+  &:hover { transform: scale(1.1); }
+}
+
+.player-list-inactive-players {
+  font-size: 1.5rem;
+  padding: 1em 1em 0.75em 1em;
 }
 
 .player-list-player {
   cursor: pointer;
+  display: inline-block;
+  color: $lightest-grey;
+  background-color: $dark-blue;
+  border-radius: 0.25em;
+  border: 3px solid $lightest-grey;
+  padding: 0.25em 0.75em;
+  margin: 0 0.25em 0.25em 0;
+  transition: transform 75ms ease-in-out;
 
-  .player-list-active-players & {
-    display: list-item;
-    list-style-type: decimal;
-    list-style-position: inside;
-    margin: 0.5em 0;
-
-    &:nth-child(1),
-    &:nth-child(2) {
-      display: none;
-    }
-
-    &:hover {
-      color: $red;
-    }
-  }
-
-  .player-list-inactive-players & {
-    display: inline-block;
-    color: $lightest-grey;
-    background-color: $dark-blue;
-    border-radius: 0.25em;
-    padding: 0.1em 0.25em;
-    margin: 0 0.5em 0.5em 0;
-
-    &:hover {
-      background-color: $darker-blue;
-    }
-  }
+  &:hover { transform: scale(1.5); }
 }

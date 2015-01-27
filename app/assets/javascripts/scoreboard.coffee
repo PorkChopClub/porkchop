@@ -1,46 +1,44 @@
+playerIdFromName = (name, playerList) ->
+  _.find(playerList, (player) -> player.name == name)?.id
+
+playerNameFromId = (id, playerList) ->
+  _.find(playerList, (player) -> player.id == id)?.name
+
 $ ->
-  players = Bacon.constant [
-    "Jared Norman"
-    "Gray Gilmore"
-    "Sean Taylor"
-    "Naomi Aro"
-    "Sonmaz Zehtabi"
-    "Clarke Brunsdon"
-    "Kyria Brown"
-    "Adam Mueller"
-    "Chris Todorov"
-    "Richard Wilson"
-    "Brendan Deere"
-    "Kevin Attfield"
-    "Chris Kelly"
-    "John Hawthorn"
-  ]
+  playersRequest = $.ajax
+    url: "/api/players.json"
+
+  players = Bacon
+    .fromPromise(playersRequest)
+    .map (data) -> data["players"]
+    .toProperty []
 
   playerActivations = $('.player-list-inactive-players')
     .asEventStream('click', '.player-list-player')
     .map (event) -> $(event.target).text()
-    .map (player) ->
+    .combine(players, playerIdFromName)
+    .map (id) ->
       (playerList) ->
         playerList = _.clone(playerList)
-        playerList.push(player)
+        playerList.push(id)
         playerList
 
   playerDeactivations = $('.player-list-active-players')
     .asEventStream('click', '.player-list-player')
     .map (event) -> $(event.target).text()
-    .map (player) ->
+    .combine(players, playerIdFromName)
+    .map (id) ->
       (playerList) ->
-        _.without playerList, player
+        _.without playerList, id
 
   activePlayers = playerActivations
-    .merge(playerDeactivations)
     .scan [], (activePlayers, change) -> change(activePlayers)
 
   inactivePlayers = Bacon.combineWith _.difference, players, activePlayers
 
-  homePlayer = activePlayers.map (playerList) -> playerList[0]
+  homePlayerId = activePlayers.map (playerList) -> playerList[0]
 
-  awayPlayer = activePlayers.map (playerList) -> playerList[1]
+  awayPlayerId = activePlayers.map (playerList) -> playerList[1]
 
   homePlayerScoring = $('.scoreboard-home-player')
     .asEventStream('click')
@@ -66,22 +64,20 @@ $ ->
         match.pop()
         match
 
-  matches = homePlayerScoring
+  match = homePlayerScoring
     .merge(awayPlayerScoring)
     .merge(rewinds)
-    .scan [[]], (matchList, change) -> [change(matchList[0])]
+    .scan [], (match, change) -> change(match)
 
-  ongoingMatch = matches.map (matchList) -> matchList[0]
-
-  homeScore = ongoingMatch
+  homeScore = match
     .map (scoringList) ->
       _.filter(scoringList, (who) -> who == 'home').length
 
-  awayScore = ongoingMatch
+  awayScore = match
     .map (scoringList) ->
       _.filter(scoringList, (who) -> who == 'away').length
 
-  service = ongoingMatch
+  service = match
     .map (scoringList) ->
       if scoringList.length/2 % 2 < 1 then 'home' else 'away'
 
@@ -99,24 +95,19 @@ $ ->
   awayScore.assign $('.scoreboard-away-player-score'), 'text'
 
   # Render player names.
-  homePlayer.assign $('.scoreboard-home-player-name'), 'text'
-  awayPlayer.assign $('.scoreboard-away-player-name'), 'text'
+  homePlayerId
+    .combine players, playerNameFromId
+    .assign $('.scoreboard-home-player-name'), 'text'
+  awayPlayerId
+    .combine players, playerNameFromId
+    .assign $('.scoreboard-away-player-name'), 'text'
 
-  # Render active players.
-  activePlayers
-    .onValue (activePlayers) ->
-      $activePlayerList = $('.player-list-active-players')
-      $activePlayerList.empty()
-      _.each activePlayers, (player) ->
-        $activePlayerList.append """
-          <div class="player-list-player">#{player}</div>
-        """
   # Render inactive players.
-  inactivePlayers
+  players
     .onValue (inactivePlayers) ->
       $inactivePlayerList = $('.player-list-inactive-players')
       $inactivePlayerList.empty()
       _.each inactivePlayers, (player) ->
         $inactivePlayerList.append """
-          <div class="player-list-player">#{player}</div>
+          <div class="player-list-player">#{player.name}</div>
         """
