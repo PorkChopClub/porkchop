@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'scoreboard/show'
 
-  root 'scoreboard#show'
+  root to: redirect('scoreboard/show')
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
