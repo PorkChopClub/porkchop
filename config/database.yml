@@ -5,8 +5,8 @@ default: &default
 
 development:
   <<: *default
-  database: porkspin_development
+  database: porkchop_development
 
 test:
   <<: *default
-  database: porkspin_test
+  database: porkchop_test
