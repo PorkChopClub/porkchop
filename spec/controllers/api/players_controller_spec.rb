@@ -4,9 +4,7 @@ RSpec.describe Api::PlayersController, type: :controller do
   render_views
 
   describe "GET index" do
-    let!(:player) {
-      Player.create!(name: "Candice Bergen") # http://bit.ly/15E65sT
-    }
+    let!(:player) { FactoryGirl.create :player }
 
     subject { get :index, format: :json }
 

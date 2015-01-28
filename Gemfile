@@ -18,4 +18,5 @@ end
 group :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
+  gem 'factory_girl_rails', require: false
 end
