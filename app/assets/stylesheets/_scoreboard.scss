@@ -21,8 +21,8 @@
   bottom: 0;
   left: 0;
   font-size: 5rem;
-  padding-left: 0.25em;
-  padding-bottom: 0.15em;
+  padding-left: 0.75em;
+  padding-bottom: 0.5em;
   text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -36,10 +36,32 @@
 }
 
 .scoreboard-controls {
+  width: 100%;
   background-color: $dark-blue;
   font-size: 1.25rem;
   padding: 0.5em;
   text-align: center;
+  position: fixed;
+  bottom: -58px;
+  transition: bottom 75ms ease-in-out;
+
+  &:hover {
+    bottom: 0;
+  }
+
+  .arrow {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-color: rgba(52, 73, 94, 0);
+    border-bottom-color: #34495e;
+    border-width: 50px;
+    margin-left: -50px;
+  }
 }
 
 .scoreboard-control {
@@ -56,9 +78,40 @@
   &:hover { transform: scale(1.1); }
 }
 
-.player-list-inactive-players {
-  font-size: 1.5rem;
+.game-setup-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 100vh;
+  right: 0;
+  background-color: $dark-blue;
+  font-size: 3rem;
   padding: 1em 1em 0.75em 1em;
+  transition: top 200ms ease-in-out;
+
+  &.started {
+    top: 0;
+  }
+
+  &.finished {
+    top: -100vh;
+  }
+}
+
+.player-selection-overlay {
+}
+
+.player-selection-message {
+  font-size: 4rem;
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 0.75em;
+  color: $lightest-grey;
+
+  &:after { content: ":"; }
+}
+
+.player-list-inactive-players {
 }
 
 .player-list-player {

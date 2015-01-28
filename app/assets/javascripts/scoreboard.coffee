@@ -5,15 +5,17 @@ playerNameFromId = (id, playerList) ->
   _.find(playerList, (player) -> player.id == id)?.name
 
 $ ->
-  playersRequest = $.ajax
-    url: "/api/players.json"
-
   players = Bacon
-    .fromPromise(playersRequest)
+    .once { url: "/api/players.json" }
+    .ajax()
     .map (data) -> data["players"]
     .toProperty []
 
-  playerActivations = $('.player-list-inactive-players')
+  playerIds = players
+    .map (players) ->
+      _.map players, (player) -> player.id
+
+  playerActivations = $('.player-list-unselected-players')
     .asEventStream('click', '.player-list-player')
     .map (event) -> $(event.target).text()
     .combine(players, playerIdFromName)
@@ -23,22 +25,23 @@ $ ->
         playerList.push(id)
         playerList
 
-  playerDeactivations = $('.player-list-active-players')
-    .asEventStream('click', '.player-list-player')
-    .map (event) -> $(event.target).text()
-    .combine(players, playerIdFromName)
-    .map (id) ->
-      (playerList) ->
-        _.without playerList, id
+  selectedPlayerIds = playerActivations
+    .scan [], (selectedPlayerIds, change) -> change(selectedPlayerIds)
 
-  activePlayers = playerActivations
-    .scan [], (activePlayers, change) -> change(activePlayers)
+  unselectedPlayers = Bacon
+    .combineWith _.difference, playerIds, selectedPlayerIds
+    .combine players, (ids, players) ->
+      _.filter players, (player) ->
+        _.include(ids, player.id)
 
-  inactivePlayers = Bacon.combineWith _.difference, players, activePlayers
+  selectedPlayerCount = selectedPlayerIds
+    .map (players) -> players.length
+  playersSelected = selectedPlayerCount
+    .map (count) -> count == 2
 
-  homePlayerId = activePlayers.map (playerList) -> playerList[0]
+  homePlayerId = selectedPlayerIds.map (playerList) -> playerList[0]
 
-  awayPlayerId = activePlayers.map (playerList) -> playerList[1]
+  awayPlayerId = selectedPlayerIds.map (playerList) -> playerList[1]
 
   homePlayerScoring = $('.scoreboard-home-player')
     .asEventStream('click')
@@ -84,6 +87,18 @@ $ ->
   homeServing = service.map (service) -> service == 'home'
   awayServing = service.map (service) -> service == 'away'
 
+  # Render player selection
+  selectedPlayerCount
+    .map (count) ->
+      if count == 0
+        "Choose the home player"
+      else
+        "Choose the away player"
+    .assign $('.player-selection-message'), 'text'
+
+  playersSelected
+    .assign $('.player-selection-overlay'), 'toggleClass', 'finished'
+
   # Set service indicator
   homeServing
     .assign $('.scoreboard-home-player'), 'toggleClass', 'has-service'
@@ -102,12 +117,12 @@ $ ->
     .combine players, playerNameFromId
     .assign $('.scoreboard-away-player-name'), 'text'
 
-  # Render inactive players.
-  players
-    .onValue (inactivePlayers) ->
-      $inactivePlayerList = $('.player-list-inactive-players')
-      $inactivePlayerList.empty()
-      _.each inactivePlayers, (player) ->
-        $inactivePlayerList.append """
+  # Render unselected players.
+  unselectedPlayers
+    .onValue (unselectedPlayers) ->
+      $unselectedPlayerList = $('.player-list-unselected-players')
+      $unselectedPlayerList.empty()
+      _.each unselectedPlayers, (player) ->
+        $unselectedPlayerList.append """
           <div class="player-list-player">#{player.name}</div>
         """
