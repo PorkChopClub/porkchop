@@ -88,6 +88,7 @@
   font-size: 3rem;
   padding: 1em 1em 0.75em 1em;
   transition: top 200ms ease-in-out;
+  color: $lightest-grey;
 
   &.started {
     top: 0;
@@ -96,22 +97,21 @@
   &.finished {
     top: -100vh;
   }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 0.75em;
+  }
 }
 
-.player-selection-overlay {
-}
-
-.player-selection-message {
-  font-size: 4rem;
-  font-weight: 300;
-  font-style: italic;
-  margin-bottom: 0.75em;
-  color: $lightest-grey;
-
-  &:after { content: ":"; }
-}
-
-.player-list-inactive-players {
+.service-selection-overlay {
+  .home-player,
+  .away-player {
+    @extend .player-list-player;
+    &:last-child { margin-left: 0.25em; }
+  }
 }
 
 .player-list-player {

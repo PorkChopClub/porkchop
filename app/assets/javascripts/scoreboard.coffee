@@ -5,6 +5,7 @@ playerNameFromId = (id, playerList) ->
   _.find(playerList, (player) -> player.id == id)?.name
 
 $ ->
+
   players = Bacon
     .once { url: "/api/players.json" }
     .ajax()
@@ -43,6 +44,21 @@ $ ->
 
   awayPlayerId = selectedPlayerIds.map (playerList) -> playerList[1]
 
+  homePlayerServiceSelection = $('.service-selection-overlay')
+    .asEventStream 'click', '.home-player'
+    .map -> "home"
+
+  awayPlayerServiceSelection = $('.service-selection-overlay')
+    .asEventStream 'click', '.away-player'
+    .map -> "away"
+
+  playerServingFirst = Bacon
+    .mergeAll [homePlayerServiceSelection, awayPlayerServiceSelection]
+    .take(1)
+    .toProperty(null)
+
+  serviceSelected = playerServingFirst.not().not()
+
   homePlayerScoring = $('.scoreboard-home-player')
     .asEventStream('click')
     .map ->
@@ -72,6 +88,21 @@ $ ->
     .merge(rewinds)
     .scan [], (match, change) -> change(match)
 
+  serviceOrder = playerServingFirst
+    .map (player) ->
+      if player == "away"
+        ["away", "home"]
+      else
+        ["home", "away"]
+
+  service = match
+    .map (scoringList) -> scoringList.length % 4
+    .combine serviceOrder, (serviceCount, serviceOrder) ->
+       serviceOrder[serviceCount >> 1]
+
+  homeServing = service.map (service) -> service == 'home'
+  awayServing = service.map (service) -> service == 'away'
+
   homeScore = match
     .map (scoringList) ->
       _.filter(scoringList, (who) -> who == 'home').length
@@ -80,26 +111,31 @@ $ ->
     .map (scoringList) ->
       _.filter(scoringList, (who) -> who == 'away').length
 
-  service = match
-    .map (scoringList) ->
-      if scoringList.length/2 % 2 < 1 then 'home' else 'away'
-
-  homeServing = service.map (service) -> service == 'home'
-  awayServing = service.map (service) -> service == 'away'
-
   # Render player selection
   selectedPlayerCount
     .map (count) ->
       if count == 0
-        "Choose the home player"
+        "Choose the home player!"
       else
-        "Choose the away player"
+        "Choose the away player!"
     .assign $('.player-selection-message'), 'text'
 
   playersSelected
     .assign $('.player-selection-overlay'), 'toggleClass', 'finished'
 
-  # Set service indicator
+  # Render service selection.
+  playersSelected
+    .assign $('.service-selection-overlay'), 'toggleClass', 'started'
+  homePlayerId
+    .combine players, playerNameFromId
+    .assign $('.service-selection-overlay .home-player'), 'text'
+  awayPlayerId
+    .combine players, playerNameFromId
+    .assign $('.service-selection-overlay .away-player'), 'text'
+  serviceSelected
+    .assign $('.service-selection-overlay'), 'toggleClass', 'finished'
+
+  # Render service indication.
   homeServing
     .assign $('.scoreboard-home-player'), 'toggleClass', 'has-service'
   awayServing
