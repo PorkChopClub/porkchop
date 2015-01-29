@@ -160,5 +160,5 @@ $ ->
       $unselectedPlayerList.empty()
       _.each unselectedPlayers, (player) ->
         $unselectedPlayerList.append """
-          <div class="player-list-player">#{player.name}</div>
+          <button class="player-list-player">#{player.name}</button>
         """
