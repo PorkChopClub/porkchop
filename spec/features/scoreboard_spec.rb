@@ -5,46 +5,35 @@ RSpec.describe "scoreboard page" do
   let!(:away) { FactoryGirl.create :player, name: "Shirley Schmidt" }
 
   scenario "recording a normal game" do
-    visit "/scoreboard/show"
+    visit "/matches/new"
 
-    expect(page).to have_content "Choose the home player!"
-    expect(page).to have_content "Candice Bergen"
-    expect(page).to have_content "Shirley Schmidt"
+    select "Candice Bergen", from: "Home player"
+    select "Shirley Schmidt", from: "Away player"
 
-    click_button "Candice Bergen"
+    click_on "Create Match"
 
-    expect(page).to have_content "Choose the away player!"
-    expect(page).to have_content "Shirley Schmidt"
+    expect(player_score(:home)).to have_content "0"
+    expect(player_score(:away)).to have_content "0"
 
-    click_button "Shirley Schmidt"
-
-    expect(page).to have_content "Who is serving?"
-
-    click_button "Shirley Schmidt"
-
-    # FIXME: Test service logic.
-
-    score_point :home
-    score_point :home
     score_point :away
+    score_point :home
     score_point :away
     score_point :home
     score_point :home
 
-    expect(player_score(:home)).to have_content "4"
+    expect(player_score(:home)).to have_content "3"
     expect(player_score(:away)).to have_content "2"
 
-    score_point :home
-    score_point :home
-    score_point :home
-    score_point :home
-    score_point :home
-    score_point :home
-    score_point :away
-    score_point :home
+    7.times { score_point :home }
+    9.times { score_point :away }
+    3.times { score_point :home }
 
-    expect(player_score(:home)).to have_content "11"
-    expect(player_score(:away)).to have_content "3"
+    expect(page).to have_content "Finalize the game?!"
+
+    click_button "Yes, please!"
+
+    # FIXME: View game result page that doesn't exist at time of writing.
+    expect(Match.count).to eq 1
   end
 
   private

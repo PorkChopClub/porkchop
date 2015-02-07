@@ -26,4 +26,5 @@ group :test do
   gem 'capybara', require: false
   gem 'poltergeist', require: false
   gem 'database_cleaner', require: false
+  gem 'shoulda-matchers', require: false
 end

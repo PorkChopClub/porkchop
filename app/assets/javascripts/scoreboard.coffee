@@ -1,164 +1,35 @@
-playerIdFromName = (name, playerList) ->
-  _.find(playerList, (player) -> player.name == name)?.id
-
-playerNameFromId = (id, playerList) ->
-  _.find(playerList, (player) -> player.id == id)?.name
-
 $ ->
+  initialFetch = Bacon.once { url: '/api/ongoing_match.json' }
 
-  players = Bacon
-    .once { url: "/api/players.json" }
-    .ajax()
-    .map (data) -> data["players"]
-    .toProperty []
-
-  playerIds = players
-    .map (players) ->
-      _.map players, (player) -> player.id
-
-  playerActivations = $('.player-list-unselected-players')
-    .asEventStream('click', '.player-list-player')
-    .map (event) -> $(event.target).text()
-    .combine(players, playerIdFromName)
-    .map (id) ->
-      (playerList) ->
-        playerList = _.clone(playerList)
-        playerList.push(id)
-        playerList
-
-  selectedPlayerIds = playerActivations
-    .scan [], (selectedPlayerIds, change) -> change(selectedPlayerIds)
-
-  unselectedPlayers = Bacon
-    .combineWith _.difference, playerIds, selectedPlayerIds
-    .combine players, (ids, players) ->
-      _.filter players, (player) ->
-        _.include(ids, player.id)
-
-  selectedPlayerCount = selectedPlayerIds
-    .map (players) -> players.length
-  playersSelected = selectedPlayerCount
-    .map (count) -> count == 2
-
-  homePlayerId = selectedPlayerIds.map (playerList) -> playerList[0]
-
-  awayPlayerId = selectedPlayerIds.map (playerList) -> playerList[1]
-
-  homePlayerServiceSelection = $('.service-selection-overlay')
-    .asEventStream 'click', '.home-player'
-    .map -> "home"
-
-  awayPlayerServiceSelection = $('.service-selection-overlay')
-    .asEventStream 'click', '.away-player'
-    .map -> "away"
-
-  playerServingFirst = Bacon
-    .mergeAll [homePlayerServiceSelection, awayPlayerServiceSelection]
-    .take(1)
-    .toProperty(null)
-
-  serviceSelected = playerServingFirst.not().not()
-
-  homePlayerScoring = $('.scoreboard-home-player')
+  homePlayerPoints = $('.scoreboard-home-player')
     .asEventStream('click')
-    .map ->
-      (match) ->
-        match = _.cloneDeep(match)
-        match.push 'home'
-        match
+    .map -> { url: '/api/ongoing_match/home_point.json', type: 'PUT' }
 
-  awayPlayerScoring = $('.scoreboard-away-player')
+  awayPlayerPoints = $('.scoreboard-away-player')
     .asEventStream('click')
-    .map ->
-      (match) ->
-        match = _.cloneDeep(match)
-        match.push 'away'
-        match
+    .map -> { url: '/api/ongoing_match/away_point.json', type: 'PUT' }
 
-  rewinds = $('.scoreboard-rewind')
-    .asEventStream('click')
-    .map ->
-      (match) ->
-        match = _.cloneDeep(match)
-        match.pop()
-        match
+  finalization = $('.scoreboard-finished-popup')
+    .asEventStream('click', 'button')
+    .map -> { url: '/api/ongoing_match/finalize.json', type: 'PUT' }
 
-  match = homePlayerScoring
-    .merge(awayPlayerScoring)
-    .merge(rewinds)
-    .scan [], (match, change) -> change(match)
+  match = Bacon.mergeAll(initialFetch,
+                         awayPlayerPoints,
+                         homePlayerPoints,
+                         finalization).ajax().map(".match")
 
-  serviceOrder = playerServingFirst
-    .map (player) ->
-      if player == "away"
-        ["away", "home"]
-      else
-        ["home", "away"]
+  match.map(".finished")
+    .assign $(".scoreboard-finished-popup"), "toggleClass", "active"
 
-  service = match
-    .map (scoringList) -> scoringList.length % 4
-    .combine serviceOrder, (serviceCount, serviceOrder) ->
-       serviceOrder[serviceCount >> 1]
+  match.map(".home_score")
+    .assign $(".scoreboard-home-player-score"), "text"
+  match.map(".away_score")
+    .assign $(".scoreboard-away-player-score"), "text"
 
-  homeServing = service.map (service) -> service == 'home'
-  awayServing = service.map (service) -> service == 'away'
+  match.map(".home_player_name")
+    .assign $(".scoreboard-home-player-name"), "text"
+  match.map(".away_player_name")
+    .assign $(".scoreboard-away-player-name"), "text"
 
-  homeScore = match
-    .map (scoringList) ->
-      _.filter(scoringList, (who) -> who == 'home').length
-
-  awayScore = match
-    .map (scoringList) ->
-      _.filter(scoringList, (who) -> who == 'away').length
-
-  # Render player selection
-  selectedPlayerCount
-    .map (count) ->
-      if count == 0
-        "Choose the home player!"
-      else
-        "Choose the away player!"
-    .assign $('.player-selection-message'), 'text'
-
-  playersSelected
-    .assign $('.player-selection-overlay'), 'toggleClass', 'finished'
-
-  # Render service selection.
-  playersSelected
-    .assign $('.service-selection-overlay'), 'toggleClass', 'started'
-  homePlayerId
-    .combine players, playerNameFromId
-    .assign $('.service-selection-overlay .home-player'), 'text'
-  awayPlayerId
-    .combine players, playerNameFromId
-    .assign $('.service-selection-overlay .away-player'), 'text'
-  serviceSelected
-    .assign $('.service-selection-overlay'), 'toggleClass', 'finished'
-
-  # Render service indication.
-  homeServing
-    .assign $('.scoreboard-home-player'), 'toggleClass', 'has-service'
-  awayServing
-    .assign $('.scoreboard-away-player'), 'toggleClass', 'has-service'
-
-  # Render player scores.
-  homeScore.assign $('.scoreboard-home-player-score'), 'text'
-  awayScore.assign $('.scoreboard-away-player-score'), 'text'
-
-  # Render player names.
-  homePlayerId
-    .combine players, playerNameFromId
-    .assign $('.scoreboard-home-player-name'), 'text'
-  awayPlayerId
-    .combine players, playerNameFromId
-    .assign $('.scoreboard-away-player-name'), 'text'
-
-  # Render unselected players.
-  unselectedPlayers
-    .onValue (unselectedPlayers) ->
-      $unselectedPlayerList = $('.player-list-unselected-players')
-      $unselectedPlayerList.empty()
-      _.each unselectedPlayers, (player) ->
-        $unselectedPlayerList.append """
-          <button class="player-list-player">#{player.name}</button>
-        """
+  finalization.onValue (final) ->
+    window.location.href = "/matches/new" if final

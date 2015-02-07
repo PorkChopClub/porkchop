@@ -80,53 +80,15 @@
   &:hover { transform: scale(1.1); }
 }
 
-.game-setup-overlay {
+.scoreboard-finished-popup {
+  background-color: orange;
   position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 100%;
-  right: 0;
-  background-color: $dark-blue;
-  font-size: 3rem;
-  padding: 1em 1em 0.75em 1em;
-  transition: top 200ms ease-in-out;
-  color: $lightest-grey;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
 
-  &.started {
-    top: 0;
+  &.active {
+    display: block;
   }
-
-  &.finished {
-    top: -100%;
-  }
-
-  h1 {
-    font-size: 4rem;
-    font-weight: 300;
-    font-style: italic;
-    margin-bottom: 0.75em;
-  }
-}
-
-.service-selection-overlay {
-  .home-player,
-  .away-player {
-    @extend .player-list-player;
-    &:last-child { margin-left: 0.25em; }
-  }
-}
-
-.player-list-player {
-  font-size: 3rem;
-  cursor: pointer;
-  display: inline-block;
-  color: $lightest-grey;
-  background-color: $dark-blue;
-  border-radius: 0.25em;
-  border: 3px solid $lightest-grey;
-  padding: 0.25em 0.75em;
-  margin: 0 0.25em 0.25em 0;
-  transition: transform 75ms ease-in-out;
-
-  &:hover { transform: scale(1.5); }
 }

@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127030249) do
+ActiveRecord::Schema.define(version: 20150209070158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "matches", force: :cascade do |t|
+    t.integer  "home_player_id"
+    t.integer  "away_player_id"
+    t.integer  "victor_id"
+    t.datetime "finalized_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "matches", ["away_player_id"], name: "index_matches_on_away_player_id", using: :btree
+  add_index "matches", ["home_player_id"], name: "index_matches_on_home_player_id", using: :btree
+  add_index "matches", ["victor_id"], name: "index_matches_on_victor_id", using: :btree
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
@@ -22,4 +35,19 @@ ActiveRecord::Schema.define(version: 20150127030249) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "points", force: :cascade do |t|
+    t.integer  "match_id"
+    t.integer  "victor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "points", ["match_id"], name: "index_points_on_match_id", using: :btree
+  add_index "points", ["victor_id"], name: "index_points_on_victor_id", using: :btree
+
+  add_foreign_key "matches", "players", column: "away_player_id"
+  add_foreign_key "matches", "players", column: "home_player_id"
+  add_foreign_key "matches", "players", column: "victor_id"
+  add_foreign_key "points", "matches"
+  add_foreign_key "points", "players", column: "victor_id"
 end

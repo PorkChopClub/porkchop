@@ -1,0 +1,2 @@
+module PingPong
+end
