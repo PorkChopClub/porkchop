@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml'
 gem 'simple_form'
+gem 'dotenv'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
