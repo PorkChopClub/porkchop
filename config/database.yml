@@ -10,3 +10,7 @@ development:
 test:
   <<: *default
   database: porkchop_test
+
+production:
+  <<: *default
+  database: porkchop_production
