@@ -69,7 +69,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    globalid (0.3.2)
+    globalid (0.3.3)
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt
