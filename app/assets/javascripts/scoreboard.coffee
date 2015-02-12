@@ -1,4 +1,9 @@
 $ ->
+  pollingEnabled = Bacon.constant window.location.href.indexOf("sync=1") > -1
+
+  matchPolls = Bacon.interval 1000, { url: '/api/ongoing_match.json' }
+    .filter pollingEnabled
+
   initialFetch = Bacon.once { url: '/api/ongoing_match.json' }
 
   homePlayerPoints = $('.scoreboard-home-player')
@@ -16,6 +21,7 @@ $ ->
   match = Bacon.mergeAll(initialFetch,
                          awayPlayerPoints,
                          homePlayerPoints,
+                         matchPolls,
                          finalization).ajax().map(".match")
 
   match.map(".finished")
