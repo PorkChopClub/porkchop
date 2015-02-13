@@ -11,5 +11,6 @@ Rails.application.routes.draw do
       put "away_point"
       put "finalize"
     end
+    get "stats/points"
   end
 end
