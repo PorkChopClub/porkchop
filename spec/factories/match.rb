@@ -23,6 +23,8 @@ FactoryGirl.define do
       end
     end
 
+    factory :complete_match, traits: [:finalized, :finished]
+
     trait :at_start do
       transient do
         home_score 0
