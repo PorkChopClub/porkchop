@@ -3,7 +3,7 @@ class Match < ActiveRecord::Base
   belongs_to :away_player, class_name: "Player"
   belongs_to :victor, class_name: "Player"
 
-  has_many :points
+  has_many :points, dependent: :destroy
 
   validates :home_player, :away_player, presence: true
 

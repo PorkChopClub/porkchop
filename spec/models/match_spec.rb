@@ -8,6 +8,18 @@ RSpec.describe Match, type: :model do
   it { is_expected.to validate_presence_of :home_player }
   it { is_expected.to validate_presence_of :away_player }
 
+  describe "#destroy" do
+    let!(:match) { FactoryGirl.create :match, home_score: 10, away_score: 0 }
+
+    subject { match.destroy }
+
+    it "destroys its points" do
+      expect{subject}.
+        to change{Point.count}.
+        from(10).to(0)
+    end
+  end
+
   describe ".ongoing" do
     let!(:ongoing_match) { FactoryGirl.create :match }
     let!(:finalized_match) { FactoryGirl.create :match, :finalized }
