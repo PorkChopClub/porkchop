@@ -1,4 +1,6 @@
 $ ->
+  return unless $('.scoreboard').length
+
   pollingEnabled = Bacon.constant window.location.href.indexOf("sync=1") > -1
 
   matchPolls = Bacon.interval 1000, { url: '/api/ongoing_match.json' }
@@ -14,6 +16,10 @@ $ ->
     .asEventStream('click')
     .map -> { url: '/api/ongoing_match/away_point.json', type: 'PUT' }
 
+  rewinds = $('.scoreboard-rewind')
+    .asEventStream('click')
+    .map -> { url: '/api/ongoing_match/rewind.json', type: 'PUT' }
+
   finalization = $('.scoreboard-finished-popup')
     .asEventStream('click', 'button')
     .map -> { url: '/api/ongoing_match/finalize.json', type: 'PUT' }
@@ -22,6 +28,7 @@ $ ->
                          awayPlayerPoints,
                          homePlayerPoints,
                          matchPolls,
+                         rewinds,
                          finalization).ajax().map(".match")
 
   match.map(".finished")
