@@ -31,6 +31,11 @@ $ ->
                          rewinds,
                          finalization).ajax().map(".match")
 
+  match.map(".finalized")
+    .filter (value) -> value
+    .onValue (final) ->
+      window.location.href = "/matches/new" if final
+
   match.map(".finished")
     .assign $(".scoreboard-finished-popup"), "toggleClass", "active"
 
@@ -43,6 +48,3 @@ $ ->
     .assign $(".scoreboard-home-player-name"), "text"
   match.map(".away_player_name")
     .assign $(".scoreboard-away-player-name"), "text"
-
-  finalization.onValue (final) ->
-    window.location.href = "/matches/new" if final
