@@ -66,20 +66,6 @@
   }
 }
 
-.scoreboard-control {
-  color: $lightest-grey;
-  background-color: $dark-blue;
-  border: 2px solid $lightest-grey;
-  font-weight: 600;
-  display: inline-block;
-  border-radius: 0.125em;
-  padding: 0.25em 0.5em;
-  cursor: pointer;
-  transition: transform 75ms ease-in-out;
-
-  &:hover { transform: scale(1.1); }
-}
-
 .scoreboard-finished-popup {
   background-color: orange;
   position: fixed;

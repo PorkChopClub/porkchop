@@ -127,4 +127,30 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it { is_expected.to render_template :show }
     end
   end
+
+  describe "DELETE destroy" do
+    subject { delete :destroy, format: :json }
+
+    let!(:complete_match) { FactoryGirl.create :complete_match }
+
+    context "when there is an ongoing match" do
+      let!(:match) { FactoryGirl.create :match }
+
+      specify { expect(subject.status).to eq 200 }
+
+      it "destroys the ongoing match" do
+        expect{subject}.
+          to change{Match.exists? match}.
+          from(true).to(false)
+      end
+    end
+
+    context "when there is not an ongoing match" do
+      specify { expect(subject.status).to eq 422 }
+
+      it "doesn't destroy anything" do
+        expect{subject}.not_to change{Match.count}
+      end
+    end
+  end
 end

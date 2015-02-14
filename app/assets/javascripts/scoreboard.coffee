@@ -24,17 +24,22 @@ $ ->
     .asEventStream('click', 'button')
     .map -> { url: '/api/ongoing_match/finalize.json', type: 'PUT' }
 
+  cancellations = $('.scoreboard-cancel-game')
+    .asEventStream('click')
+    .map -> { url: '/api/ongoing_match.json', type: 'DELETE' }
+
   match = Bacon.mergeAll(initialFetch,
                          awayPlayerPoints,
                          homePlayerPoints,
                          matchPolls,
                          rewinds,
+                         cancellations,
                          finalization).ajax().map(".match")
 
-  match.map(".finalized")
-    .filter (value) -> value
-    .onValue (final) ->
-      window.location.href = "/matches/new" if final
+  finalized = match.map(".finalized")
+  deleted = match.map(".deleted")
+  Bacon.mergeAll(finalized, deleted)
+    .onValue (final) -> window.location.href = "/matches/new" if final
 
   match.map(".finished")
     .assign $(".scoreboard-finished-popup"), "toggleClass", "active"

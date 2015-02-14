@@ -6,12 +6,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :players, only: :index
-    resource :ongoing_match, only: [:show] do
+
+    resource :ongoing_match, only: [:show, :destroy] do
       put "home_point"
       put "away_point"
       put "rewind"
       put "finalize"
     end
+
     get "stats/points"
   end
 end

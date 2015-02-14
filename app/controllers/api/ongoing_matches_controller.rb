@@ -36,6 +36,15 @@ class Api::OngoingMatchesController < ApplicationController
     render :show
   end
 
+  def destroy
+    if ongoing_match
+      ongoing_match.destroy
+      render :show
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def record_service victor
