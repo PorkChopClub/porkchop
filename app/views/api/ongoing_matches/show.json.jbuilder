@@ -5,5 +5,5 @@ json.match do
   json.away_player_name @match.away_player.try(:name)
   json.finished @match.finished?
   json.finalized @match.finalized?
-  json.deleted !Match.exists?(@match)
+  json.deleted !Match.exists?(@match.id)
 end

@@ -32,7 +32,7 @@ RSpec.describe PingPong::Rewind do
 
       it "deletes the most recent point" do
         expect{subject}.
-          to change{Point.exists? point}.
+          to change{Point.exists? point.id}.
           from(true).to(false)
       end
     end

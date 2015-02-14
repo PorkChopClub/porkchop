@@ -140,7 +140,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
       it "destroys the ongoing match" do
         expect{subject}.
-          to change{Match.exists? match}.
+          to change{Match.exists? match.id}.
           from(true).to(false)
       end
     end
