@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: redirect('scoreboard/show')
+  root to: 'home#index'
+
   get 'scoreboard/show'
 
   resources :matches, only: [:new, :create]

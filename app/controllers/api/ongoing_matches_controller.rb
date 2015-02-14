@@ -57,8 +57,4 @@ class Api::OngoingMatchesController < ApplicationController
   def rewind_match
     PingPong::Rewind.new(ongoing_match).rewind!
   end
-
-  def ongoing_match
-    @match ||= Match.ongoing.first
-  end
 end
