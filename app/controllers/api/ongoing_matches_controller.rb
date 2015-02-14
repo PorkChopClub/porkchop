@@ -23,6 +23,14 @@ class Api::OngoingMatchesController < ApplicationController
     end
   end
 
+  def rewind
+    if rewind_match
+      render :show
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   def finalize
     ongoing_match.finalize!
     render :show
@@ -35,6 +43,10 @@ class Api::OngoingMatchesController < ApplicationController
       match: ongoing_match,
       victor: victor
     ).record!
+  end
+
+  def rewind_match
+    PingPong::Rewind.new(ongoing_match).rewind!
   end
 
   def ongoing_match

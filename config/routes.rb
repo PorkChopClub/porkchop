@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resource :ongoing_match, only: [:show] do
       put "home_point"
       put "away_point"
+      put "rewind"
       put "finalize"
     end
     get "stats/points"

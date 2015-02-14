@@ -71,6 +71,37 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     end
   end
 
+  describe "PUT rewind" do
+    subject { put :rewind, format: :json }
+
+    let!(:match) { FactoryGirl.create :match }
+    let(:rewind) { instance_double PingPong::Rewind }
+
+    before do
+      expect(PingPong::Rewind).
+        to receive(:new).
+        with(instance_of(Match)).
+        and_return(rewind)
+      expect(rewind).
+        to receive(:rewind!).
+        and_return(success)
+    end
+
+    context "when the match can be rewound" do
+      let(:success) { true }
+
+      specify { expect(subject.status).to eq 200 }
+      it { is_expected.to render_template :show }
+    end
+
+    context "when the match cannot be rewound" do
+      let(:success) { false }
+
+      specify { expect(subject.status).to eq 422 }
+      it { is_expected.to render_template :show }
+    end
+  end
+
   describe "PUT finalize" do
     subject { put :finalize, format: :json }
 
@@ -82,6 +113,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
           to change{match.reload.finalized?}.
           from(false).to(true)
       end
+
+      it { is_expected.to render_template :show }
     end
 
     context "when the match is not finished" do
@@ -90,6 +123,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it "doesn't finalize the game" do
         expect{subject}.not_to change{match.reload.finalized?}
       end
+
+      it { is_expected.to render_template :show }
     end
   end
 end
