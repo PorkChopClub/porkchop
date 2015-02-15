@@ -1,14 +1,14 @@
 class Api::OngoingMatchesController < ApplicationController
-  before_action :ongoing_match
+  before_action :load_ongoing_match
 
   def show
-    unless ongoing_match
+    unless @match
       head :not_found
     end
   end
 
   def home_point
-    if record_service ongoing_match.home_player
+    if record_service @match.home_player
       render :show
     else
       render :show, status: :unprocessable_entity
@@ -16,7 +16,7 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def away_point
-    if record_service ongoing_match.away_player
+    if record_service @match.away_player
       render :show
     else
       render :show, status: :unprocessable_entity
@@ -32,13 +32,16 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def finalize
-    ongoing_match.finalize!
-    render :show
+    if finalize_match
+      render :show
+    else
+      render :show, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    if ongoing_match
-      ongoing_match.destroy
+    if @match
+      @match.destroy
       render :show
     else
       render :show, status: :unprocessable_entity
@@ -47,14 +50,22 @@ class Api::OngoingMatchesController < ApplicationController
 
   private
 
+  def finalize_match
+    PingPong::Finalization.new(@match).finalize!
+  end
+
   def record_service victor
     PingPong::Service.new(
-      match: ongoing_match,
+      match: @match,
       victor: victor
     ).record!
   end
 
   def rewind_match
-    PingPong::Rewind.new(ongoing_match).rewind!
+    PingPong::Rewind.new(@match).rewind!
+  end
+
+  def load_ongoing_match
+    @match = ongoing_match
   end
 end

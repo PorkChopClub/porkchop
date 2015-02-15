@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Api::OngoingMatchesController, type: :controller do
+  shared_examples "renders match" do
+    it { is_expected.to render_template :show }
+
+    it "assigns the match as @match" do
+      subject
+      expect(assigns(:match)).to eq match
+    end
+  end
+
   describe "GET show" do
     subject { get :show, format: :json }
 
@@ -10,8 +19,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       before { subject }
 
       specify { expect(response.status).to eq 200 }
-      specify { expect(assigns(:match)).to eq match }
-      specify { expect(response).to render_template :show }
+
+      it_behaves_like "renders match"
     end
 
     context "when there is not an ongoing match" do
@@ -25,7 +34,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     context "when the point can be scored" do
       let!(:match) { FactoryGirl.create :match, home_score: 0 }
 
-      it { is_expected.to render_template :show }
+      it_behaves_like "renders match"
 
       it "scores one for the home team" do
         expect{subject}.
@@ -36,6 +45,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     context "when the point cannot be scored" do
       let!(:match) { FactoryGirl.create :match, :finished }
+
+      it_behaves_like "renders match"
 
       specify { expect(subject.status).to eq 422 }
 
@@ -51,7 +62,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     context "when the point can be scored" do
       let!(:match) { FactoryGirl.create :match, away_score: 0 }
 
-      it { is_expected.to render_template :show }
+      it_behaves_like "renders match"
 
       it "scores one for the away team" do
         expect{subject}.
@@ -62,6 +73,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     context "when the point cannot be scored" do
       let!(:match) { FactoryGirl.create :match, :finished }
+
+      it_behaves_like "renders match"
 
       specify { expect(subject.status).to eq 422 }
 
@@ -91,40 +104,47 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       let(:success) { true }
 
       specify { expect(subject.status).to eq 200 }
-      it { is_expected.to render_template :show }
+
+      it_behaves_like "renders match"
     end
 
     context "when the match cannot be rewound" do
       let(:success) { false }
 
       specify { expect(subject.status).to eq 422 }
-      it { is_expected.to render_template :show }
+
+      it_behaves_like "renders match"
     end
   end
 
   describe "PUT finalize" do
     subject { put :finalize, format: :json }
 
-    context "when the match is finished" do
-      let!(:match) { FactoryGirl.create :match, :finished }
+    let!(:match) { FactoryGirl.create :match }
+    let(:finalization) {
+      instance_double PingPong::Finalization, finalize!: finalized
+    }
 
-      it "finalizes the game" do
-        expect{subject}.
-          to change{match.reload.finalized?}.
-          from(false).to(true)
-      end
-
-      it { is_expected.to render_template :show }
+    before do
+      expect(PingPong::Finalization).
+        to receive(:new).
+        and_return(finalization)
     end
 
-    context "when the match is not finished" do
-      let!(:match) { FactoryGirl.create :match }
+    context "when the match can be finalized" do
+      let(:finalized) { true }
 
-      it "doesn't finalize the game" do
-        expect{subject}.not_to change{match.reload.finalized?}
-      end
+      it_behaves_like "renders match"
 
-      it { is_expected.to render_template :show }
+      specify { expect(subject.status).to eq 200 }
+    end
+
+    context "when the match cannot be finalized" do
+      let(:finalized) { false }
+
+      it_behaves_like "renders match"
+
+      specify { expect(subject.status).to eq 422 }
     end
   end
 
