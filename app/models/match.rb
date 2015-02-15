@@ -31,13 +31,26 @@ class Match < ActiveRecord::Base
     !!finalized_at
   end
 
+  def leader
+    return nil if home_score == away_score
+    home_score > away_score ? home_player : away_player
+  end
+
+  def home_score
+    home_points.count
+  end
+
+  def away_score
+    away_points.count
+  end
+
   private
 
   def highest_score
-    [home_points.count, away_points.count].max
+    [home_score, away_score].max
   end
 
   def score_differential
-    (away_points.count - home_points.count).abs
+    (away_score - home_score).abs
   end
 end

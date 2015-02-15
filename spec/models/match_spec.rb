@@ -140,4 +140,62 @@ RSpec.describe Match, type: :model do
       it { is_expected.to eq [away_point_1] }
     end
   end
+
+  describe "#leader" do
+    subject { match.leader }
+
+    let(:home_player) { FactoryGirl.create :player }
+    let(:away_player) { FactoryGirl.create :player }
+
+    context "when the game is tied" do
+      let(:match) {
+        FactoryGirl.create :match,
+          home_player: home_player,
+          away_player: away_player,
+          home_score: 5,
+          away_score: 5
+      }
+      it { is_expected.to eq nil }
+    end
+
+    context "when the home player is leading" do
+      let(:match) {
+        FactoryGirl.create :match,
+          home_player: home_player,
+          away_player: away_player,
+          home_score: 6,
+          away_score: 5
+      }
+      it { is_expected.to eq home_player }
+    end
+
+    context "when the away player is leading" do
+      let(:match) {
+        FactoryGirl.create :match,
+          home_player: home_player,
+          away_player: away_player,
+          home_score: 5,
+          away_score: 6
+      }
+      it { is_expected.to eq away_player }
+    end
+  end
+
+  describe "scores" do
+    let(:match) {
+      FactoryGirl.create :match,
+        home_score: 5,
+        away_score: 10
+    }
+
+    describe "#home_score" do
+      subject { match.home_score }
+      it { is_expected.to eq 5 }
+    end
+
+    describe "#away_score" do
+      subject { match.away_score }
+      it { is_expected.to eq 10 }
+    end
+  end
 end
