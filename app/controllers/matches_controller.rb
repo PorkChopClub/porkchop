@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
   def create
     @match = Match.new(match_params)
     if @match.save
-      redirect_to scoreboard_show_path
+      redirect_to edit_scoreboard_path
     else
       render :new
     end
@@ -22,7 +22,7 @@ class MatchesController < ApplicationController
 
   def check_for_ongoing_match
     if Match.ongoing.count != 0
-      redirect_to scoreboard_show_path
+      redirect_to edit_scoreboard_path
     end
   end
 end

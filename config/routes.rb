@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  get 'scoreboard/show'
+  resource :scoreboard, only: [:show, :edit]
 
   resources :matches, only: [:new, :create]
 

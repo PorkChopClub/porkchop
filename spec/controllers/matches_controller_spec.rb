@@ -12,7 +12,7 @@ RSpec.describe MatchesController, type: :controller do
     context "when there is already an ongoing match" do
       let!(:ongoing_match) { FactoryGirl.create :match }
 
-      it { is_expected.to redirect_to scoreboard_show_path }
+      it { is_expected.to redirect_to edit_scoreboard_path }
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe MatchesController, type: :controller do
           away_player_id: away_player.to_param
         } }
 
-        it { is_expected.to redirect_to scoreboard_show_path }
+        it { is_expected.to redirect_to edit_scoreboard_path }
 
         it "creates a match" do
           expect{subject}.
@@ -53,7 +53,7 @@ RSpec.describe MatchesController, type: :controller do
       let(:match_params) { {} }
       let!(:ongoing_match) { FactoryGirl.create :match }
 
-      it { is_expected.to redirect_to scoreboard_show_path }
+      it { is_expected.to redirect_to edit_scoreboard_path }
 
       it "doesn't create a match" do
         expect{subject}.not_to change{Match.count}

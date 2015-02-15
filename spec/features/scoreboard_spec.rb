@@ -24,25 +24,27 @@ RSpec.describe "scoreboard page" do
     expect(player_score(:home)).to have_content "3"
     expect(player_score(:away)).to have_content "2"
 
-    7.times { score_point :home }
-    9.times { score_point :away }
-    3.times { score_point :home }
+    click_button "Rewind Game"
+    click_button "Rewind Game"
 
-    expect(page).to have_content "Finalize the game?!"
+    expect(player_score(:home)).to have_content "1"
+    expect(player_score(:away)).to have_content "2"
 
-    click_button "Yes, please!"
+    10.times { score_point :home }
 
-    # FIXME: View game result page that doesn't exist at time of writing.
-    expect(Match.count).to eq 1
+    expect(player_score(:home)).to have_content "11"
+    expect(player_score(:away)).to have_content "2"
+
+    click_button "Finalize Game"
   end
 
   private
 
   def player_score player
-    find(".scoreboard-#{player}-player-score")
+    find(".match-controls-#{player}-player-score")
   end
 
   def score_point player
-    find(".scoreboard-#{player}-player").click
+    find(".match-controls-#{player}-player").click
   end
 end
