@@ -8,44 +8,23 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def home_point
-    if record_service @match.home_player
-      render :show
-    else
-      render :show, status: :unprocessable_entity
-    end
+    perform record_service(@match.home_player)
   end
 
   def away_point
-    if record_service @match.away_player
-      render :show
-    else
-      render :show, status: :unprocessable_entity
-    end
+    perform record_service(@match.away_player)
   end
 
   def rewind
-    if rewind_match
-      render :show
-    else
-      render :show, status: :unprocessable_entity
-    end
+    perform rewind_match
   end
 
   def finalize
-    if finalize_match
-      render :show
-    else
-      render :show, status: :unprocessable_entity
-    end
+    perform finalize_match
   end
 
   def destroy
-    if @match
-      @match.destroy
-      render :show
-    else
-      render :show, status: :unprocessable_entity
-    end
+    perform @match && @match.destroy
   end
 
   private
@@ -67,5 +46,13 @@ class Api::OngoingMatchesController < ApplicationController
 
   def load_ongoing_match
     @match = ongoing_match
+  end
+
+  def perform(action)
+    if action
+      render :show
+    else
+      render :show, status: :unprocessable_entity
+    end
   end
 end
