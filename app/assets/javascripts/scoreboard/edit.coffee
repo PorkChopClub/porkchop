@@ -30,21 +30,26 @@ $ ->
                          finalization,
                          cancellations).ajax().map(".match")
 
-  match.map(".finished")
-    .not()
-    .assign $(".match-controls-finalize"), "prop", "disabled"
+  matchHomeScore = match.map(".home_score")
+  matchAwayScore = match.map(".away_score")
 
-  match.map(".home_score")
-    .assign $(".match-controls-home-player-score"), "text"
-  match.map(".away_score")
-    .assign $(".match-controls-away-player-score"), "text"
+  matchHomeName = match.map(".home_player_name")
+  matchAwayName = match.map(".away_player_name")
 
-  match.map(".home_player_name")
-    .assign $(".match-controls-home-player-name"), "text"
-  match.map(".away_player_name")
-    .assign $(".match-controls-away-player-name"), "text"
+  matchFinished = match.map(".finished")
+  matchFinalized = match.map(".finalized")
+  matchDeleted = match.map(".deleted")
 
-  finalized = match.map(".finalized")
-  deleted = match.map(".deleted")
-  Bacon.mergeAll(finalized, deleted)
-    .onValue (final) -> window.location.assign("/matches/new") if final
+  matchFinalized.assign $(".match-controls-cancel-game"), "prop", "disabled"
+
+  matchFinished.not().assign $(".match-controls-finalize"), "prop", "disabled"
+
+  matchHomeScore.assign $(".match-controls-home-player-score"), "text"
+  matchAwayScore.assign $(".match-controls-away-player-score"), "text"
+
+  matchHomeName.assign $(".match-controls-home-player-name"), "text"
+  matchAwayName.assign $(".match-controls-away-player-name"), "text"
+
+  Bacon.mergeAll(matchFinalized, matchDeleted)
+    .filter (value) -> value
+    .onValue -> window.location.assign("/matches/new")
