@@ -30,6 +30,10 @@ $ ->
                          finalization,
                          cancellations).ajax().map(".match")
 
+  match.map(".finished")
+    .not()
+    .assign $(".match-controls-finalize"), "prop", "disabled"
+
   match.map(".home_score")
     .assign $(".match-controls-home-player-score"), "text"
   match.map(".away_score")
@@ -43,4 +47,4 @@ $ ->
   finalized = match.map(".finalized")
   deleted = match.map(".deleted")
   Bacon.mergeAll(finalized, deleted)
-    .onValue (final) -> window.location.href = "/matches/new" if final
+    .onValue (final) -> window.location.assign("/matches/new") if final
