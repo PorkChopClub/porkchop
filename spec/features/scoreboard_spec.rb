@@ -36,6 +36,8 @@ RSpec.describe "scoreboard page" do
     expect(player_score(:away)).to have_content "2"
 
     click_button "Finalize Game"
+
+    expect(page).to have_content "Create Match"
   end
 
   private
