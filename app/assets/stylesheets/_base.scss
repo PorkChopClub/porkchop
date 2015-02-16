@@ -3,23 +3,9 @@
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
-  background-color: $lightest-grey;
+  background-color: $dark-blue;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
-}
-
-input[type=submit],
-button {
-  font-size: 1rem;
-  font-family: 'Lato', sans-serif;
-  color: $lightest-grey;
-  background-color: $dark-blue;
-  border: 2px solid $lightest-grey;
-  font-weight: 600;
-  display: inline-block;
-  border-radius: 0.125em;
-  padding: 0.25em 0.5em;
-  cursor: pointer;
-  margin: 0 0.5rem;
+  line-height: 1.5;
 }

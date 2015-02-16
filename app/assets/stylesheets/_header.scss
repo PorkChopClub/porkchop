@@ -1,0 +1,53 @@
+.main-header {
+  @include span-columns(12);
+  line-height: 2.5;
+
+  a {
+    &:link,
+    &:visited {
+      color: $lightest-grey;
+      text-decoration: none;
+    }
+
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+}
+
+.main-title {
+  @include span-columns(4 of 12);
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 0;
+
+  em {
+    font-style: normal;
+    font-weight: 300;
+    text-transform: none;
+  }
+}
+
+.primary-navigation {
+  @include span-columns(8 of 12);
+  font-size: 1.5rem;
+  text-align: right;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline;
+
+    &:after {
+      content: "/";
+      color: $light-grey;
+      font-weight: 300;
+    }
+
+    &:last-child:after {
+      display: none;
+    }
+  }
+}

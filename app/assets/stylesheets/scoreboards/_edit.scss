@@ -1,0 +1,18 @@
+.match-controls-home-player,
+.match-controls-away-player,
+.match-controls-additional-stuff {
+  font-size: 2rem;
+
+  @include media($desktop) {
+    @include span-columns(4);
+
+    &:nth-child(3) {
+      @include omega();
+    }
+  }
+
+  @include media($mobile) {
+    @include span-columns(4);
+    @include omega();
+  }
+}

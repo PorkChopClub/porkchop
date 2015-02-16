@@ -1,0 +1,19 @@
+!!! 5
+%html
+  = render 'layouts/head'
+%body
+  .outer-container
+    %header.main-header
+      %h1.main-title
+        = link_to "Pork<em>chop</em>".html_safe, root_path
+      %ul.primary-navigation
+        - if ongoing_match
+          %li
+            = link_to "scoreboard", scoreboard_path
+          %li
+            = link_to "controls", edit_scoreboard_path
+        - else
+          %li
+            = link_to "start match", new_match_path
+
+    = yield
