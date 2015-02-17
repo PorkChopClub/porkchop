@@ -54,15 +54,17 @@ $ ->
   showingFinalizeButton = Bacon.mergeAll(showFinalizeMatch, overlayCancelled)
     .toProperty(false)
 
-  matchHomeScore = match.map(".home_score")
-  matchAwayScore = match.map(".away_score")
+  matchId = match.map(".id").toProperty()
 
-  matchHomeName = match.map(".home_player_name")
-  matchAwayName = match.map(".away_player_name")
+  matchHomeScore = match.map(".home_score").toProperty()
+  matchAwayScore = match.map(".away_score").toProperty()
 
-  matchFinished = match.map(".finished")
-  matchFinalized = match.map(".finalized")
-  matchDeleted = match.map(".deleted")
+  matchHomeName = match.map(".home_player_name").toProperty()
+  matchAwayName = match.map(".away_player_name").toProperty()
+
+  matchFinished = match.map(".finished").toProperty()
+  matchFinalized = match.map(".finalized").toProperty()
+  matchDeleted = match.map(".deleted").toProperty()
 
   matchFinalized.assign $(".match-controls-cancel-match"), "prop", "disabled"
 
@@ -79,9 +81,14 @@ $ ->
   matchHomeName.assign $(".match-controls-home-player-name"), "text"
   matchAwayName.assign $(".match-controls-away-player-name"), "text"
 
-  Bacon.mergeAll(matchFinalized, matchDeleted)
+  matchDeleted
     .filter (value) -> value
     .onValue -> window.location.assign("/matches/new")
+
+  matchFinalized
+    .filter (value) -> value
+    .map(matchId)
+    .onValue (id) -> window.location.assign("/matches/#{id}")
 
   showingOverlay.assign $('.match-controls-overlay'), 'toggleClass', 'active'
 

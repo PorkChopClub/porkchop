@@ -1,4 +1,5 @@
 json.match do
+  json.id @match.to_param
   json.home_score @match.home_score
   json.away_score @match.away_score
   json.home_player_name @match.home_player.try(:name)

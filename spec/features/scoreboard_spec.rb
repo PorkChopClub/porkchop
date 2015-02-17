@@ -50,7 +50,7 @@ RSpec.describe "scoreboard page" do
     click_button "Finalize Match"
     click_button "Confirm Finalization"
 
-    expect(page).to have_content "Create Match"
+    expect(page).to have_content "Candice Bergen wins!"
   end
 
   private
