@@ -1,0 +1,10 @@
+.match-summary {
+  @include media($desktop) {
+    @include span-columns(8);
+  }
+
+  @include media($mobile) {
+    @include span-columns(4);
+    @include omega();
+  }
+}

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resource :scoreboard, only: [:show, :edit]
 
-  resources :matches, only: [:new, :create]
+  resources :matches, only: [:new, :create, :show]
 
   namespace :api do
     resources :players, only: :index

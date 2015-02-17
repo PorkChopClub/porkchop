@@ -1,0 +1,10 @@
+.match-summary.porkbox-light
+  %h3= "#{@match.victor.name} wins!"
+  .home
+    %strong.home-player-name= "#{@match.home_player.name}:"
+    &nbsp;
+    %span.home-player-score= @match.home_score
+  .away
+    %strong.away-player-name= "#{@match.away_player.name}:"
+    &nbsp;
+    %span.away-player-score= @match.away_score
