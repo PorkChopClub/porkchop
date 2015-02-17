@@ -15,11 +15,11 @@ $ ->
     .asEventStream('click')
     .map -> { url: '/api/ongoing_match/rewind.json', type: 'PUT' }
 
-  finalization = $('.match-controls-finalize')
+  finalization = $('.match-controls-finalize-match')
     .asEventStream('click')
     .map -> { url: '/api/ongoing_match/finalize.json', type: 'PUT' }
 
-  cancellations = $('.match-controls-cancel-game')
+  cancellations = $('.match-controls-cancel-match')
     .asEventStream('click')
     .map -> { url: '/api/ongoing_match.json', type: 'DELETE' }
 
@@ -29,6 +29,30 @@ $ ->
                          rewinds,
                          finalization,
                          cancellations).ajax().map(".match")
+
+  overlayCancelled = $('.match-controls-overlay-cancel')
+    .asEventStream('click')
+    .map -> false
+
+  showCancelMatch = $('.match-controls-show-cancel-match')
+    .asEventStream('click')
+    .map -> true
+
+  showFinalizeMatch = $('.match-controls-show-finalize-match')
+    .asEventStream('click')
+    .map -> true
+
+  showingOverlay = Bacon.mergeAll([
+    showCancelMatch
+    showFinalizeMatch
+    overlayCancelled
+  ]).toProperty(false)
+
+  showingCancelButton = Bacon.mergeAll(showCancelMatch, overlayCancelled)
+    .toProperty(false)
+
+  showingFinalizeButton = Bacon.mergeAll(showFinalizeMatch, overlayCancelled)
+    .toProperty(false)
 
   matchHomeScore = match.map(".home_score")
   matchAwayScore = match.map(".away_score")
@@ -40,9 +64,14 @@ $ ->
   matchFinalized = match.map(".finalized")
   matchDeleted = match.map(".deleted")
 
-  matchFinalized.assign $(".match-controls-cancel-game"), "prop", "disabled"
+  matchFinalized.assign $(".match-controls-cancel-match"), "prop", "disabled"
 
-  matchFinished.not().assign $(".match-controls-finalize"), "prop", "disabled"
+  matchFinished.not()
+    .assign(
+      $(".match-controls-finalize-match, .match-controls-show-finalize-match"),
+      "prop",
+      "disabled"
+    )
 
   matchHomeScore.assign $(".match-controls-home-player-score"), "text"
   matchAwayScore.assign $(".match-controls-away-player-score"), "text"
@@ -53,3 +82,11 @@ $ ->
   Bacon.mergeAll(matchFinalized, matchDeleted)
     .filter (value) -> value
     .onValue -> window.location.assign("/matches/new")
+
+  showingOverlay.assign $('.match-controls-overlay'), 'toggleClass', 'active'
+
+  showingCancelButton
+    .assign $('.match-controls-cancel-match'), 'toggleClass', 'active'
+
+  showingFinalizeButton
+    .assign $('.match-controls-finalize-match'), 'toggleClass', 'active'

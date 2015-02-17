@@ -8,6 +8,14 @@
     .match-controls-away-player-score
 
   .match-controls-additional-stuff.porkbox-dark
-    %button.match-controls-rewind Rewind Game
-    %button.match-controls-cancel-game Cancel Game
-    %button.match-controls-finalize Finalize Game
+    %button.match-controls-rewind Rewind a point
+    %button.match-controls-show-cancel-match Cancel Match
+    %button.match-controls-show-finalize-match Finalize Match
+
+  .match-controls-overlay
+    .match-controls-overlay-inner
+      .match-controls-overlay-text Are you sure?
+      %button.match-controls-cancel-match Confirm Cancellation
+      %button.match-controls-finalize-match Confirm Finalization
+      .match-controls-overlay-text or
+      %button.match-controls-overlay-cancel.active Don't do that

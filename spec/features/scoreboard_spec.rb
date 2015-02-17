@@ -7,6 +7,18 @@ RSpec.describe "scoreboard page" do
   scenario "recording a normal game" do
     visit "/matches/new"
 
+    select "Candice Bergen", from: "Away player"
+    select "Shirley Schmidt", from: "Home player"
+
+    click_on "Create Match"
+
+    score_point :away
+
+    click_on "Cancel Match"
+    click_on "Confirm Cancellation"
+
+    expect(page).to have_content "Create Match"
+
     select "Candice Bergen", from: "Home player"
     select "Shirley Schmidt", from: "Away player"
 
@@ -24,8 +36,8 @@ RSpec.describe "scoreboard page" do
     expect(player_score(:home)).to have_content "3"
     expect(player_score(:away)).to have_content "2"
 
-    click_button "Rewind Game"
-    click_button "Rewind Game"
+    click_button "Rewind a point"
+    click_button "Rewind a point"
 
     expect(player_score(:home)).to have_content "1"
     expect(player_score(:away)).to have_content "2"
@@ -35,7 +47,8 @@ RSpec.describe "scoreboard page" do
     expect(player_score(:home)).to have_content "11"
     expect(player_score(:away)).to have_content "2"
 
-    click_button "Finalize Game"
+    click_button "Finalize Match"
+    click_button "Confirm Finalization"
 
     expect(page).to have_content "Create Match"
   end

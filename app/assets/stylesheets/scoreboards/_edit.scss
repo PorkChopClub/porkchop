@@ -1,12 +1,16 @@
 .match-controls-home-player,
 .match-controls-away-player,
 .match-controls-additional-stuff {
-  font-size: 2rem;
+  font-size: modular-scale(3);
+}
 
+
+.match-controls-home-player,
+.match-controls-away-player {
   @include media($desktop) {
-    @include span-columns(4);
+    @include span-columns(6);
 
-    &:nth-child(3) {
+    &:nth-child(2) {
       @include omega();
     }
   }
@@ -15,4 +19,58 @@
     @include span-columns(4);
     @include omega();
   }
+}
+
+.match-controls-additional-stuff {
+  @include media($desktop) {
+    @include span-columns(12);
+    @include omega();
+  }
+
+  @include media($mobile) {
+    @include span-columns(4);
+    @include omega();
+  }
+}
+
+.match-controls-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($dark-blue, 0.95);
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.match-controls-overlay-inner {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  padding: modular-scale(-1);
+  text-align: center;
+
+  button {
+    width: 100%;
+    font-size: modular-scale(3);
+    color: $lightest-grey;
+    border: 3px solid $lightest-grey;
+    border-radius: 9px;
+    margin: modular-scale(-2) 0;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}
+
+.match-controls-overlay-text {
+  color: $lightest-grey;
+  font-size: modular-scale(2);
 }
