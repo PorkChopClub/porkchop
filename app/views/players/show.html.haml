@@ -1,2 +1,5 @@
 .player-summary.porkbox-light
   %h1= @player.name
+  %h3
+    Record:
+    = " #{@stats.record.join("-")}"
