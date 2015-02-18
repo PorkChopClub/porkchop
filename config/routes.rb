@@ -15,6 +15,6 @@ Rails.application.routes.draw do
       put "finalize"
     end
 
-    get "stats/points"
+    get "stats/win_percentage"
   end
 end

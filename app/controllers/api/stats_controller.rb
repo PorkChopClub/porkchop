@@ -1,8 +1,18 @@
 class Api::StatsController < ApplicationController
-  def points
-    @points = Player.all.to_a.
-      find_all { |p| p.points.any? }.
-      sort_by { |p| -p.points.count }.
-      map { |p| [p.name, p.points.count] }
+  def win_percentage
+    @percentages = Player.all.to_a.inject({}) { |acc, player|
+      acc[player.name] = win_percentage_of player
+      acc
+    }
+  end
+
+  private
+
+  def win_percentage_of player
+    if player.matches.count != 0
+      (player.victories.count/player.matches.count.to_f).round(3)
+    else
+      0.0
+    end
   end
 end
