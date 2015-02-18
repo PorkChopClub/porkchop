@@ -20,6 +20,17 @@ RSpec.describe Match, type: :model do
     end
   end
 
+  describe ".finalized" do
+    let!(:ongoing_match) { FactoryGirl.create :match }
+    let!(:finalized_match) { FactoryGirl.create :match, :finalized }
+
+    subject { described_class.finalized }
+
+    it "includes only finalized matches" do
+      expect(subject).to match_array [finalized_match]
+    end
+  end
+
   describe ".ongoing" do
     let!(:ongoing_match) { FactoryGirl.create :match }
     let!(:finalized_match) { FactoryGirl.create :match, :finalized }

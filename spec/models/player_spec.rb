@@ -23,4 +23,15 @@ RSpec.describe Player, type: :model do
       expect(subject).to match_array [home_match, away_match]
     end
   end
+
+  describe "#losses" do
+    subject { player.losses }
+
+    let!(:win) { FactoryGirl.create :complete_match, away_player: player, victor: player }
+    let!(:loss) { FactoryGirl.create :complete_match, away_player: player }
+    let!(:incomplete_match) { FactoryGirl.create :match, home_player: player }
+    let(:player) { FactoryGirl.create :player }
+
+    specify { expect(subject).to match_array [loss] }
+  end
 end

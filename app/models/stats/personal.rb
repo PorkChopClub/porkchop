@@ -11,6 +11,10 @@ class Stats::Personal
     end
   end
 
+  def record
+    [player.victories.count, player.losses.count]
+  end
+
   private
   attr_reader :player
 end

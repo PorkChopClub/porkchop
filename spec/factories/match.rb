@@ -15,6 +15,10 @@ FactoryGirl.define do
 
     trait :finalized do
       sequence(:finalized_at) { |n| n.minutes.ago }
+
+      after(:build) do |match|
+        match.victor ||= match.home_player
+      end
     end
 
     trait :finished do

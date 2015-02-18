@@ -8,6 +8,7 @@ class Match < ActiveRecord::Base
   validates :home_player, :away_player, presence: true
 
   scope :ongoing, -> { where finalized_at: nil }
+  scope :finalized, -> { where.not finalized_at: nil }
 
   def home_points
     points.where(victor: home_player)

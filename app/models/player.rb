@@ -7,5 +7,9 @@ class Player < ActiveRecord::Base
       id: id
   end
 
+  def losses
+    matches.finalized.where.not(victor: self)
+  end
+
   validates :name, presence: true
 end
