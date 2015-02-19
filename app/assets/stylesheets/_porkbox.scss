@@ -1,7 +1,7 @@
 .porkbox-light,
 .porkbox-dark {
-  padding: modular-scale(-1);
-  margin-bottom: modular-scale(-1);
+  padding: modular-scale(0);
+  margin-bottom: modular-scale(1);
 
   #{$all-buttons} {
     font-size: 2rem;

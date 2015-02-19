@@ -1,7 +1,7 @@
 .match-controls-home-player,
 .match-controls-away-player,
 .match-controls-additional-stuff {
-  font-size: modular-scale(3);
+  font-size: modular-scale(2);
 }
 
 
@@ -58,16 +58,16 @@
   width: 100%;
   top: 50%;
   @include transform(translate(0%, -50%));
-  padding: modular-scale(-1);
+  padding: modular-scale(0);
   text-align: center;
 
   #{$all-buttons} {
     width: 100%;
-    font-size: modular-scale(3);
+    font-size: modular-scale(2);
     color: $lightest-grey;
     border: 3px solid $lightest-grey;
     border-radius: 9px;
-    margin: modular-scale(-2) 0;
+    margin: modular-scale(0) 0;
     display: none;
 
     &.active {
@@ -78,5 +78,5 @@
 
 .match-controls-overlay-text {
   color: $lightest-grey;
-  font-size: modular-scale(2);
+  font-size: modular-scale(1);
 }

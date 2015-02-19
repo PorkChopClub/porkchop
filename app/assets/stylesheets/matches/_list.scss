@@ -1,14 +1,6 @@
 .match-list {
   width: 100%;
   text-align: center;
-
-  @include media($desktop) {
-    font-size: modular-scale(1);
-  }
-
-  @include media($mobile) {
-    font-size: modular-scale(0);
-  }
 }
 
 .match-list-victor {
