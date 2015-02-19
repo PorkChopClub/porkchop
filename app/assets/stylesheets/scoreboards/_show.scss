@@ -69,5 +69,5 @@
   position: absolute;
   top: 50%;
   width: 100%;
-  transform: translate(0%, -50%);
+  @include transform(translate(0%, -50%));
 }
