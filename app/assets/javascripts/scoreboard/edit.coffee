@@ -67,6 +67,8 @@ $ ->
   matchHomeName = match.map(".home_player_name").toProperty()
   matchAwayName = match.map(".away_player_name").toProperty()
 
+  matchHomeService = match.map(".home_player_service").toProperty()
+
   matchFinished = match.map(".finished").toProperty()
   matchFinalized = match.map(".finalized").toProperty()
   matchDeleted = match.map(".deleted").toProperty()
@@ -85,6 +87,17 @@ $ ->
 
   matchHomeName.assign $(".match-controls-home-player-name"), "text"
   matchAwayName.assign $(".match-controls-away-player-name"), "text"
+
+  matchHomeService.not().assign(
+    $(".match-controls-away-player"),
+      "toggleClass",
+      "has-service"
+  )
+  matchHomeService.assign(
+    $(".match-controls-home-player"),
+    "toggleClass",
+    "has-service"
+  )
 
   matchDeleted
     .filter (value) -> value
