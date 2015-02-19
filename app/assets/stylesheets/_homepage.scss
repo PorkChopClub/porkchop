@@ -1,0 +1,14 @@
+.homepage-recent-matches {
+  @include media($desktop) {
+    @include span-columns(8);
+    @include shift(2);
+  }
+
+  @include media($mobile) {
+    @include span-columns(4);
+  }
+
+  @include omega();
+
+  font-size: modular-scale(-1);
+}
