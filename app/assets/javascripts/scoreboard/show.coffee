@@ -21,3 +21,9 @@ $ ->
     .assign $(".scoreboard-home-player-name"), "text"
   match.map(".away_player_name")
     .assign $(".scoreboard-away-player-name"), "text"
+
+  matchPolls
+    .map -> false
+    .mapError -> true
+    .toProperty true
+    .assign $(".scoreboard-no-game-message"), "toggleClass", "active"

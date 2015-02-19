@@ -36,3 +36,27 @@
   margin: -0.12em 0.1em;
   text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.1);
 }
+
+.scoreboard-no-game-message {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $dark-blue;
+  color: $lightest-grey;
+  font-size: modular-scale(5);
+  text-align: center;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.scoreboard-no-game-message-inner {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translate(0%, -50%);
+}
