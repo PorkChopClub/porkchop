@@ -11,6 +11,10 @@ $ ->
     .asEventStream('click')
     .map -> { url: '/api/ongoing_match/away_point.json', type: 'PUT' }
 
+  serviceToggle = $('.match-controls-toggle-service')
+    .asEventStream('click')
+    .map -> { url: '/api/ongoing_match/toggle_service.json', type: 'PUT' }
+
   rewinds = $('.match-controls-rewind')
     .asEventStream('click')
     .map -> { url: '/api/ongoing_match/rewind.json', type: 'PUT' }
@@ -26,6 +30,7 @@ $ ->
   match = Bacon.mergeAll(initialFetch,
                          homePlayerPoints,
                          awayPlayerPoints,
+                         serviceToggle,
                          rewinds,
                          finalization,
                          cancellations).ajax().map(".match")

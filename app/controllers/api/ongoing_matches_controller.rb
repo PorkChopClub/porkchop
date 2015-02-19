@@ -15,6 +15,10 @@ class Api::OngoingMatchesController < ApplicationController
     perform record_service(@match.away_player)
   end
 
+  def toggle_service
+    perform @match.toggle!(:first_service_by_home_player)
+  end
+
   def rewind
     perform rewind_match
   end

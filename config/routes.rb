@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resource :ongoing_match, only: [:show, :destroy] do
       put "home_point"
       put "away_point"
+      put "toggle_service"
       put "rewind"
       put "finalize"
     end

@@ -84,6 +84,42 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     end
   end
 
+  describe "PUT toggle_service" do
+    let!(:match) { FactoryGirl.create :match, :at_start }
+
+    subject { put :toggle_service, format: :json }
+
+    context "when the service can be toggled" do
+      it_behaves_like "renders match"
+
+      it "toggles the service to the away player" do
+        expect{subject}.
+          to change{match.reload.home_player_service?}.
+          from(true).to(false)
+      end
+    end
+
+    context "when the service cannot be toggled" do
+      before do
+        expect(Match).
+          to receive(:ongoing).
+          and_return([match])
+        expect(match).
+          to receive(:toggle!).
+          with(:first_service_by_home_player).
+          and_return(false)
+      end
+
+      it_behaves_like "renders match"
+
+      specify { expect(subject.status).to eq 422 }
+
+      it "doesn't toggle the service" do
+        expect{subject}.not_to change{match.reload.home_player_service?}
+      end
+    end
+  end
+
   describe "PUT rewind" do
     subject { put :rewind, format: :json }
 
