@@ -45,6 +45,14 @@ class Match < ActiveRecord::Base
     away_points.count
   end
 
+  def home_player_service?
+    first_service_by_away_player? ^ (points.count / 2 % 2 == 0)
+  end
+
+  def first_service_by_away_player?
+    !first_service_by_home_player?
+  end
+
   private
 
   def highest_score

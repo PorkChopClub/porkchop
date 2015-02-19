@@ -12,6 +12,10 @@ $ ->
       away_player_name: ""
     }
 
+  homeService = match.map(".home_player_service").toProperty()
+  homeService.not().assign($(".scoreboard-away-player"), "toggleClass", "has-service")
+  homeService.assign($(".scoreboard-home-player"), "toggleClass", "has-service")
+
   match.map(".home_score")
     .assign $(".scoreboard-home-player-score"), "text"
   match.map(".away_score")
