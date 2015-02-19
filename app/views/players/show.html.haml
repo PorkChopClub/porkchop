@@ -1,4 +1,5 @@
 .player-summary.porkbox-light
+  = image_tag @player.avatar_url, class: "player-summary-avatar"
   %h1= @player.name
   %h3
     Record:

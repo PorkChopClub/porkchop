@@ -19,3 +19,12 @@
   }
   @include omega();
 }
+
+.player-summary-avatar {
+  height: 200px;
+
+  @include media($desktop) {
+    float: right;
+    width: auto;
+  }
+}
