@@ -209,4 +209,54 @@ RSpec.describe Match, type: :model do
       it { is_expected.to eq 10 }
     end
   end
+
+  describe "services" do
+    let(:match) { FactoryGirl.build :match }
+
+    describe "#home_player_service?" do
+      subject { match.home_player_service? }
+
+      context "when it's the first service of the match" do
+        context "and the away player serves first" do
+          before { match.first_service_by_home_player = false }
+          it { is_expected.to be false }
+        end
+
+        context "and the home player serves first" do
+          before { match.first_service_by_home_player = true }
+          it { is_expected.to be true }
+        end
+      end
+
+      context "when it's the third service of the match" do
+        let(:match) {
+          FactoryGirl.create :match,
+            home_score: 1,
+            away_score: 1
+        }
+        context "and the away player serves first" do
+          before { match.first_service_by_home_player = false }
+          it { is_expected.to be true }
+        end
+        context "and the home player serves first" do
+          before { match.first_service_by_home_player = true }
+          it { is_expected.to be false }
+        end
+      end
+    end
+
+    describe "#first_service_by_away_player?" do
+      subject { match.first_service_by_away_player? }
+
+      context "when home player serves first" do
+        before { match.first_service_by_home_player = true }
+        it { is_expected.to be false }
+      end
+
+      context "when away player serves first" do
+        before { match.first_service_by_home_player = false }
+        it { is_expected.to be true }
+      end
+    end
+  end
 end
