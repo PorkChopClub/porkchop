@@ -1,5 +1,6 @@
 .main-header {
   @include span-columns(12);
+  @include omega();
   line-height: 2.5;
 
   a {
