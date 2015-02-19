@@ -10,7 +10,7 @@ body {
   line-height: 1.5;
 }
 
-button {
+#{$all-buttons} {
   -webkit-appearance: none;
   font-family: 'Lato', sans-serif;
   border: none;

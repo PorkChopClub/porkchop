@@ -3,7 +3,7 @@
   padding: modular-scale(-1);
   margin-bottom: modular-scale(-1);
 
-  button {
+  #{$all-buttons} {
     font-size: 2rem;
     color: $lightest-grey;
     font-weight: 600;

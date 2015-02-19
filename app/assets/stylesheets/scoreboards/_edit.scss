@@ -61,7 +61,7 @@
   padding: modular-scale(-1);
   text-align: center;
 
-  button {
+  #{$all-buttons} {
     width: 100%;
     font-size: modular-scale(3);
     color: $lightest-grey;
