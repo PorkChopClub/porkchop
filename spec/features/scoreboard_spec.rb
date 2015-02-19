@@ -17,8 +17,6 @@ RSpec.describe "scoreboard page" do
     click_on "Cancel match"
     click_on "Confirm cancellation"
 
-    expect(page).to have_content "Create Match"
-
     select "Candice Bergen", from: "Home player"
     select "Shirley Schmidt", from: "Away player"
 
