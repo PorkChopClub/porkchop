@@ -19,7 +19,7 @@
 
 .main-title {
   @include span-columns(4 of 12);
-  font-size: 1.5rem;
+  font-size: modular-scale(1);
   font-weight: normal;
   margin: 0;
 
@@ -32,7 +32,7 @@
 
 .primary-navigation {
   @include span-columns(8 of 12);
-  font-size: 1.5rem;
+  font-size: modular-scale(1);
   text-align: right;
   list-style-type: none;
   margin: 0;

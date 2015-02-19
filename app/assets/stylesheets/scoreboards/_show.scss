@@ -29,7 +29,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  font-size: 5rem;
+  font-size: modular-scale(3);
   padding-left: 0.75em;
   padding-bottom: 0.5em;
   @include shadow-hack($lightest-grey);
@@ -43,7 +43,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 25rem;
+  font-size: modular-scale(7);
   margin: -0.12em 0.1em;
   text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.1);
 }
