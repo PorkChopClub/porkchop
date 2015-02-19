@@ -14,8 +14,8 @@ RSpec.describe "scoreboard page" do
 
     score_point :away
 
-    click_on "Cancel Match"
-    click_on "Confirm Cancellation"
+    click_on "Cancel match"
+    click_on "Confirm cancellation"
 
     expect(page).to have_content "Create Match"
 
@@ -47,8 +47,8 @@ RSpec.describe "scoreboard page" do
     expect(player_score(:home)).to have_content "11"
     expect(player_score(:away)).to have_content "2"
 
-    click_button "Finalize Match"
-    click_button "Confirm Finalization"
+    click_button "Finalize match"
+    click_button "Confirm finalization"
 
     expect(page).to have_content "Candice Bergen wins!"
   end
