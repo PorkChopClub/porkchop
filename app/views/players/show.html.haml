@@ -3,3 +3,7 @@
   %h3
     Record:
     = " #{@stats.record.join("-")}"
+
+.player-match-history.porkbox-light
+  %h1 Match History
+  = render "matches/list", matches: @player.matches.finalized.order(finalized_at: :desc)

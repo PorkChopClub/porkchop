@@ -1,0 +1,20 @@
+%table.match-list
+  %thead
+    %tr
+      %th Finalized
+      %th Home
+      %th Away
+      %th Final Score
+      %th
+  %tbody
+    - matches.each do |match|
+      %tr
+        %td= l match.finalized_at, format: :short
+        %td{class: ("match-list-victor" if match.victor == match.home_player)}
+          = match.home_player.name
+        %td{class: ("match-list-victor" if match.victor == match.away_player)}
+          = match.away_player.name
+        %td
+          = [match.home_score, match.away_score].join(' - ')
+        %td
+          = link_to "view", match
