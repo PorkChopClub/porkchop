@@ -1,6 +1,9 @@
 .player-summary.porkbox-light
   = image_tag @player.avatar_url, class: "player-summary-avatar"
-  %h1= @player.name
+  %h1
+    = @player.name
+    &nbsp;
+    = link_to "(edit)", edit_player_path(@player)
   %h3
     Record:
     = " #{@stats.record.join("-")}"

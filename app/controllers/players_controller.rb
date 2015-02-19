@@ -1,6 +1,25 @@
 class PlayersController < ApplicationController
+  before_filter :load_player
+
   def show
-    @player = Player.find(params[:id])
     @stats = Stats::Personal.new(@player)
+  end
+
+  def update
+    if @player.update player_params
+      redirect_to @player
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  def load_player
+    @player = Player.find(params[:id])
+  end
+
+  def player_params
+    params.require(:player).permit(:name, :avatar_url)
   end
 end
