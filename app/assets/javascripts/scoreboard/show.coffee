@@ -26,6 +26,13 @@ $ ->
   match.map(".away_player_name")
     .assign $(".scoreboard-away-player-name"), "text"
 
+  match.map(".home_player_avatar_url")
+    .map (url) -> "url(#{url})"
+    .assign $(".scoreboard-home-player"), "css", "background-image"
+  match.map(".away_player_avatar_url")
+    .map (url) -> "url(#{url})"
+    .assign $(".scoreboard-away-player"), "css", "background-image"
+
   matchPolls
     .map -> false
     .mapError -> true
