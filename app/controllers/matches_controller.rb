@@ -1,5 +1,9 @@
 class MatchesController < ApplicationController
-  before_action :check_for_ongoing_match, only: [:create, :new]
+  before_action :check_for_ongoing_match, only: [:new, :create]
+
+  def show
+    @match = Match.find(params[:id])
+  end
 
   def new
     @match = Match.new
@@ -12,10 +16,6 @@ class MatchesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-    @match = Match.find(params[:id])
   end
 
   private
