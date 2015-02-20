@@ -1,6 +1,10 @@
 class MatchesController < ApplicationController
   before_action :check_for_ongoing_match, only: [:new, :create]
 
+  def index
+    @matches = Match.finalized.order(finalized_at: :desc)
+  end
+
   def show
     @match = Match.find(params[:id])
   end

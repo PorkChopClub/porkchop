@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resource :scoreboard, only: [:show, :edit]
-  resources :matches, only: [:new, :create, :show]
+  resources :matches, only: [:index, :show, :new, :create]
   resources :players, only: [:index, :show, :edit, :update]
 
   namespace :api do
