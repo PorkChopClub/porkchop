@@ -1,0 +1,8 @@
+.players-listing
+  - @players.each do |player|
+    .list-player
+      = link_to player_path(player) do
+        = image_tag player.avatar_url, class: "list-player-avatar"
+        .list-player-details
+          %h2= player.name
+          %p= Stats::Personal.new(player).record.join('-')

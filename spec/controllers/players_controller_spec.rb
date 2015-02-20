@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe PlayersController, type: :controller do
+
+  describe "GET index" do
+    subject { get :index }
+
+    let(:players) { FactoryGirl.create_list :player, 3 }
+
+    specify { expect(subject.status).to eq 200 }
+    it { is_expected.to render_template :index }
+
+    it "assigns all players as @players" do
+      subject
+      expect(assigns(:players)).to eq players
+    end
+  end
+
   describe "GET show" do
     subject { get :show, id: player.to_param }
 
@@ -71,4 +86,5 @@ RSpec.describe PlayersController, type: :controller do
       specify { expect(subject.status).to eq 200 }
     end
   end
+
 end

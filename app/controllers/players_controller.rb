@@ -1,5 +1,9 @@
 class PlayersController < ApplicationController
-  before_filter :load_player
+  before_filter :load_player, except: :index
+
+  def index
+    @players = Player.order(:name)
+  end
 
   def show
     @stats = Stats::Personal.new(@player)

@@ -1,0 +1,77 @@
+.players-listing {
+  @include span-columns(12);
+  @include omega;
+  padding: 0 modular-scale(1);
+
+  @include media($desktop) {
+    margin-top: 30px;
+  }
+}
+
+.list-player {
+  margin-bottom: modular-scale(1);
+  overflow: hidden;
+
+  a {
+    display: block;
+    border: 1px solid $light-grey;
+    padding-left: 5px;
+  }
+
+  @include media($desktop) {
+    @include span-columns(4 of 12);
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+
+  @include media($mobile) {
+    @include fill-parent;
+  }
+}
+
+.list-player-avatar,
+.list-player-details {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.list-player-avatar {
+  max-width: 100px;
+  height: auto;
+  @include transform(translateY(10px));
+  @include transition(transform 0.2s ease-in);
+
+  a:hover > & {
+    @include transform(translateY(1px)); // 1px so that the avatar still covers the border
+  }
+
+  @include media($mobile) {
+    max-width: 300px;
+    width: 50%;
+  }
+}
+
+.list-player-details {
+  @include calc(width, "100% - 100px"); // width of the avatar
+  padding: 10px 10px 10px 20px;
+
+  @include media($mobile) {
+    width: 50%; // width of the avatar
+  }
+
+  h2,
+  p {
+    color: white;
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 0;
+  }
+}
