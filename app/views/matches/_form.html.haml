@@ -1,7 +1,7 @@
 = simple_form_for @match do |f|
   %h4 The home player is the one closest to the office entrance.
-  = f.association :home_player
+  = f.association :home_player, collection: @players
   %br
-  = f.association :away_player
+  = f.association :away_player, collection: @players
   %br
   = f.submit

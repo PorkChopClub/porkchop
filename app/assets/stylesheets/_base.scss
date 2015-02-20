@@ -18,3 +18,7 @@ body {
   background-color: transparent;
   outline: none;
 }
+
+select {
+  color: darken($dark-blue, 10);
+}

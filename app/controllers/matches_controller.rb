@@ -11,6 +11,7 @@ class MatchesController < ApplicationController
 
   def new
     @match = Match.new
+    @players = Player.all.sort_by{ |p| p.matches.count }.reverse
   end
 
   def create
