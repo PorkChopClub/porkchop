@@ -9,33 +9,46 @@
   width: 50%;
   height: 100%;
   float: left;
-  background-color: $lightest-grey;
-  color: $dark-blue;
-  background-size: 60%;
+  background-size: auto 60%;
   background-position: 0% 100%;
   background-repeat: no-repeat;
+  color: $dark-grey;
+  background-color: $off-white;
 
   &.has-service {
+    color: $off-white;
     background-color: $blue;
-    color: $lightest-grey;
   }
 }
 
-@mixin shadow-hack($color) {
-  text-shadow: 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color, 0 0 50px $color;
+@mixin scoreboard-player-gradient($color) {
+  @include linear-gradient(transparent 40%, $color 80%);
+}
+
+.scoreboard-player-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 30%;
+  background-position: 10% 100%;
+  background-repeat: no-repeat;
+  @include scoreboard-player-gradient($off-white);
+
+  .has-service & {
+    @include scoreboard-player-gradient($blue);
+  }
 }
 
 .scoreboard-player-name {
   position: absolute;
   bottom: 0;
   left: 0;
-  font-size: modular-scale(3);
-  padding-left: 0.75em;
-  padding-bottom: 0.5em;
-  @include shadow-hack($lightest-grey);
+  font-size: modular-scale(5);
+  padding-left: modular-scale(4);
+  padding-bottom: modular-scale(0);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
 
   .has-service & {
-    @include shadow-hack($blue)
   }
 }
 
@@ -43,9 +56,10 @@
   position: absolute;
   top: 0;
   right: 0;
-  font-size: modular-scale(7);
-  margin: -0.12em 0.1em;
-  text-shadow: 4px 5px 0 rgba(0, 0, 0, 0.1);
+  font-size: modular-scale(12);
+  margin: 0 modular-scale(7);
+  line-height: 1;
+  text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.15);
 }
 
 .scoreboard-no-game-message {
@@ -54,8 +68,8 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: $dark-blue;
-  color: $lightest-grey;
+  background-color: $dark-grey;
+  color: $off-white;
   font-size: modular-scale(3);
   text-align: center;
   display: none;

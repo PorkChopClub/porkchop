@@ -23,7 +23,7 @@
   &.has-service {
     background-color: $blue;
     border-bottom: 6px solid darken($blue, 5);
-    color: $lightest-grey;
+    color: $off-white;
   }
 }
 
@@ -45,7 +45,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba($dark-blue, 0.95);
+  background-color: rgba($dark-grey, 0.95);
   display: none;
 
   &.active {
@@ -64,8 +64,8 @@
   #{$all-buttons} {
     width: 100%;
     font-size: modular-scale(2);
-    color: $lightest-grey;
-    border: 3px solid $lightest-grey;
+    color: $off-white;
+    border: 3px solid $off-white;
     border-radius: 9px;
     margin: modular-scale(0) 0;
     display: none;
@@ -77,6 +77,6 @@
 }
 
 .match-controls-overlay-text {
-  color: $lightest-grey;
+  color: $off-white;
   font-size: modular-scale(1);
 }

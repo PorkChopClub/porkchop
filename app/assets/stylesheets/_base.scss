@@ -2,8 +2,8 @@
 
 body {
   margin: 0;
-  font-family: 'Lato', sans-serif;
-  background-color: $dark-blue;
+  font-family: 'Roboto', sans-serif;
+  background-color: $dark-grey;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -12,7 +12,7 @@ body {
 
 #{$all-buttons} {
   -webkit-appearance: none;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
   border: none;
   display: block;
   background-color: transparent;
@@ -20,5 +20,5 @@ body {
 }
 
 select {
-  color: darken($dark-blue, 10);
+  color: darken($dark-grey, 10);
 }

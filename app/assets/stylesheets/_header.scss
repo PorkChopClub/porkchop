@@ -6,7 +6,7 @@
   a {
     &:link,
     &:visited {
-      color: $lightest-grey;
+      color: $off-white;
       text-decoration: none;
     }
 
@@ -21,7 +21,7 @@
   @include span-columns(4 of 12);
   font-size: modular-scale(1);
   font-weight: normal;
-  margin: 0;
+  margin: 0 0 0 0.5em;
 
   em {
     font-style: normal;
@@ -43,7 +43,7 @@
 
     &:after {
       content: "/";
-      color: $light-grey;
+      color: $off-white;
       font-weight: 300;
     }
 

@@ -5,24 +5,24 @@
 
   #{$all-buttons} {
     font-size: modular-scale(1);
-    color: $lightest-grey;
+    color: $off-white;
     font-weight: 600;
 
     &[disabled] {
-      color: darken($dark-blue, 5);
+      color: darken($dark-grey, 5);
     }
   }
 }
 
 .porkbox-light {
-  background-color: $lightest-grey;
-  border-bottom: 6px solid darken($lightest-grey, 5);
-  color: darken($dark-blue, 10);
+  background-color: $off-white;
+  border-bottom: 6px solid darken($off-white, 5);
+  color: darken($dark-grey, 10);
 }
 
 .porkbox-dark {
-  background-color: darken($dark-blue, 10);
-  border-bottom: 6px solid darken($dark-blue, 5);
-  color: $lightest-grey;
+  background-color: darken($dark-grey, 10);
+  border-bottom: 6px solid darken($dark-grey, 5);
+  color: $off-white;
 }
 
