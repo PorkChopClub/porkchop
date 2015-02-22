@@ -1,7 +1,6 @@
 .players-listing {
   @include span-columns(12);
   @include omega;
-  padding: 0 modular-scale(1);
 
   @include media($desktop) {
     margin-top: 30px;
@@ -9,25 +8,25 @@
 }
 
 .list-player {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 modular-scale(-1);
   margin-bottom: modular-scale(1);
-  overflow: hidden;
 
   a {
     display: block;
     border: 1px solid $off-white;
     padding-left: 5px;
+    overflow: hidden;
   }
 
   @include media($desktop) {
-    @include span-columns(4 of 12);
-
-    &:nth-child(3n) {
-      margin-right: 0;
-    }
+    width: 33.33%;
   }
 
   @include media($mobile) {
-    @include fill-parent;
+    width: 100%;
+    display: block;
   }
 }
 
@@ -44,7 +43,7 @@
   @include transition(transform 0.2s ease-in);
 
   a:hover > & {
-    @include transform(translateY(1px)); // 1px so that the avatar still covers the border
+    @include transform(translateY(0));
   }
 
   @include media($mobile) {
