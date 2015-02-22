@@ -7,16 +7,9 @@
       %h1.main-title
         = link_to "Pork<em>chop</em>".html_safe, root_path
       %nav.primary-navigation
-        %ul
-          %li= link_to "Players", players_path
-          %li= link_to "Match History", matches_path
-          - if ongoing_match
-            %li.navigation-action
-              = link_to "Scoreboard", scoreboard_path
-            %li.navigation-action
-              = link_to "Controls", edit_scoreboard_path
-          - else
-            %li.navigation-action
-              = link_to "New Match", new_match_path
+        = render "shared/navigation", nav: :main
 
     = yield
+
+    %footer.main-footer
+      = render "shared/navigation", nav: :footer
