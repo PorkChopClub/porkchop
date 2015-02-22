@@ -1,0 +1,6 @@
+@include keyframes(pulse) {
+  0%   { @include transform(scale(1.03)); }
+  90%  { @include transform(scale(0.98)); }
+  100% { @include transform(scale(1.03)); }
+}
+

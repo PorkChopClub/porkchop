@@ -60,6 +60,10 @@
   margin: 0 modular-scale(7);
   line-height: 1;
   text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.15);
+
+  .has-service & {
+    @include animation(pulse 0.9s infinite);
+  }
 }
 
 .scoreboard-no-game-message {
