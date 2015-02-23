@@ -4,8 +4,7 @@
 %body
   .outer-container
     %header.main-header
-      %h1.main-title
-        = link_to "Pork<em>chop</em>".html_safe, root_path
+      %h1.main-title= link_to "Pork<em>chop</em>".html_safe, root_path
       %nav.primary-navigation
         = render "shared/navigation", nav: :main
 

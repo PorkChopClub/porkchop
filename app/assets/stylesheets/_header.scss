@@ -21,7 +21,13 @@
   @include span-columns(4 of 12);
   font-size: modular-scale(1);
   font-weight: normal;
-  margin: 0 0 0 0.5em;
+  padding-left: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @include media($mobile) {
+    font-size: modular-scale(0);
+  }
 
   em {
     font-style: normal;
@@ -32,9 +38,14 @@
 
 .primary-navigation {
   @include span-columns(8 of 12);
-  font-size: modular-scale(1);
+  @include omega();
   text-align: right;
   position: relative;
+  font-size: modular-scale(1);
+
+  @include media($mobile) {
+    font-size: modular-scale(0);
+  }
 
   ul {
     list-style-type: none;
