@@ -4,7 +4,7 @@ RSpec.describe PingPong::Service do
   describe "#record!" do
     let(:service) {
       described_class.new(
-        match: match,
+        match: PingPong::Match.new(match),
         victor: victor
       )
     }

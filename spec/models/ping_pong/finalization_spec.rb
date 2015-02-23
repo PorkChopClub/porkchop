@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PingPong::Finalization do
-  let(:finalization) { described_class.new(match) }
+  let(:finalization) { described_class.new PingPong::Match.new(match) }
 
   describe "#finalize!" do
     subject { finalization.finalize! }

@@ -94,8 +94,9 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
       it "toggles the service to the away player" do
         expect{subject}.
-          to change{match.reload.home_player_service?}.
-          from(true).to(false)
+          to change {
+            PingPong::Match.new(match.reload).home_player_service?
+          }.from(true).to(false)
       end
     end
 
@@ -115,7 +116,10 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       specify { expect(subject.status).to eq 422 }
 
       it "doesn't toggle the service" do
-        expect{subject}.not_to change{match.reload.home_player_service?}
+        expect{subject}.
+          not_to change {
+            PingPong::Match.new(match.reload).home_player_service?
+          }
       end
     end
   end
@@ -129,7 +133,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     before do
       expect(PingPong::Rewind).
         to receive(:new).
-        with(instance_of(Match)).
+        with(instance_of(PingPong::Match)).
         and_return(rewind)
       expect(rewind).
         to receive(:rewind!).

@@ -42,37 +42,6 @@ RSpec.describe Match, type: :model do
     end
   end
 
-  describe "#finished?" do
-    let(:match) {
-      FactoryGirl.create :match,
-        home_score: home_score,
-        away_score: away_score
-    }
-
-    subject { match.finished? }
-
-    context "when a player has won at 11" do
-      let(:home_score) { 11 }
-      let(:away_score) { 9 }
-
-      it { is_expected.to eq true }
-    end
-
-    context "when a player has won past 11" do
-      let(:home_score) { 11 }
-      let(:away_score) { 13 }
-
-      it { is_expected.to eq true }
-    end
-
-    context "when the game can't be finished" do
-      let(:home_score) { 10 }
-      let(:away_score) { 9 }
-
-      it { is_expected.to eq false }
-    end
-  end
-
   describe "#finalized?" do
     subject { match.finalized? }
 
@@ -92,38 +61,14 @@ RSpec.describe Match, type: :model do
   describe "#finalize!" do
     subject { match.finalize! }
 
-    context "when the match isn't finished" do
-      let(:match) { FactoryGirl.create :match }
+    let(:match) { FactoryGirl.create :match }
 
-      it { is_expected.to eq false }
+    it { is_expected.to eq true }
 
-      it "doesn't mark the match as finalized" do
-        expect{subject}.not_to change{match.reload.finalized_at}
-      end
-    end
-
-    context "when the match is finished" do
-      context "when the match is not finalized" do
-        let(:match) { FactoryGirl.create :match, :finished }
-
-        it { is_expected.to eq true }
-
-        it "marks the match as finalized" do
-          expect{subject}.
-            to change{match.reload.finalized?}.
-            from(false).to(true)
-        end
-      end
-
-      context "when the match is already finalized" do
-        let(:match) { FactoryGirl.create :match, :finished, :finalized }
-
-        it { is_expected.to eq false }
-
-        it "doesn't change the finalized_at timestamp" do
-          expect{subject}.not_to change{match.reload.finalized_at}
-        end
-      end
+    it "marks the match as finalized" do
+      expect{subject}.
+        to change{match.reload.finalized?}.
+        from(false).to(true)
     end
   end
 
@@ -152,46 +97,6 @@ RSpec.describe Match, type: :model do
     end
   end
 
-  describe "#leader" do
-    subject { match.leader }
-
-    let(:home_player) { FactoryGirl.create :player }
-    let(:away_player) { FactoryGirl.create :player }
-
-    context "when the game is tied" do
-      let(:match) {
-        FactoryGirl.create :match,
-          home_player: home_player,
-          away_player: away_player,
-          home_score: 5,
-          away_score: 5
-      }
-      it { is_expected.to eq nil }
-    end
-
-    context "when the home player is leading" do
-      let(:match) {
-        FactoryGirl.create :match,
-          home_player: home_player,
-          away_player: away_player,
-          home_score: 6,
-          away_score: 5
-      }
-      it { is_expected.to eq home_player }
-    end
-
-    context "when the away player is leading" do
-      let(:match) {
-        FactoryGirl.create :match,
-          home_player: home_player,
-          away_player: away_player,
-          home_score: 5,
-          away_score: 6
-      }
-      it { is_expected.to eq away_player }
-    end
-  end
-
   describe "scores" do
     let(:match) {
       FactoryGirl.create :match,
@@ -210,53 +115,19 @@ RSpec.describe Match, type: :model do
     end
   end
 
-  describe "services" do
+  describe "#first_service_by_away_player?" do
+    subject { match.first_service_by_away_player? }
+
     let(:match) { FactoryGirl.build :match }
 
-    describe "#home_player_service?" do
-      subject { match.home_player_service? }
-
-      context "when it's the first service of the match" do
-        context "and the away player serves first" do
-          before { match.first_service_by_home_player = false }
-          it { is_expected.to be false }
-        end
-
-        context "and the home player serves first" do
-          before { match.first_service_by_home_player = true }
-          it { is_expected.to be true }
-        end
-      end
-
-      context "when it's the third service of the match" do
-        let(:match) {
-          FactoryGirl.create :match,
-            home_score: 1,
-            away_score: 1
-        }
-        context "and the away player serves first" do
-          before { match.first_service_by_home_player = false }
-          it { is_expected.to be true }
-        end
-        context "and the home player serves first" do
-          before { match.first_service_by_home_player = true }
-          it { is_expected.to be false }
-        end
-      end
+    context "when home player serves first" do
+      before { match.first_service_by_home_player = true }
+      it { is_expected.to be false }
     end
 
-    describe "#first_service_by_away_player?" do
-      subject { match.first_service_by_away_player? }
-
-      context "when home player serves first" do
-        before { match.first_service_by_home_player = true }
-        it { is_expected.to be false }
-      end
-
-      context "when away player serves first" do
-        before { match.first_service_by_home_player = false }
-        it { is_expected.to be true }
-      end
+    context "when away player serves first" do
+      before { match.first_service_by_home_player = false }
+      it { is_expected.to be true }
     end
   end
 end

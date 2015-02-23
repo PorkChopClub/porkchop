@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PingPong::Rewind do
-  let(:rewind) { described_class.new(match) }
+  let(:rewind) { described_class.new PingPong::Match.new(match) }
 
   describe "#rewind!" do
     subject { rewind.rewind! }

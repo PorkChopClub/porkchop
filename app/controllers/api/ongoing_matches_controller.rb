@@ -1,22 +1,22 @@
 class Api::OngoingMatchesController < ApplicationController
-  before_action :load_ongoing_match
+  before_filter :match
 
   def show
-    unless @match
+    unless match.present?
       head :not_found
     end
   end
 
   def home_point
-    perform record_service(@match.home_player)
+    perform record_service(match.home_player)
   end
 
   def away_point
-    perform record_service(@match.away_player)
+    perform record_service(match.away_player)
   end
 
   def toggle_service
-    perform @match.toggle!(:first_service_by_home_player)
+    perform match.toggle!(:first_service_by_home_player)
   end
 
   def rewind
@@ -28,28 +28,25 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def destroy
-    perform @match && @match.destroy
+    perform match.try! :destroy
   end
 
   private
 
+  def match
+    @match ||= PingPong::Match.new ongoing_match
+  end
+
   def finalize_match
-    PingPong::Finalization.new(@match).finalize!
+    PingPong::Finalization.new(match).finalize!
   end
 
   def record_service victor
-    PingPong::Service.new(
-      match: @match,
-      victor: victor
-    ).record!
+    PingPong::Service.new(match: match, victor: victor).record!
   end
 
   def rewind_match
-    PingPong::Rewind.new(@match).rewind!
-  end
-
-  def load_ongoing_match
-    @match = ongoing_match
+    PingPong::Rewind.new(match).rewind!
   end
 
   def perform(action)

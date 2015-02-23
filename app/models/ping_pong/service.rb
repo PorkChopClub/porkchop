@@ -7,10 +7,7 @@ module PingPong
 
     def record!
       return false if @match.finished?
-      Point.create!(
-        match: @match,
-        victor: @victor
-      )
+      @match.points.create! victor: @victor
     end
   end
 end
