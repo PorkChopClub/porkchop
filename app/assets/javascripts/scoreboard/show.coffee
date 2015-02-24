@@ -13,25 +13,33 @@ $ ->
       home_player_name: "",
       away_player_name: ""
     }
+    .toProperty()
+
+  homeScore = match.map(".home_score")
+  awayScore = match.map(".away_score")
+
+  homePlayerName = match.map(".home_player_name")
+  awayPlayerName = match.map(".away_player_name")
+
+  homePlayerAvatarUrl = match.map(".home_player_avatar_url")
+  awayPlayerAvatarUrl = match.map(".away_player_avatar_url")
 
   homeService = match.map(".home_player_service").toProperty()
-  homeService.not().assign($(".scoreboard-away-player"), "toggleClass", "has-service")
+  awayService = homeService.not()
+
+  awayService.assign($(".scoreboard-away-player"), "toggleClass", "has-service")
   homeService.assign($(".scoreboard-home-player"), "toggleClass", "has-service")
 
-  match.map(".home_score")
-    .assign $(".scoreboard-home-player-score"), "text"
-  match.map(".away_score")
-    .assign $(".scoreboard-away-player-score"), "text"
+  homeScore.assign $(".scoreboard-home-player-score"), "text"
+  awayScore.assign $(".scoreboard-away-player-score"), "text"
 
-  match.map(".home_player_name")
-    .assign $(".scoreboard-home-player-name"), "text"
-  match.map(".away_player_name")
-    .assign $(".scoreboard-away-player-name"), "text"
+  homePlayerName.assign $(".scoreboard-home-player-name"), "text"
+  awayPlayerName.assign $(".scoreboard-away-player-name"), "text"
 
-  match.map(".home_player_avatar_url")
+  homePlayerAvatarUrl
     .map (url) -> "url(#{url})"
     .assign $(".scoreboard-home-player"), "css", "background-image"
-  match.map(".away_player_avatar_url")
+  awayPlayerAvatarUrl
     .map (url) -> "url(#{url})"
     .assign $(".scoreboard-away-player"), "css", "background-image"
 
