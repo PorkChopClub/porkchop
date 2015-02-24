@@ -17,6 +17,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml'
 gem 'simple_form'
 
+gem 'omniauth-twitter'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'

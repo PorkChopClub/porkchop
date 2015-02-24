@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   resources :matches, only: [:index, :show, :new, :create]
   resources :players, only: [:index, :show, :edit, :update]
 
+  get 'signin', to: redirect('/auth/twitter')
+  delete 'signout', to: 'sessions#destroy', as: 'signout'
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+
   namespace :api do
     resources :players, only: :index
     resource :ongoing_match, only: [:show, :destroy] do
