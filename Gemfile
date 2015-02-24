@@ -18,6 +18,7 @@ gem 'haml'
 gem 'simple_form'
 
 gem 'omniauth-twitter'
+gem 'cancancan', '~> 1.10'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
