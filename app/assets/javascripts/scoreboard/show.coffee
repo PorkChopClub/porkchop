@@ -21,8 +21,8 @@ $ ->
   homePlayerName = match.map(".home_player_name")
   awayPlayerName = match.map(".away_player_name")
 
-  homePlayerAvatarUrl = match.map(".home_player_avatar_url")
-  awayPlayerAvatarUrl = match.map(".away_player_avatar_url")
+  homePlayerAvatarUrl = match.map(".home_player_avatar_url").skipDuplicates()
+  awayPlayerAvatarUrl = match.map(".away_player_avatar_url").skipDuplicates()
 
   homeService = match.map(".home_player_service").toProperty()
   awayService = homeService.not()
