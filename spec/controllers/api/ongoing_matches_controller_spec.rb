@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Api::OngoingMatchesController, type: :controller do
+  include_context "controller authorization"
+
   shared_examples "renders match" do
     it { is_expected.to render_template :show }
 
@@ -12,6 +14,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "GET show" do
     subject { get :show, format: :json }
+    before { ability.can :read, PingPong::Match }
 
     context "when there is an ongoing match" do
       let!(:match) { FactoryGirl.create :match }
@@ -30,6 +33,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "PUT home_point" do
     subject { put :home_point, format: :json }
+    before { ability.can :update, PingPong::Match }
 
     context "when the point can be scored" do
       let!(:match) { FactoryGirl.create :match, home_score: 0 }
@@ -58,6 +62,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "PUT away_point" do
     subject { put :away_point, format: :json }
+    before { ability.can :update, PingPong::Match }
 
     context "when the point can be scored" do
       let!(:match) { FactoryGirl.create :match, away_score: 0 }
@@ -88,6 +93,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     let!(:match) { FactoryGirl.create :match, :at_start }
 
     subject { put :toggle_service, format: :json }
+    before { ability.can :update, PingPong::Match }
 
     context "when the service can be toggled" do
       it_behaves_like "renders match"
@@ -126,6 +132,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "PUT rewind" do
     subject { put :rewind, format: :json }
+    before { ability.can :update, PingPong::Match }
 
     let!(:match) { FactoryGirl.create :match }
     let(:rewind) { instance_double PingPong::Rewind }
@@ -159,6 +166,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "PUT finalize" do
     subject { put :finalize, format: :json }
+    before { ability.can :update, PingPong::Match }
 
     let!(:match) { FactoryGirl.create :match }
     let(:finalization) {
@@ -190,6 +198,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "DELETE destroy" do
     subject { delete :destroy, format: :json }
+    before { ability.can :update, PingPong::Match }
 
     let!(:complete_match) { FactoryGirl.create :complete_match }
 

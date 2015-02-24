@@ -1,5 +1,7 @@
 class Api::OngoingMatchesController < ApplicationController
   before_filter :match
+  authorize_resource :match, only: [:show]
+  before_filter :authorize_update, except: [:show]
 
   def show
     unless match.present?
@@ -35,6 +37,10 @@ class Api::OngoingMatchesController < ApplicationController
 
   def match
     @match ||= PingPong::Match.new ongoing_match
+  end
+
+  def authorize_update
+    authorize! :update, @match
   end
 
   def finalize_match

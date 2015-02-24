@@ -1,8 +1,8 @@
 class PlayersController < ApplicationController
-  before_filter :load_player, except: :index
+  load_and_authorize_resource
 
   def index
-    @players = Player.order(:name)
+    @players = @players.order(:name)
   end
 
   def show
@@ -18,10 +18,6 @@ class PlayersController < ApplicationController
   end
 
   private
-
-  def load_player
-    @player = Player.find(params[:id])
-  end
 
   def player_params
     params.require(:player).permit(:name, :avatar_url)

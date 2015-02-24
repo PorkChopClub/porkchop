@@ -1,10 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe MatchesController, type: :controller do
+  include_context "controller authorization"
+
   describe "GET show" do
     let!(:match) { FactoryGirl.create :complete_match }
 
     subject { get :show, id: match.to_param }
+    before { ability.can :read, match }
 
     specify { expect(subject.status).to eq 200 }
 
@@ -18,6 +21,7 @@ RSpec.describe MatchesController, type: :controller do
 
   describe "GET new" do
     subject { get :new }
+    before { ability.can :create, Match }
 
     context "when there is not an ongoing match" do
       specify { expect(subject.status).to eq 200 }
@@ -33,6 +37,7 @@ RSpec.describe MatchesController, type: :controller do
 
   describe "POST create" do
     subject { post :create, match: match_params }
+    before { ability.can :create, Match }
 
     context "when there is not an ongoing match" do
       context "with valid params" do

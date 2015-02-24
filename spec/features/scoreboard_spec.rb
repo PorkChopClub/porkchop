@@ -4,7 +4,11 @@ RSpec.describe "scoreboard page" do
   let!(:home) { FactoryGirl.create :player, name: "Candice Bergen" }
   let!(:away) { FactoryGirl.create :player, name: "Shirley Schmidt" }
 
+  let!(:user) { FactoryGirl.create :admin_user }
+
   scenario "recording a normal game" do
+    visit "/auth/twitter"
+
     visit "/matches/new"
 
     select "Candice Bergen", from: "Away player"
