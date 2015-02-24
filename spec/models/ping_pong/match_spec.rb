@@ -3,6 +3,34 @@ require 'rails_helper'
 RSpec.describe PingPong::Match do
   let(:ping_pong_match) { described_class.new match }
 
+  describe "#game_point" do
+    subject { ping_pong_match.game_point }
+
+    let(:match) do
+      FactoryGirl.create :match,
+        home_score: home_score,
+        away_score: away_score
+    end
+
+    context "when it is game point for the home player" do
+      let(:home_score) { 10 }
+      let(:away_score) { 0 }
+      it { is_expected.to eq :home }
+    end
+
+    context "when it is game point for the away player" do
+      let(:home_score) { 12 }
+      let(:away_score) { 13 }
+      it { is_expected.to eq :away }
+    end
+
+    context "when it is not game point" do
+      let(:home_score) { 10 }
+      let(:away_score) { 10 }
+      it { is_expected.to eq nil }
+    end
+  end
+
   describe "#home_player_service?" do
     subject { ping_pong_match.home_player_service? }
 

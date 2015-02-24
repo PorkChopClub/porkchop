@@ -12,6 +12,13 @@ class PingPong::Match < SimpleDelegator
     home_score > away_score ? home_player : away_player
   end
 
+  def game_point
+    return if finished?
+    if highest_score >= 10 && score_differential > 0
+      leader == home_player ? :home : :away
+    end
+  end
+
   private
 
   def highest_score
