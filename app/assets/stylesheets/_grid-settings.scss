@@ -1,7 +1,7 @@
 @import "neat-helpers";
 
 $column: modular-scale(3);
-$gutter: modular-scale(1);
+$gutter: 0rem;
 $max-width: rem(1200);
 
 $desktop: new-breakpoint(min-width 801px 12);

@@ -9,14 +9,13 @@
 .match-controls-away-player {
   @include media($desktop) {
     @include span-columns(6);
-
-    &:nth-child(2) {
-      @include omega();
-    }
   }
 
   @include media($mobile) {
-    @include span-columns(4);
+    @include span-columns(2);
+  }
+
+  &:nth-child(2) {
     @include omega();
   }
 
