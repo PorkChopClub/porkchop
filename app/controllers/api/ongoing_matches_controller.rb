@@ -1,7 +1,12 @@
 class Api::OngoingMatchesController < ApplicationController
   before_filter :match
-  authorize_resource :match, only: [:show]
-  before_filter :authorize_update, except: [:show]
+
+  authorize_resource :match,
+    only: [:show]
+
+  before_filter :authorize_update,
+    except: [:show],
+    unless: :skip_auth_check?
 
   def show
     unless match.present?
@@ -41,6 +46,11 @@ class Api::OngoingMatchesController < ApplicationController
 
   def authorize_update
     authorize! :update, @match
+  end
+
+  def skip_auth_check?
+    # FIXME: Add api key and check it from headers.
+    params[:secret] == "pingpong"
   end
 
   def finalize_match
