@@ -22,6 +22,8 @@ gem 'cancancan', '~> 1.10'
 
 gem 'slack-notifier'
 
+gem 'bugsnag'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'
