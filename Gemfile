@@ -20,6 +20,8 @@ gem 'simple_form'
 gem 'omniauth-twitter'
 gem 'cancancan', '~> 1.10'
 
+gem 'slack-notifier'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'

@@ -38,4 +38,8 @@ class Match < ActiveRecord::Base
   def first_service_by_away_player?
     !first_service_by_home_player?
   end
+
+  def loser
+    Player.find ([home_player_id, away_player_id] - [victor_id]).first
+  end
 end

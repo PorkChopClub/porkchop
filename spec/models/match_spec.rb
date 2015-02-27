@@ -20,6 +20,35 @@ RSpec.describe Match, type: :model do
     end
   end
 
+  describe "#loser" do
+    subject { match.loser }
+
+    let(:winner) { FactoryGirl.create :player }
+    let(:loser) { FactoryGirl.create :player }
+
+    context "when the away player has won" do
+      let(:match) do
+        FactoryGirl.create :complete_match,
+          home_player: loser,
+          away_player: winner,
+          victor: winner
+      end
+
+      it { is_expected.to eq loser }
+    end
+
+    context "when the home player has won" do
+      let(:match) do
+        FactoryGirl.create :complete_match,
+          home_player: winner,
+          away_player: loser,
+          victor: winner
+      end
+
+      it { is_expected.to eq loser }
+    end
+  end
+
   describe ".finalized" do
     let!(:ongoing_match) { FactoryGirl.create :match }
     let!(:finalized_match) { FactoryGirl.create :match, :finalized }

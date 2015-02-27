@@ -5,7 +5,7 @@ RSpec.describe Api::PlayersController, type: :controller do
   include_context "controller authorization"
 
   describe "GET index" do
-    let!(:player) { FactoryGirl.create :player }
+    let!(:player) { FactoryGirl.create :player, name: "Candice Bergen" }
 
     subject { get :index, format: :json }
     before { ability.can :read, Player }
