@@ -6,27 +6,27 @@ RSpec.describe Api::StatsController, type: :controller do
   describe "GET win_percentage" do
     subject { get :win_percentage, format: :json }
 
-    let(:player1) { FactoryGirl.create :player, name: "Jared" }
-    let(:player2) { FactoryGirl.create :player, name: "Gray" }
-    let!(:player3) { FactoryGirl.create :player, name: "Clarke" }
+    let(:jared) { FactoryGirl.create :player, name: "Jared" }
+    let(:gray) { FactoryGirl.create :player, name: "Gray" }
+    let!(:clarke) { FactoryGirl.create :player, name: "Clarke" }
 
     let!(:match1) {
-      FactoryGirl.create :match,
-        home_player: player1,
-        away_player: player2,
-        victor: player1
+      FactoryGirl.create :complete_match,
+        home_player: jared,
+        away_player: gray,
+        victor: jared
     }
     let!(:match2) {
-      FactoryGirl.create :match,
-        home_player: player1,
-        away_player: player2,
-        victor: player2
+      FactoryGirl.create :complete_match,
+        home_player: jared,
+        away_player: gray,
+        victor: gray
     }
     let!(:match3) {
-      FactoryGirl.create :match,
-        home_player: player1,
-        away_player: player2,
-        victor: player1
+      FactoryGirl.create :complete_match,
+        home_player: jared,
+        away_player: gray,
+        victor: jared
     }
 
     it "renders the players by total score" do

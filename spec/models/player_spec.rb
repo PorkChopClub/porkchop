@@ -15,8 +15,16 @@ RSpec.describe Player, type: :model do
   describe "#matches" do
     subject { player.matches }
 
-    let!(:away_match) { FactoryGirl.create :match, away_player: player }
-    let!(:home_match) { FactoryGirl.create :match, home_player: player }
+    let!(:away_match) do
+      FactoryGirl.create :match,
+        away_player: player
+    end
+
+    let!(:home_match) do
+      FactoryGirl.create :match,
+        home_player: player
+    end
+
     let(:player) { FactoryGirl.create :player }
 
     it "includes both home and away matches" do
@@ -27,11 +35,49 @@ RSpec.describe Player, type: :model do
   describe "#losses" do
     subject { player.losses }
 
-    let!(:win) { FactoryGirl.create :complete_match, away_player: player, victor: player }
-    let!(:loss) { FactoryGirl.create :complete_match, away_player: player }
-    let!(:incomplete_match) { FactoryGirl.create :match, home_player: player }
+    let!(:win) do
+      FactoryGirl.create :complete_match,
+        away_player: player,
+        victor: player
+    end
+
+    let!(:loss) do
+      FactoryGirl.create :complete_match,
+        away_player: player
+    end
+
+    let!(:incomplete_match) do
+      FactoryGirl.create :match,
+        home_player: player
+    end
+
     let(:player) { FactoryGirl.create :player }
 
     specify { expect(subject).to match_array [loss] }
+  end
+
+  describe "#matches_against" do
+    subject { player.matches_against opponent }
+
+    let(:player) { FactoryGirl.create :player }
+    let(:opponent) { FactoryGirl.create :player }
+
+    let!(:away) do
+      FactoryGirl.create :complete_match,
+        home_player: opponent,
+        away_player: player
+    end
+
+    let!(:home) do
+      FactoryGirl.create :complete_match,
+        home_player: player,
+        away_player: opponent
+    end
+
+    let!(:other) do
+      FactoryGirl.create :complete_match
+    end
+
+    it { is_expected.to match_array [away, home] }
   end
 end
