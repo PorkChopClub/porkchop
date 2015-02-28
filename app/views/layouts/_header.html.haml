@@ -1,5 +1,8 @@
 %header.main-header
-  %h1.main-title= link_to "Pork<em>chop</em>".html_safe, root_path
+  %h1.main-title
+    = link_to root_path do
+      %span Pork
+      %span Chop
   %nav.primary-navigation
     %ul
       %li= link_to "Players", players_path

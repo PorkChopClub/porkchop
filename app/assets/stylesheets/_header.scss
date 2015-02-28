@@ -2,6 +2,7 @@
   @include span-columns(12);
   @include omega();
   line-height: 2.5;
+  font-size: modular-scale(1);
 
   a {
     &:link,
@@ -19,20 +20,44 @@
 
 .main-title {
   @include span-columns(4 of 12);
-  font-size: modular-scale(1);
-  font-weight: normal;
   padding-left: 0.5em;
   margin-top: 0;
   margin-bottom: 0;
+  font-size: inherit;
 
   @include media($mobile) {
     font-size: modular-scale(0);
   }
 
-  em {
-    font-style: normal;
-    font-weight: 300;
-    text-transform: none;
+  a {
+    &:link,
+    &:visited {
+      display: inline-block;
+      line-height: 1;
+      border: 2px solid #FFF;
+      border-radius: 2px;
+      text-decoration: none;
+    }
+
+    &:hover,
+    &:active {
+    }
+  }
+
+  span {
+    display: inline-block;
+    padding: 0.2em 0.2em 0.15em 0.2em;
+
+    &:first-child {
+      color: $off-white;
+      font-weight: 300;
+    }
+
+    &:last-child {
+      font-weight: bold;
+      background-color: $off-white;
+      color: $dark-grey;
+    }
   }
 }
 
