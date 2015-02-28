@@ -32,7 +32,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "PUT home_point" do
-    subject { put :home_point, format: :json, secret: "pingpong" }
+    subject { put :home_point, format: :json }
+    before { ability.can :update, PingPong::Match }
 
     context "when the point can be scored" do
       let!(:match) { FactoryGirl.create :match, home_score: 0 }
