@@ -31,13 +31,8 @@ RSpec.describe PingPong::Finalization do
     end
 
     context "when the match is finished but not finalized" do
-      let(:victor) do
-        FactoryGirl.create :player, name: "Candice"
-      end
-
-      let(:loser) do
-        FactoryGirl.create :player, name: "Shirley"
-      end
+      let(:victor) { FactoryGirl.create :player }
+      let(:loser) { FactoryGirl.create :player }
 
       let(:match) {
         FactoryGirl.create :match,
@@ -45,41 +40,10 @@ RSpec.describe PingPong::Finalization do
           home_player: loser,  home_score: 10
       }
 
-      let(:notifier) { instance_double Slack::Notifier }
-
       before do
-        allow(ENV).
-          to receive(:[]).
-          with("SLACK_WEBHOOK_URL").
-          and_return("http://en.wikipedia.org/wiki/Candice_Bergen")
-
-        expect(Slack::Notifier).
-          to receive(:new).
-          with(
-            "http://en.wikipedia.org/wiki/Candice_Bergen",
-            username: "PorkChop",
-            icon_emoji: ":trophy:"
-          ).and_return(notifier)
-
-        expect(notifier).
-          to receive(:ping).
-          with(
-            "Candice defeated Shirley",
-            attachments: [
-              {
-                fields: [
-                  {
-                    title: "Shirley",
-                    value: 10
-                  },
-                  {
-                    title: "Candice",
-                    value: 12
-                  }
-                ]
-              }
-            ]
-          )
+        expect(MatchFinalizationJob).
+          to receive(:perform_later).
+          with(match)
       end
 
       it { is_expected.to eq true }
