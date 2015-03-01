@@ -1,7 +1,6 @@
 .main-footer {
   @include span-columns(12);
   @include omega();
-  text-align: center;
 
   ul {
     list-style: none;
@@ -9,12 +8,31 @@
     margin: 0;
   }
 
-  li {
-    display: inline-block;
-    margin: 0 10px;
+  a {
+    color: $off-white;
+  }
+}
 
-    a {
-      color: $off-white;
-    }
+.main-footer-navigation {
+  @include media($desktop) {
+    @include span-columns(4);
+  }
+
+  @include media($mobile) {
+    @include span-columns(4);
+    @include omega();
+  }
+}
+
+.main-footer-information {
+  @include media($desktop) {
+    @include span-columns(8);
+    @include omega();
+  }
+
+  @include media($mobile) {
+    @include span-columns(4);
+    @include omega();
+    margin-top: 1rem;
   }
 }

@@ -1,0 +1,25 @@
+%footer.main-footer.porkbox-dark
+  %ul.main-footer-navigation
+    %li= link_to "Players", players_path
+    %li= link_to "Match History", matches_path
+    - if ongoing_match
+      %li= link_to "Scoreboard", scoreboard_path
+      %li= link_to "Controls", edit_scoreboard_path
+    - else
+      %li= link_to "New Match", new_match_path
+    - if current_user
+      %li= link_to "Log Out (#{current_user.username})",
+        signout_path, method: :delete
+    - else
+      %li= link_to "Log in with Twitter", "/auth/twitter"
+  .main-footer-information
+    %h3 About PorkChop
+    %p
+      These are the voyages of the Starship Enterprise. Its
+      continuing mission, to explore strange new worlds, to seek out
+      new life and new civilizations, to boldly go where no one has
+      gone before. We need to neutralize the homing signal. Each unit
+      has total environmental control, gravity, temperature,
+      atmosphere, light, in a protective field. Sensors show energy
+      readings in your area. We had a forced chamber explosion in the
+      resonator coil. Field strength has increased by 3,000 percent.
