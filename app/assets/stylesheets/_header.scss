@@ -4,6 +4,14 @@
   line-height: 2.5;
   font-size: modular-scale(1);
 
+  @include media($desktop) {
+    margin: modular-scale(-1) 0;
+  }
+
+  @include media($mobile) {
+    margin: modular-scale(-2) 0;
+  }
+
   a {
     &:link,
     &:visited {
@@ -81,7 +89,7 @@
 
   li {
     display: inline-block;
-    margin-right: modular-scale(-2);
+    margin-right: modular-scale(-1);
   }
 
   a {
@@ -92,6 +100,7 @@
 
       &.button {
         font-size: modular-scale(0);
+        vertical-align: 10%;
       }
     }
   }
