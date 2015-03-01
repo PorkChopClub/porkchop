@@ -2,21 +2,10 @@
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
   background-color: $dark-grey;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
-  line-height: 1.5;
-}
-
-#{$all-buttons} {
-  -webkit-appearance: none;
-  font-family: 'Roboto', sans-serif;
-  border: none;
-  display: block;
-  background-color: transparent;
-  outline: none;
 }
 
 select {

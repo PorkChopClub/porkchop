@@ -24,6 +24,7 @@
   margin-top: 0;
   margin-bottom: 0;
   font-size: inherit;
+  line-height: inherit;
 
   @include media($mobile) {
     font-size: modular-scale(0);
@@ -61,7 +62,7 @@
   }
 }
 
-.primary-navigation {
+.header-navigation {
   @include span-columns(8 of 12);
   @include omega();
   text-align: right;
@@ -80,22 +81,18 @@
 
   li {
     display: inline-block;
-    margin-left: 5px;
-
-    @include media($mobile) {
-      &:not(.navigation-action) {
-        display: none;
-      }
-    }
+    margin-right: modular-scale(-2);
   }
 
   a {
-    padding: 5px 10px;
-  }
-}
+    @include media($mobile) {
+      &:not(.button) {
+        display: none;
+      }
 
-.navigation-action a {
-  background-color: #206393;
-  border-bottom: 3px solid #1B557E;
-  color: #FCFCF7;
+      &.button {
+        font-size: modular-scale(0);
+      }
+    }
+  }
 }

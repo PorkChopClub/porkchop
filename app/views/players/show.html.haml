@@ -9,12 +9,12 @@
     = " #{@stats.record.join("-")}"
 
 .player-win-percentages.porkbox-light
-  %h1 Win Ratio by Opponent
+  %h2 Win Ratio by Opponent
   %dl.player-win-percentage-list
     - @stats.win_ratio_by_opponent.each do |opponent, ratio|
       %dt= opponent
       %dd= ratio
 
 .player-match-history.porkbox-light
-  %h1 Match History
+  %h2 Match History
   = render "matches/list", matches: @player.matches.finalized.order(finalized_at: :desc)

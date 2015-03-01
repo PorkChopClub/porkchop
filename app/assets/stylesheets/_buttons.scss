@@ -1,0 +1,27 @@
+.button, #{$all-buttons} {
+  font-family: 'Roboto', sans-serif;
+  font-size: modular-scale(1);
+  font-weight: 300;
+  line-height: 1.5;
+  padding: 0 modular-scale(-1);
+  margin: 0 modular-scale(-5);
+
+  &:first-child { margin-left: 0; }
+  &:last-child { margin-right: 0; }
+
+  display: inline-block;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  border-radius: 0.1em;
+
+  background-color: $blue;
+  border-bottom: 3px solid darken($blue, 5);
+  color: $off-white;
+
+  &[disabled] {
+    background-color: darken($blue, 5);
+    border-bottom: 3px solid darken($blue, 10);
+    color: darken($blue, 20);
+  }
+}
