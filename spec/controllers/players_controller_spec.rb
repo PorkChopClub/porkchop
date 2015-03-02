@@ -14,7 +14,7 @@ RSpec.describe PlayersController, type: :controller do
 
     it "assigns all players as @players" do
       subject
-      expect(assigns(:players)).to eq players
+      expect(assigns(:players)).to eq players.sort_by(&:name)
     end
   end
 
