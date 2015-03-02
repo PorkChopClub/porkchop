@@ -33,6 +33,7 @@ group :test do
   # Test fast or die trying.
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
+  gem 'codeclimate-test-reporter', require: false
   gem 'factory_girl_rails', require: false
   gem 'capybara', require: false
   gem 'poltergeist', require: false
