@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :players, only: :index
+
     resource :ongoing_match, only: [:show, :destroy] do
       put "home_point"
       put "away_point"
@@ -21,5 +22,9 @@ Rails.application.routes.draw do
     end
 
     get "stats/win_percentage"
+
+    put "table/home_button"
+    put "table/away_button"
+    put "table/center_button"
   end
 end
