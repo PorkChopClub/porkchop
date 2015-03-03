@@ -5,27 +5,39 @@ $ ->
 
   homePlayerPoints = $('.match-controls-home-player')
     .asEventStream('click')
-    .map -> { url: '/api/ongoing_match/home_point.json', type: 'PUT' }
+    .map ->
+      ga 'send', 'event', 'button', 'click', 'home point'
+      { url: '/api/ongoing_match/home_point.json', type: 'PUT' }
 
   awayPlayerPoints = $('.match-controls-away-player')
     .asEventStream('click')
-    .map -> { url: '/api/ongoing_match/away_point.json', type: 'PUT' }
+    .map ->
+      ga 'send', 'event', 'button', 'click', 'away point'
+      { url: '/api/ongoing_match/away_point.json', type: 'PUT' }
 
   serviceToggle = $('.match-controls-toggle-service')
     .asEventStream('click')
-    .map -> { url: '/api/ongoing_match/toggle_service.json', type: 'PUT' }
+    .map ->
+      ga 'send', 'event', 'button', 'click', 'toggle service'
+      { url: '/api/ongoing_match/toggle_service.json', type: 'PUT' }
 
   rewinds = $('.match-controls-rewind')
     .asEventStream('click')
-    .map -> { url: '/api/ongoing_match/rewind.json', type: 'PUT' }
+    .map ->
+      ga 'send', 'event', 'button', 'click', 'rewind'
+      { url: '/api/ongoing_match/rewind.json', type: 'PUT' }
 
   finalization = $('.match-controls-finalize-match')
     .asEventStream('click')
-    .map -> { url: '/api/ongoing_match/finalize.json', type: 'PUT' }
+    .map ->
+      ga 'send', 'event', 'button', 'click', 'finalize match'
+      { url: '/api/ongoing_match/finalize.json', type: 'PUT' }
 
   cancellations = $('.match-controls-cancel-match')
     .asEventStream('click')
-    .map -> { url: '/api/ongoing_match.json', type: 'DELETE' }
+    .map ->
+      ga 'send', 'event', 'button', 'click', 'cancel match'
+      { url: '/api/ongoing_match.json', type: 'DELETE' }
 
   match = Bacon.mergeAll(initialFetch,
                          homePlayerPoints,
