@@ -57,9 +57,3 @@ $ ->
   awayPlayerAvatarUrl
     .map (url) -> "url(#{url})"
     .assign $(".scoreboard-away-player-avatar"), "css", "background-image"
-
-  matchPolls
-    .map -> false
-    .mapError -> true
-    .toProperty true
-    .assign $(".scoreboard-no-game-message"), "toggleClass", "active"
