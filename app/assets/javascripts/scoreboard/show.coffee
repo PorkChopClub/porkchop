@@ -27,6 +27,12 @@ $ ->
   homePlayerName = match.map(".home_player_name")
   awayPlayerName = match.map(".away_player_name")
 
+  homePlayerNickname = match.map(".home_player_nickname")
+  awayPlayerNickname = match.map(".away_player_nickname")
+
+  homePlayerDisplayName = homePlayerNickname.or(homePlayerName)
+  awayPlayerDisplayName = awayPlayerNickname.or(awayPlayerName)
+
   homePlayerAvatarUrl = match.map(".home_player_avatar_url").skipDuplicates()
   awayPlayerAvatarUrl = match.map(".away_player_avatar_url").skipDuplicates()
 
@@ -48,8 +54,8 @@ $ ->
   homeScore.assign $(".scoreboard-home-player-score"), "text"
   awayScore.assign $(".scoreboard-away-player-score"), "text"
 
-  homePlayerName.assign $(".scoreboard-home-player-name"), "text"
-  awayPlayerName.assign $(".scoreboard-away-player-name"), "text"
+  homePlayerDisplayName.assign $(".scoreboard-home-player-name"), "text"
+  awayPlayerDisplayName.assign $(".scoreboard-away-player-name"), "text"
 
   homePlayerAvatarUrl
     .map (url) -> "url(#{url})"
