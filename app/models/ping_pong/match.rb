@@ -1,4 +1,6 @@
 class PingPong::Match < SimpleDelegator
+  delegate :comment, to: :commentator
+
   def home_player_service?
     first_service_by_away_player? ^ (points.count / 2 % 2 == 0)
   end
@@ -20,6 +22,10 @@ class PingPong::Match < SimpleDelegator
   end
 
   private
+
+  def commentator
+    @commentator ||= PingPong::Commentator.new(match: self)
+  end
 
   def highest_score
     [home_score, away_score].max

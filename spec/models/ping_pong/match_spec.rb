@@ -139,4 +139,20 @@ RSpec.describe PingPong::Match do
       it { is_expected.to eq away_player }
     end
   end
+
+  describe "#comment" do
+    subject { ping_pong_match.comment }
+    let(:match) { FactoryGirl.create :match }
+    let(:commentator) { instance_double PingPong::Commentator }
+
+    before do
+      expect(PingPong::Commentator).
+        to receive(:new).
+        with(match: match) { commentator }
+
+      expect(commentator).to receive(:comment) { 'foo' }
+    end
+
+    it { is_expected.to eq 'foo' }
+  end
 end
