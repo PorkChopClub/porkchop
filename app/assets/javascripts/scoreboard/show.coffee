@@ -38,7 +38,8 @@ $ ->
     .assign($(".scoreboard-message-area"), "toggleClass", "message-present")
   message.assign($(".scoreboard-message"), "text")
 
-  homeService = match.map(".home_player_service").toProperty()
+  homeService = match.map(".home_player_service")
+    .skipDuplicates().toProperty()
   awayService = homeService.not()
 
   awayService.assign($(".scoreboard-away-player"), "toggleClass", "has-service")
