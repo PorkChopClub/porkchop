@@ -1,3 +1,5 @@
+$bottom-bar-height: 120px;
+
 .scoreboard {
   position: fixed;
   height: 100%;
@@ -5,13 +7,10 @@
 }
 
 .scoreboard-player {
-  position: relative;
+  position: absolute;
   width: 50%;
-  height: 100%;
-  float: left;
-  background-size: auto 60%;
-  background-position: 0% 100%;
-  background-repeat: no-repeat;
+  height: $bottom-bar-height;
+  bottom: 0;
   color: $dark-grey;
   background-color: $off-white;
 
@@ -21,90 +20,85 @@
   }
 }
 
-@mixin scoreboard-player-gradient($color) {
-  @include linear-gradient(transparent 40%, $color 80%);
-}
-
-.scoreboard-player-inner {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-size: 100% 30%;
-  background-position: 10% 100%;
-  background-repeat: no-repeat;
-  @include scoreboard-player-gradient($off-white);
-
-  .has-service & {
-    @include scoreboard-player-gradient($blue);
-  }
-}
+.scoreboard-away-player { left:  0; }
+.scoreboard-home-player { right: 0; }
 
 .scoreboard-player-name {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   font-size: modular-scale(5);
-  padding-left: modular-scale(4);
-  padding-bottom: modular-scale(0);
+  line-height: $bottom-bar-height;
+  padding: 0 modular-scale(2);
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
 
-  .has-service & {
+  .scoreboard-home-player & {
+    text-align: left;
   }
-}
 
-.scoreboard-game-point-notice-wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  @include transform(translate(-50%, -50%));
-}
-
-.scoreboard-game-point-notice {
-  color: $red;
-  font-weight: bold;
-  @include animation(pulse 0.9s infinite);
-  font-size: modular-scale(9);
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1;
-  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
-  display: none;
-
-  .game-point & {
-    display: block;
+  .scoreboard-away-player & {
+    text-align: right;
   }
 }
 
 .scoreboard-player-score {
   position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0 modular-scale(7);
-  font-size: modular-scale(12);
+  bottom: 0;
+  font-size: modular-scale(10);
   line-height: 1;
   text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.15);
-}
-
-.scoreboard-no-game-message {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: $dark-grey;
-  color: $off-white;
-  font-size: modular-scale(3);
+  padding: 0 modular-scale(2);
   text-align: center;
-  display: none;
+  min-width: 375px;
+  background-color: $off-white;
 
-  &.active {
-    display: block;
+  .has-service & {
+    background-color: $blue;
+  }
+
+  .scoreboard-home-player & {
+    right: 0;
+    border-radius: modular-scale(2) 0 0 0;
+  }
+
+  .scoreboard-away-player & {
+    left: 0;
+    border-radius: 0 modular-scale(2) 0 0;
   }
 }
 
-.scoreboard-no-game-message-inner {
+.scoreboard-message-area {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: $bottom-bar-height;
+  left: 0;
+  background-color: darken($blue, 15);
+}
+
+.scoreboard-message {
   position: absolute;
   top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%));
+  font-size: modular-scale(7);
   width: 100%;
-  @include transform(translate(0%, -50%));
+  max-height: 100%;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1.2;
+  color: $off-white;
 }
+
+.scoreboard-home-player-avatar,
+.scoreboard-away-player-avatar {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-repeat: none;
+  background-size: contain;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  opacity: 1.0;
+}
+
+.scoreboard-home-player-avatar { right: 0; }
+.scoreboard-away-player-avatar { left: 0;  }

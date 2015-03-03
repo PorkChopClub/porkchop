@@ -15,10 +15,6 @@ $ ->
     }
     .toProperty()
 
-  gamePoint = match.map(".game_point")
-  homeGamePoint = gamePoint.map (player) -> player == "home"
-  awayGamePoint = gamePoint.map (player) -> player == "away"
-
   homeScore = match.map(".home_score")
   awayScore = match.map(".away_score")
 
@@ -34,9 +30,6 @@ $ ->
   awayService.assign($(".scoreboard-away-player"), "toggleClass", "has-service")
   homeService.assign($(".scoreboard-home-player"), "toggleClass", "has-service")
 
-  awayGamePoint.assign($(".scoreboard-away-player"), "toggleClass", "game-point")
-  homeGamePoint.assign($(".scoreboard-home-player"), "toggleClass", "game-point")
-
   homeScore.assign $(".scoreboard-home-player-score"), "text"
   awayScore.assign $(".scoreboard-away-player-score"), "text"
 
@@ -45,10 +38,10 @@ $ ->
 
   homePlayerAvatarUrl
     .map (url) -> "url(#{url})"
-    .assign $(".scoreboard-home-player"), "css", "background-image"
+    .assign $(".scoreboard-home-player-avatar"), "css", "background-image"
   awayPlayerAvatarUrl
     .map (url) -> "url(#{url})"
-    .assign $(".scoreboard-away-player"), "css", "background-image"
+    .assign $(".scoreboard-away-player-avatar"), "css", "background-image"
 
   matchPolls
     .map -> false
