@@ -2,8 +2,18 @@
 .match-controls-away-player,
 .match-controls-additional-stuff {
   font-size: modular-scale(2);
+  text-align: center;
 }
 
+.match-controls-home-player-name,
+.match-controls-away-player-name {
+  font-size: modular-scale(1);
+}
+
+.match-controls-home-player-score,
+.match-controls-away-player-score {
+  font-size: modular-scale(4);
+}
 
 .match-controls-home-player,
 .match-controls-away-player {
