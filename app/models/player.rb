@@ -12,7 +12,7 @@ class Player < ActiveRecord::Base
   end
 
   def matches_against opponent
-    matches.where(
+    matches.finalized.where(
       "away_player_id = :opponent OR home_player_id = :opponent",
       opponent: opponent
     )

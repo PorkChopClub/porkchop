@@ -62,6 +62,12 @@ RSpec.describe Player, type: :model do
     let(:player) { FactoryGirl.create :player }
     let(:opponent) { FactoryGirl.create :player }
 
+    let!(:incomplete_match) do
+      FactoryGirl.create :match,
+        home_player: opponent,
+        away_player: player
+    end
+
     let!(:away) do
       FactoryGirl.create :complete_match,
         home_player: opponent,
