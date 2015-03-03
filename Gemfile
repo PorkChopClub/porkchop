@@ -27,6 +27,8 @@ gem 'bugsnag'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'
+
+  gem 'factory_girl_rails', require: false
 end
 
 group :test do
@@ -34,7 +36,6 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
   gem 'codeclimate-test-reporter', require: false
-  gem 'factory_girl_rails', require: false
   gem 'capybara', require: false
   gem 'poltergeist', require: false
   gem 'database_cleaner', require: false
