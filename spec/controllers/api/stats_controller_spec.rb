@@ -37,4 +37,31 @@ RSpec.describe Api::StatsController, type: :controller do
       })
     end
   end
+
+  describe "GET rating" do
+    subject { get :rating, format: :json }
+
+    let!(:jared) do
+      FactoryGirl.create :player, name: "Jared", elo: 1200
+    end
+    let!(:gray) do
+      FactoryGirl.create :player, name: "Gray", elo: 1000
+    end
+    let!(:clarke) do
+      FactoryGirl.create :player, name: "Clarke", elo: 900
+    end
+
+    before do
+      allow_any_instance_of(Player).
+        to receive_message_chain(:matches, :finalized, :count) { 20 }
+    end
+
+    it "renders the players by elo" do
+      expect(JSON.parse(subject.body)['ratings']).to eq([
+        ["Jared", 1200],
+        ["Gray", 1000],
+        ["Clarke", 900]
+      ])
+    end
+  end
 end

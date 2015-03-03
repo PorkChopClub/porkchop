@@ -1,0 +1,1 @@
+json.ratings @ratings

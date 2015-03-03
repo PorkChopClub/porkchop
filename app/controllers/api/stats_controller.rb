@@ -7,4 +7,12 @@ class Api::StatsController < ApplicationController
       acc
     }
   end
+
+  def rating
+    @ratings =Player.all.to_a.
+      find_all { |p| p.matches.finalized.count >= 20 }.
+      sort_by(&:elo).
+      reverse.
+      map { |p| [p.name, p.elo] }
+  end
 end
