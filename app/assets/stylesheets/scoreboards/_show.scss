@@ -81,10 +81,12 @@ $bottom-bar-height: 120px;
   font-size: modular-scale(7);
   width: 100%;
   max-height: 100%;
+  padding: 0 modular-scale(7);
   overflow: hidden;
   text-align: center;
   line-height: 1.2;
   color: $off-white;
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 .scoreboard-home-player-avatar,
@@ -98,6 +100,11 @@ $bottom-bar-height: 120px;
   background-position: 50% 100%;
   background-repeat: no-repeat;
   opacity: 1.0;
+  @include transition(opacity 200ms ease-out);
+
+  .message-present & {
+    opacity: 0.25;
+  }
 }
 
 .scoreboard-home-player-avatar { right: 0; }

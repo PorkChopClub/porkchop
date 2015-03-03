@@ -15,6 +15,12 @@ $ ->
     }
     .toProperty()
 
+  message = match.map(".comment")
+    .skipDuplicates()
+    .map (value) -> value || ""
+
+  messagePresent = message.not().not()
+
   homeScore = match.map(".home_score")
   awayScore = match.map(".away_score")
 
@@ -23,6 +29,14 @@ $ ->
 
   homePlayerAvatarUrl = match.map(".home_player_avatar_url").skipDuplicates()
   awayPlayerAvatarUrl = match.map(".away_player_avatar_url").skipDuplicates()
+
+  #############
+  # Rendering #
+  #############
+
+  messagePresent
+    .assign($(".scoreboard-message-area"), "toggleClass", "message-present")
+  message.assign($(".scoreboard-message"), "text")
 
   homeService = match.map(".home_player_service").toProperty()
   awayService = homeService.not()
