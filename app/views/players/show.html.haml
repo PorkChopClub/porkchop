@@ -7,9 +7,12 @@
       = "a.k.a. #{@player.nickname}"
       &nbsp;
     = link_to "(edit)", edit_player_path(@player)
+  %h2
+    Rating:&nbsp;
+    = @player.elo
   %h3
-    Record:
-    = " #{@stats.record.join("-")}"
+    Record:&nbsp;
+    = @stats.record.join("-")
 
 .player-win-percentages.porkbox-light
   %h2 Win Ratio by Opponent
