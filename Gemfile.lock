@@ -67,6 +67,7 @@ GEM
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
+    elo (0.1.0)
     erubis (2.7.0)
     execjs (2.3.0)
     factory_girl (4.5.0)
@@ -232,6 +233,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   dotenv-rails
+  elo
   factory_girl_rails
   haml
   jbuilder (~> 2.0)

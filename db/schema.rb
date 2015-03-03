@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303063113) do
+ActiveRecord::Schema.define(version: 20150303081428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150303063113) do
     t.datetime "updated_at",                                            null: false
     t.string   "avatar_url", default: "http://i.imgur.com/ya5NxSH.png"
     t.string   "nickname"
+    t.integer  "elo",        default: 1000
   end
 
   create_table "points", force: :cascade do |t|
