@@ -57,11 +57,11 @@ RSpec.describe Api::StatsController, type: :controller do
     end
 
     it "renders the players by elo" do
-      expect(JSON.parse(subject.body)['ratings']).to eq([
-        ["Jared", 1200],
-        ["Gray", 1000],
-        ["Clarke", 900]
-      ])
+      expect(JSON.parse(subject.body)['ratings']).to eq({
+        "Jared" => 1200,
+        "Gray" => 1000,
+        "Clarke" => 900
+      })
     end
   end
 end
