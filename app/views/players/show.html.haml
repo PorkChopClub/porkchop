@@ -3,6 +3,9 @@
   %h1
     = @player.name
     &nbsp;
+    - if @player.nickname.present?
+      = "a.k.a. #{@player.nickname}"
+      &nbsp;
     = link_to "(edit)", edit_player_path(@player)
   %h3
     Record:
