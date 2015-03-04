@@ -4,6 +4,7 @@ class MatchFinalizationJob < ActiveJob::Base
   def perform match
     @match = match
     send_notification!
+    adjust_elo!
   end
 
   private
@@ -17,6 +18,13 @@ class MatchFinalizationJob < ActiveJob::Base
         fields: [{title: home_player_name, value: match.home_score},
                  {title: away_player_name, value: match.away_score}]}]
     )
+  end
+
+  def adjust_elo!
+    EloAdjustment.new(
+      victor: match.victor,
+      loser: match.loser
+    ).adjust!
   end
 
   def victor_name
