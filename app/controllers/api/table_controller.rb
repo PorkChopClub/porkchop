@@ -1,5 +1,6 @@
 class Api::TableController < ApplicationController
   skip_authorization_check
+  skip_before_action :verify_authenticity_token
 
   before_action :check_table_token
   before_action :match
