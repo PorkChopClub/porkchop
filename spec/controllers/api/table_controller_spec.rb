@@ -5,7 +5,7 @@ RSpec.describe Api::TableController, type: :controller do
   let!(:match) { FactoryGirl.create :match }
 
   before do
-    ENV['table_token'] = 'm37410c41yp53'
+    ENV['TABLE_TOKEN'] = 'm37410c41yp53'
   end
 
   shared_examples "without valid token" do

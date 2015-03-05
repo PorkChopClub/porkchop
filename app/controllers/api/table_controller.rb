@@ -22,7 +22,7 @@ class Api::TableController < ApplicationController
   private
 
   def check_table_token
-    unless params[:table_token] == ENV['table_token']
+    unless params[:table_token] == ENV['TABLE_TOKEN']
       head :forbidden
     end
   end
