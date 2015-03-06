@@ -1,28 +1,20 @@
 module PingPong
   class Commentator
+    COMMENT_CLASSES = [PingPong::PastRecordComment]
+
     def initialize(match:)
       @match = match
     end
 
     def comment
-      if match.points.count < 2
-        if last_match
-          "In their last match, #{last_match.victor.name} won #{[last_match.home_score, last_match.away_score].sort.reverse.join('-')}."
-        else
-          "This is the first match between these players."
-        end
-      end
+      comments.select(&:available?).max_by(&:priority).message
     end
 
     private
     attr_reader :match
-    delegate :home_player,
-             :away_player,
-             to: :match
 
-    def last_match
-      home_player.matches_against(away_player).
-        order('finalized_at DESC').first
+    def comments
+      COMMENT_CLASSES.map { |klass| klass.new(match) }
     end
   end
 end
