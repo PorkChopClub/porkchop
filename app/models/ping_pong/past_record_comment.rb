@@ -1,15 +1,11 @@
 module PingPong
-  class PastRecordComment
-    def initialize match
-      @match = match
-    end
-
+  class PastRecordComment < Comment
     def available?
-      true
+      match.points.count < 2
     end
 
     def priority
-      match.points.count < 2 ? 10 : 0
+      5 - match.points.count
     end
 
     def message
@@ -21,7 +17,6 @@ module PingPong
     end
 
     private
-    attr_reader :match
     delegate :home_player,
              :away_player,
              to: :match

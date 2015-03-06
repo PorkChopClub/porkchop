@@ -11,6 +11,28 @@ RSpec.describe PingPong::Commentator do
     let(:jared) { FactoryGirl.create :player, name: "Jared" }
     let(:gray)  { FactoryGirl.create :player, name: "Gray" }
 
+    context "when the match is at game point" do
+      context "for the home player" do
+        let(:match) do
+          FactoryGirl.create :match,
+            home_player: jared, home_score: 10,
+            away_player: gray,  away_score: 8
+        end
+
+        it { is_expected.to eq "Game point, Jared." }
+      end
+
+      context "for the away player" do
+        let(:match) do
+          FactoryGirl.create :match,
+            home_player: jared, home_score: 10,
+            away_player: gray,  away_score: 11
+        end
+
+        it { is_expected.to eq "Game point, Gray." }
+      end
+    end
+
     context "when the match is less than 2 points in" do
       let(:match) do
         FactoryGirl.create :new_match,

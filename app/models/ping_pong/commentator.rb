@@ -1,13 +1,14 @@
 module PingPong
   class Commentator
-    COMMENT_CLASSES = [PingPong::PastRecordComment]
+    COMMENT_CLASSES = [PingPong::PastRecordComment,
+                       PingPong::GamePointComment]
 
     def initialize(match:)
       @match = match
     end
 
     def comment
-      comments.select(&:available?).max_by(&:priority).message
+      comments.select(&:available?).max_by(&:priority).try(:message)
     end
 
     private
