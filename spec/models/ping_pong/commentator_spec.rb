@@ -33,7 +33,25 @@ RSpec.describe PingPong::Commentator do
       end
     end
 
-    context "when the match is less than 2 points in" do
+    context "when the match is 1 point in" do
+      let(:match) do
+        FactoryGirl.create :match,
+          home_player: jared, home_score: 1,
+          away_player: gray,  away_score: 0
+      end
+
+      let!(:older_match) do
+        FactoryGirl.create :complete_match,
+          home_player: jared, home_score: 14,
+          away_player: gray,  away_score: 12,
+          finalized_at: 2.days.ago
+      end
+
+      it { is_expected.
+           to eq "Jared is 1-0 against Gray." }
+    end
+
+    context "when the match is about to start" do
       let(:match) do
         FactoryGirl.create :new_match,
           home_player: jared,

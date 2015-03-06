@@ -4,6 +4,32 @@ RSpec.describe Stats::Personal do
   let(:stats) { described_class.new(player) }
   let(:player) { FactoryGirl.create :player }
 
+  describe "#record_against" do
+    subject { stats.record_against candice }
+
+    let(:candice) { FactoryGirl.create :player, name: "Candice" }
+
+    let!(:match1) do
+      FactoryGirl.create :complete_match,
+        home_player: player,
+        away_player: candice
+    end
+
+    let!(:match2) do
+      FactoryGirl.create :complete_match,
+        home_player: player,
+        away_player: candice
+    end
+
+    let!(:match3) do
+      FactoryGirl.create :complete_match,
+        home_player: candice,
+        away_player: player
+    end
+
+    it { is_expected.to eq [2, 1] }
+  end
+
   describe "#win_ratio_by_opponent" do
     subject { stats.win_ratio_by_opponent }
 

@@ -1,5 +1,5 @@
 module PingPong
-  class PastRecordComment < Comment
+  class LastGameComment < Comment
     def available?
       match.points.count < 2
     end

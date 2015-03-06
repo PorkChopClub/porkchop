@@ -18,6 +18,10 @@ class Stats::Personal
     end
   end
 
+  def record_against opponent
+    [victory_count_against(opponent), loss_count_against(opponent)]
+  end
+
   def record
     [victory_count, loss_count]
   end
@@ -41,6 +45,10 @@ class Stats::Personal
 
   def match_count_against opponent
     matches_against(opponent).count
+  end
+
+  def loss_count_against opponent
+    match_count_against(opponent) - victory_count_against(opponent)
   end
 
   def victory_count
