@@ -1,3 +1,7 @@
 .homepage-recent-matches.porkbox-light
-  %h1 Recent matches
+  %h2 Recent matches
   = render "matches/list", matches: @recent_matches
+
+.homepage-leaderboard-list.porkbox-light
+  %h2 Leaderboard
+  = render "shared/leaderboard", players: @ranked_players

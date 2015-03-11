@@ -1,14 +1,29 @@
+.homepage-recent-matches,
+.homepage-leaderboard-list {
+
+  h2 {
+    margin-bottom: 15px;
+  }
+}
+
 .homepage-recent-matches {
   @include media($desktop) {
-    @include span-columns(8);
-    @include shift(2);
+    @include span-columns(7);
   }
 
   @include media($mobile) {
     @include span-columns(4);
   }
+}
 
-  @include omega();
+.homepage-leaderboard-list {
+  @include media($desktop) {
+    @include span-columns(4);
+    @include shift(1);
+    @include omega();
+  }
 
-  font-size: modular-scale(-1);
+  @include media($mobile) {
+    @include span-columns(4);
+  }
 }
