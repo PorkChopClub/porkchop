@@ -1,0 +1,18 @@
+.leaderboard-list {
+  width: 100%;
+
+  th {
+    text-align: left;
+  }
+}
+
+.leaderboard-list-player {
+
+  td {
+    padding: 5px 0;
+  }
+
+  &:nth-child(even) td {
+    background: #f0f0f0;
+  }
+}

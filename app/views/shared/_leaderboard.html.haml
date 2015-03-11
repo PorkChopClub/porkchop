@@ -1,0 +1,12 @@
+%table.leaderboard-list
+  %thead
+    %tr
+      %th Player
+      %th Rating
+  %tbody
+    - players.each_with_index do |player, i|
+      %tr.leaderboard-list-player
+        %td
+          %strong #{i + 1}.&nbsp;
+          = link_to player.name, player
+        %td= player.elo
