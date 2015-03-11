@@ -10,10 +10,10 @@
     - matches.each do |match|
       %tr
         %td= l match.finalized_at, format: :short
-        %td{class: ("match-list-victor" if match.victor == match.home_player)}
-          = match.home_player.name
-        %td{class: ("match-list-victor" if match.victor == match.away_player)}
-          = match.away_player.name
+        %td{class: ["match-list-player", ("match-list-victor" if match.victor == match.home_player)]}
+          = link_to match.home_player.name, match.home_player
+        %td{class: ["match-list-player", ("match-list-victor" if match.victor == match.away_player)]}
+          = link_to match.away_player.name, match.away_player
         %td
           = [match.home_score, match.away_score].join(' - ')
         %td
