@@ -4,5 +4,5 @@
       = link_to player_path(player) do
         = image_tag player.avatar_url, class: "list-player-avatar"
         .list-player-details
-          %h2= player.name
+          %h3= player.name
           %p= Stats::Personal.new(player).record.join('-')
