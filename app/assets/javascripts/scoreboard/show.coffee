@@ -2,7 +2,7 @@ $ ->
   return unless $('.scoreboard').length
 
   ajaxOptions = { url: '/api/ongoing_match.json' }
-  matchPolls = Bacon.mergeAll([Bacon.interval(1000, ajaxOptions),
+  matchPolls = Bacon.mergeAll([Bacon.interval(300, ajaxOptions),
                                Bacon.once(ajaxOptions)]).ajax()
 
   match = matchPolls
