@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Player, type: :model do
   it { is_expected.to have_many :points }
   it { is_expected.to have_many :victories }
+  it { is_expected.to have_many :elo_ratings }
 
   it "is invalid without a name" do
     expect(described_class.new.valid?).to be false
@@ -85,5 +86,55 @@ RSpec.describe Player, type: :model do
     end
 
     it { is_expected.to match_array [away, home] }
+  end
+
+  describe "#elo=" do
+    let(:player) { FactoryGirl.create :player, elo: 666 }
+
+    context "without saving" do
+      it "does not change the player's rating" do
+        expect do
+          player.elo = 1000
+        end.not_to change{player.reload.elo}
+      end
+    end
+
+    context "without saving" do
+      it "does not change the player's rating" do
+        expect do
+          player.elo = 1000
+          player.save
+        end.to change{player.reload.elo}.from(666).to(1000)
+      end
+    end
+  end
+
+  describe "#elo" do
+    subject { player.elo }
+
+    let(:player) { FactoryGirl.create :player }
+
+    context "when the player has no recorded ratings" do
+      it { is_expected.to eq 1000 }
+    end
+
+    context "when the player has recorded ratings" do
+      let!(:old_rating) do
+        FactoryGirl.create :elo_rating,
+          player: player,
+          rating: 10,
+          created_at: 1.minute.ago
+      end
+
+      let!(:newest_rating) do
+        FactoryGirl.create :elo_rating,
+          player: player,
+          rating: 1200
+      end
+
+      it "returns the rating of the most recent one" do
+        expect(subject).to eq 1200
+      end
+    end
   end
 end

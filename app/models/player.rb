@@ -1,6 +1,11 @@
 class Player < ActiveRecord::Base
   has_many :points, foreign_key: 'victor_id'
   has_many :victories, class_name: "Match", foreign_key: 'victor_id'
+  has_many :elo_ratings
+
+  validates :name, presence: true
+
+  after_save :record_rating
 
   def matches
     Match.where "matches.home_player_id = :id OR matches.away_player_id = :id",
@@ -22,9 +27,20 @@ class Player < ActiveRecord::Base
     Player.where(id: opponent_ids)
   end
 
-  validates :name, presence: true
+  def elo= rating
+    @elo = rating
+  end
+
+  def elo
+    elo_ratings.order(created_at: :desc).first.try(:rating) || 1000
+  end
 
   private
+
+  def record_rating
+    return unless @elo
+    elo_ratings.create(rating: @elo)
+  end
 
   def opponent_ids
     matches.

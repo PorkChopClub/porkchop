@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303081428) do
+ActiveRecord::Schema.define(version: 20150313032732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "elo_ratings", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "elo_ratings", ["player_id"], name: "index_elo_ratings_on_player_id", using: :btree
 
   create_table "matches", force: :cascade do |t|
     t.integer  "home_player_id"
@@ -36,7 +45,6 @@ ActiveRecord::Schema.define(version: 20150303081428) do
     t.datetime "updated_at",                                            null: false
     t.string   "avatar_url", default: "http://i.imgur.com/ya5NxSH.png"
     t.string   "nickname"
-    t.integer  "elo",        default: 1000
   end
 
   create_table "points", force: :cascade do |t|
@@ -58,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150303081428) do
     t.boolean  "admin",      default: false
   end
 
+  add_foreign_key "elo_ratings", "players"
   add_foreign_key "matches", "players", column: "away_player_id"
   add_foreign_key "matches", "players", column: "home_player_id"
   add_foreign_key "matches", "players", column: "victor_id"

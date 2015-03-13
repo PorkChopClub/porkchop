@@ -24,6 +24,11 @@ namespace :porkchop do
           PingPong::Match.new(match)
         ).finalize!
 
+        EloRating.
+          order(created_at: :desc).
+          limit(2).
+          update_all(created_at: finalized_at)
+
         match.update_column :finalized_at, finalized_at
       end
     end
