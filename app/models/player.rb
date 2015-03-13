@@ -9,6 +9,8 @@ class Player < ActiveRecord::Base
 
   after_save :record_rating
 
+  has_many :achievements
+
   def matches
     Match.where "matches.home_player_id = :id OR matches.away_player_id = :id",
       id: id
