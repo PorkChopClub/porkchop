@@ -1,4 +1,6 @@
 class Player < ActiveRecord::Base
+  BASE_ELO = 1000
+
   has_many :points, foreign_key: 'victor_id'
   has_many :victories, class_name: "Match", foreign_key: 'victor_id'
   has_many :elo_ratings
@@ -32,7 +34,7 @@ class Player < ActiveRecord::Base
   end
 
   def elo
-    elo_ratings.order(created_at: :desc).first.try(:rating) || 1000
+    elo_ratings.most_recent_rating || BASE_ELO
   end
 
   private
