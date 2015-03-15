@@ -1,6 +1,7 @@
 class Player < ActiveRecord::Base
   BASE_ELO = 1000
 
+  has_many :achievements
   has_many :points, foreign_key: 'victor_id'
   has_many :victories, class_name: "Match", foreign_key: 'victor_id'
   has_many :elo_ratings
@@ -8,8 +9,6 @@ class Player < ActiveRecord::Base
   validates :name, presence: true
 
   after_save :record_rating
-
-  has_many :achievements
 
   def matches
     Match.where "matches.home_player_id = :id OR matches.away_player_id = :id",
@@ -37,6 +36,10 @@ class Player < ActiveRecord::Base
 
   def elo
     elo_ratings.most_recent_rating || BASE_ELO
+  end
+
+  def unearned_achievements
+    Achievement.unearned(self)
   end
 
   private

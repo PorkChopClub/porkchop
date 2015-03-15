@@ -138,4 +138,12 @@ RSpec.describe Player, type: :model do
       end
     end
   end
+
+  describe "#unearned_achievements" do
+    let(:player) { FactoryGirl.create :player }
+    subject { player.unearned_achievements }
+    it "contains a victories achievement" do
+      expect(subject.first.variety).to eq "victories"
+    end
+  end
 end
