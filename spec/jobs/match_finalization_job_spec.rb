@@ -20,6 +20,7 @@ RSpec.describe MatchFinalizationJob, type: :job do
 
     let(:notifier) { instance_double Slack::Notifier }
     let(:adjustment) { instance_double EloAdjustment }
+    let(:achievement) { instance_double Achievement }
 
     before do
       allow(ENV).
@@ -56,6 +57,15 @@ RSpec.describe MatchFinalizationJob, type: :job do
         loser: loser
       ).and_return(adjustment)
       expect(adjustment).to receive(:adjust!)
+      subject
+    end
+
+    it "collects all of the achievements" do
+      expect(match.home_player).to receive(:unearned_achievements).
+        and_return([achievement])
+      expect(match.away_player).to receive(:unearned_achievements).
+        and_return([achievement])
+      expect(achievement).to receive(:achieved?).twice.and_return(false)
       subject
     end
   end

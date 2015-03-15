@@ -5,6 +5,7 @@ class MatchFinalizationJob < ActiveJob::Base
     @match = match
     send_notification!
     adjust_elo!
+    collect_achievements!
   end
 
   private
@@ -25,6 +26,12 @@ class MatchFinalizationJob < ActiveJob::Base
       victor: match.victor,
       loser: match.loser
     ).adjust!
+  end
+
+  def collect_achievements!
+    [match.home_player, match.away_player].each do |player|
+      player.unearned_achievements.select(&:achieved?).each(&:save!)
+    end
   end
 
   def victor_name
