@@ -65,7 +65,7 @@ RSpec.describe MatchFinalizationJob, type: :job do
         and_return([achievement])
       expect(match.away_player).to receive(:unearned_achievements).
         and_return([achievement])
-      expect(achievement).to receive(:achieved?).twice.and_return(false)
+      expect(achievement).to receive(:earned?).twice.and_return(false)
       subject
     end
   end

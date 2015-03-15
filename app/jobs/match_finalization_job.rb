@@ -30,7 +30,7 @@ class MatchFinalizationJob < ActiveJob::Base
 
   def collect_achievements!
     [match.home_player, match.away_player].each do |player|
-      player.unearned_achievements.select(&:achieved?).each(&:save!)
+      player.all_achievements.select(&:earned?).each(&:adjust_rank!)
     end
   end
 

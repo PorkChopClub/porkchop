@@ -38,6 +38,10 @@ class Player < ActiveRecord::Base
     elo_ratings.most_recent_rating || BASE_ELO
   end
 
+  def all_achievements
+    achievements + unearned_achievements
+  end
+
   def unearned_achievements
     Achievement.unearned(self)
   end
