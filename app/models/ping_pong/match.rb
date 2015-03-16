@@ -2,7 +2,13 @@ class PingPong::Match < SimpleDelegator
   delegate :comment, to: :commentator
 
   def home_player_service?
+    return unless first_service
     first_service_by_away_player? ^ (points.count / 2 % 2 == 0)
+  end
+
+  def away_player_service?
+    return unless first_service
+    !home_player_service?
   end
 
   def finished?

@@ -3,6 +3,8 @@ class Match < ActiveRecord::Base
   belongs_to :away_player, class_name: "Player"
   belongs_to :victor, class_name: "Player"
 
+  enum first_service: { first_service_by_home_player: 1, first_service_by_away_player: 2 }
+
   has_many :points, dependent: :destroy
 
   validates :home_player, :away_player, presence: true
@@ -35,8 +37,22 @@ class Match < ActiveRecord::Base
     away_points.count
   end
 
-  def first_service_by_away_player?
-    !first_service_by_home_player?
+  def first_service_by=(player)
+    if player == home_player
+      first_service_by_home_player!
+    elsif player == away_player
+      first_service_by_away_player!
+    else
+      raise ArgumentError
+    end
+  end
+
+  def toggle_service
+    if first_service_by_home_player?
+      first_service_by_away_player!
+    else
+      first_service_by_home_player!
+    end
   end
 
   def loser

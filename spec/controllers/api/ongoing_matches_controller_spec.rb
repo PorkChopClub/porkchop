@@ -102,7 +102,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
         expect{subject}.
           to change {
             PingPong::Match.new(match.reload).home_player_service?
-          }.from(true).to(false)
+          }.from(nil).to(true)
       end
     end
 
@@ -112,8 +112,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
           to receive(:ongoing).
           and_return([match])
         expect(match).
-          to receive(:toggle!).
-          with(:first_service_by_home_player).
+          to receive(:toggle_service).
           and_return(false)
       end
 

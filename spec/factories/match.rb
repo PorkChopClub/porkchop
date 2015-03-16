@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :match do
     association :home_player, factory: :player
     association :away_player, factory: :player
+    first_service :first_service_by_home_player
 
     transient do
       home_score 5
@@ -28,11 +29,21 @@ FactoryGirl.define do
     end
 
     trait :at_start do
+      first_service nil
       transient do
         home_score 0
         away_score 0
       end
     end
+
+    trait :first_service_by_home_player do
+      first_service :first_service_by_home_player
+    end
+
+    trait :first_service_by_away_player do
+      first_service :first_service_by_away_player
+    end
+
 
     factory :complete_match, traits: [:finalized, :finished]
     factory :new_match, traits: [:at_start]

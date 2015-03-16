@@ -150,12 +150,12 @@ RSpec.describe Match, type: :model do
     let(:match) { FactoryGirl.build :match }
 
     context "when home player serves first" do
-      before { match.first_service_by_home_player = true }
+      before { match.first_service_by_home_player! }
       it { is_expected.to be false }
     end
 
     context "when away player serves first" do
-      before { match.first_service_by_home_player = false }
+      before { match.first_service_by_away_player! }
       it { is_expected.to be true }
     end
   end

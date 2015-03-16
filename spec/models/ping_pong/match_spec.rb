@@ -34,18 +34,20 @@ RSpec.describe PingPong::Match do
   describe "#home_player_service?" do
     subject { ping_pong_match.home_player_service? }
 
-    let(:match) { FactoryGirl.build :match }
+    let(:match) { FactoryGirl.build :match, :at_start}
 
     context "when it's the first service of the match" do
-      context "and the away player serves first" do
-        before { match.first_service_by_home_player = false }
+      context "and the service is undecided" do
+        it { is_expected.to be nil }
+      end
 
+      context "and the away player serves first" do
+        before { match.first_service_by_away_player! }
         it { is_expected.to be false }
       end
 
       context "and the home player serves first" do
-        before { match.first_service_by_home_player = true }
-
+        before { match.first_service_by_home_player! }
         it { is_expected.to be true }
       end
     end
@@ -56,14 +58,34 @@ RSpec.describe PingPong::Match do
       end
 
       context "and the away player serves first" do
-        before { match.first_service_by_home_player = false }
-
+        before { match.first_service_by_away_player! }
         it { is_expected.to be true }
       end
 
       context "and the home player serves first" do
-        before { match.first_service_by_home_player = true }
+        before { match.first_service_by_home_player! }
+        it { is_expected.to be false }
+      end
+    end
+  end
 
+  describe "#away_player_service?" do
+    subject { ping_pong_match.away_player_service? }
+
+    let(:match) { FactoryGirl.build :match, :at_start}
+
+    context "when it's the first service of the match" do
+      context "and the service is undecided" do
+        it { is_expected.to be nil }
+      end
+
+      context "and the away player serves first" do
+        before { match.first_service_by_away_player! }
+        it { is_expected.to be true }
+      end
+
+      context "and the home player serves first" do
+        before { match.first_service_by_home_player! }
         it { is_expected.to be false }
       end
     end

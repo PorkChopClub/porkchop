@@ -29,6 +29,9 @@ RSpec.describe "scoreboard page" do
     expect(player_score(:home)).to have_content "0"
     expect(player_score(:away)).to have_content "0"
 
+    # Select home service
+    score_point :home
+
     score_point :away
     score_point :home
     score_point :away

@@ -22,7 +22,7 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def toggle_service
-    perform match.toggle!(:first_service_by_home_player)
+    perform match.toggle_service
   end
 
   def rewind
