@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   get 'signin', to: redirect('/auth/twitter')
   delete 'signout', to: 'sessions#destroy', as: 'signout'
-  get 'auth/:provider/callback', to: 'sessions#create'
+
+  get  'auth/:provider/callback', to: 'sessions#create'
+  post 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
 
   namespace :api do
