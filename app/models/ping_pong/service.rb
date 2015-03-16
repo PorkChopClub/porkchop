@@ -1,6 +1,6 @@
 module PingPong
   class Service
-    def initialize match:, victor:
+    def initialize(match:, victor:)
       @match = match
       @victor = victor
     end

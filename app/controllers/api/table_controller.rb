@@ -6,17 +6,17 @@ class Api::TableController < ApplicationController
   before_action :match
 
   def home_button
-    record_service match.home_player
+    table.home_button
     head :ok
   end
 
   def away_button
-    record_service match.away_player
+    table.away_button
     head :ok
   end
 
   def center_button
-    rewind_match
+    table.center_button
     head :ok
   end
 
@@ -29,17 +29,11 @@ class Api::TableController < ApplicationController
   end
 
   # FIXME: Copied out of Api::OngoingMatchController
-  def record_service victor
-    PingPong::Service.new(match: match, victor: victor).record!
-  end
-
-  # FIXME: Copied out of Api::OngoingMatchController
-  def rewind_match
-    PingPong::Rewind.new(match).rewind!
-  end
-
-  # FIXME: Copied out of Api::OngoingMatchController
   def match
     @match ||= PingPong::Match.new ongoing_match
+  end
+
+  def table
+    @table ||= PingPong::TableControls.new(match)
   end
 end
