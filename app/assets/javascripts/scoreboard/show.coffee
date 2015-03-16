@@ -46,7 +46,8 @@ $ ->
 
   homeService = match.map(".home_player_service")
     .skipDuplicates().toProperty()
-  awayService = homeService.not()
+  awayService = match.map(".away_player_service")
+    .skipDuplicates().toProperty()
 
   awayService.assign($(".scoreboard-away-player"), "toggleClass", "has-service")
   homeService.assign($(".scoreboard-home-player"), "toggleClass", "has-service")

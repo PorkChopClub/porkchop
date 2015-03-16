@@ -11,7 +11,8 @@ json.match do
   json.away_player_nickname @match.away_player.try(:nickname)
   json.away_player_avatar_url @match.away_player.try(:avatar_url)
 
-  json.home_player_service @match.home_player_service?
+  json.home_player_service !!@match.home_player_service?
+  json.away_player_service !!@match.away_player_service?
   json.finished @match.finished?
   json.finalized @match.finalized?
   json.deleted !Match.exists?(@match.id)
