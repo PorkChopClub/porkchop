@@ -16,5 +16,6 @@ json.match do
   json.finished @match.finished?
   json.finalized @match.finalized?
   json.deleted !Match.exists?(@match.id)
-  json.comment @match.comment
+  json.comment @match.comment || ""
+  json.instructions @match.instructions || ""
 end

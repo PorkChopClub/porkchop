@@ -1,5 +1,5 @@
 class PingPong::Match < SimpleDelegator
-  delegate :comment, to: :commentator
+  delegate :comment, :instructions, to: :commentator
 
   def home_player_service?
     return unless first_service

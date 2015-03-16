@@ -15,6 +15,10 @@ module PingPong
       comments.select(&:available?).max_by(&:priority).try(:message)
     end
 
+    def instructions
+      Instructions.new(match).message
+    end
+
     private
     attr_reader :match
 

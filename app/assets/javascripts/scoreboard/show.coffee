@@ -11,13 +11,14 @@ $ ->
       home_score: "",
       away_score: "",
       home_player_name: "",
-      away_player_name: ""
+      away_player_name: "",
+      comment: "",
+      instructions: ""
     }
     .toProperty()
 
   message = match.map(".comment")
     .skipDuplicates()
-    .map (value) -> value || ""
 
   messagePresent = message.not().not()
 
@@ -43,6 +44,10 @@ $ ->
   messagePresent
     .assign($(".scoreboard-message-area"), "toggleClass", "message-present")
   message.assign($(".scoreboard-message"), "text")
+
+  match.map(".instructions")
+    .skipDuplicates()
+    .assign($(".scoreboard-instructions"), "text")
 
   homeService = match.map(".home_player_service")
     .skipDuplicates().toProperty()
