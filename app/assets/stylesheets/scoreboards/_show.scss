@@ -89,6 +89,28 @@ $bottom-bar-height: 120px;
   text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
+@-webkit-keyframes blinker {
+  from { opacity: 1.0; }
+  50%  { opacity: 0.0; }
+  to   { opacity: 1.0; }
+}
+
+.scoreboard-instructions {
+  position: absolute;
+  bottom: 16px;
+  font-size: modular-scale(3);
+  width: 100%;
+  text-align: center;
+  line-height: 1.2;
+  color: $yellow;
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -webkit-animation-duration: 1s;
+}
+
 .scoreboard-home-player-avatar,
 .scoreboard-away-player-avatar {
   position: absolute;
