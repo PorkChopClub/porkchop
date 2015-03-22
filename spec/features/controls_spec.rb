@@ -1,6 +1,6 @@
 require 'feature_helper'
 
-RSpec.describe "scoreboard page" do
+RSpec.describe "controls page" do
   let!(:home) { FactoryGirl.create :player, name: "Candice Bergen" }
   let!(:away) { FactoryGirl.create :player, name: "Shirley Schmidt" }
 
