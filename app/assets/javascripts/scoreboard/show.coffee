@@ -63,9 +63,10 @@ $ ->
   homePlayerDisplayName.assign $(".scoreboard-home-player-name"), "text"
   awayPlayerDisplayName.assign $(".scoreboard-away-player-name"), "text"
 
+  backgroundmap = (url) -> url? ? "none" : "url(#{url})"
   homePlayerAvatarUrl
-    .map (url) -> "url(#{url})"
+    .map backgroundmap
     .assign $(".scoreboard-home-player-avatar"), "css", "background-image"
   awayPlayerAvatarUrl
-    .map (url) -> "url(#{url})"
+    .map backgroundmap
     .assign $(".scoreboard-away-player-avatar"), "css", "background-image"
