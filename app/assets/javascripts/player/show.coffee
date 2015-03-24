@@ -9,15 +9,21 @@ $ ->
     labels: $.map(rawData, -> ""),
     datasets: [
       {
-        fillColor: "rgba(53,46,55,0.2)",
-        strokeColor: "rgba(53,46,55,1)",
-        pointColor: "rgba(53,46,55,1)",
+        fillColor: "rgba(153,134,142,0.2)",
+        strokeColor: "rgba(153,134,142,1)",
+        pointColor: "rgba(153,134,142,1)",
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(53,46,55,1)",
+        pointHighlightStroke: "rgba(153,134,142,1)",
         data: rawData
       }
     ]
   }
+  options = {
+    showTooltips: false,
+    scaleShowHorizontalLines: false,
+    scaleShowVerticalLines: false,
+    pointDot: false
+  }
   ctx = canvas.get(0).getContext("2d")
-  new Chart(ctx).Line(chartData)
+  new Chart(ctx).Line(chartData, options)
