@@ -1,3 +1,4 @@
+#= require match_stream
 $ ->
   return unless $('.scoreboard').length
 
@@ -17,56 +18,39 @@ $ ->
     }
     .toProperty()
 
-  message = match.map(".comment")
-    .skipDuplicates()
-
-  messagePresent = message.not().not()
-
-  homeScore = match.map(".home_score")
-  awayScore = match.map(".away_score")
-
-  homePlayerName = match.map(".home_player_name")
-  awayPlayerName = match.map(".away_player_name")
-
-  homePlayerNickname = match.map(".home_player_nickname")
-  awayPlayerNickname = match.map(".away_player_nickname")
-
-  homePlayerDisplayName = homePlayerNickname.or(homePlayerName)
-  awayPlayerDisplayName = awayPlayerNickname.or(awayPlayerName)
-
-  homePlayerAvatarUrl = match.map(".home_player_avatar_url").skipDuplicates()
-  awayPlayerAvatarUrl = match.map(".away_player_avatar_url").skipDuplicates()
+  match = new MatchStream(match)
 
   #############
   # Rendering #
   #############
 
-  messagePresent
+  match.commentPresent
     .assign($(".scoreboard-message-area"), "toggleClass", "message-present")
-  message.assign($(".scoreboard-message"), "text")
+  match.comment
+    .assign($(".scoreboard-message"), "text")
 
-  match.map(".instructions")
-    .skipDuplicates()
+  match.instructions
     .assign($(".scoreboard-instructions"), "text")
 
-  homeService = match.map(".home_player_service")
-    .skipDuplicates().toProperty()
-  awayService = match.map(".away_player_service")
-    .skipDuplicates().toProperty()
+  match.awayPlayerService
+    .assign($(".scoreboard-away-player"), "toggleClass", "has-service")
+  match.homePlayerService
+    .assign($(".scoreboard-home-player"), "toggleClass", "has-service")
 
-  awayService.assign($(".scoreboard-away-player"), "toggleClass", "has-service")
-  homeService.assign($(".scoreboard-home-player"), "toggleClass", "has-service")
+  match.homeScore
+    .assign $(".scoreboard-home-player-score"), "text"
+  match.awayScore
+    .assign $(".scoreboard-away-player-score"), "text"
 
-  homeScore.assign $(".scoreboard-home-player-score"), "text"
-  awayScore.assign $(".scoreboard-away-player-score"), "text"
-
-  homePlayerDisplayName.assign $(".scoreboard-home-player-name"), "text"
-  awayPlayerDisplayName.assign $(".scoreboard-away-player-name"), "text"
+  match.homePlayerDisplayName
+    .assign $(".scoreboard-home-player-name"), "text"
+  match.awayPlayerDisplayName
+    .assign $(".scoreboard-away-player-name"), "text"
 
   backgroundmap = (url) -> url? ? "none" : "url(#{url})"
-  homePlayerAvatarUrl
+  match.homePlayerAvatarUrl
     .map backgroundmap
     .assign $(".scoreboard-home-player-avatar"), "css", "background-image"
-  awayPlayerAvatarUrl
+  match.awayPlayerAvatarUrl
     .map backgroundmap
     .assign $(".scoreboard-away-player-avatar"), "css", "background-image"
