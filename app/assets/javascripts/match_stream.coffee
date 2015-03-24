@@ -1,5 +1,27 @@
 class @MatchStream
+  @polling: (interval) ->
+    ajaxOptions = { url: '/api/ongoing_match.json' }
+    matchPolls = Bacon.mergeAll([Bacon.interval(interval, ajaxOptions),
+                                 Bacon.once(ajaxOptions)]).ajax()
+
+    match = matchPolls
+      .map(".match")
+      .mapError -> {
+        home_score: "",
+        away_score: "",
+        home_player_name: "",
+        away_player_name: "",
+        home_player_service: false,
+        away_player_service: false,
+        comment: "",
+        instructions: ""
+      }
+      .toProperty()
+
+    new @ match
+
   constructor: (match) ->
+    match = match.skipDuplicates(_.isEqual)
     @match = match
 
     @id = match.map(".id")

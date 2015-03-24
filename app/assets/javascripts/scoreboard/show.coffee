@@ -2,25 +2,7 @@
 $ ->
   return unless $('.scoreboard').length
 
-  ajaxOptions = { url: '/api/ongoing_match.json' }
-  matchPolls = Bacon.mergeAll([Bacon.interval(300, ajaxOptions),
-                               Bacon.once(ajaxOptions)]).ajax()
-
-  match = matchPolls
-    .map(".match")
-    .mapError -> {
-      home_score: "",
-      away_score: "",
-      home_player_name: "",
-      away_player_name: "",
-      home_player_service: false,
-      away_player_service: false,
-      comment: "",
-      instructions: ""
-    }
-    .toProperty()
-
-  match = new MatchStream(match)
+  match = MatchStream.polling(300)
 
   #############
   # Rendering #
