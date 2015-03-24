@@ -13,6 +13,7 @@
   %h3
     Record:&nbsp;
     = @stats.record.join("-")
+  %canvas.player-elo-chart{ data: { ratings: @player.elo_ratings.sorted_ratings } }
 
 .player-win-percentages.porkbox-light
   %h2 Win Ratio by Opponent

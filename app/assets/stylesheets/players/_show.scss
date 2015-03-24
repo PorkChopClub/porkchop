@@ -10,6 +10,13 @@
   }
 }
 
+.player-elo-chart {
+  width: 50%;
+  @include media($mobile) {
+    width: 100%;
+  }
+}
+
 .player-win-percentages {
   @include media($desktop) {
     @include span-columns(6);
@@ -56,6 +63,7 @@
 
   @include media($desktop) {
     float: right;
+    height: 360px;
     width: auto;
   }
 }
