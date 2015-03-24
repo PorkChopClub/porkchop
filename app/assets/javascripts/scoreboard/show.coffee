@@ -13,6 +13,8 @@ $ ->
       away_score: "",
       home_player_name: "",
       away_player_name: "",
+      home_player_service: false,
+      away_player_service: false,
       comment: "",
       instructions: ""
     }
