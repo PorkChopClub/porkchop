@@ -31,7 +31,7 @@ $ ->
   match.awayPlayerDisplayName
     .assign $(".scoreboard-away-player-name"), "text"
 
-  backgroundmap = (url) -> url? ? "none" : "url(#{url})"
+  backgroundmap = (url) -> if url? then "url(#{url})" else "none"
   match.homePlayerAvatarUrl
     .map backgroundmap
     .assign $(".scoreboard-home-player-avatar"), "css", "background-image"
