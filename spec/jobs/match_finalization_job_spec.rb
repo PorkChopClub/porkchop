@@ -44,8 +44,13 @@ RSpec.describe MatchFinalizationJob, type: :job do
 
       expect(notifier).to receive(:ping).with(
         "Candice defeated Shirley",
-        attachments: [{fields: [{title: "Candice", value: 12},
-                                {title: "Shirley", value: 10}]}]
+        attachments: [{
+          fallback: "Candice 12 - 10 Shirley",
+          fields: [
+            { title: "Candice", value: 12 },
+            { title: "Shirley", value: 10 }
+          ]
+        }]
       )
 
       subject

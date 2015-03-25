@@ -16,8 +16,12 @@ class MatchFinalizationJob < ActiveJob::Base
     notifier.ping(
       "#{victor_name} defeated #{loser_name}",
       attachments: [{
-        fields: [{title: home_player_name, value: match.home_score},
-                 {title: away_player_name, value: match.away_score}]}]
+        fallback: "#{home_player_name} #{match.home_score} - #{match.away_score} #{away_player_name}",
+        fields: [
+          { title: home_player_name, value: match.home_score },
+          { title: away_player_name, value: match.away_score }
+        ]
+      }]
     )
   end
 
