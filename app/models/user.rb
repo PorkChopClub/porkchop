@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
       user.provider = omniauth["provider"]
       user.uid = omniauth["uid"]
 
-      if info = omniauth["info"]
+      if (info = omniauth["info"])
         user.username = info["nickname"] || info["name"]
       end
     end
