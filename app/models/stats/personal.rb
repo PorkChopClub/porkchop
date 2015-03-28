@@ -12,10 +12,11 @@ class Stats::Personal
   end
 
   def win_ratio_by_opponent
-    opponents.inject({}) do |acc, opponent|
-      acc[opponent.name] = win_ratio_against(opponent)
-      acc
-    end
+    Hash[
+      opponents.map do |opponent|
+        [opponent.name, win_ratio_against(opponent)]
+      end
+    ]
   end
 
   def record_against opponent
