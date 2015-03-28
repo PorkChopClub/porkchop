@@ -56,6 +56,6 @@ class Match < ActiveRecord::Base
   end
 
   def loser
-    Player.find ([home_player_id, away_player_id] - [victor_id]).first
+    Player.find(([home_player_id, away_player_id] - [victor_id]).first)
   end
 end
