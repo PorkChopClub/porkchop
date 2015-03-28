@@ -1,0 +1,34 @@
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - 'vendor/**/*'
+
+Style/DotPosition:
+  EnforcedStyle: trailing
+Metrics/LineLength:
+  Max: 136
+Style/StringLiterals:
+  Enabled: false
+Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/TrivialAccessors:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
