@@ -15,10 +15,10 @@ namespace :porkchop do
         scores = [11, rand(0..9)].shuffle
 
         match = FactoryGirl.create :match,
-          home_player: home,
-          away_player: away,
-          home_score: scores[0],
-          away_score: scores[1]
+                                   home_player: home,
+                                   away_player: away,
+                                   home_score: scores[0],
+                                   away_score: scores[1]
 
         PingPong::Finalization.new(
           PingPong::Match.new(match)

@@ -19,12 +19,12 @@ RSpec.describe Player, type: :model do
 
     let!(:away_match) do
       FactoryGirl.create :match,
-        away_player: player
+                         away_player: player
     end
 
     let!(:home_match) do
       FactoryGirl.create :match,
-        home_player: player
+                         home_player: player
     end
 
     let(:player) { FactoryGirl.create :player }
@@ -39,18 +39,18 @@ RSpec.describe Player, type: :model do
 
     let!(:win) do
       FactoryGirl.create :complete_match,
-        away_player: player,
-        victor: player
+                         away_player: player,
+                         victor: player
     end
 
     let!(:loss) do
       FactoryGirl.create :complete_match,
-        away_player: player
+                         away_player: player
     end
 
     let!(:incomplete_match) do
       FactoryGirl.create :match,
-        home_player: player
+                         home_player: player
     end
 
     let(:player) { FactoryGirl.create :player }
@@ -66,20 +66,20 @@ RSpec.describe Player, type: :model do
 
     let!(:incomplete_match) do
       FactoryGirl.create :match,
-        home_player: opponent,
-        away_player: player
+                         home_player: opponent,
+                         away_player: player
     end
 
     let!(:away) do
       FactoryGirl.create :complete_match,
-        home_player: opponent,
-        away_player: player
+                         home_player: opponent,
+                         away_player: player
     end
 
     let!(:home) do
       FactoryGirl.create :complete_match,
-        home_player: player,
-        away_player: opponent
+                         home_player: player,
+                         away_player: opponent
     end
 
     let!(:other) do
@@ -96,7 +96,7 @@ RSpec.describe Player, type: :model do
       it "does not change the player's rating" do
         expect do
           player.elo = 1000
-        end.not_to change{player.reload.elo}
+        end.not_to change { player.reload.elo }
       end
     end
 
@@ -105,7 +105,7 @@ RSpec.describe Player, type: :model do
         expect do
           player.elo = 1000
           player.save
-        end.to change{player.reload.elo}.from(666).to(1000)
+        end.to change { player.reload.elo }.from(666).to(1000)
       end
     end
   end
@@ -122,15 +122,15 @@ RSpec.describe Player, type: :model do
     context "when the player has recorded ratings" do
       let!(:old_rating) do
         FactoryGirl.create :elo_rating,
-          player: player,
-          rating: 10,
-          created_at: 1.minute.ago
+                           player: player,
+                           rating: 10,
+                           created_at: 1.minute.ago
       end
 
       let!(:newest_rating) do
         FactoryGirl.create :elo_rating,
-          player: player,
-          rating: 1200
+                           player: player,
+                           rating: 1200
       end
 
       it "returns the rating of the most recent one" do

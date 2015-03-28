@@ -17,6 +17,7 @@ module PingPong
     end
 
     private
+
     delegate :home_player,
              :away_player,
              to: :match

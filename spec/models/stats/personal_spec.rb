@@ -11,20 +11,20 @@ RSpec.describe Stats::Personal do
 
     let!(:match1) do
       FactoryGirl.create :complete_match,
-        home_player: player,
-        away_player: candice
+                         home_player: player,
+                         away_player: candice
     end
 
     let!(:match2) do
       FactoryGirl.create :complete_match,
-        home_player: player,
-        away_player: candice
+                         home_player: player,
+                         away_player: candice
     end
 
     let!(:match3) do
       FactoryGirl.create :complete_match,
-        home_player: candice,
-        away_player: player
+                         home_player: candice,
+                         away_player: player
     end
 
     it { is_expected.to eq [2, 1] }
@@ -39,46 +39,44 @@ RSpec.describe Stats::Personal do
 
     let!(:match1) do
       FactoryGirl.create :complete_match,
-        home_player: player,
-        away_player: candice
+                         home_player: player,
+                         away_player: candice
     end
 
     let!(:match2) do
       FactoryGirl.create :complete_match,
-        home_player: player,
-        away_player: candice
+                         home_player: player,
+                         away_player: candice
     end
 
     let!(:match3) do
       FactoryGirl.create :complete_match,
-        home_player: shirley,
-        away_player: player
+                         home_player: shirley,
+                         away_player: player
     end
 
     let!(:match4) do
       FactoryGirl.create :complete_match,
-        home_player: shirley,
-        away_player: player
+                         home_player: shirley,
+                         away_player: player
     end
 
     let!(:match5) do
       FactoryGirl.create :complete_match,
-        home_player: player,
-        away_player: shirley
+                         home_player: player,
+                         away_player: shirley
     end
 
     let!(:match6) do
       FactoryGirl.create :complete_match,
-        home_player: georgie,
-        away_player: player
+                         home_player: georgie,
+                         away_player: player
     end
 
     it "is a hash of the win ratios by opponents" do
-      expect(subject).to eq({
-        "Georgie" => 0.0,
-        "Shirley" => 0.333,
-        "Candice" => 1.0
-      })
+      expect(subject).to eq("Georgie" => 0.0,
+                            "Shirley" => 0.333,
+                            "Candice" => 1.0)
     end
   end
 
@@ -111,19 +109,19 @@ RSpec.describe Stats::Personal do
 
     let!(:match1) do
       FactoryGirl.create :complete_match,
-        home_player: player,
-        victor: player
+                         home_player: player,
+                         victor: player
     end
 
     let!(:match2) do
       FactoryGirl.create :complete_match,
-        home_player: player,
-        victor: player
+                         home_player: player,
+                         victor: player
     end
 
     let!(:match3) do
       FactoryGirl.create :complete_match,
-        away_player: player
+                         away_player: player
     end
 
     it { is_expected.to eq [2, 1] }

@@ -10,11 +10,11 @@ RSpec.describe PingPong::Finalization do
 
     shared_examples "failure" do
       it "doesn't change the finalized at" do
-        expect{subject}.not_to change{match.reload.finalized_at}
+        expect { subject }.not_to change { match.reload.finalized_at }
       end
 
       it "doesn't set the victor" do
-        expect{subject}.not_to change{match.reload.victor}
+        expect { subject }.not_to change { match.reload.victor }
       end
     end
 
@@ -34,11 +34,11 @@ RSpec.describe PingPong::Finalization do
       let(:victor) { FactoryGirl.create :player }
       let(:loser) { FactoryGirl.create :player }
 
-      let(:match) {
+      let(:match) do
         FactoryGirl.create :match,
-          away_player: victor, away_score: 12,
-          home_player: loser,  home_score: 10
-      }
+                           away_player: victor, away_score: 12,
+                           home_player: loser,  home_score: 10
+      end
 
       before do
         expect(MatchFinalizationJob).
@@ -49,12 +49,12 @@ RSpec.describe PingPong::Finalization do
       it { is_expected.to eq true }
 
       it "sets the finalized_at" do
-        expect{subject}.to change{match.reload.finalized_at}
+        expect { subject }.to change { match.reload.finalized_at }
       end
 
       it "sets the victor" do
-        expect{subject}.
-          to change{match.reload.victor}.
+        expect { subject }.
+          to change { match.reload.victor }.
           from(nil).to(victor)
       end
     end

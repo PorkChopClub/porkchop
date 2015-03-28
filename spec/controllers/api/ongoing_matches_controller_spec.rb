@@ -41,8 +41,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it_behaves_like "renders match"
 
       it "scores one for the home team" do
-        expect{subject}.
-          to change{match.home_points.count}.
+        expect { subject }.
+          to change { match.home_points.count }.
           from(0).to(1)
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       specify { expect(subject.status).to eq 422 }
 
       it "doesn't change the home score" do
-        expect{subject}.not_to change{match.home_points.count}
+        expect { subject }.not_to change { match.home_points.count }
       end
     end
   end
@@ -70,8 +70,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it_behaves_like "renders match"
 
       it "scores one for the away team" do
-        expect{subject}.
-          to change{match.away_points.count}.
+        expect { subject }.
+          to change { match.away_points.count }.
           from(0).to(1)
       end
     end
@@ -84,7 +84,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       specify { expect(subject.status).to eq 422 }
 
       it "doesn't change the away score" do
-        expect{subject}.not_to change{match.away_points.count}
+        expect { subject }.not_to change { match.away_points.count }
       end
     end
   end
@@ -99,7 +99,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it_behaves_like "renders match"
 
       it "toggles the service to the away player" do
-        expect{subject}.
+        expect { subject }.
           to change {
             PingPong::Match.new(match.reload).home_player_service?
           }.from(nil).to(true)
@@ -121,7 +121,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       specify { expect(subject.status).to eq 422 }
 
       it "doesn't toggle the service" do
-        expect{subject}.
+        expect { subject }.
           not_to change {
             PingPong::Match.new(match.reload).home_player_service?
           }
@@ -168,9 +168,9 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     before { ability.can :update, PingPong::Match }
 
     let!(:match) { FactoryGirl.create :match }
-    let(:finalization) {
+    let(:finalization) do
       instance_double PingPong::Finalization, finalize!: finalized
-    }
+    end
 
     before do
       expect(PingPong::Finalization).
@@ -207,8 +207,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       specify { expect(subject.status).to eq 200 }
 
       it "destroys the ongoing match" do
-        expect{subject}.
-          to change{Match.exists? match.id}.
+        expect { subject }.
+          to change { Match.exists? match.id }.
           from(true).to(false)
       end
     end
@@ -217,7 +217,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       specify { expect(subject.status).to eq 422 }
 
       it "doesn't destroy anything" do
-        expect{subject}.not_to change{Match.count}
+        expect { subject }.not_to change { Match.count }
       end
     end
   end

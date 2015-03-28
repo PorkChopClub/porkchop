@@ -44,7 +44,6 @@ FactoryGirl.define do
       first_service :first_service_by_away_player
     end
 
-
     factory :complete_match, traits: [:finalized, :finished]
     factory :new_match, traits: [:at_start]
   end

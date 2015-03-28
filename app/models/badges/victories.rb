@@ -6,7 +6,7 @@ Badger.define do
     end
     calculate_rank do |player|
       num_victories = player.victories.size
-      ranks.rindex{ |r| num_victories >= r }
+      ranks.rindex { |r| num_victories >= r }
     end
   end
 end

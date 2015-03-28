@@ -14,8 +14,8 @@ RSpec.describe MatchFinalizationJob, type: :job do
 
     let(:match) do
       FactoryGirl.create :complete_match,
-        away_player: loser, away_score: 10,
-        home_player: victor,  home_score: 12
+                         away_player: loser, away_score: 10,
+                         home_player: victor,  home_score: 12
     end
 
     let(:notifier) { instance_double Slack::Notifier }

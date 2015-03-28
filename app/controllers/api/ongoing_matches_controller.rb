@@ -1,11 +1,11 @@
 class Api::OngoingMatchesController < ApplicationController
-  before_filter :match
+  before_action :match
 
   authorize_resource :match,
-    only: [:show]
+                     only: [:show]
 
-  before_filter :authorize_update,
-    except: [:show]
+  before_action :authorize_update,
+                except: [:show]
 
   def show
     unless match.present?
@@ -51,7 +51,7 @@ class Api::OngoingMatchesController < ApplicationController
     PingPong::Finalization.new(match).finalize!
   end
 
-  def record_service victor
+  def record_service(victor)
     PingPong::Service.new(match: match, victor: victor).record!
   end
 

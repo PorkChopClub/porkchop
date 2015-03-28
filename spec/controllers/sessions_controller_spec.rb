@@ -10,16 +10,16 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     it "creates a user" do
-      expect{subject}.
-        to change{User.count}.
+      expect { subject }.
+        to change { User.count }.
         from(0).to(1)
     end
 
     it { is_expected.to redirect_to "/" }
 
     it "sets the user_id on the session" do
-      expect{subject}.
-        to change{session[:user_id]}.
+      expect { subject }.
+        to change { session[:user_id] }.
         from(nil)
     end
   end
@@ -34,8 +34,8 @@ RSpec.describe SessionsController, type: :controller do
     it { is_expected.to redirect_to "/" }
 
     it "removes the user_id from the session" do
-      expect{subject}.
-        to change{session[:user_id]}.
+      expect { subject }.
+        to change { session[:user_id] }.
         from(1).to(nil)
     end
   end

@@ -44,7 +44,7 @@ RSpec.describe Badger, ":victories", type: :model do
       end
       context "and they have 25 wins" do
         let(:match) { instance_double Match }
-        before { allow(player).to receive(:victories).and_return([match]*25) }
+        before { allow(player).to receive(:victories).and_return([match] * 25) }
         it { is_expected.to eq 3 }
       end
     end

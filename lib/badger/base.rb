@@ -15,4 +15,3 @@ module Badger
     end
   end
 end
-

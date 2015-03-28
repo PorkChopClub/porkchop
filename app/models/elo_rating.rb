@@ -5,10 +5,10 @@ class EloRating < ActiveRecord::Base
             presence: true
 
   def self.most_recent_rating
-    self.order(created_at: :desc).pluck(:rating).first
+    order(created_at: :desc).pluck(:rating).first
   end
 
   def self.sorted_ratings
-    self.order(:created_at).pluck(:rating)
+    order(:created_at).pluck(:rating)
   end
 end

@@ -1,6 +1,6 @@
 module PingPong
   class Comment
-    def initialize match
+    def initialize(match)
       @match = match
     end
 
@@ -13,10 +13,11 @@ module PingPong
     end
 
     def message
-      raise NotImplementedError
+      fail NotImplementedError
     end
 
     private
+
     attr_reader :match
   end
 end

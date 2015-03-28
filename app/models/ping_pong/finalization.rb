@@ -1,5 +1,5 @@
 class PingPong::Finalization
-  def initialize match
+  def initialize(match)
     @match = match
   end
 
@@ -14,6 +14,6 @@ class PingPong::Finalization
   end
 
   private
+
   attr_reader :match
 end
-

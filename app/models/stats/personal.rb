@@ -1,11 +1,11 @@
 class Stats::Personal
-  def initialize player
+  def initialize(player)
     @player = player
   end
 
   def win_ratio
     if match_count != 0
-      (victory_count/match_count.to_f).round 3
+      (victory_count / match_count.to_f).round 3
     else
       0.0
     end
@@ -19,7 +19,7 @@ class Stats::Personal
     ]
   end
 
-  def record_against opponent
+  def record_against(opponent)
     [victory_count_against(opponent), loss_count_against(opponent)]
   end
 
@@ -28,6 +28,7 @@ class Stats::Personal
   end
 
   private
+
   attr_reader :player
   delegate :matches,
            :losses,
@@ -36,19 +37,19 @@ class Stats::Personal
            :matches_against,
            to: :player
 
-  def win_ratio_against opponent
-    (victory_count_against(opponent)/match_count_against(opponent).to_f).round 3
+  def win_ratio_against(opponent)
+    (victory_count_against(opponent) / match_count_against(opponent).to_f).round 3
   end
 
-  def victory_count_against opponent
+  def victory_count_against(opponent)
     matches_against(opponent).where(victor: player).count
   end
 
-  def match_count_against opponent
+  def match_count_against(opponent)
     matches_against(opponent).count
   end
 
-  def loss_count_against opponent
+  def loss_count_against(opponent)
     match_count_against(opponent) - victory_count_against(opponent)
   end
 

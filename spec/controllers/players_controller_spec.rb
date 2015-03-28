@@ -68,22 +68,22 @@ RSpec.describe PlayersController, type: :controller do
     let(:player) { FactoryGirl.create :player, name: "Candice Bergen" }
 
     context "with valid params" do
-      let(:player_params) { {"name" => "Bandice Cergen"} }
+      let(:player_params) { { "name" => "Bandice Cergen" } }
 
       it { is_expected.to redirect_to player }
 
       it "updates the player" do
-        expect{subject}.
-          to change{player.reload.name}.
+        expect { subject }.
+          to change { player.reload.name }.
           from("Candice Bergen").to("Bandice Cergen")
       end
     end
 
     context "with invalid params" do
-      let(:player_params) { {"name" => nil} }
+      let(:player_params) { { "name" => nil } }
 
       it "doesn't update the player" do
-        expect{subject}.not_to change{player.reload}
+        expect { subject }.not_to change { player.reload }
       end
 
       it { is_expected.to render_template :edit }
@@ -91,5 +91,4 @@ RSpec.describe PlayersController, type: :controller do
       specify { expect(subject.status).to eq 200 }
     end
   end
-
 end

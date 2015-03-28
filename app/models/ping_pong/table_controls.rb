@@ -1,5 +1,5 @@
 class PingPong::TableControls
-  def initialize match
+  def initialize(match)
     @match = match
   end
 

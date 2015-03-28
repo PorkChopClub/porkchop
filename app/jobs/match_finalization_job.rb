@@ -1,7 +1,7 @@
 class MatchFinalizationJob < ActiveJob::Base
   queue_as :default
 
-  def perform match
+  def perform(match)
     @match = match
     send_notification!
     adjust_elo!
@@ -9,6 +9,7 @@ class MatchFinalizationJob < ActiveJob::Base
   end
 
   private
+
   attr_reader :match
 
   def send_notification!

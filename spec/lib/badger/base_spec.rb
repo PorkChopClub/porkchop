@@ -13,7 +13,7 @@ RSpec.describe Badger::Base, type: :model do
   end
 
   describe "#condition" do
-    let(:dummy_proc) { lambda{} }
+    let(:dummy_proc) { -> {} }
     before { base.condition &dummy_proc }
     it "stores the condition" do
       expect(base.condition_proc).to eq dummy_proc
@@ -21,7 +21,7 @@ RSpec.describe Badger::Base, type: :model do
   end
 
   describe "#calculate_rank" do
-    let(:dummy_proc) { lambda{} }
+    let(:dummy_proc) { -> {} }
     before { base.calculate_rank &dummy_proc }
     it "stores the rank calculator" do
       expect(base.rank_proc).to eq dummy_proc

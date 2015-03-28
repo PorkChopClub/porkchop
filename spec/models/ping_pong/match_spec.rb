@@ -8,8 +8,8 @@ RSpec.describe PingPong::Match do
 
     let(:match) do
       FactoryGirl.create :match,
-        home_score: home_score,
-        away_score: away_score
+                         home_score: home_score,
+                         away_score: away_score
     end
 
     context "when it is game point for the home player" do
@@ -34,7 +34,7 @@ RSpec.describe PingPong::Match do
   describe "#home_player_service?" do
     subject { ping_pong_match.home_player_service? }
 
-    let(:match) { FactoryGirl.build :match, :at_start}
+    let(:match) { FactoryGirl.build :match, :at_start }
 
     context "when it's the first service of the match" do
       context "and the service is undecided" do
@@ -72,7 +72,7 @@ RSpec.describe PingPong::Match do
   describe "#away_player_service?" do
     subject { ping_pong_match.away_player_service? }
 
-    let(:match) { FactoryGirl.build :match, :at_start}
+    let(:match) { FactoryGirl.build :match, :at_start }
 
     context "when it's the first service of the match" do
       context "and the service is undecided" do
@@ -92,11 +92,11 @@ RSpec.describe PingPong::Match do
   end
 
   describe "#finished?" do
-    let(:match) {
+    let(:match) do
       FactoryGirl.create :match,
-        home_score: home_score,
-        away_score: away_score
-    }
+                         home_score: home_score,
+                         away_score: away_score
+    end
 
     subject { ping_pong_match.finished? }
 
@@ -129,35 +129,35 @@ RSpec.describe PingPong::Match do
     let(:away_player) { FactoryGirl.create :player }
 
     context "when the game is tied" do
-      let(:match) {
+      let(:match) do
         FactoryGirl.create :match,
-          home_player: home_player,
-          away_player: away_player,
-          home_score: 5,
-          away_score: 5
-      }
+                           home_player: home_player,
+                           away_player: away_player,
+                           home_score: 5,
+                           away_score: 5
+      end
       it { is_expected.to eq nil }
     end
 
     context "when the home player is leading" do
-      let(:match) {
+      let(:match) do
         FactoryGirl.create :match,
-          home_player: home_player,
-          away_player: away_player,
-          home_score: 6,
-          away_score: 5
-      }
+                           home_player: home_player,
+                           away_player: away_player,
+                           home_score: 6,
+                           away_score: 5
+      end
       it { is_expected.to eq home_player }
     end
 
     context "when the away player is leading" do
-      let(:match) {
+      let(:match) do
         FactoryGirl.create :match,
-          home_player: home_player,
-          away_player: away_player,
-          home_score: 5,
-          away_score: 6
-      }
+                           home_player: home_player,
+                           away_player: away_player,
+                           home_score: 5,
+                           away_score: 6
+      end
       it { is_expected.to eq away_player }
     end
   end
@@ -170,7 +170,7 @@ RSpec.describe PingPong::Match do
     before do
       expect(PingPong::Commentator).
         to receive(:new).
-        with(match: match) { commentator }
+          with(match: match) { commentator }
 
       expect(commentator).to receive(:comment) { 'foo' }
     end

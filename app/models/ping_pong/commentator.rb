@@ -20,6 +20,7 @@ module PingPong
     end
 
     private
+
     attr_reader :match
 
     def comments

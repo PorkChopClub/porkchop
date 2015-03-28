@@ -1,5 +1,5 @@
 class PingPong::Rewind
-  def initialize match
+  def initialize(match)
     @match = match
   end
 
@@ -10,6 +10,7 @@ class PingPong::Rewind
   end
 
   private
+
   attr_reader :match
 
   def no_points?

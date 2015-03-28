@@ -8,7 +8,7 @@ RSpec.describe PingPong::Rewind do
 
     shared_examples "failure" do
       it "doesn't delete any points" do
-        expect{subject}.not_to change{Point.count}
+        expect { subject }.not_to change { Point.count }
       end
 
       it { is_expected.to eq false }
@@ -31,8 +31,8 @@ RSpec.describe PingPong::Rewind do
       it { is_expected.to eq true }
 
       it "deletes the most recent point" do
-        expect{subject}.
-          to change{Point.exists? point.id}.
+        expect { subject }.
+          to change { Point.exists? point.id }.
           from(true).to(false)
       end
     end

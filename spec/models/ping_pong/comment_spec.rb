@@ -17,7 +17,7 @@ RSpec.describe PingPong::Comment do
   describe "#message" do
     subject { comment.message }
     it "throws an error" do
-      expect{subject}.
+      expect { subject }.
         to raise_error NotImplementedError
     end
   end

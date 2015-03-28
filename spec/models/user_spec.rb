@@ -17,8 +17,8 @@ RSpec.describe User, type: :model do
     context "when the user exists" do
       let!(:user) do
         FactoryGirl.create :user,
-          provider: "twitter",
-          uid: "1234567890"
+                           provider: "twitter",
+                           uid: "1234567890"
       end
 
       it { is_expected.to eq user }
@@ -26,8 +26,8 @@ RSpec.describe User, type: :model do
 
     context "when the user doesn't exist" do
       it "creates a user" do
-        expect{subject}.
-          to change{User.count}.
+        expect { subject }.
+          to change { User.count }.
           from(0).to(1)
       end
 

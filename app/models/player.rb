@@ -12,14 +12,14 @@ class Player < ActiveRecord::Base
 
   def matches
     Match.where "matches.home_player_id = :id OR matches.away_player_id = :id",
-      id: id
+                id: id
   end
 
   def losses
     matches.finalized.where.not(victor: self)
   end
 
-  def matches_against opponent
+  def matches_against(opponent)
     matches.finalized.where(
       "away_player_id = :opponent OR home_player_id = :opponent",
       opponent: opponent
@@ -30,9 +30,7 @@ class Player < ActiveRecord::Base
     Player.where(id: opponent_ids)
   end
 
-  def elo= rating
-    @elo = rating
-  end
+  attr_writer :elo
 
   def elo
     elo_ratings.most_recent_rating || BASE_ELO

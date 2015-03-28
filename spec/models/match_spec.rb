@@ -14,8 +14,8 @@ RSpec.describe Match, type: :model do
     subject { match.destroy }
 
     it "destroys its points" do
-      expect{subject}.
-        to change{Point.count}.
+      expect { subject }.
+        to change { Point.count }.
         from(10).to(0)
     end
   end
@@ -29,9 +29,9 @@ RSpec.describe Match, type: :model do
     context "when the away player has won" do
       let(:match) do
         FactoryGirl.create :complete_match,
-          home_player: loser,
-          away_player: winner,
-          victor: winner
+                           home_player: loser,
+                           away_player: winner,
+                           victor: winner
       end
 
       it { is_expected.to eq loser }
@@ -40,9 +40,9 @@ RSpec.describe Match, type: :model do
     context "when the home player has won" do
       let(:match) do
         FactoryGirl.create :complete_match,
-          home_player: winner,
-          away_player: loser,
-          victor: winner
+                           home_player: winner,
+                           away_player: loser,
+                           victor: winner
       end
 
       it { is_expected.to eq loser }
@@ -95,8 +95,8 @@ RSpec.describe Match, type: :model do
     it { is_expected.to eq true }
 
     it "marks the match as finalized" do
-      expect{subject}.
-        to change{match.reload.finalized?}.
+      expect { subject }.
+        to change { match.reload.finalized? }.
         from(false).to(true)
     end
   end
@@ -104,16 +104,16 @@ RSpec.describe Match, type: :model do
   describe "player points" do
     let(:match) { FactoryGirl.create :match, :at_start }
 
-    let(:home_point_1) {
+    let(:home_point_1) do
       FactoryGirl.create :point, match: match, victor: match.home_player
-    }
-    let(:home_point_2) {
+    end
+    let(:home_point_2) do
       FactoryGirl.create :point, match: match, victor: match.home_player
-    }
+    end
 
-    let(:away_point_1) {
+    let(:away_point_1) do
       FactoryGirl.create :point, match: match, victor: match.away_player
-    }
+    end
 
     describe "#home_points" do
       subject { match.home_points }
@@ -127,11 +127,11 @@ RSpec.describe Match, type: :model do
   end
 
   describe "scores" do
-    let(:match) {
+    let(:match) do
       FactoryGirl.create :match,
-        home_score: 5,
-        away_score: 10
-    }
+                         home_score: 5,
+                         away_score: 10
+    end
 
     describe "#home_score" do
       subject { match.home_score }

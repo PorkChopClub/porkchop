@@ -43,7 +43,7 @@ class Match < ActiveRecord::Base
     elsif player == away_player
       first_service_by_away_player!
     else
-      raise ArgumentError
+      fail ArgumentError
     end
   end
 

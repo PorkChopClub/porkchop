@@ -15,6 +15,7 @@ class EloAdjustment
   end
 
   private
+
   attr_reader :victor,
               :loser,
               :victor_player,

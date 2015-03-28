@@ -60,11 +60,11 @@ RSpec.describe "controls page" do
 
   private
 
-  def player_score player
+  def player_score(player)
     find(".match-controls-#{player}-player-score")
   end
 
-  def score_point player
+  def score_point(player)
     find(".match-controls-#{player}-player").click
   end
 end
