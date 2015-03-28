@@ -6,7 +6,7 @@ RSpec.describe Badger::Configuration, type: :model do
   describe "#new" do
     subject { config }
     it "creates a registry hash" do
-      expect(config.registry).to eq Hash.new
+      expect(config.registry).to eq({})
     end
   end
 
