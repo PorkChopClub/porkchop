@@ -1,6 +1,9 @@
 class Achievement < ActiveRecord::Base
   belongs_to :player
 
+  validates :player, presence: true
+  validates :variety, presence: true
+
   def self.varieties
     Badger.varieties
   end
