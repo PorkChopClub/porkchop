@@ -1,6 +1,6 @@
 #= require match_stream
 #= require achievement_stream
-#
+
 $ ->
   return unless $('.scoreboard').length
 
