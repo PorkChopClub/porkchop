@@ -6,6 +6,7 @@ class MatchFinalizationJob < ActiveJob::Base
     send_notification!
     adjust_elo!
     collect_achievements!
+    matchmake!
   end
 
   private
@@ -27,5 +28,14 @@ class MatchFinalizationJob < ActiveJob::Base
     [match.home_player, match.away_player].each do |player|
       player.all_achievements.select(&:earned?).each(&:adjust_rank!)
     end
+  end
+
+  def matchmake!
+    home_player = (Player.all - [match.victor, match.loser]).sample
+    away_player = (Player.all - [match.victor, match.loser, home_player]).sample
+    Match.create(
+      home_player: home_player,
+      away_player: away_player
+    )
   end
 end

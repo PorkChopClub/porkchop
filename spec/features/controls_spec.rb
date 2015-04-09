@@ -1,6 +1,9 @@
 require 'feature_helper'
 
 RSpec.describe "controls page" do
+  let!(:other1) { FactoryGirl.create :player, name: "Dave" }
+  let!(:other2) { FactoryGirl.create :player, name: "Anne" }
+
   let!(:home) { FactoryGirl.create :player, name: "Candice Bergen" }
   let!(:away) { FactoryGirl.create :player, name: "Shirley Schmidt" }
 

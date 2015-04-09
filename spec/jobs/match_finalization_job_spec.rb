@@ -4,12 +4,20 @@ RSpec.describe MatchFinalizationJob, type: :job do
   describe "#perform" do
     subject { described_class.new.perform match }
 
+    let!(:anne) do
+      FactoryGirl.create :player, name: "Anne", active: true
+    end
+
+    let!(:dave) do
+      FactoryGirl.create :player, name: "Dave", active: true
+    end
+
     let(:victor) do
-      FactoryGirl.create :player, name: "Candice"
+      FactoryGirl.create :player, name: "Candice", active: true
     end
 
     let(:loser) do
-      FactoryGirl.create :player, name: "Shirley"
+      FactoryGirl.create :player, name: "Shirley", active: true
     end
 
     let(:match) do
@@ -54,6 +62,13 @@ RSpec.describe MatchFinalizationJob, type: :job do
       )
 
       subject
+    end
+
+    it "creates a new match between other active players" do
+      subject
+      new_match = Match.ongoing.first!
+      expect([new_match.home_player, new_match.away_player]).
+        to match_array [anne, dave]
     end
 
     it "adjusts the elo" do
