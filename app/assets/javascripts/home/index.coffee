@@ -31,7 +31,7 @@ $ ->
 
   chartData = {
     labels: $.map(labels, (label, idx)->
-      if (idx % 7 == 0) then label else null
+      if (idx % 7 == 0) then label else ""
     ),
     datasets: $.map(rawData, (_, player)->
       playerIndex = players.indexOf(player)
