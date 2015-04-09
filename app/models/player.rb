@@ -36,6 +36,10 @@ class Player < ActiveRecord::Base
     elo_ratings.most_recent_rating || BASE_ELO
   end
 
+  def elo_on(date)
+    elo_ratings.rating_on(date) || BASE_ELO
+  end
+
   def all_achievements
     achievements + unearned_achievements
   end

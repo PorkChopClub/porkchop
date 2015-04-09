@@ -5,7 +5,11 @@ class EloRating < ActiveRecord::Base
             presence: true
 
   def self.most_recent_rating
-    order(created_at: :desc).pluck(:rating).first
+    sorted_ratings.last
+  end
+
+  def self.rating_on(date)
+    where("created_at <= ?", date.end_of_day).most_recent_rating
   end
 
   def self.sorted_ratings

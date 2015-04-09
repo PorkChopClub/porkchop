@@ -1,6 +1,5 @@
 .homepage-recent-matches,
 .homepage-leaderboard-list {
-
   h2 {
     margin-bottom: 15px;
   }
@@ -25,5 +24,27 @@
 
   @include media($mobile) {
     @include span-columns(4);
+  }
+}
+
+.homepage-chart {
+  @include span-columns(12);
+  .elo-chart {
+    @include span-columns(7);
+  }
+  .elo-legend {
+    @include span-columns(4);
+    @include shift(1);
+    @include omega();
+
+    list-style: none;
+
+    .swatch {
+      display: inline-block;
+      height: 12px;
+      width: 12px;
+      margin: 0 12px 6px -12px;
+      vertical-align: middle;
+    }
   }
 }
