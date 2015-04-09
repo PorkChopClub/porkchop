@@ -8,7 +8,7 @@ class HomeController < ApplicationController
                       sort_by(&:elo).
                       reverse
 
-    @elo_range = (7.days.ago.to_date..Date.current).to_a
+    @elo_range = (30.days.ago.to_date..Date.current).to_a
     @elo_data = @ranked_players.map do |player|
       [
         player.name,
