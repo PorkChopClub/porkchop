@@ -31,8 +31,7 @@ class MatchFinalizationJob < ActiveJob::Base
   end
 
   def matchmake!
-    home_player = (Player.active - [match.victor, match.loser]).sample
-    away_player = (Player.active - [match.victor, match.loser, home_player]).sample
+    home_player, away_player = Player.active.sample(2)
     Match.create(
       home_player: home_player,
       away_player: away_player

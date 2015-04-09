@@ -41,6 +41,9 @@ RSpec.describe MatchFinalizationJob, type: :job do
 
       allow(EloAdjustment).to receive(:new).and_return(adjustment)
       allow(adjustment).to receive(:adjust!)
+
+      player_double = double sample: [anne, dave]
+      allow(Player).to receive(:active).and_return(player_double)
     end
 
     it "notifies Slack about the match" do
