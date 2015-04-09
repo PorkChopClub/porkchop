@@ -1,0 +1,12 @@
+.active-players,
+.inactive-players {
+  @include media($desktop) {
+    @include span-columns(6);
+    @include omega(2n);
+  }
+
+  @include media($mobile) {
+    @include span-columns(4);
+    @include omega();
+  }
+}
