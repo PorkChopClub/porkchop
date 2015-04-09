@@ -1,12 +1,24 @@
 $ ->
   return unless $('.player-activations').length
 
+  activePlayerList = $('.active-players-list')
+  inactivePlayerList = $('.inactive-players-list')
+
   initialFetch = Bacon.once({ url: '/api/activations' })
 
-  activations = $*{ url: '/api/ongoing_match/away_point.json', type: 'PUT' }
-  deactivations = { url: '/api/ongoing_match/away_point.json', type: 'PUT' }
+  activations = inactivePlayerList
+    .asEventStream('click', 'li')
+    .map (event) ->
+      id = $(event.target).data('id')
+      { url: "/api/activations/#{id}/activate.json", type: 'PUT' }
 
-  players = Bacon.mergeAll([initialFetch])
+  deactivations = activePlayerList
+    .asEventStream('click', 'li')
+    .map (event) ->
+      id = $(event.target).data('id')
+      { url: "/api/activations/#{id}/deactivate.json", type: 'PUT' }
+
+  players = Bacon.mergeAll([initialFetch, activations, deactivations])
     .ajax()
     .map(".players")
 
@@ -15,9 +27,6 @@ $ ->
 
   inactivePlayers = players
     .map (players) -> _.select(players, (player) -> !player.active)
-
-  activePlayerList = $('.active-players-list')
-  inactivePlayerList = $('.inactive-players-list')
 
   activePlayers.onValue (players) ->
     activePlayerList.empty()
