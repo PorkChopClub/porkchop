@@ -5,39 +5,40 @@ $ ->
   return unless canvas.length
 
   colors = [
-    "153,134,142",
-    "123,100,110",
-    " 89, 66, 76",
-    "179,161,157",
-    "144,122,118",
-    "105, 82, 78",
-    "114,130,120",
-    "190,196,192",
-    "147,159,151",
-    " 85,105, 93",
-    " 56, 76, 64",
-    "155,164,143",
-    "193,200,185",
-    "121,132,107",
-    " 85, 96, 71",
+    "rgba(255, 88, 88,1)",
+    "rgba(255,163, 88,1)",
+    "rgba( 83,241,241,1)",
+    "rgba( 85,248, 85,1)",
+    "rgba(255,154,154,1)",
+    "rgba(255,200,154,1)",
+    "rgba(148,244,244,1)",
+    "rgba(151,250,151,1)",
+    "rgba(255, 25, 25,1)",
+    "rgba(255,129, 25,1)",
+    "rgba( 23,240,240,1)",
+    "rgba( 24,248, 24,1)",
+    "rgba(255,  0,  0,1)",
+    "rgba(255,116,  0,1)",
+    "rgba(  0,238,238,1)",
+    "rgba(  0,246,  0,1)"
   ]
 
   rawData = canvas.data("ratings")
+  labels = canvas.data("labels")
+
   players = Object.keys(rawData)
   return unless players.length
 
   chartData = {
-    labels: canvas.data("labels"),
+    labels: $.map(labels, (label, idx)->
+      if (idx % 7 == 0) then label else null
+    ),
     datasets: $.map(rawData, (_, player)->
       playerIndex = players.indexOf(player)
       {
         label: player,
-        fillColor: "rgba(#{colors[playerIndex]},0.2)",
-        strokeColor: "rgba(#{colors[playerIndex]},1)",
-        pointColor: "rgba(#{colors[playerIndex]},1)",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(#{colors[playerIndex]},1)",
+        fillColor: "rgba(0,0,0,0)",
+        strokeColor: colors[playerIndex],
         data: $.map(rawData[player], (_, date)->
           rawData[player][date]
         )
@@ -45,8 +46,10 @@ $ ->
     )
   }
   options = {
+    showTooltips: false,
     scaleShowHorizontalLines: false,
     scaleShowVerticalLines: false,
+    pointDot: false,
     legendTemplate : "<ul class=\"elo-legend\">" +
       "<% for (var i=0; i<datasets.length; i++){ %>" +
         "<li>" +

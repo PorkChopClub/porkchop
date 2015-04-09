@@ -7,4 +7,4 @@
   = render "shared/leaderboard", players: @ranked_players
 
 .homepage-chart.porkbox-light
-  %canvas.elo-chart{ data: { labels: @elo_range.to_json, ratings: @elo_data.to_json } }
+  %canvas.elo-chart{ data: { labels: @elo_range.map{ |x| l(x, format: :short) }.to_json, ratings: @elo_data.to_json } }
