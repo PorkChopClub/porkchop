@@ -11,3 +11,17 @@ body {
 select {
   color: darken($dark-grey, 10);
 }
+
+a {
+  &:link,
+  &:visited {
+    color: $green;
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:active {
+    color: darken($green, 10);
+    text-decoration: underline;
+  }
+}
