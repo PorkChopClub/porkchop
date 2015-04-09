@@ -7,8 +7,7 @@ RSpec.describe ActivationsController, type: :controller do
     subject { get :edit }
     before { ability.can :update, Player }
 
-    specify { expect(subject.status).to eq 200 }
-
+    it { is_expected.to have_http_status :ok }
     it { is_expected.to render_template :edit }
   end
 end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resource :scoreboard, only: [:show, :edit]
   resource :activation, only: [:edit]
+
   resources :matches, only: [:index, :show, :new, :create]
   resources :players, only: [:index, :show, :edit, :update]
 
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
       put "rewind"
       put "finalize"
     end
+
+    resources :activations, only: [:index]
 
     get "stats/win_percentage"
     get "stats/rating"
