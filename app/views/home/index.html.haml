@@ -5,3 +5,6 @@
 .homepage-leaderboard-list.porkbox-light
   %h2 Leaderboard
   = render "shared/leaderboard", players: @ranked_players
+
+.homepage-chart.porkbox-light
+  %canvas.elo-chart{ data: { labels: @elo_range.to_json, ratings: @elo_data.to_json } }
