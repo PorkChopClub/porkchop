@@ -1,6 +1,8 @@
 class Player < ActiveRecord::Base
   BASE_ELO = 1000
 
+  scope :active, -> { where(active: true) }
+
   has_many :achievements
   has_many :points, foreign_key: 'victor_id'
   has_many :victories, class_name: "Match", foreign_key: 'victor_id'
