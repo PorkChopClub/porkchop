@@ -26,7 +26,12 @@ Rails.application.routes.draw do
       put "finalize"
     end
 
-    resources :activations, only: [:index]
+    resources :activations, only: [:index] do
+      member do
+        put "activate"
+        put "deactivate"
+      end
+    end
 
     get "stats/win_percentage"
     get "stats/rating"

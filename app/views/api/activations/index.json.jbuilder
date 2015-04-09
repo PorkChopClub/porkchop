@@ -1,1 +1,1 @@
-json.players @players, :name, :active
+json.players @players, :name, :id, :active
