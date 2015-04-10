@@ -1,3 +1,5 @@
+require 'matchmaker'
+
 class MatchFinalizationJob < ActiveJob::Base
   queue_as :default
 

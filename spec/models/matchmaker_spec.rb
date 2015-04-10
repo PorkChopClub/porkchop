@@ -1,4 +1,5 @@
-require 'rails_helper'
+require 'spec_helper'
+require 'matchmaker'
 
 class MockMatchmakerPlayer
   attr_reader :last_played_at, :times_played
