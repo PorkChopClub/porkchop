@@ -1,11 +1,11 @@
 module PingPong
   class LastGameComment < Comment
     def available?
-      match.points.count < 2
+      match.points.count == 0
     end
 
     def priority
-      5 - match.points.count
+      5
     end
 
     def message
@@ -23,8 +23,10 @@ module PingPong
              to: :match
 
     def last_match
-      home_player.matches_against(away_player).
-        order('finalized_at DESC').first
+      home_player.
+        matches_against(away_player).
+        order(finalized_at: :desc).
+        first
     end
   end
 end
