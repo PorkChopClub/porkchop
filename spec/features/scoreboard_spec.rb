@@ -16,10 +16,11 @@ RSpec.describe "scoreboard page" do
 
     expect(page).to have_content(home.name)
     expect(page).to have_content(away.name)
-    expect(page).to have_content("This is the first match between these players")
+    expect(page).to have_content("01:30")
     expect(page).to have_content("Select first service")
 
     table.home_button
+    expect(page).to have_content("This is the first match between these players")
     expect(page).to have_css('.scoreboard-home-player.has-service')
     expect(page).to have_no_content("Select first service")
 

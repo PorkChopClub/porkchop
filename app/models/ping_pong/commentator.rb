@@ -4,7 +4,8 @@ module PingPong
       PingPong::LastGameComment,
       PingPong::PreviousRecordComment,
       PingPong::GamePointComment,
-      PingPong::VictoryComment
+      PingPong::VictoryComment,
+      PingPong::WarmUpComment
     ]
 
     def initialize(match:)
