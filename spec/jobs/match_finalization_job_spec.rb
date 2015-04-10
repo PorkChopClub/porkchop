@@ -41,9 +41,6 @@ RSpec.describe MatchFinalizationJob, type: :job do
 
       allow(EloAdjustment).to receive(:new).and_return(adjustment)
       allow(adjustment).to receive(:adjust!)
-
-      player_double = double sample: [anne, dave]
-      allow(Player).to receive(:active).and_return(player_double)
     end
 
     it "notifies Slack about the match" do
@@ -69,9 +66,7 @@ RSpec.describe MatchFinalizationJob, type: :job do
 
     it "creates a new match between other active players" do
       subject
-      new_match = Match.ongoing.first!
-      expect([new_match.home_player, new_match.away_player]).
-        to match_array [anne, dave]
+      expect(Match.ongoing.first!).to_not be_nil
     end
 
     it "adjusts the elo" do

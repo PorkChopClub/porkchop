@@ -31,7 +31,8 @@ class MatchFinalizationJob < ActiveJob::Base
   end
 
   def matchmake!
-    home_player, away_player = Player.active.sample(2)
+    home_player = Player.active.min_by{ |player| player.matches.maximum(:created_at) || Time.new(0) }
+    away_player = (Player.active - [home_player]).sample
     Match.create(
       home_player: home_player,
       away_player: away_player
