@@ -1,7 +1,7 @@
 module PingPong
   class PreviousRecordComment < Comment
     def available?
-      (1..2).include? match.points.count
+      match.points.count == 1
     end
 
     def priority

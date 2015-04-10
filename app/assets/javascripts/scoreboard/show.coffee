@@ -4,7 +4,7 @@
 $ ->
   return unless $('.scoreboard').length
 
-  achievements = AchievementStream.polling(500).buffered(2000)
+  achievements = AchievementStream.polling(500).buffered(10000)
   match = MatchStream.polling(300)
 
   formatMessage = (achievement) ->
@@ -15,14 +15,18 @@ $ ->
     .map(formatMessage)
     .toProperty("")
 
+  message = achievementMessages.or(match.comment)
+
   #############
   # Rendering #
   #############
 
-  match.commentPresent
-    .assign($(".scoreboard-message-area"), "toggleClass", "message-present")
-  achievementMessages.or(match.comment)
+  message
     .assign($(".scoreboard-message"), "text")
+
+  message
+    .map (message) -> !!message
+    .assign($(".scoreboard-message-area"), "toggleClass", "message-present")
 
   match.instructions
     .assign($(".scoreboard-instructions"), "text")

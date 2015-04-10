@@ -57,7 +57,8 @@ RSpec.describe PingPong::Commentator do
       let(:match) do
         FactoryGirl.create :new_match,
                            home_player: jared,
-                           away_player: gray
+                           away_player: gray,
+                           first_service: :first_service_by_away_player
       end
 
       context "when these players have played before" do
