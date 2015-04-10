@@ -9,4 +9,12 @@
     @include span-columns(4);
     @include omega();
   }
+
+  li[data-id] {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
