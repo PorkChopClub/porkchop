@@ -7,12 +7,15 @@ class @AchievementStream
       Bacon.once(ajaxOptions)
     ]).ajax().map('.achievements')
 
+    achievementEqual = (a, b) ->
+      a.id == b.id && a.rank == b.rank
+
     # FIXME: this is some pretty crap logic
     # Works if we don't delete records, but should be replaced with something more robust
     emitChanges = (before, after) ->
       out = []
       for value, index in after
-        if !before[index] || !_.isEqual(value, before[index])
+        if !before[index] || !achievementEqual(value, before[index])
           out.push value
       out
 
