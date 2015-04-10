@@ -32,8 +32,9 @@ class MatchFinalizationJob < ActiveJob::Base
 
   def matchmake!
     home_player, away_player = Matchmaker.choose
+    return unless home_player && away_player
 
-    Match.create(
+    Match.create!(
       home_player: home_player,
       away_player: away_player
     )
