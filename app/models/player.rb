@@ -50,6 +50,10 @@ class Player < ActiveRecord::Base
     Achievement.unearned(self)
   end
 
+  def last_played_at
+    matches.maximum(:created_at)
+  end
+
   private
 
   def record_rating

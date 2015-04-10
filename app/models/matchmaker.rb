@@ -10,7 +10,7 @@ class Matchmaker
   end
 
   def choose
-    home_player = players.min_by{ |player| player.matches.maximum(:created_at) || Time.new(0) }
+    home_player = players.min_by{ |player| player.last_played_at || Time.new(0) }
     away_player = (players - [home_player]).sample
     [home_player, away_player]
   end
