@@ -1,5 +1,3 @@
-require 'matchmaker'
-
 class MatchFinalizationJob < ActiveJob::Base
   queue_as :default
 
@@ -33,12 +31,6 @@ class MatchFinalizationJob < ActiveJob::Base
   end
 
   def matchmake!
-    home_player, away_player = Matchmaker.choose
-    return unless home_player && away_player
-
-    Match.create!(
-      home_player: home_player,
-      away_player: away_player
-    )
+    Match.matchmake!
   end
 end

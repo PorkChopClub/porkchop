@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       put "toggle_service"
       put "rewind"
       put "finalize"
+      put "matchmake"
     end
 
     resources :activations, only: [:index] do

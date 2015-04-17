@@ -221,4 +221,41 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       end
     end
   end
+
+  describe "PUT matchmake" do
+    subject { put :matchmake, format: :json }
+    before { ability.can :update, PingPong::Match }
+
+    let!(:player1){ FactoryGirl.create :player, active: true }
+    let!(:player2){ FactoryGirl.create :player, active: true }
+
+    let(:new_match){ Match.ongoing.last! }
+    let(:new_players){ [new_match.home_player, new_match.away_player] }
+
+    context "when there is an ongoing match" do
+      let!(:match) { FactoryGirl.create :match }
+
+      specify { expect(subject.status).to eq 200 }
+
+      it "removes the existing match" do
+        expect { subject }.
+          to change { Match.exists? match.id }.
+          from(true).to(false)
+      end
+
+      it "creates a new match" do
+        subject
+        expect(new_players).to match_array([player1, player2])
+      end
+    end
+
+    context "when there is not an ongoing match" do
+      specify { expect(subject.status).to eq 200 }
+
+      it "creates a new match" do
+        subject
+        expect(new_players).to match_array([player1, player2])
+      end
+    end
+  end
 end
