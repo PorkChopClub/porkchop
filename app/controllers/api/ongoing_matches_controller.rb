@@ -37,6 +37,17 @@ class Api::OngoingMatchesController < ApplicationController
     perform match.try! :destroy
   end
 
+  def matchmake
+    if match.present?
+      if !match.destroy
+        render :show, status: :unprocessable_entity
+        return
+      end
+    end
+
+    perform Match.matchmake!
+  end
+
   private
 
   def match
@@ -44,7 +55,7 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def authorize_update
-    authorize! :update, @match
+    authorize! :update, @match || Match
   end
 
   def finalize_match
