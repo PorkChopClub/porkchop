@@ -43,5 +43,5 @@ group :test do
   gem 'database_cleaner', require: false
   gem 'shoulda-matchers', require: false
 
-  gem 'visdiff', '0.0.6'
+  gem 'visdiff'
 end
