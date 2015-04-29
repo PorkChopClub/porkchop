@@ -2,6 +2,7 @@
   %ul.main-footer-navigation
     %li= link_to "Players", players_path
     %li= link_to "Match History", matches_path
+    %li= link_to "Activation List", edit_activation_path
     - if ongoing_match
       %li= link_to "Scoreboard", scoreboard_path
       %li= link_to "Controls", edit_scoreboard_path
