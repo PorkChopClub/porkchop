@@ -15,7 +15,7 @@ json.match do
   json.away_player_service !!@match.away_player_service?
   json.finished @match.finished?
   json.finalized @match.finalized?
-  json.deleted !Match.exists?(@match.id)
+  json.deleted @match.destroyed?
   json.comment @match.comment || ""
   json.instructions @match.instructions || ""
 end
