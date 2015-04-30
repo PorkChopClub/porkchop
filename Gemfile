@@ -27,6 +27,11 @@ gem 'bugsnag'
 
 gem 'elo'
 
+# profiling
+gem 'stackprof'
+gem 'flamegraph'
+gem 'rack-mini-profiler'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'
