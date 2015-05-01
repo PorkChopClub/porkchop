@@ -1,6 +1,6 @@
 class Api::AchievementsController < ApplicationController
-  load_and_authorize_resource
-
   def index
+    authorize! :show, Achievement
+    @achievements = Achievement.includes(:player)
   end
 end
