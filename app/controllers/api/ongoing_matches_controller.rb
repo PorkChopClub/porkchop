@@ -8,7 +8,9 @@ class Api::OngoingMatchesController < ApplicationController
                 except: [:show]
 
   def show
-    unless match.present?
+    if match.present?
+      fresh_when(match)
+    else
       head :not_found
     end
   end
