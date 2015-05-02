@@ -9,7 +9,10 @@ class Api::OngoingMatchesController < ApplicationController
 
   def show
     if match.present?
-      fresh_when(match)
+      # FIXME
+      if match.created_at < 2.minutes.ago
+        fresh_when(match)
+      end
     else
       head :not_found
     end
