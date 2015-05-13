@@ -1,5 +1,5 @@
-module PingPong
-  class GamePointComment < Comment
+module PingPong::Comments
+  class GamePoint < PingPong::Comment
     def available?
       match.game_point
     end

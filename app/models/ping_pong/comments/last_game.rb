@@ -1,5 +1,5 @@
-module PingPong
-  class LastGameComment < Comment
+module PingPong::Comments
+  class LastGame < PingPong::Comment
     def available?
       match.points.count == 0
     end

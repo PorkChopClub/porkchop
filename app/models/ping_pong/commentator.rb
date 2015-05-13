@@ -1,11 +1,11 @@
 module PingPong
   class Commentator
     COMMENT_CLASSES = [
-      PingPong::LastGameComment,
-      PingPong::PreviousRecordComment,
-      PingPong::GamePointComment,
-      PingPong::VictoryComment,
-      PingPong::WarmUpComment
+      PingPong::Comments::LastGame,
+      PingPong::Comments::PreviousRecord,
+      PingPong::Comments::GamePoint,
+      PingPong::Comments::Victory,
+      PingPong::Comments::WarmUp
     ]
 
     def initialize(match:)

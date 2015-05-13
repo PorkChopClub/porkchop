@@ -1,5 +1,5 @@
-module PingPong
-  class VictoryComment < Comment
+module PingPong::Comments
+  class Victory < PingPong::Comment
     def available?
       match.finished?
     end

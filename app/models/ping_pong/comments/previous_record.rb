@@ -1,5 +1,5 @@
-module PingPong
-  class PreviousRecordComment < Comment
+module PingPong::Comments
+  class PreviousRecord < PingPong::Comment
     def available?
       match.points.count == 1
     end

@@ -1,5 +1,5 @@
-module PingPong
-  class WarmUpComment < Comment
+module PingPong::Comments
+  class WarmUp < PingPong::Comment
     TIME_LIMIT_SECONDS = 90
 
     def available?
