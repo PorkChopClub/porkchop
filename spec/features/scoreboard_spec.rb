@@ -5,7 +5,7 @@ RSpec.describe "scoreboard page" do
   let!(:other2) { FactoryGirl.create :player, name: "Anne" }
 
   let!(:home) { FactoryGirl.create :player, name: "Candice Bergen" }
-  let!(:away) { FactoryGirl.create :player, name: "Shirley Schmidt" }
+  let!(:away) { FactoryGirl.create :player, name: "Adam Mueller" }
 
   scenario "recording a normal game" do
     visit '/scoreboard'
