@@ -5,6 +5,7 @@ module PingPong
       PingPong::Comments::GamePoint,
       PingPong::Comments::LastGame,
       PingPong::Comments::PreviousRecord,
+      PingPong::Comments::Streak,
       PingPong::Comments::Victory,
       PingPong::Comments::WarmUp,
     ]
