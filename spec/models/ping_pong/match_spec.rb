@@ -128,37 +128,156 @@ RSpec.describe PingPong::Match do
     let(:home_player) { FactoryGirl.create :player }
     let(:away_player) { FactoryGirl.create :player }
 
-    context "when the game is tied" do
-      let(:match) do
-        FactoryGirl.create :match,
-                           home_player: home_player,
-                           away_player: away_player,
-                           home_score: 5,
-                           away_score: 5
-      end
+    let(:match) do
+      FactoryGirl.create(:match,
+                         home_player: home_player,
+                         away_player: away_player,
+                         home_score: home_score,
+                         away_score: away_score)
+    end
+
+    context "when the match is tied" do
+      let(:home_score) { 5 }
+      let(:away_score) { 5 }
       it { is_expected.to eq nil }
     end
 
     context "when the home player is leading" do
-      let(:match) do
-        FactoryGirl.create :match,
-                           home_player: home_player,
-                           away_player: away_player,
-                           home_score: 6,
-                           away_score: 5
-      end
+      let(:home_score) { 6 }
+      let(:away_score) { 5 }
       it { is_expected.to eq home_player }
     end
 
     context "when the away player is leading" do
-      let(:match) do
-        FactoryGirl.create :match,
-                           home_player: home_player,
-                           away_player: away_player,
-                           home_score: 5,
-                           away_score: 6
-      end
+      let(:home_score) { 5 }
+      let(:away_score) { 6 }
       it { is_expected.to eq away_player }
+    end
+  end
+
+  describe "#trailer" do
+    subject { ping_pong_match.trailer }
+
+    let(:home_player) { FactoryGirl.create :player }
+    let(:away_player) { FactoryGirl.create :player }
+
+    let(:match) do
+      FactoryGirl.create(:match,
+                         home_player: home_player,
+                         away_player: away_player,
+                         home_score: home_score,
+                         away_score: away_score)
+    end
+
+    context "when the match is tied" do
+      let(:home_score) { 5 }
+      let(:away_score) { 5 }
+      it { is_expected.to eq nil }
+    end
+
+    context "when the home player is leading" do
+      let(:home_score) { 6 }
+      let(:away_score) { 5 }
+      it { is_expected.to eq away_player }
+    end
+
+    context "when the away player is leading" do
+      let(:home_score) { 5 }
+      let(:away_score) { 6 }
+      it { is_expected.to eq home_player }
+    end
+  end
+
+  describe "#leading_score" do
+    subject { ping_pong_match.leading_score }
+
+    let(:home_player) { FactoryGirl.create :player }
+    let(:away_player) { FactoryGirl.create :player }
+
+    let(:match) do
+      FactoryGirl.create(:match,
+                         home_player: home_player,
+                         away_player: away_player,
+                         home_score: home_score,
+                         away_score: away_score)
+    end
+
+    context "when the match is tied" do
+      let(:home_score) { 7 }
+      let(:away_score) { 7 }
+      it { is_expected.to eq nil }
+    end
+
+    context "when the home player is leading" do
+      let(:home_score) { 8 }
+      let(:away_score) { 7 }
+      it { is_expected.to eq 8 }
+    end
+
+    context "when the away player is leading" do
+      let(:home_score) { 8 }
+      let(:away_score) { 9 }
+      it { is_expected.to eq 9 }
+    end
+  end
+
+  describe "#trailing_score" do
+    subject { ping_pong_match.trailing_score }
+
+    let(:home_player) { FactoryGirl.create :player }
+    let(:away_player) { FactoryGirl.create :player }
+
+    let(:match) do
+      FactoryGirl.create(:match,
+                         home_player: home_player,
+                         away_player: away_player,
+                         home_score: home_score,
+                         away_score: away_score)
+    end
+
+    context "when the match is tied" do
+      let(:home_score) { 7 }
+      let(:away_score) { 7 }
+      it { is_expected.to eq nil }
+    end
+
+    context "when the home player is trailing" do
+      let(:home_score) { 2 }
+      let(:away_score) { 7 }
+      it { is_expected.to eq 2 }
+    end
+
+    context "when the away player is trailing" do
+      let(:home_score) { 8 }
+      let(:away_score) { 1 }
+      it { is_expected.to eq 1 }
+    end
+  end
+
+  describe "#score_differential" do
+    subject { ping_pong_match.score_differential }
+    let(:match) do
+      FactoryGirl.create(:match,
+                         home_score: home_score,
+                         away_score: away_score)
+    end
+
+    context "when the match is tied" do
+      let(:home_score) { 2 }
+      let(:away_score) { 2 }
+      it { is_expected.to eq 0 }
+    end
+
+    context "when the away player is leading" do
+      let(:home_score) { 2 }
+      let(:away_score) { 9 }
+      it { is_expected.to eq 7 }
+    end
+
+    context "when the home player is leading" do
+      let(:home_score) { 9 }
+      let(:away_score) { 4 }
+      it { is_expected.to eq 5 }
     end
   end
 

@@ -29,6 +29,10 @@ class Match < ActiveRecord::Base
     match && match.save!
   end
 
+  def players
+    [home_player, away_player]
+  end
+
   def home_points
     points.where(victor: home_player)
   end

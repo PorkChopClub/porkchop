@@ -8,6 +8,21 @@ RSpec.describe Match, type: :model do
   it { is_expected.to validate_presence_of :home_player }
   it { is_expected.to validate_presence_of :away_player }
 
+  describe "#players" do
+    let(:match) do
+      FactoryGirl.create(:match,
+                         home_player: home_player,
+                         away_player: away_player)
+    end
+
+    let(:home_player) { FactoryGirl.create(:player) }
+    let(:away_player) { FactoryGirl.create(:player) }
+
+    subject { match.players }
+
+    it { is_expected.to match_array [home_player, away_player] }
+  end
+
   describe "#destroy" do
     let!(:match) { FactoryGirl.create :match, home_score: 10, away_score: 0 }
 
