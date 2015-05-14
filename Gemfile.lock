@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/jarednorman/normalize-rails.git
+  revision: 464244842272c7891eadab784fc4eb08ef20820d
+  branch: missing-semicolons
+  specs:
+    normalize-rails (3.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -80,6 +87,7 @@ GEM
     fast_stack (0.1.0)
       rake
       rake-compiler
+    ffi (1.9.8)
     flamegraph (0.1.0)
       fast_stack
     globalid (0.3.3)
@@ -112,7 +120,6 @@ GEM
       sass (>= 3.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    normalize-rails (3.0.1)
     oauth (0.4.7)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
@@ -195,6 +202,15 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    sassc (1.1.2)
+      bundler
+      ffi (~> 1.9.6)
+    sassc-rails (0.0.9)
+      rails (>= 4.0.0)
+      sass
+      sassc (~> 1.1.2)
+      sprockets (> 2.11)
+      tilt
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -257,7 +273,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   neat
-  normalize-rails
+  normalize-rails!
   omniauth-twitter
   pg
   poltergeist
@@ -267,6 +283,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
+  sassc-rails
   sdoc (~> 0.4.0)
   shoulda-matchers
   simple_form
