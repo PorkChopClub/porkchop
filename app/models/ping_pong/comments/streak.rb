@@ -17,11 +17,15 @@ module PingPong::Comments
     delegate :points, to: :match
 
     def streak_length
-      points.chunk(&:victor).to_a[0][1].size
+      ordered_points.chunk(&:victor).to_a[0][1].size
     end
 
     def streaker
-      points.first.victor
+      ordered_points.first.victor
+    end
+
+    def ordered_points
+      points.order(created_at: :desc)
     end
   end
 end
