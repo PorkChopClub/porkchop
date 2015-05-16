@@ -12,3 +12,4 @@ Player.create! name: "Brendan Deere", avatar_url: "http://i.imgur.com/RSPZBIV.pn
 Player.create! name: "Kevin Attfield"
 Player.create! name: "Chris Kelly"
 Player.create! name: "John Hawthorn"
+User.create! username: 'admin', uid: 'admin@example.com', admin: true, provider: 'developer'
