@@ -12,8 +12,32 @@ class Matchmaker
   end
 
   def choose
-    home_player = players.min_by{ |player| player.last_played_at || EPOCH }
-    away_player = (players - [home_player]).sample
     [home_player, away_player]
+  end
+
+  private
+
+  def home_player
+    @home_player ||= players.min_by{ |player| player.last_played_at || EPOCH }
+  end
+
+  def away_player
+    if possible_opponents.size == 1
+      possible_opponents.first
+    else
+      possible_opponents.sort_by do |player|
+        last_played_against(player) || EPOCH
+      end.last(2).min_by do |player|
+        player.last_played_at || EPOCH
+      end
+    end
+  end
+
+  def possible_opponents
+    @possible_opponents ||= players - [home_player]
+  end
+
+  def last_played_against(player)
+    home_player.matches_against(player).maximum(:created_at)
   end
 end

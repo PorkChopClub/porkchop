@@ -1,63 +1,42 @@
-require 'spec_helper'
+require 'rails_helper'
 require 'matchmaker'
 
-class MockMatchmakerPlayer
-  attr_reader :last_played_at, :times_played
-
-  def initialize
-    @last_played_at = nil
-    @times_played = 0
-  end
-
-  def play(time=Time.current)
-    @last_played_at = time
-    @times_played += 1
-  end
-end
-
-RSpec.shared_examples "a fair matchmaker" do
-  it "should allow each player to a game in as many games" do
-    num_players.times { play_match }
-    players.each do |player|
-      expect(player.times_played).to be > 0
-    end
-  end
-
-  it "should give each player a balanced number of games" do
-    n = 1000
-
-    # Each player should expect to play once for every N/2 games
-    # This spec fails if they don't achieve half that
-    fair_ratio = (1.0 / num_players)
-
-    n.times { play_match }
-    players.each do |player|
-      expect(player.times_played).to be > (n * fair_ratio)
-    end
-  end
-end
-
 RSpec.describe Matchmaker do
-  def mock_player
-    MockMatchmakerPlayer.new
-  end
+  describe "#choose" do
+    let(:matchmaker) { Matchmaker.new(players) }
+    let(:least_recently_played_player) { FactoryGirl.create :player, name: "Least", active: true }
 
-  def play_match
-    @matches_played ||= 0
-    @matches_played += 1
+    subject { matchmaker.choose }
 
-    time = Time.at(@matches_played)
+    context "when there are 2 players"do
+      let(:other_player) { FactoryGirl.create :player, active: true }
+      let(:players) { [least_recently_played_player, other_player] }
 
-    playing = described_class.new(players).choose
-    playing.each{|player| player.play(time) }
-  end
+      before do
+        FactoryGirl.create(:match, :finalized, home_player: other_player)
+      end
 
-  let(:players){ Array.new(num_players){ mock_player } }
+      it { is_expected.to eq [least_recently_played_player, other_player] }
+    end
 
-  [2, 3, 4, 5, 6, 7, 8, 9, 10].each do |n|
-    context "with #{n} players" do
-      let(:num_players){ n }
-      it_behaves_like "a fair matchmaker"
+    context "when there are 3 or more players" do
+      let(:other_player) { FactoryGirl.create :player, name: "Other", active: true }
+      let(:another_player) { FactoryGirl.create :player, name: "Another", active: true }
+      let(:players) { [least_recently_played_player, other_player, another_player] }
+
+      before do
+        FactoryGirl.create(:match, :finalized,
+                           home_player: least_recently_played_player,
+                           away_player: another_player,
+                           created_at: 2.days.ago)
+
+        FactoryGirl.create(:match, :finalized,
+                           home_player: other_player,
+                           away_player: another_player,
+                           created_at: 2.minutes.ago)
+      end
+
+      it { is_expected.to eq [least_recently_played_player, other_player] }
     end
   end
 end
