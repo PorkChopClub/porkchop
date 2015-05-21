@@ -27,7 +27,7 @@ class Matchmaker
     else
       possible_opponents.sort_by do |player|
         last_played_against(player) || EPOCH
-      end.last(2).min_by do |player|
+      end.first(2).min_by do |player|
         player.last_played_at || EPOCH
       end
     end
@@ -38,6 +38,6 @@ class Matchmaker
   end
 
   def last_played_against(player)
-    home_player.matches_against(player).minimum(:created_at)
+    home_player.matches_against(player).maximum(:created_at)
   end
 end
