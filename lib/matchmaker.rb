@@ -38,6 +38,6 @@ class Matchmaker
   end
 
   def last_played_against(player)
-    home_player.matches_against(player).maximum(:created_at)
+    home_player.matches_against(player).minimum(:created_at)
   end
 end
