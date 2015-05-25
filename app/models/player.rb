@@ -7,6 +7,8 @@ class Player < ActiveRecord::Base
   has_many :points, foreign_key: 'victor_id'
   has_many :victories, class_name: "Match", foreign_key: 'victor_id'
   has_many :elo_ratings
+  has_many :season_memberships
+  has_many :seasons, through: :season_memberships
 
   validates :name, presence: true
 

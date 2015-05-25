@@ -5,6 +5,8 @@ RSpec.describe Player, type: :model do
   it { is_expected.to have_many :victories }
   it { is_expected.to have_many :elo_ratings }
   it { is_expected.to have_many :achievements }
+  it { is_expected.to have_many :season_memberships }
+  it { is_expected.to have_many :seasons }
 
   it "is invalid without a name" do
     expect(described_class.new.valid?).to be false
