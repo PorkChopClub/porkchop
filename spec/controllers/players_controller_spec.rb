@@ -65,30 +65,18 @@ RSpec.describe PlayersController, type: :controller do
     subject { patch :update, id: player.to_param, player: player_params }
     before { ability.can :update, player }
 
-    let(:player) { FactoryGirl.create :player, name: "Candice Bergen" }
+    let(:player) { FactoryGirl.create :player, nickname: "Candice Bergen" }
 
     context "with valid params" do
-      let(:player_params) { { "name" => "Bandice Cergen" } }
+      let(:player_params) { { "nickname" => "Bandice Cergen" } }
 
       it { is_expected.to redirect_to player }
 
       it "updates the player" do
         expect { subject }.
-          to change { player.reload.name }.
+          to change { player.reload.nickname }.
           from("Candice Bergen").to("Bandice Cergen")
       end
-    end
-
-    context "with invalid params" do
-      let(:player_params) { { "name" => nil } }
-
-      it "doesn't update the player" do
-        expect { subject }.not_to change { player.reload }
-      end
-
-      it { is_expected.to render_template :edit }
-
-      specify { expect(subject.status).to eq 200 }
     end
   end
 end
