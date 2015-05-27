@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# This should be first.
+gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
+
 gem 'rails', '4.2.0'
 gem 'pg'
 gem 'puma'
@@ -28,7 +31,6 @@ gem 'bugsnag'
 
 gem 'elo'
 
-# profiling
 gem 'stackprof'
 gem 'flamegraph'
 gem 'rack-mini-profiler'
