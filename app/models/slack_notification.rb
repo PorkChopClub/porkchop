@@ -20,8 +20,8 @@ class SlackNotification
     [{
       fallback: "#{home_player_name} #{match.home_score} - #{match.away_score} #{away_player_name}",
       fields: [
-        { title: home_player_name, value: match.home_score, short: true },
-        { title: away_player_name, value: match.away_score, short: true }
+        { title: home_player_name, value: match.home_score },
+        { title: away_player_name, value: match.away_score }
       ]
     }]
   end

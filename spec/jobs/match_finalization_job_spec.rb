@@ -55,8 +55,8 @@ RSpec.describe MatchFinalizationJob, type: :job do
         attachments: [{
           fallback: "Candice 12 - 10 Shirley",
           fields: [
-            { title: "Candice", value: 12, short: true },
-            { title: "Shirley", value: 10, short: true }
+            { title: "Candice", value: 12 },
+            { title: "Shirley", value: 10 }
           ]
         }]
       )
