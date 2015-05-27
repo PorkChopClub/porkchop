@@ -11,10 +11,13 @@ RSpec.describe "Visuals", type: :feature do
   context "with a running game" do
     let!(:player1) { FactoryGirl.create :player, name: "Dave" }
     let!(:player2) { FactoryGirl.create :player, name: "Anne" }
-    let!(:match){ FactoryGirl.create :match, home_player: player1, away_player: player2 }
+    let!(:match) do
+      FactoryGirl.create :new_match, home_player: player1, away_player: player2
+    end
 
     it "scoreboard" do
       visit '/scoreboard'
+      sleep 1
       observe! 'scoreboard'
     end
   end
