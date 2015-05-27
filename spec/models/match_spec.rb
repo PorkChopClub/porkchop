@@ -8,6 +8,58 @@ RSpec.describe Match, type: :model do
   it { is_expected.to validate_presence_of :home_player }
   it { is_expected.to validate_presence_of :away_player }
 
+  describe ".setup!" do
+    let!(:kelly) do
+      FactoryGirl.create(:player, name: "Kelly Clarkson")
+    end
+
+    let!(:carrie) do
+      FactoryGirl.create(:player, name: "Carrie Underwood")
+    end
+
+    let(:matchup) { Matchup.new(home_player: kelly, away_player: carrie) }
+
+    context "without a matchup" do
+      subject { Match.setup! }
+
+      before do
+        expect(Matchmaker).
+          to receive(:choose).
+          and_return(matchup)
+      end
+
+      it "creates a match" do
+        expect { subject }.
+          to change { Match.count }.
+          from(0).to(1)
+      end
+
+      it "matches up the players from the matchmaker" do
+        subject
+        match = Match.first
+        expect(match.home_player).to eq kelly
+        expect(match.away_player).to eq carrie
+      end
+    end
+
+    context "with a matchup" do
+      subject { Match.setup!(matchup) }
+
+      it "creates a match" do
+        expect { subject }.
+          to change { Match.count }.
+          from(0).to(1)
+      end
+
+      it "matches up the players from the matchup" do
+        subject
+        match = Match.first
+        expect(match.home_player).to eq kelly
+        expect(match.away_player).to eq carrie
+      end
+    end
+  end
+
   describe "#players" do
     let(:match) do
       FactoryGirl.create(:match,

@@ -12,7 +12,8 @@ class Matchmaker
   end
 
   def choose
-    [home_player, away_player]
+    Matchup.new(home_player: home_player,
+                away_player: away_player)
   end
 
   private

@@ -31,6 +31,6 @@ class MatchFinalizationJob < ActiveJob::Base
   end
 
   def matchmake!
-    Match.matchmake!
+    Match.setup!
   end
 end

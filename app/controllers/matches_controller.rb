@@ -7,7 +7,7 @@ class MatchesController < ApplicationController
   end
 
   def new
-    @match = Match.matchmake || Match.new
+    @match = Match.new
     @players = Player.all.sort_by { |p| p.matches.count }.reverse
   end
 

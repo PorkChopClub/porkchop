@@ -1,5 +1,11 @@
 class Matchup
+  include ActiveModel::Validations
+
   EPOCH = Time.at(0)
+
+  validates :home_player, presence: true
+  validates :away_player, presence: true
+  validate :cant_play_agaist_yourself
 
   def initialize(home_player:, away_player:)
     @home_player = home_player
@@ -28,5 +34,13 @@ class Matchup
       where(home_player: home_player,
             away_player: away_player).
       order(finalized_at: :asc)
+  end
+
+  private
+
+  def cant_play_agaist_yourself
+    if home_player && home_player == away_player
+      errors.add(:base, "One cannot play against oneself.")
+    end
   end
 end

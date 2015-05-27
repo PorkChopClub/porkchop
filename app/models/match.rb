@@ -14,19 +14,11 @@ class Match < ActiveRecord::Base
   scope :ongoing, -> { where finalized_at: nil }
   scope :finalized, -> { where.not finalized_at: nil }
 
-  def self.matchmake
-    home_player, away_player = Matchmaker.choose
-    return unless home_player && away_player
+  def self.setup!(matchup = nil)
+    matchup ||= Matchmaker.choose
 
-    Match.new(
-      home_player: home_player,
-      away_player: away_player
-    )
-  end
-
-  def self.matchmake!
-    match = matchmake
-    match && match.save!
+    matchup.valid? && Match.create!(home_player: matchup.home_player,
+                                    away_player: matchup.away_player)
   end
 
   def players

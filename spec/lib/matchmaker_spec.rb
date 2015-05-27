@@ -16,7 +16,10 @@ RSpec.describe Matchmaker do
         FactoryGirl.create(:match, :finalized, home_player: other_player)
       end
 
-      it { is_expected.to eq [least_recently_played_player, other_player] }
+      it "puts them against each other" do
+        expect(subject).to eq Matchup.new(home_player: least_recently_played_player,
+                                          away_player: other_player)
+      end
     end
 
     context "when there are 3 or more players" do
@@ -36,7 +39,10 @@ RSpec.describe Matchmaker do
                            created_at: 2.minutes.ago)
       end
 
-      it { is_expected.to eq [least_recently_played_player, other_player] }
+      it "matches up the least recently played player against the correct opponent" do
+        expect(subject).to eq Matchup.new(home_player: least_recently_played_player,
+                                          away_player: other_player)
+      end
     end
   end
 end

@@ -5,6 +5,43 @@ RSpec.describe Matchup do
   let(:joseph) { FactoryGirl.create :player, name: "Joseph Gordon-Levitt" }
   let(:zooey) { FactoryGirl.create :player, name: "Zooey Deschanel" }
 
+  describe "#valid?" do
+    subject { matchup.valid? }
+
+    let(:matchup) do
+      Matchup.new(home_player: home_player,
+                  away_player: away_player)
+    end
+
+    context "when home_player is missing" do
+      let(:home_player) { nil }
+      let(:away_player) { zooey }
+
+      it { is_expected.to be_falsy }
+    end
+
+    context "when away_player is missing" do
+      let(:home_player) { zooey }
+      let(:away_player) { nil }
+
+      it { is_expected.to be_falsy }
+    end
+
+    context "when home_player is away_player" do
+      let(:home_player) { zooey }
+      let(:away_player) { zooey }
+
+      it { is_expected.to be_falsy }
+    end
+
+    context "when home_player and away_player are present" do
+      let(:home_player) { candice }
+      let(:away_player) { zooey }
+
+      it { is_expected.to be_truthy }
+    end
+  end
+
   describe "#==" do
     subject { matchup1 == matchup2 }
 

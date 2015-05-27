@@ -50,7 +50,7 @@ class Api::OngoingMatchesController < ApplicationController
       end
     end
 
-    perform Match.matchmake!
+    perform Match.setup!
   end
 
   private
