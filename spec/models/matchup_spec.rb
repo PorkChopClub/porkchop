@@ -5,6 +5,29 @@ RSpec.describe Matchup do
   let(:joseph) { FactoryGirl.create :player, name: "Joseph Gordon-Levitt" }
   let(:zooey) { FactoryGirl.create :player, name: "Zooey Deschanel" }
 
+  describe ".all" do
+    subject { Matchup.all(players: players) }
+
+    let(:players) { [candice, joseph, zooey] }
+
+    it "returns all the matchups between the given players" do
+      expect(subject).to match_array [
+        Matchup.new(home_player: candice,
+                    away_player: joseph),
+        Matchup.new(home_player: candice,
+                    away_player: zooey),
+        Matchup.new(home_player: zooey,
+                    away_player: joseph),
+        Matchup.new(home_player: zooey,
+                    away_player: candice),
+        Matchup.new(home_player: joseph,
+                    away_player: zooey),
+        Matchup.new(home_player: joseph,
+                    away_player: candice),
+      ]
+    end
+  end
+
   describe "#valid?" do
     subject { matchup.valid? }
 

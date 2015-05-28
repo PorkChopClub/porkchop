@@ -7,6 +7,12 @@ class Matchup
   validates :away_player, presence: true
   validate :cant_play_agaist_yourself
 
+  def self.all(players:)
+    players.permutation(2).map do |(home_player, away_player)|
+      new(home_player: home_player, away_player: away_player)
+    end
+  end
+
   def initialize(home_player:, away_player:)
     @home_player = home_player
     @away_player = away_player
