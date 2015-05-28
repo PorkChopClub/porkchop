@@ -35,16 +35,14 @@ RSpec.describe "Visuals", type: :feature do
     end
 
     it "create, and score game" do
-      FactoryGirl.create :player, name: "Dave"
-      FactoryGirl.create :player, name: "Anne"
+      FactoryGirl.create :player, name: "Dave", active: true
+      FactoryGirl.create :player, name: "Anne", active: true
 
       within('nav'){ click_on 'New Match' }
 
-      select 'Dave', from: 'Home player'
-      select 'Anne', from: 'Away player'
       observe! 'New Match'
 
-      click_on 'Create Match'
+      click_on 'Create match!'
 
       observe! 'Controls'
     end

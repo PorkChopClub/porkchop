@@ -24,7 +24,21 @@ RSpec.describe MatchesController, type: :controller do
     before { ability.can :create, Match }
 
     context "when there is not an ongoing match" do
+      before do
+        allow(Matchmaker).
+          to receive(:choose).
+          and_return(matchup)
+      end
+
+      let(:matchup) { instance_double Matchup }
+
       specify { expect(subject.status).to eq 200 }
+
+      it "grabs the next matchup" do
+        subject
+        expect(assigns(:matchup)).to eq matchup
+      end
+
       it { is_expected.to render_template :new }
     end
 
@@ -36,37 +50,16 @@ RSpec.describe MatchesController, type: :controller do
   end
 
   describe "POST create" do
-    subject { post :create, match: match_params }
+    subject { post :create }
     before { ability.can :create, Match }
 
     context "when there is not an ongoing match" do
       context "with valid params" do
-        let(:home_player) { FactoryGirl.create :player }
-        let(:away_player) { FactoryGirl.create :player }
-
-        let(:match_params) do
-          {
-            home_player_id: home_player.to_param,
-            away_player_id: away_player.to_param
-          }
-        end
-
         it { is_expected.to redirect_to edit_scoreboard_path }
 
-        it "creates a match" do
-          expect { subject }.
-            to change { Match.count }.
-            from(0).to(1)
-        end
-      end
-
-      context "with invalid params" do
-        let(:match_params) { { foo: 'bar' } }
-
-        it { is_expected.to render_template :new }
-
-        it "doesn't create a match" do
-          expect { subject }.not_to change { Match.count }
+        it "sets up a match" do
+          expect(Match).to receive(:setup!)
+          subject
         end
       end
     end

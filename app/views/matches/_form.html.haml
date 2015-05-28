@@ -1,7 +1,12 @@
-= simple_form_for @match do |f|
-  %h4 The home player is the one closest to the office entrance.
-  = f.association :home_player, collection: @players
+= form_tag matches_path do |f|
+  %h2 Who's next?
+
+  %p
+    %strong Home
+    .home-player= @matchup.home_player.try! :name
+  %p
+    %strong Away
+    .away_player= @matchup.away_player.try! :name
+
   %br
-  = f.association :away_player, collection: @players
-  %br
-  = f.submit
+  = submit_tag "Create match!"

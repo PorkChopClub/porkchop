@@ -4,8 +4,8 @@ RSpec.describe "controls page" do
   let!(:other1) { FactoryGirl.create :player, name: "Dave" }
   let!(:other2) { FactoryGirl.create :player, name: "Anne" }
 
-  let!(:home) { FactoryGirl.create :player, name: "Candice Bergen" }
-  let!(:away) { FactoryGirl.create :player, name: "Shirley Schmidt" }
+  let!(:home) { FactoryGirl.create :player, active: true, name: "Candice Bergen" }
+  let!(:away) { FactoryGirl.create :player, active: true,  name: "Shirley Schmidt" }
 
   let!(:user) { FactoryGirl.create :admin_user }
 
@@ -14,20 +14,13 @@ RSpec.describe "controls page" do
 
     visit "/matches/new"
 
-    select "Candice Bergen", from: "Away player"
-    select "Shirley Schmidt", from: "Home player"
-
-    click_on "Create Match"
+    click_on "Create match!"
 
     score_point :away
 
     click_on "Cancel match"
     click_on "Confirm cancellation"
-
-    select "Candice Bergen", from: "Home player"
-    select "Shirley Schmidt", from: "Away player"
-
-    click_on "Create Match"
+    click_on "Create match!"
 
     expect(player_score(:home)).to have_content "0"
     expect(player_score(:away)).to have_content "0"

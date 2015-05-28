@@ -1,29 +1,22 @@
 class MatchesController < ApplicationController
   before_action :check_for_ongoing_match, only: [:new, :create]
-  load_and_authorize_resource
+  load_and_authorize_resource only: [:index, :show, :create]
+  skip_authorization_check only: [:new]
 
   def index
     @matches = @matches.finalized.order(finalized_at: :desc)
   end
 
   def new
-    @match = Match.new
-    @players = Player.all.sort_by { |p| p.matches.count }.reverse
+    @matchup = Matchmaker.choose
   end
 
   def create
-    if @match.save
-      redirect_to edit_scoreboard_path
-    else
-      render :new
-    end
+    Match.setup!
+    redirect_to edit_scoreboard_path
   end
 
   private
-
-  def match_params
-    params.require(:match).permit :home_player_id, :away_player_id
-  end
 
   def check_for_ongoing_match
     if Match.ongoing.count != 0
