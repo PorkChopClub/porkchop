@@ -12,10 +12,16 @@ class Matchmaker
   end
 
   def choose
-    Matchup.all(players: players).min_by do |matchup|
-      matchup.last_played_at.to_i +
-        matchup.home_player.last_played_at.to_i +
-        matchup.away_player.last_played_at.to_i
+    Matchup.all(players: players).max_by do |matchup|
+      (now - matchup.last_played_at.to_i) +
+        (now - matchup.home_player.last_played_at.to_i) +
+        (now - matchup.away_player.last_played_at.to_i)
     end || Matchup.new(home_player: nil, away_player: nil)
+  end
+
+  private
+
+  def now
+    @now ||= Time.zone.now.to_i
   end
 end
