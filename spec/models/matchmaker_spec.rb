@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'matchmaker'
 
 RSpec.describe Matchmaker do
   describe "#choose" do
