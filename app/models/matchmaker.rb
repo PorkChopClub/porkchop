@@ -9,7 +9,7 @@ class Matchmaker
     end
 
     def rank
-      seconds_since(matchup.last_played_at) +
+      0.15 * seconds_since(matchup.last_played_at) +
         seconds_since(home_player.last_played_at) +
         seconds_since(away_player.last_played_at)
     end
