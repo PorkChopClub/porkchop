@@ -32,14 +32,14 @@ class Matchup
   end
 
   def last_played_at
-    match_history.first.try!(:created_at) || EPOCH
+    match_history.last.try!(:created_at) || EPOCH
   end
 
   def match_history
     Match.
       where(home_player: home_player,
             away_player: away_player).
-      order(finalized_at: :asc)
+      order(created_at: :asc)
   end
 
   private
