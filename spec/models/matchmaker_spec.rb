@@ -30,7 +30,17 @@ RSpec.describe Matchmaker do
       it { is_expected.to be_a Matchup }
       it { is_expected.to be_valid }
     end
+  end
 
-    # FIXME: Add tests that do what Hawth's tests did, but work with ActiveRecord.
+  describe "matchmaking algorithm" do
+    context "with 10 players playing 90 matches" do
+      let!(:players) { FactoryGirl.create_list(:player, 10, active: true) }
+      before { 90.times { Match.setup!.finalize! } }
+
+      it "plays all matchups" do
+        Player.all.each { |player| expect(player.matches.count).to eq 18 }
+        expect(Match.all.map(&:to_matchup).uniq.length).to eq 90
+      end
+    end
   end
 end

@@ -19,6 +19,11 @@ class Match < ActiveRecord::Base
                                     away_player: matchup.away_player)
   end
 
+  def to_matchup
+    Matchup.new(home_player: home_player,
+                away_player: away_player)
+  end
+
   def players
     [home_player, away_player]
   end

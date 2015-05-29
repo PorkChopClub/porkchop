@@ -60,6 +60,17 @@ RSpec.describe Match, type: :model do
     end
   end
 
+  describe "#to_matchup" do
+    subject { match.to_matchup }
+
+    let(:match) { FactoryGirl.create(:match) }
+
+    it "builds the match's matchup" do
+      expect(subject.home_player).to eq match.home_player
+      expect(subject.away_player).to eq match.away_player
+    end
+  end
+
   describe "#players" do
     let(:match) do
       FactoryGirl.create(:match,
