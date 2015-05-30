@@ -4,7 +4,10 @@ class HomeController < ApplicationController
   def index
     @recent_matches = Match.finalized.order(finalized_at: :desc).limit(10)
     @ranked_players = Player.all.
-                      select { |p| p.matches.finalized.count >= 20 }.
+                      select do |p|
+                        p.matches.finalized.count >= 20 &&
+                        p.last_played_at > 30.days.ago
+                      end.
                       sort_by(&:elo).
                       reverse
 
