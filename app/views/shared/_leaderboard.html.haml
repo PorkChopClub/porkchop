@@ -3,6 +3,7 @@
     %tr
       %th Player
       %th Rating
+      %th L10
   %tbody
     - players.each_with_index do |player, i|
       %tr.leaderboard-list-player
@@ -10,3 +11,4 @@
           %strong #{i + 1}.&nbsp;
           = link_to player.name, player
         %td= player.elo
+        %td= player.stats.last_10_results.join("-")
