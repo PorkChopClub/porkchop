@@ -27,6 +27,10 @@ class Stats::Personal
     [victory_count, loss_count]
   end
 
+  def last_10_results
+    [last_10_victory_count, last_10_loss_count]
+  end
+
   private
 
   attr_reader :player
@@ -63,5 +67,17 @@ class Stats::Personal
 
   def match_count
     matches.finalized.count
+  end
+
+  def last_10_matches
+    @last_10_matches ||= matches.finalized.last(10)
+  end
+
+  def last_10_victory_count
+    last_10_matches.select { |m| m.victor == player }.size
+  end
+
+  def last_10_loss_count
+    last_10_matches.select { |m| m.victor != player }.size
   end
 end
