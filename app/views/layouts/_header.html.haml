@@ -1,20 +1,18 @@
 %header.main-header
+  %nav.secondary-navigation
+    %ul
+      - if current_user
+        %li= link_to "Log Out (#{current_user.username})",
+          signout_path, method: :delete
+      - else
+        %li= link_to "Log in with Twitter", "/auth/twitter"
   %h1.main-title
     = link_to root_path do
-      %span PorkChop
-      %span Club
-  %nav.header-navigation
+      %span PorkChop&nbsp;
+      %span Club League
+  %nav.primary-navigation
     %ul
+      %li= link_to "Second Screen", edit_scoreboard_path
       %li= link_to "Players", players_path
       %li= link_to "Match History", matches_path
-      - if ongoing_match
-        %li
-          = link_to "Scoreboard", scoreboard_path, class: "button"
-        %li
-          = link_to "Controls", edit_scoreboard_path, class: "button"
-      - else
-        %li
-          = link_to "New Match", new_match_path, class: "button"
-      - unless current_user
-        %li
-          = link_to "Log in with Twitter", "/auth/twitter", class: "button"
+      %li= link_to "Activation List", edit_activation_path

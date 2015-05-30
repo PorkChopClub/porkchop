@@ -1,18 +1,17 @@
 .porkbox-light,
 .porkbox-dark {
   padding: modular-scale(0);
-  margin-bottom: modular-scale(1);
 }
 
 .porkbox-light {
   background-color: $off-white;
-  border-bottom: 6px solid darken($off-white, 5);
+  border-bottom: 1px solid $dark-grey;
   color: darken($dark-grey, 10);
 }
 
 .porkbox-dark {
   background-color: darken($dark-grey, 10);
-  border-bottom: 6px solid darken($dark-grey, 5);
+  border-bottom: 1px solid $off-white;
   color: $off-white;
 }
 

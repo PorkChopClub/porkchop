@@ -1,20 +1,4 @@
-.main-footer {
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  a {
-    color: $off-white;
-  }
-}
-
-.main-footer-navigation {
-}
-
 .main-footer-information {
-  margin-top: modular-scale(0);
   font-size: modular-scale(-1);
   color: lighten($dark-grey, 25);
 
@@ -29,5 +13,9 @@
     text-transform: uppercase;
     font-weight: $font-weight-medium;
     letter-spacing: 0.05em;
+  }
+
+  p {
+    margin-bottom: 0;
   }
 }
