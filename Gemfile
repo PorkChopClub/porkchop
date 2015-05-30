@@ -9,26 +9,26 @@ gem 'puma'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'dotenv-rails'
 
+# CSS
 gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails'
+gem 'bourbon'
+gem 'normalize-rails', github: 'markmcconachie/normalize-rails'
+
+# Javascript
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
-gem 'bourbon'
-gem 'neat'
-gem 'normalize-rails', github: 'jarednorman/normalize-rails', branch: 'missing-semicolons'
 gem 'jquery-rails'
 
+# Frontend
 gem 'jbuilder', '~> 2.0'
 gem 'haml'
 gem 'simple_form'
 
 gem 'omniauth-twitter'
 gem 'cancancan', '~> 1.10'
-
 gem 'slack-notifier'
-
 gem 'bugsnag'
-
 gem 'elo'
 
 gem 'stackprof'

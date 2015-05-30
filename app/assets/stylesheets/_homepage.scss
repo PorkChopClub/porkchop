@@ -6,43 +6,31 @@
 }
 
 .homepage-recent-matches {
-  @include media($desktop) {
-    @include span-columns(7);
-  }
-
-  @include media($mobile) {
-    @include span-columns(4);
-  }
 }
 
 .homepage-leaderboard-list {
-  @include media($desktop) {
-    @include span-columns(4);
-    @include shift(1);
-    @include omega();
-  }
-
-  @include media($mobile) {
-    @include span-columns(4);
-  }
 }
 
 .homepage-chart {
-  @include span-columns(12);
   .elo-chart {
-    @include span-columns(7);
+    width: 100%;
   }
-  .elo-legend {
-    @include span-columns(4);
-    @include shift(1);
-    @include omega();
 
+  .elo-legend {
     list-style: none;
+
+    @include desktop {
+      @include columns(4);
+    }
+
+    @include mobile {
+      @include columns(2);
+    }
 
     .swatch {
       display: inline-block;
-      height: 12px;
-      width: 12px;
+      height: 18px;
+      width: 18px;
       margin: 0 12px 6px -12px;
       vertical-align: middle;
     }

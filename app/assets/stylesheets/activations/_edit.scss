@@ -1,14 +1,11 @@
+.player-activations {
+  @include clearfix;
+}
+
 .active-players,
 .inactive-players {
-  @include media($desktop) {
-    @include span-columns(6);
-    @include omega(2n);
-  }
-
-  @include media($mobile) {
-    @include span-columns(4);
-    @include omega();
-  }
+  width: 50%;
+  float: left;
 
   li[data-id] {
     cursor: pointer;

@@ -1,10 +1,4 @@
 .players-listing {
-  @include span-columns(12);
-  @include omega;
-
-  @include media($desktop) {
-    margin-top: 30px;
-  }
 }
 
 .list-player {
@@ -13,20 +7,23 @@
   padding: 0 modular-scale(-1);
   margin-bottom: modular-scale(1);
 
+  @include desktop {
+    width: 33.333%;
+  }
+
+  @include tablet {
+    width: 50%;
+  }
+
+  @include phone {
+    width: 100%;
+  }
+
   a {
     display: block;
     border: 1px solid $off-white;
     padding-left: 5px;
     overflow: hidden;
-  }
-
-  @include media($desktop) {
-    width: 33.33%;
-  }
-
-  @include media($mobile) {
-    width: 100%;
-    display: block;
   }
 }
 
@@ -45,20 +42,11 @@
   a:hover > & {
     @include transform(translateY(0));
   }
-
-  @include media($mobile) {
-    max-width: 300px;
-    width: 50%;
-  }
 }
 
 .list-player-details {
   @include calc(width, "100% - 100px"); // width of the avatar
   padding: 10px 10px 10px 20px;
-
-  @include media($mobile) {
-    width: 50%; // width of the avatar
-  }
 
   h3,
   p {

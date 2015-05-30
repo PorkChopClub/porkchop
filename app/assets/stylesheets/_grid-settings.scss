@@ -1,8 +1,0 @@
-@import "neat-helpers";
-
-$column: rem(80);
-$gutter: rem(10);
-$max-width: rem(1080);
-
-$desktop: new-breakpoint(min-width 801px 12);
-$mobile: new-breakpoint(max-width 800px 4);

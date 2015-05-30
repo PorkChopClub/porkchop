@@ -1,16 +1,6 @@
 .main-header {
-  @include span-columns(12);
-  @include omega();
   line-height: 2.5;
   font-size: modular-scale(1);
-
-  @include media($desktop) {
-    margin: modular-scale(-1) 0;
-  }
-
-  @include media($mobile) {
-    margin: modular-scale(-2) 0;
-  }
 
   a {
     &:link,
@@ -27,16 +17,11 @@
 }
 
 .main-title {
-  @include span-columns(4 of 12);
   padding-left: 0.5em;
   margin-top: 0;
   margin-bottom: 0;
   font-size: inherit;
   line-height: inherit;
-
-  @include media($mobile) {
-    font-size: modular-scale(0);
-  }
 
   a {
     &:link,
@@ -59,11 +44,11 @@
 
     &:first-child {
       color: $off-white;
-      font-weight: 300;
+      font-weight: $font-weight-light;
     }
 
     &:last-child {
-      font-weight: bold;
+      font-weight: $font-weight-bold;
       background-color: $off-white;
       color: $dark-grey;
     }
@@ -71,15 +56,9 @@
 }
 
 .header-navigation {
-  @include span-columns(8 of 12);
-  @include omega();
   text-align: right;
   position: relative;
   font-size: modular-scale(1);
-
-  @include media($mobile) {
-    font-size: modular-scale(0);
-  }
 
   ul {
     list-style-type: none;
@@ -93,15 +72,5 @@
   }
 
   a {
-    @include media($mobile) {
-      &:not(.button) {
-        display: none;
-      }
-
-      &.button {
-        font-size: modular-scale(0);
-        vertical-align: 10%;
-      }
-    }
   }
 }

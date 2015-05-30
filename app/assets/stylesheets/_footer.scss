@@ -1,7 +1,4 @@
 .main-footer {
-  @include span-columns(12);
-  @include omega();
-
   ul {
     list-style: none;
     padding: 0;
@@ -14,25 +11,23 @@
 }
 
 .main-footer-navigation {
-  @include media($desktop) {
-    @include span-columns(4);
-  }
-
-  @include media($mobile) {
-    @include span-columns(4);
-    @include omega();
-  }
 }
 
 .main-footer-information {
-  @include media($desktop) {
-    @include span-columns(8);
-    @include omega();
+  margin-top: modular-scale(0);
+  font-size: modular-scale(-1);
+  color: lighten($dark-grey, 25);
+
+  a {
+    color: lighten($dark-grey, 40);
+    text-decoration: underline;
   }
 
-  @include media($mobile) {
-    @include span-columns(4);
-    @include omega();
-    margin-top: 1rem;
+  h3 {
+    color: lighten($dark-grey, 45);
+    font-size: modular-scale(0);
+    text-transform: uppercase;
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.05em;
   }
 }

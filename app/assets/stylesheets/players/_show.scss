@@ -1,35 +1,13 @@
 .player-summary {
-  @include media($desktop) {
-    @include span-columns(12);
-    @include omega();
-  }
-
-  @include media($mobile) {
-    @include span-columns(4);
-    @include omega();
-  }
-}
-
-.player-elo-chart {
-  width: 50%;
-  @include media($mobile) {
-    width: 100%;
-  }
+  @include clearfix;
 }
 
 .player-win-percentages {
-  @include media($desktop) {
-    @include span-columns(6);
-  }
-
-  @include media($mobile) {
-    @include span-columns(4);
-    @include omega();
-  }
 }
 
 .player-win-percentage-list {
   font-size: modular-scale(2);
+  @include clearfix;
 
   dt, dd {
     float: left;
@@ -47,22 +25,17 @@
 }
 
 .player-match-history {
-  @include media($desktop) {
-    @include span-columns(6);
-    @include omega();
-  }
-
-  @include media($mobile) {
-    @include span-columns(4);
-    @include omega();
-  }
 }
 
 .player-summary-avatar {
   height: 200px;
 
-  @include media($desktop) {
+  @include desktop {
     float: right;
-    width: auto;
   }
+}
+
+.player-elo-chart {
+  float: left;
+  width: 100%;
 }

@@ -1,7 +1,6 @@
 GIT
-  remote: git://github.com/jarednorman/normalize-rails.git
-  revision: 464244842272c7891eadab784fc4eb08ef20820d
-  branch: missing-semicolons
+  remote: git://github.com/markmcconachie/normalize-rails.git
+  revision: 671ca8fd780bcc5f4ed67c9d3c65cd8d63935fa0
   specs:
     normalize-rails (3.0.3)
 
@@ -115,9 +114,6 @@ GEM
     minitest (5.5.1)
     multi_json (1.10.1)
     multipart-post (2.0.0)
-    neat (1.7.1)
-      bourbon (>= 4.0)
-      sass (>= 3.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     oauth (0.4.7)
@@ -202,13 +198,13 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    sassc (1.1.2)
+    sassc (1.2.0)
       bundler
       ffi (~> 1.9.6)
-    sassc-rails (0.0.9)
+    sassc-rails (0.1.0)
       rails (>= 4.0.0)
       sass
-      sassc (~> 1.1.2)
+      sassc (~> 1.2.0)
       sprockets (> 2.11)
       tilt
     sdoc (0.4.1)
@@ -273,7 +269,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mime-types (~> 2.6.1)
-  neat
   normalize-rails!
   omniauth-twitter
   pg
@@ -294,6 +289,3 @@ DEPENDENCIES
   stackprof
   uglifier (>= 1.3.0)
   visdiff
-
-BUNDLED WITH
-   1.10.1

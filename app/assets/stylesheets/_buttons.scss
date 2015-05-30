@@ -1,7 +1,7 @@
 .button, #{$all-buttons} {
   font-family: 'Roboto', sans-serif;
   font-size: modular-scale(1);
-  font-weight: 300;
+  font-weight: $font-weight-light;
   line-height: 1.5;
   padding: 0 0.5em;
   margin: 0 0.25em;
