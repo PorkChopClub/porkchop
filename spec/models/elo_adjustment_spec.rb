@@ -8,13 +8,13 @@ RSpec.describe EloAdjustment do
     )
   end
 
+  let(:victor) { FactoryGirl.create :player }
+  let(:loser) { FactoryGirl.create :player }
+
   describe "#adjust!" do
     subject { adjustment.adjust! }
 
     context "when the players have the default rating" do
-      let(:victor) { FactoryGirl.create :player }
-      let(:loser) { FactoryGirl.create :player }
-
       it "increases the victor's rating" do
         subject
         expect(victor.reload.elo).to eq 1016
@@ -39,6 +39,24 @@ RSpec.describe EloAdjustment do
         subject
         expect(loser.reload.elo).to eq 1169
       end
+    end
+  end
+
+  describe "#victor_elo_change" do
+    subject { adjustment.victor_elo_change }
+
+    it "returns the change in elo for the victor" do
+      subject
+      expect(subject).to eq 16
+    end
+  end
+
+  describe "#loser_elo_change" do
+    subject { adjustment.loser_elo_change }
+
+    it "returns the change in elo for the loser" do
+      subject
+      expect(subject).to eq -16
     end
   end
 end

@@ -14,6 +14,16 @@ class EloAdjustment
     loser.save!
   end
 
+  def victor_elo_change
+    calculate
+    victor_player.rating - victor.elo
+  end
+
+  def loser_elo_change
+    calculate
+    loser_player.rating - loser.elo
+  end
+
   private
 
   attr_reader :victor,
@@ -22,6 +32,6 @@ class EloAdjustment
               :loser_player
 
   def calculate
-    victor_player.wins_from(loser_player)
+    @calculate ||= victor_player.wins_from(loser_player)
   end
 end
