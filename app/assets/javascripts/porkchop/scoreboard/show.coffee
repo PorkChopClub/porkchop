@@ -1,11 +1,8 @@
-#= require match_stream
-#= require achievement_stream
-
 $ ->
   return unless $('.scoreboard').length
 
-  achievements = AchievementStream.polling(500).buffered(10000)
-  match = MatchStream.polling(300)
+  achievements = PorkChop.AchievementStream.polling(500).buffered(10000)
+  match = PorkChop.MatchStream.polling(300)
 
   formatMessage = (achievement) ->
     if achievement

@@ -1,5 +1,3 @@
-#= require Chart
-
 $ ->
   canvas = $(".player-elo-chart")
   return unless canvas.length

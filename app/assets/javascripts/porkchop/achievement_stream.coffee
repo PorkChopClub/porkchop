@@ -1,4 +1,4 @@
-class @AchievementStream
+class PorkChop.AchievementStream
   @polling: (interval) ->
     ajaxOptions = { url: '/api/achievements.json' }
 
