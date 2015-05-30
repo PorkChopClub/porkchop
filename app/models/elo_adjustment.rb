@@ -7,7 +7,7 @@ class EloAdjustment
   end
 
   def adjust!
-    victor_player.wins_from(loser_player)
+    calculate
     victor.elo = victor_player.rating
     loser.elo = loser_player.rating
     victor.save!
@@ -20,4 +20,8 @@ class EloAdjustment
               :loser,
               :victor_player,
               :loser_player
+
+  def calculate
+    victor_player.wins_from(loser_player)
+  end
 end
