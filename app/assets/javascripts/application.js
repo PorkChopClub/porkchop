@@ -3,4 +3,5 @@
 //= require Bacon
 //= require lodash
 //= require bacon_ajax
-//= require_tree .
+//= require Chart
+//= require porkchop

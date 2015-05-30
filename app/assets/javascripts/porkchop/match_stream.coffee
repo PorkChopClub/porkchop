@@ -1,4 +1,4 @@
-class @MatchStream
+class PorkChop.MatchStream
   @polling: (interval) ->
     ajaxOptions = { url: '/api/ongoing_match.json' }
     matchPolls = Bacon.mergeAll([Bacon.interval(interval, ajaxOptions),

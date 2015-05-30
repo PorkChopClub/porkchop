@@ -1,5 +1,3 @@
-#= require Chart
-
 $ ->
   canvas = $(".homepage-chart > .elo-chart")
   return unless canvas.length
