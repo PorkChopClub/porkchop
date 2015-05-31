@@ -84,6 +84,17 @@ ActiveRecord::Schema.define(version: 20150602054518) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "streaks", force: :cascade do |t|
+    t.integer  "player_id"
+    t.string   "streak_type"
+    t.integer  "streak_length"
+    t.datetime "finished_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "streaks", ["player_id"], name: "index_streaks_on_player_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
@@ -102,4 +113,5 @@ ActiveRecord::Schema.define(version: 20150602054518) do
   add_foreign_key "points", "players", column: "victor_id"
   add_foreign_key "season_memberships", "players"
   add_foreign_key "season_memberships", "seasons"
+  add_foreign_key "streaks", "players"
 end
