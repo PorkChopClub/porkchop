@@ -147,4 +147,20 @@ RSpec.describe Player, type: :model do
     subject { player.stats }
     it { should be_a Stats::Personal }
   end
+
+  describe "#current_streak" do
+    let(:player) { FactoryGirl.create :player }
+
+    before do
+      FactoryGirl.create_list :streak, 5, :finished, player: player
+    end
+
+    let(:streak) { FactoryGirl.create :streak, player: player }
+    subject { streak.player.current_streak }
+
+    it "returns the currently active streak" do
+      subject
+      expect(subject).to eq streak
+    end
+  end
 end

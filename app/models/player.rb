@@ -61,6 +61,10 @@ class Player < ActiveRecord::Base
     @stats ||= Stats::Personal.new(self)
   end
 
+  def current_streak
+    streaks.active.first
+  end
+
   private
 
   def record_rating
