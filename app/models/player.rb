@@ -9,6 +9,7 @@ class Player < ActiveRecord::Base
   has_many :elo_ratings
   has_many :season_memberships
   has_many :seasons, through: :season_memberships
+  has_many :streaks, class_name: "Stats::Streak"
 
   validates :name, presence: true
 

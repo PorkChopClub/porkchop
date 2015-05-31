@@ -7,6 +7,7 @@ RSpec.describe Player, type: :model do
   it { is_expected.to have_many :achievements }
   it { is_expected.to have_many :season_memberships }
   it { is_expected.to have_many :seasons }
+  it { is_expected.to have_many :streaks }
 
   let(:player) { FactoryGirl.create :player }
 
