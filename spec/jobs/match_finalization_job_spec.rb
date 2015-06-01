@@ -27,7 +27,8 @@ RSpec.describe MatchFinalizationJob, type: :job do
     end
 
     let(:notifier) { instance_double Slack::Notifier }
-    let(:adjustment) { instance_double EloAdjustment }
+    let(:elo_adjustment) { instance_double EloAdjustment }
+    let(:streak_adjustment) { instance_double Stats::StreakAdjustment }
     let(:achievement) { instance_double Achievement }
 
     before do
@@ -39,8 +40,11 @@ RSpec.describe MatchFinalizationJob, type: :job do
       allow(Slack::Notifier).to receive(:new).and_return(notifier)
       allow(notifier).to receive(:ping)
 
-      allow(EloAdjustment).to receive(:new).and_return(adjustment)
-      allow(adjustment).to receive(:adjust!)
+      allow(EloAdjustment).to receive(:new).and_return(elo_adjustment)
+      allow(elo_adjustment).to receive(:adjust!)
+
+      allow(Stats::StreakAdjustment).to receive(:new).and_return(streak_adjustment)
+      allow(streak_adjustment).to receive(:adjust!)
     end
 
     it "notifies Slack about the match" do
@@ -74,8 +78,17 @@ RSpec.describe MatchFinalizationJob, type: :job do
         victor: victor,
         loser: loser,
         matches: []
-      ).and_return(adjustment)
-      expect(adjustment).to receive(:adjust!)
+      ).and_return(elo_adjustment)
+      expect(elo_adjustment).to receive(:adjust!)
+      subject
+    end
+
+    it "adjusts players' streaks" do
+      expect(Stats::StreakAdjustment).to receive(:new).with(
+        player: victor,
+        match_result: "W"
+      ).and_return(streak_adjustment)
+      expect(streak_adjustment).to receive(:adjust!)
       subject
     end
 
