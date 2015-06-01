@@ -13,15 +13,7 @@ RSpec.describe ScoreboardsController, type: :controller do
   describe "GET edit" do
     subject { get :edit }
     before { ability.can :edit, match }
-
-    context "when there is an ongoing match" do
-      let(:match) { FactoryGirl.create :match }
-      it { is_expected.to have_http_status :success }
-    end
-
-    context "when there is no ongoing match" do
-      let(:match) { FactoryGirl.create :complete_match }
-      it { is_expected.to redirect_to new_match_path }
-    end
+    let(:match) { FactoryGirl.create :match }
+    it { is_expected.to have_http_status :success }
   end
 end

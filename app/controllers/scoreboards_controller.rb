@@ -6,10 +6,6 @@ class ScoreboardsController < ApplicationController
   end
 
   def edit
-    if ongoing_match
-      authorize! :edit, ongoing_match
-    else
-      redirect_to new_match_url
-    end
+    authorize! :edit, ongoing_match
   end
 end

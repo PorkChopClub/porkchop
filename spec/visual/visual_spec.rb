@@ -38,7 +38,7 @@ RSpec.describe "Visuals", type: :feature do
       FactoryGirl.create :player, name: "Dave", active: true
       FactoryGirl.create :player, name: "Anne", active: true
 
-      within('.primary-navigation') { click_on 'Second Screen' }
+      visit '/matches/new'
 
       observe! 'New Match'
 
