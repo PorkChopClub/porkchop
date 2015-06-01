@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resource :scoreboard, only: [:show, :edit]
-  resource :activation, only: [:edit]
 
   resources :matches, only: [:index, :show, :new, :create]
   resources :players, only: [:index, :show, :edit, :update]

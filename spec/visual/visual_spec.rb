@@ -28,12 +28,6 @@ RSpec.describe "Visuals", type: :feature do
       visit '/auth/twitter'
     end
 
-    it "edit active users" do
-      visit '/activation/edit'
-      expect(page).to have_content 'Active Players'
-      observe! 'Active players'
-    end
-
     it "create, and score game" do
       FactoryGirl.create :player, name: "Dave", active: true
       FactoryGirl.create :player, name: "Anne", active: true
