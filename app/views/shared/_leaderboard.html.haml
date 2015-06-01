@@ -6,6 +6,7 @@
       %th Today
       %th This Week
       %th L10
+      %th Streak
   %tbody
     - players.each_with_index do |player, i|
       %tr.leaderboard-list-player
@@ -26,3 +27,7 @@
           - elsif change > 0
             %span(style="color: green") +#{change}
         %td= player.stats.last_10_results.join("-")
+        - if player.current_streak
+          %td= "#{player.current_streak.streak_type}#{player.current_streak.streak_length}"
+        - else
+          %td -
