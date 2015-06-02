@@ -19,6 +19,10 @@ class Match < ActiveRecord::Base
                                     away_player: matchup.away_player)
   end
 
+  def all_matches_before
+    Match.where('id < ?', id)
+  end
+
   def to_matchup
     Matchup.new(home_player: home_player,
                 away_player: away_player)

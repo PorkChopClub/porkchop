@@ -42,7 +42,8 @@ namespace :porkchop do
       Match.all.finalized.order(finalized_at: :asc).find_each do |match|
         EloAdjustment.new(
           victor: match.victor,
-          loser: match.loser
+          loser: match.loser,
+          matches: match.all_matches_before
         ).adjust!
 
         EloRating.

@@ -4,7 +4,8 @@ RSpec.describe EloAdjustment do
   let(:adjustment) do
     described_class.new(
       victor: victor,
-      loser: loser
+      loser: loser,
+      matches: Match.all
     )
   end
 

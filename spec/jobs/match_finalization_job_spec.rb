@@ -72,7 +72,8 @@ RSpec.describe MatchFinalizationJob, type: :job do
     it "adjusts the elo" do
       expect(EloAdjustment).to receive(:new).with(
         victor: victor,
-        loser: loser
+        loser: loser,
+        matches: []
       ).and_return(adjustment)
       expect(adjustment).to receive(:adjust!)
       subject
