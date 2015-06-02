@@ -31,9 +31,9 @@ gem 'slack-notifier'
 gem 'bugsnag'
 gem 'elo', github: 'jhawthorn/elo'
 
-gem 'stackprof'
-gem 'flamegraph'
-gem 'rack-mini-profiler'
+gem 'stackprof', require: false
+gem 'flamegraph', require: false
+gem 'rack-mini-profiler', require: false
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
