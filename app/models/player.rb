@@ -56,6 +56,10 @@ class Player < ActiveRecord::Base
     matches.maximum(:created_at) || Time.at(0)
   end
 
+  def stats
+    @stats ||= Stats::Personal.new(self)
+  end
+
   private
 
   def record_rating

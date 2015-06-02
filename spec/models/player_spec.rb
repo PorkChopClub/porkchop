@@ -141,4 +141,9 @@ RSpec.describe Player, type: :model do
       expect(subject.first.variety).to eq "victories"
     end
   end
+
+  describe "#stats" do
+    subject { player.stats }
+    it { should be_a Stats::Personal }
+  end
 end
