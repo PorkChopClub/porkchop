@@ -33,4 +33,23 @@ namespace :porkchop do
       end
     end
   end
+
+  namespace :elo do
+    desc "Regenerate ELO"
+    task regenerate: [:environment] do
+      EloRating.delete_all
+
+      Match.all.order(finalized_at: :asc).find_each do |match|
+        EloAdjustment.new(
+          victor: match.victor,
+          loser: match.loser
+        ).adjust!
+
+        EloRating.
+          order(created_at: :desc).
+          limit(2).
+          update_all(created_at: match.finalized_at)
+      end
+    end
+  end
 end

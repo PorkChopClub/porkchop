@@ -17,12 +17,12 @@ RSpec.describe EloAdjustment do
     context "when the players have the default rating" do
       it "increases the victor's rating" do
         subject
-        expect(victor.reload.elo).to eq 1016
+        expect(victor.reload.elo).to eq 1012
       end
 
       it "decreases the loser's rating" do
         subject
-        expect(loser.reload.elo).to eq 984
+        expect(loser.reload.elo).to eq 987
       end
     end
 
@@ -32,12 +32,12 @@ RSpec.describe EloAdjustment do
 
       it "increases the victor's rating" do
         subject
-        expect(victor.reload.elo).to eq 730
+        expect(victor.reload.elo).to eq 723
       end
 
       it "decreases the loser's rating" do
         subject
-        expect(loser.reload.elo).to eq 1169
+        expect(loser.reload.elo).to eq 1185
       end
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe EloAdjustment do
 
     it "returns the change in elo for the victor" do
       subject
-      expect(subject).to eq 16
+      expect(subject).to eq 12
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe EloAdjustment do
 
     it "returns the change in elo for the loser" do
       subject
-      expect(subject).to eq -16
+      expect(subject).to eq -13
     end
   end
 end
