@@ -39,7 +39,7 @@ namespace :porkchop do
     task regenerate: [:environment] do
       EloRating.delete_all
 
-      Match.all.order(finalized_at: :asc).find_each do |match|
+      Match.all.finalized.order(finalized_at: :asc).find_each do |match|
         EloAdjustment.new(
           victor: match.victor,
           loser: match.loser
