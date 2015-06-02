@@ -1,9 +1,9 @@
 class EloAdjustment
-  def initialize(victor:, loser:)
+  def initialize(victor:, loser:, matches:)
     @victor = victor
     @loser = loser
-    @victor_player = Elo::Player.new(rating: victor.elo)
-    @loser_player = Elo::Player.new(rating: loser.elo)
+    @victor_player = Elo::Player.new(rating: victor.elo, games_played: matches.merge(victor.matches).count)
+    @loser_player = Elo::Player.new(rating: loser.elo, games_played: matches.merge(loser.matches).count)
   end
 
   def adjust!

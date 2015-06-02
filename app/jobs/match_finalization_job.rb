@@ -20,7 +20,8 @@ class MatchFinalizationJob < ActiveJob::Base
   def adjust_elo!
     EloAdjustment.new(
       victor: match.victor,
-      loser: match.loser
+      loser: match.loser,
+      matches: match.all_matches_before
     ).adjust!
   end
 
