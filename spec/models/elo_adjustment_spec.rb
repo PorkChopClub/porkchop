@@ -33,7 +33,7 @@ RSpec.describe EloAdjustment do
 
       it "increases the victor's rating" do
         subject
-        expect(victor.reload.elo).to eq 737
+        expect(victor.reload.elo).to eq 738
       end
 
       it "decreases the loser's rating" do
