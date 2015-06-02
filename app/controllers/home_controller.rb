@@ -11,11 +11,24 @@ class HomeController < ApplicationController
                       sort_by(&:elo).
                       reverse
 
-    @elo_range = (30.days.ago.to_date..Date.current).to_a
+    @elo_range = (30.days.ago.to_date..Date.current)
+
+    @all_elo_ratings = EloRating.where(created_at: @elo_range).group_by do |rating|
+      [rating.player_id, rating.created_at.to_date]
+    end.map do |(player_id, date), ratings|
+      rating = ratings.last
+      [[player_id, date], rating.rating]
+    end.to_h
+
     @elo_data = @ranked_players.map do |player|
+      previous_rating = player.elo_on(@elo_range.first)
       [
         player.name,
-        @elo_range.map { |d| [d, player.elo_on(d)] }.to_h
+        @elo_range.map do |d|
+          rating = @all_elo_ratings[[player.id, d]]
+          previous_rating = rating if rating
+          [d, rating || previous_rating]
+        end.to_h
       ]
     end.to_h
   end
