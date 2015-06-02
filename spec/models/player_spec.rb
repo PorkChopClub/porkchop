@@ -8,6 +8,8 @@ RSpec.describe Player, type: :model do
   it { is_expected.to have_many :season_memberships }
   it { is_expected.to have_many :seasons }
 
+  let(:player) { FactoryGirl.create :player }
+
   it "is invalid without a name" do
     expect(described_class.new.valid?).to be false
   end
@@ -28,8 +30,6 @@ RSpec.describe Player, type: :model do
       FactoryGirl.create :match,
                          home_player: player
     end
-
-    let(:player) { FactoryGirl.create :player }
 
     it "includes both home and away matches" do
       expect(subject).to match_array [home_match, away_match]
@@ -55,15 +55,11 @@ RSpec.describe Player, type: :model do
                          home_player: player
     end
 
-    let(:player) { FactoryGirl.create :player }
-
     specify { expect(subject).to match_array [loss] }
   end
 
   describe "#matches_against" do
     subject { player.matches_against opponent }
-
-    let(:player) { FactoryGirl.create :player }
     let(:opponent) { FactoryGirl.create :player }
 
     let!(:incomplete_match) do
@@ -115,8 +111,6 @@ RSpec.describe Player, type: :model do
   describe "#elo" do
     subject { player.elo }
 
-    let(:player) { FactoryGirl.create :player }
-
     context "when the player has no recorded ratings" do
       it { is_expected.to eq 1000 }
     end
@@ -142,7 +136,6 @@ RSpec.describe Player, type: :model do
   end
 
   describe "#unearned_achievements" do
-    let(:player) { FactoryGirl.create :player }
     subject { player.unearned_achievements }
     it "contains a victories achievement" do
       expect(subject.first.variety).to eq "victories"
