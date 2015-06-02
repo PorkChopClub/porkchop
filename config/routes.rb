@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resource :scoreboard, only: [:show, :edit]
 
-  resources :matches, only: [:index, :show, :new, :create]
+  resources :matches, only: [:index, :show]
   resources :players, only: [:index, :show, :edit, :update]
 
   get 'signin', to: redirect('/auth/twitter')

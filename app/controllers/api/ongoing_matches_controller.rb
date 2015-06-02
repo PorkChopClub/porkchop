@@ -50,7 +50,7 @@ class Api::OngoingMatchesController < ApplicationController
       end
     end
 
-    perform Match.setup!
+    perform @match = PingPong::Match.new(Match.setup!)
   end
 
   private

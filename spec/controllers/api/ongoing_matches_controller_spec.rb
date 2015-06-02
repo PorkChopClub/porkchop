@@ -250,7 +250,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     end
 
     context "when there is not an ongoing match" do
-      specify { expect(subject.status).to eq 200 }
+      it { is_expected.to have_http_status :ok }
 
       it "creates a new match" do
         subject

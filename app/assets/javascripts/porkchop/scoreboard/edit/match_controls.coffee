@@ -40,38 +40,34 @@ $ ->
       ga 'send', 'event', 'button', 'click', 'cancel match'
       { url: '/api/ongoing_match.json', type: 'DELETE' }
 
-  match = Bacon.mergeAll(initialFetch,
-                         polling,
-                         homePlayerPoints,
-                         awayPlayerPoints,
-                         serviceToggle,
-                         rewinds,
-                         finalization,
-                         cancellations).ajax().map(".match")
-
-  overlayCancelled = $('.match-controls-overlay-cancel')
+  matchmakes = $('.match-controls-matchmake')
     .asEventStream('click')
-    .map -> false
+    .map ->
+      ga 'send', 'event', 'button', 'click', 'matchmake'
+      { url: '/api/ongoing_match/matchmake.json', type: 'PUT' }
 
-  showCancelMatch = $('.match-controls-show-cancel-match')
-    .asEventStream('click')
-    .map -> true
-
-  showFinalizeMatch = $('.match-controls-show-finalize-match')
-    .asEventStream('click')
-    .map -> true
-
-  showingOverlay = Bacon.mergeAll([
-    showCancelMatch
-    showFinalizeMatch
-    overlayCancelled
-  ]).toProperty(false)
-
-  showingCancelButton = Bacon.mergeAll(showCancelMatch, overlayCancelled)
-    .toProperty(false)
-
-  showingFinalizeButton = Bacon.mergeAll(showFinalizeMatch, overlayCancelled)
-    .toProperty(false)
+  match = Bacon
+    .mergeAll(
+      initialFetch,
+      polling,
+      homePlayerPoints,
+      awayPlayerPoints,
+      serviceToggle,
+      rewinds,
+      finalization,
+      cancellations,
+      matchmakes
+    )
+    .ajax().map(".match")
+    .mapError -> {
+      home_score: 0,
+      away_score: 0,
+      home_player_name: "???",
+      away_player_name: "???",
+      finished: false,
+      home_player_service: true,
+      away_player_service: false
+    }
 
   matchId = match.map(".id").toProperty()
 
@@ -113,20 +109,3 @@ $ ->
     "toggleClass",
     "has-service"
   )
-
-  matchDeleted
-    .filter (value) -> value
-    .onValue -> window.location.assign("/matches/new")
-
-  matchFinalized
-    .filter (value) -> value
-    .map(matchId)
-    .onValue (id) -> window.location.assign("/matches/#{id}")
-
-  showingOverlay.assign $('.match-controls-overlay'), 'toggleClass', 'active'
-
-  showingCancelButton
-    .assign $('.match-controls-cancel-match'), 'toggleClass', 'active'
-
-  showingFinalizeButton
-    .assign $('.match-controls-finalize-match'), 'toggleClass', 'active'

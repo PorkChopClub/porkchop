@@ -7,15 +7,6 @@ class MatchesController < ApplicationController
     @matches = @matches.finalized.order(finalized_at: :desc)
   end
 
-  def new
-    @matchup = Matchmaker.choose
-  end
-
-  def create
-    Match.setup!
-    redirect_to edit_scoreboard_path
-  end
-
   private
 
   def check_for_ongoing_match

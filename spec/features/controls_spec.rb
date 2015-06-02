@@ -5,22 +5,24 @@ RSpec.describe "controls page" do
   let!(:other2) { FactoryGirl.create :player, name: "Anne" }
 
   let!(:home) { FactoryGirl.create :player, active: true, name: "Candice Bergen" }
-  let!(:away) { FactoryGirl.create :player, active: true,  name: "Shirley Schmidt" }
+  let!(:away) { FactoryGirl.create :player, active: true, name: "Shirley Schmidt" }
 
   let!(:user) { FactoryGirl.create :admin_user }
 
   scenario "recording a normal game" do
-    visit "/auth/twitter"
+    visit "/"
+    click_on "Log in with Twitter"
+    click_on "Match Controls"
+    # FIXME: Test activating players.
+    click_on "Matchmake"
 
-    visit "/matches/new"
-
-    click_on "Create match!"
+    expect(find(".match-controls-away-player-name")).to have_content "Candice"
+    expect(find(".match-controls-home-player-name")).to have_content "Shirley"
 
     score_point :away
 
     click_on "Cancel match"
-    click_on "Confirm cancellation"
-    click_on "Create match!"
+    click_on "Matchmake"
 
     expect(player_score(:home)).to have_content "0"
     expect(player_score(:away)).to have_content "0"
@@ -49,9 +51,11 @@ RSpec.describe "controls page" do
     expect(player_score(:away)).to have_content "2"
 
     click_button "Finalize match"
-    click_button "Confirm finalization"
 
-    expect(page).to have_content "Shirley Schmidt wins!"
+    expect(find(".match-controls-away-player-name")).to have_content "Shirley"
+    expect(find(".match-controls-home-player-name")).to have_content "Candice"
+
+    expect(Match.finalized.count).to eq 1
   end
 
   private

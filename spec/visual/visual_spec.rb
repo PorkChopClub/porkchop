@@ -17,6 +17,7 @@ RSpec.describe "Visuals", type: :feature do
 
     it "scoreboard" do
       visit '/scoreboard'
+
       sleep 1
       observe! 'scoreboard'
     end
@@ -32,12 +33,14 @@ RSpec.describe "Visuals", type: :feature do
       FactoryGirl.create :player, name: "Dave", active: true
       FactoryGirl.create :player, name: "Anne", active: true
 
-      visit '/matches/new'
+      visit '/scoreboard/edit'
 
+      sleep 1
       observe! 'New Match'
 
-      click_on 'Create match!'
+      click_on 'Matchmake'
 
+      sleep 1
       observe! 'Controls'
     end
   end
