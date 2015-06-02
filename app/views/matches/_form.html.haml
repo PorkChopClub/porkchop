@@ -1,12 +1,7 @@
 = form_tag matches_path do |f|
   %h2 Who's next?
 
-  %p
-    %strong Home
-    .home-player= @matchup.home_player.try! :name
-  %p
-    %strong Away
-    .away_player= @matchup.away_player.try! :name
+  %p= @matchup.players.map(&:name).join(" vs. ")
 
   %br
   = submit_tag "Create match!"

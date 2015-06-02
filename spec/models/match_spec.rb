@@ -10,52 +10,49 @@ RSpec.describe Match, type: :model do
 
   describe ".setup!" do
     let!(:kelly) do
-      FactoryGirl.create(:player, name: "Kelly Clarkson")
+      FactoryGirl.create(:player,
+                         active: true,
+                         name: "Kelly Clarkson")
     end
-
     let!(:carrie) do
-      FactoryGirl.create(:player, name: "Carrie Underwood")
+      FactoryGirl.create(:player,
+                         active: true,
+                         name: "Carrie Underwood")
     end
 
-    let(:matchup) { Matchup.new(home_player: kelly, away_player: carrie) }
+    subject { Match.setup! }
 
-    context "without a matchup" do
-      subject { Match.setup! }
-
+    context "when the players have played before" do
       before do
-        expect(Matchmaker).
-          to receive(:choose).
-          and_return(matchup)
+        FactoryGirl.create(:complete_match,
+                           home_player: carrie,
+                           away_player: kelly)
       end
 
       it "creates a match" do
         expect { subject }.
           to change { Match.count }.
-          from(0).to(1)
+          from(1).to(2)
       end
 
-      it "matches up the players from the matchmaker" do
+      it "alternates who is at home" do
         subject
-        match = Match.first
-        expect(match.home_player).to eq kelly
-        expect(match.away_player).to eq carrie
+        expect(subject.home_player).to eq kelly
+        expect(subject.away_player).to eq carrie
       end
     end
 
-    context "with a matchup" do
-      subject { Match.setup!(matchup) }
-
+    context "when the players have not played before" do
       it "creates a match" do
         expect { subject }.
           to change { Match.count }.
           from(0).to(1)
       end
 
-      it "matches up the players from the matchup" do
+      it "puts the player whose name comes first at home" do
         subject
-        match = Match.first
-        expect(match.home_player).to eq kelly
-        expect(match.away_player).to eq carrie
+        expect(subject.home_player).to eq carrie
+        expect(subject.away_player).to eq kelly
       end
     end
   end
@@ -66,8 +63,8 @@ RSpec.describe Match, type: :model do
     let(:match) { FactoryGirl.create(:match) }
 
     it "builds the match's matchup" do
-      expect(subject.home_player).to eq match.home_player
-      expect(subject.away_player).to eq match.away_player
+      expect(subject.players.to_a).to match_array [match.home_player,
+                                                   match.away_player]
     end
   end
 

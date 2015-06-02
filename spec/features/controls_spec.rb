@@ -51,7 +51,7 @@ RSpec.describe "controls page" do
     click_button "Finalize match"
     click_button "Confirm finalization"
 
-    expect(page).to have_content "Candice Bergen wins!"
+    expect(page).to have_content "Shirley Schmidt wins!"
   end
 
   private

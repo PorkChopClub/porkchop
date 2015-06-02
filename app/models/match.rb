@@ -14,9 +14,21 @@ class Match < ActiveRecord::Base
 
   def self.setup!(matchup = nil)
     matchup ||= Matchmaker.choose
+    return unless matchup.valid?
 
-    matchup.valid? && Match.create!(home_player: matchup.home_player,
-                                    away_player: matchup.away_player)
+    player1, player2 = *matchup.players.sort
+
+    player1_at_home = player1.matches_against(player2).any? &&
+                      player1.matches_against(player2).
+                      order(created_at: :asc).last.away_player == player1
+
+    if player1_at_home
+      Match.create!(home_player: player1,
+                    away_player: player2)
+    else
+      Match.create!(home_player: player2,
+                    away_player: player1)
+    end
   end
 
   def all_matches_before
@@ -24,8 +36,7 @@ class Match < ActiveRecord::Base
   end
 
   def to_matchup
-    Matchup.new(home_player: home_player,
-                away_player: away_player)
+    Matchup.new(home_player, away_player)
   end
 
   def players

@@ -12,18 +12,9 @@ RSpec.describe Matchup do
 
     it "returns all the matchups between the given players" do
       expect(subject).to match_array [
-        Matchup.new(home_player: candice,
-                    away_player: joseph),
-        Matchup.new(home_player: candice,
-                    away_player: zooey),
-        Matchup.new(home_player: zooey,
-                    away_player: joseph),
-        Matchup.new(home_player: zooey,
-                    away_player: candice),
-        Matchup.new(home_player: joseph,
-                    away_player: zooey),
-        Matchup.new(home_player: joseph,
-                    away_player: candice),
+        Matchup.new(candice, joseph),
+        Matchup.new(candice, zooey),
+        Matchup.new(zooey, joseph),
       ]
     end
   end
@@ -32,35 +23,26 @@ RSpec.describe Matchup do
     subject { matchup.valid? }
 
     let(:matchup) do
-      Matchup.new(home_player: home_player,
-                  away_player: away_player)
+      Matchup.new(*players)
     end
 
-    context "when home_player is missing" do
-      let(:home_player) { nil }
-      let(:away_player) { zooey }
-
+    context "when there is less than two players" do
+      let(:players) { [zooey] }
       it { is_expected.to be_falsy }
     end
 
-    context "when away_player is missing" do
-      let(:home_player) { zooey }
-      let(:away_player) { nil }
-
+    context "when the players are the same" do
+      let(:players) { [zooey, zooey] }
       it { is_expected.to be_falsy }
     end
 
-    context "when home_player is away_player" do
-      let(:home_player) { zooey }
-      let(:away_player) { zooey }
-
+    context "when ther are more than two players" do
+      let(:players) { [candice, zooey, joseph] }
       it { is_expected.to be_falsy }
     end
 
-    context "when home_player and away_player are present" do
-      let(:home_player) { candice }
-      let(:away_player) { zooey }
-
+    context "when there are two different players" do
+      let(:players) { [candice, zooey] }
       it { is_expected.to be_truthy }
     end
   end
@@ -69,69 +51,61 @@ RSpec.describe Matchup do
     subject { matchup1 == matchup2 }
 
     context "when the other object is not a matchup" do
-      let(:matchup1) { described_class.new(home_player: candice, away_player: joseph) }
+      let(:matchup1) { described_class.new(candice, joseph) }
       let(:matchup2) { "I've made a huge mistake." }
-
       it { is_expected.to be_falsy }
     end
 
     context "when the players are different" do
-      let(:matchup1) { described_class.new(home_player: candice, away_player: joseph) }
-      let(:matchup2) { described_class.new(home_player: zooey, away_player: joseph) }
-
+      let(:matchup1) { described_class.new(candice, joseph) }
+      let(:matchup2) { described_class.new(zooey, joseph) }
       it { is_expected.to be_falsy }
     end
 
     context "when the matchups contain the same two players" do
-      context "in different positions" do
-        let(:matchup1) { described_class.new(home_player: joseph, away_player: zooey) }
-        let(:matchup2) { described_class.new(home_player: zooey, away_player: joseph) }
-
-        it { is_expected.to be_falsy }
-      end
-
-      context "in the same positions" do
-        let(:matchup1) { described_class.new(home_player: joseph, away_player: zooey) }
-        let(:matchup2) { described_class.new(home_player: joseph, away_player: zooey) }
-
-        it { is_expected.to be_truthy }
-      end
+      let(:matchup1) { described_class.new(joseph, zooey) }
+      let(:matchup2) { described_class.new(zooey, joseph) }
+      it { is_expected.to be_truthy }
     end
   end
 
-  describe "#last_played_at" do
-    subject { matchup.last_played_at }
+  describe "#matches_since_last_played" do
+    subject { matchup.matches_since_last_played }
 
-    let(:matchup) { described_class.new(home_player: candice, away_player: joseph) }
+    let(:matchup) { described_class.new(candice, joseph) }
 
     context "when the matchup has never been played" do
-      it { is_expected.to eq Time.at(0) }
+      it { is_expected.to eq Float::INFINITY }
     end
 
     context "when the matchup has been played" do
       before do
         FactoryGirl.create(:complete_match,
-                           created_at: 120.days.ago.at_end_of_day,
+                           created_at: 5.days.ago.at_end_of_day,
                            home_player: candice,
                            away_player: joseph)
         FactoryGirl.create(:complete_match,
-                           created_at: 100.days.ago.at_end_of_day,
+                           created_at: 4.days.ago.at_end_of_day,
                            home_player: candice,
                            away_player: joseph)
         FactoryGirl.create(:complete_match,
-                           created_at: 80.days.ago.at_end_of_day,
-                           home_player: joseph,
+                           created_at: 3.days.ago.at_end_of_day,
+                           home_player: zooey,
                            away_player: candice)
+        FactoryGirl.create(:complete_match,
+                           created_at: 2.days.ago.at_end_of_day,
+                           home_player: joseph,
+                           away_player: zooey)
       end
 
-      it { is_expected.to be_within(1.second).of(100.days.ago.at_end_of_day) }
+      it { is_expected.to eq 2 }
     end
   end
 
   describe "#match_history" do
     subject { matchup.match_history }
 
-    let(:matchup) { described_class.new(home_player: candice, away_player: joseph) }
+    let(:matchup) { described_class.new(candice, joseph) }
 
     context "when the matchup has never been played" do
       it { is_expected.to eq [] }

@@ -3,50 +3,48 @@ class Matchup
 
   EPOCH = Time.at(0)
 
-  validates :home_player, presence: true
-  validates :away_player, presence: true
-  validate :cant_play_agaist_yourself
+  validate :exactly_two_players
 
   def self.all(players:)
-    players.permutation(2).map do |(home_player, away_player)|
-      new(home_player: home_player, away_player: away_player)
-    end
+    players.combination(2).map { |players| new(*players) }
   end
 
-  def initialize(home_player:, away_player:)
-    @home_player = home_player
-    @away_player = away_player
+  def initialize(*players)
+    @players = Set.new(players)
   end
 
-  attr_reader :home_player,
-              :away_player
+  attr_reader :players
 
   def ==(other_object)
-    if other_object.respond_to?(:home_player) &&
-        other_object.respond_to?(:away_player)
-      home_player == other_object.home_player &&
-        away_player == other_object.away_player
+    if other_object.respond_to?(:players)
+      players == other_object.players
     else
       super
     end
   end
 
-  def last_played_at
-    match_history.last.try!(:created_at) || EPOCH
+  def matches_since_last_played
+    if last_played_at = match_history.last.try!(:created_at)
+      Match.where("created_at > ?", last_played_at).count
+    else
+      Float::INFINITY
+    end
   end
 
   def match_history
+    p1, p2 = *players
     Match.
-      where(home_player: home_player,
-            away_player: away_player).
+      where("home_player_id = :p1 AND away_player_id = :p2 OR home_player_id = :p2 AND away_player_id = :p1",
+            p1: p1,
+            p2: p2).
       order(created_at: :asc)
   end
 
   private
 
-  def cant_play_agaist_yourself
-    if home_player && home_player == away_player
-      errors.add(:base, "One cannot play against oneself.")
+  def exactly_two_players
+    unless players.length == 2
+      errors.add(:base, "Must have exactly two players.")
     end
   end
 end

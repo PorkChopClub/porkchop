@@ -9,16 +9,12 @@ class Matchmaker
     end
 
     def rank
-      0.15 * seconds_since(matchup.last_played_at) +
-        seconds_since(home_player.last_played_at) +
-        seconds_since(away_player.last_played_at)
+      matches_since_last_played
     end
 
     private
 
-    delegate :home_player,
-             :away_player,
-             to: :matchup
+    delegate :matches_since_last_played, to: :matchup
 
     def seconds_since(date_time)
       current_time.to_i - date_time.to_i
@@ -52,6 +48,6 @@ class Matchmaker
   end
 
   def empty_match
-    Matchup.new(home_player: nil, away_player: nil)
+    Matchup.new
   end
 end
