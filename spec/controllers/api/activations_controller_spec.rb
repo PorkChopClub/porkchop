@@ -20,8 +20,8 @@ RSpec.describe Api::ActivationsController, type: :controller do
 
     it "renders the player names and activations" do
       expect(JSON.parse(subject.body)).to eq("players" => [
-        { "name" => "Joe", "id" => player1.id, "active" => true },
-        { "name" => "Ada", "id" => player2.id, "active" => false }
+        { "name" => "Ada", "id" => player2.id, "active" => false },
+        { "name" => "Joe", "id" => player1.id, "active" => true }
       ])
     end
   end

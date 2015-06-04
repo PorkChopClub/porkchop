@@ -1,7 +1,7 @@
 class Api::ActivationsController < ApplicationController
   def index
     authorize! :read, Player
-    @players = Player.all
+    @players = find_players
   end
 
   def activate
@@ -11,7 +11,7 @@ class Api::ActivationsController < ApplicationController
     player.active = true
     player.save
 
-    @players = Player.all
+    @players = find_players
     render :index
   end
 
@@ -22,7 +22,7 @@ class Api::ActivationsController < ApplicationController
     player.active = false
     player.save
 
-    @players = Player.all
+    @players = find_players
     render :index
   end
 
@@ -30,5 +30,9 @@ class Api::ActivationsController < ApplicationController
 
   def player
     @player ||= Player.find_by_id(params[:id])
+  end
+
+  def find_players
+    Player.all.order(:name)
   end
 end
