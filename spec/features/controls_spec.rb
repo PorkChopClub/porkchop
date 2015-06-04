@@ -16,8 +16,8 @@ RSpec.describe "controls page" do
     # FIXME: Test activating players.
     click_on "Matchmake"
 
-    expect(find(".match-controls-away-player-name")).to have_content "Candice"
-    expect(find(".match-controls-home-player-name")).to have_content "Shirley"
+    expect(player_name(:home)).to have_content "Candice"
+    expect(player_name(:away)).to have_content "Shirley"
 
     score_point :away
 
@@ -52,13 +52,17 @@ RSpec.describe "controls page" do
 
     click_button "Finalize match"
 
-    expect(find(".match-controls-away-player-name")).to have_content "Shirley"
-    expect(find(".match-controls-home-player-name")).to have_content "Candice"
+    expect(player_name(:home)).to have_content "Shirley"
+    expect(player_name(:away)).to have_content "Candice"
 
     expect(Match.finalized.count).to eq 1
   end
 
   private
+
+  def player_name(player)
+    find(".match-controls-#{player}-player-name")
+  end
 
   def player_score(player)
     find(".match-controls-#{player}-player-score")

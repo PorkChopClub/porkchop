@@ -16,9 +16,9 @@ class Match < ActiveRecord::Base
     matchup ||= Matchmaker.choose
     return unless matchup.valid?
 
-    player1, player2 = *matchup.players.sort
+    player1, player2 = *matchup.players.sort_by(&:name)
 
-    player1_at_home = player1.matches_against(player2).any? &&
+    player1_at_home = player1.matches_against(player2).none? ||
                       player1.matches_against(player2).
                       order(created_at: :asc).last.away_player == player1
 
