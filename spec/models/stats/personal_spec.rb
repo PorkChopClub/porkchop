@@ -126,4 +126,15 @@ RSpec.describe Stats::Personal do
 
     it { is_expected.to eq [2, 1] }
   end
+
+  describe "#last_10_results" do
+    subject { stats.last_10_results }
+
+    before do
+      FactoryGirl.create_list :complete_match, 2, home_player: player
+      FactoryGirl.create :complete_match, away_player: player
+    end
+
+    it { is_expected.to eq [2, 1] }
+  end
 end
