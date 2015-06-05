@@ -3,6 +3,7 @@
     %tr
       %th Player
       %th Rating
+      %th Today
       %th L10
   %tbody
     - players.each_with_index do |player, i|
@@ -11,4 +12,10 @@
           %strong #{i + 1}.&nbsp;
           = link_to player.name, player
         %td= player.elo
+        %td
+          - change = player.elo - player.elo_on(Date.yesterday)
+          - if change < 0
+            %span(style="color: red")= change
+          - elsif change > 0
+            %span(style="color: green") +#{change}
         %td= player.stats.last_10_results.join("-")
