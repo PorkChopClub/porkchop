@@ -4,6 +4,7 @@
       %th Player
       %th Rating
       %th Today
+      %th This Week
       %th L10
   %tbody
     - players.each_with_index do |player, i|
@@ -14,6 +15,12 @@
         %td= player.elo
         %td
           - change = player.elo - player.elo_on(Date.yesterday)
+          - if change < 0
+            %span(style="color: red")= change
+          - elsif change > 0
+            %span(style="color: green") +#{change}
+        %td
+          - change = player.elo - player.elo_on(Date.yesterday.beginning_of_week(:sunday))
           - if change < 0
             %span(style="color: red")= change
           - elsif change > 0
