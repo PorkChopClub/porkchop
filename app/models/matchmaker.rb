@@ -15,8 +15,10 @@ class Matchmaker
       @matchup = matchup
       @terms = []
 
+      # A number between 0 and 1 representing which is higher the longer since
+      # the match. This is essentially just a tie breaker.
       add_term(name: "Matches since last played",
-               base_value: matches_since_last_played)
+               base_value: 1.0 - 1.0 / [matches_since_last_played, 0.5].max)
     end
 
     def rank
