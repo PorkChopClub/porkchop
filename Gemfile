@@ -29,7 +29,7 @@ gem 'omniauth-twitter'
 gem 'cancancan', '~> 1.10'
 gem 'slack-notifier'
 gem 'bugsnag'
-gem 'elo', github: 'jhawthorn/elo'
+gem 'elo2'
 
 gem 'stackprof', require: false
 gem 'flamegraph', require: false

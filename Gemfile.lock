@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/jhawthorn/elo.git
-  revision: 27f24d12e82f7e6545753ca419b25dbc69c02dc8
-  specs:
-    elo (0.1.0)
-
-GIT
   remote: git://github.com/markmcconachie/normalize-rails.git
   revision: 671ca8fd780bcc5f4ed67c9d3c65cd8d63935fa0
   specs:
@@ -79,6 +73,7 @@ GEM
     dotenv (2.0.1)
     dotenv-rails (2.0.1)
       dotenv (= 2.0.1)
+    elo2 (0.1.0)
     erubis (2.7.0)
     execjs (2.5.2)
     factory_girl (4.5.0)
@@ -262,7 +257,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   dotenv-rails
-  elo!
+  elo2
   factory_girl_rails
   flamegraph
   haml
