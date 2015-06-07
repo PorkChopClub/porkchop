@@ -7,6 +7,7 @@ class Matchmaker
     end
 
     class_attribute :current_time
+    class_attribute :total_player_count
 
     attr_reader :matchup,
                 :terms
@@ -15,14 +16,26 @@ class Matchmaker
       @matchup = matchup
       @terms = []
 
-      # A number between 0 and 1 representing which is higher the longer since
+      # A number between 0 and 2 representing which is higher the longer since
       # the match. This is essentially just a tie breaker.
-      add_term(name: "Matches since last played",
-               base_value: 1.0 - 1.0 / [matches_since_last_played, 0.5].max)
+      add_term(name: "Matchup matches since last played",
+               base_value: 2.0 - 1.0 / [matches_since_last_played, 0.5].max)
+
+      # 0, 10, or 20 based on whether 0, 1, or 2 players in the matchup should
+      # have played by now.
+      add_term(name: "Players who should have played by now",
+               base_value: players_who_should_play,
+               factor: 10.0)
     end
 
     def rank
       terms.sum(&:value)
+    end
+
+    def players_who_should_play
+      players.select do |player|
+        player.matches_since_last_played > 2.0 / total_player_count
+      end.count
     end
 
     def breakdown
@@ -38,7 +51,9 @@ class Matchmaker
 
     private
 
-    delegate :matches_since_last_played, to: :matchup
+    delegate :matches_since_last_played,
+             :players,
+             to: :matchup
 
     def add_term(name:, base_value:, factor: 1)
       terms << Term.new(name, base_value, factor)
@@ -81,6 +96,8 @@ class Matchmaker
   def ranked_matchups
     @ranked_matchups ||= begin
       RankedMatchup.current_time = Time.zone.now
+      RankedMatchup.total_player_count = players.length
+
       Matchup.all(players: players).
         map { |matchup| RankedMatchup.new(matchup) }.
         sort_by(&:rank).

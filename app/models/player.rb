@@ -24,6 +24,14 @@ class Player < ActiveRecord::Base
     matches.finalized.where.not(victor: self)
   end
 
+  def matches_since_last_played
+    if last_played_at = matches.order(created_at: :asc).last.try(:created_at)
+      Match.where("created_at > ?", last_played_at).count
+    else
+      Float::INFINITY
+    end
+  end
+
   def matches_against(opponent)
     matches.finalized.where(
       "away_player_id = :opponent OR home_player_id = :opponent",

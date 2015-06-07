@@ -37,6 +37,44 @@ RSpec.describe Player, type: :model do
     end
   end
 
+  describe "#matches_since_last_played" do
+    subject { player.matches_since_last_played }
+
+    context "when the player has never played" do
+      it { is_expected.to eq Float::INFINITY }
+    end
+
+    context "when the player has played before" do
+      let(:joan) { FactoryGirl.create :player, name: "Joan Jett" }
+      let(:micki) { FactoryGirl.create :player, name: "Michael Steele" }
+
+      before do
+        FactoryGirl.create(:complete_match,
+                           created_at: 5.days.ago.at_end_of_day,
+                           home_player: joan,
+                           away_player: micki)
+
+        FactoryGirl.create(:complete_match,
+                           created_at: 4.days.ago.at_end_of_day,
+                           home_player: joan,
+                           away_player: player)
+
+        FactoryGirl.create(:complete_match,
+                           created_at: 3.days.ago.at_end_of_day,
+                           home_player: joan,
+                           away_player: micki)
+        FactoryGirl.create(:complete_match,
+                           created_at: 2.days.ago.at_end_of_day,
+                           home_player: micki,
+                           away_player: joan)
+      end
+
+      it "is the number of between other players since this player last played" do
+        expect(subject).to eq 2
+      end
+    end
+  end
+
   describe "#losses" do
     subject { player.losses }
 
