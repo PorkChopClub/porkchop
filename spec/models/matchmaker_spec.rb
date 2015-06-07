@@ -32,6 +32,28 @@ RSpec.describe Matchmaker do
     end
   end
 
+  describe "explain" do
+    subject { matchmaker.explain }
+
+    let(:matchmaker) { Matchmaker.new(players) }
+    let(:players) { [bert, ernie] }
+    let(:ernie) { FactoryGirl.create :player, name: "Ernie", active: true }
+    let(:bert) { FactoryGirl.create :player, name: "Bert", active: true }
+
+    it "returns an arbitrary representation of the result of the matchup ranking" do
+      expect(subject).to eq [{
+        players: ["Bert", "Ernie"],
+        result: Float::INFINITY,
+        breakdown: [{
+          name: "Matches since last played",
+          base_value: Float::INFINITY,
+          factor: 1,
+          value: Float::INFINITY
+        }]
+      }]
+    end
+  end
+
   describe "matchmaking algorithm" do
     context "with 10 players playing 90 matches" do
       let!(:players) { FactoryGirl.create_list(:player, 10, active: true) }
