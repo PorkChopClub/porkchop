@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       put "matchmake"
     end
 
+    resource :matchmaking, only: [:show]
+
     resources :activations, only: [:index] do
       member do
         put "activate"
