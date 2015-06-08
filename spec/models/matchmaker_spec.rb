@@ -63,7 +63,7 @@ RSpec.describe Matchmaker do
   end
 
   describe "matchmaking algorithm" do
-    context "with 5 players playing 40 matches", :focus do
+    context "with 5 players playing 40 matches" do
       let!(:players) { FactoryGirl.create_list(:player, 5, active: true) }
       before { 80.times { Match.setup!.finalize! } }
 
