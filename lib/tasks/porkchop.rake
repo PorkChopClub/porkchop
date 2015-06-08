@@ -34,8 +34,8 @@ namespace :porkchop do
     end
   end
 
-  namespace :elo do
-    desc "Regenerate ELO"
+  namespace :stats do
+    desc "Regenerate ELO and streaks"
     task regenerate: [:environment] do
       EloRating.delete_all
 
@@ -50,6 +50,15 @@ namespace :porkchop do
           order(created_at: :desc).
           limit(2).
           update_all(created_at: match.finalized_at)
+
+        Stats::StreakAdjustment.new(
+          player: match.victor,
+          match_result: "W"
+        ).adjust!
+        Stats::StreakAdjustment.new(
+          player: match.loser,
+          match_result: "L"
+        ).adjust!
       end
     end
   end
