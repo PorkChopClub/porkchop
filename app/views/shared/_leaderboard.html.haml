@@ -1,6 +1,7 @@
 %table.leaderboard-list
   %thead
     %tr
+      %th
       %th Player
       %th Rating
       %th Today
@@ -10,9 +11,8 @@
   %tbody
     - players.each_with_index do |player, i|
       %tr.leaderboard-list-player
-        %td
-          %strong #{i + 1}.&nbsp;
-          = link_to player.name, player
+        %td= i + 1
+        %td= link_to player.name, player
         %td= player.elo
         %td
           - change = player.elo - player.elo_on(Date.yesterday)
