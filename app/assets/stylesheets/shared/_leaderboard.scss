@@ -1,6 +1,12 @@
 .leaderboard-list {
   width: 100%;
 
+  thead {
+    @include phone {
+      display: none;
+    }
+  }
+
   th {
     text-align: left;
   }
@@ -10,6 +16,17 @@
 
   td {
     padding: 5px 0;
+
+    @include phone {
+      display: block;
+
+      &:before {
+        display: inline-block;
+        width: 100px;
+        content: attr(data-th-label);
+        font-weight: bold;
+      }
+    }
   }
 
   &:nth-child(even) td {

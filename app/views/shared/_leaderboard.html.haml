@@ -11,23 +11,23 @@
   %tbody
     - players.each_with_index do |player, i|
       %tr.leaderboard-list-player
-        %td= i + 1
-        %td= link_to player.name, player
-        %td= player.elo
-        %td
+        %td(data-th-label="Rank")= i + 1
+        %td(data-th-label="Name")= link_to player.name, player
+        %td(data-th-label="Elo")= player.elo
+        %td(data-th-label="Today")
           - change = player.elo - player.elo_on(Date.yesterday)
           - if change < 0
             %span(style="color: red")= change
           - elsif change > 0
             %span(style="color: green") +#{change}
-        %td
+        %td(data-th-label="This Week")
           - change = player.elo - player.elo_on(Date.yesterday.beginning_of_week(:sunday))
           - if change < 0
             %span(style="color: red")= change
           - elsif change > 0
             %span(style="color: green") +#{change}
-        %td= player.stats.last_10_results.join("-")
+        %td(data-th-label="L10")= player.stats.last_10_results.join("-")
         - if player.current_streak
-          %td= "#{player.current_streak.streak_type}#{player.current_streak.streak_length}"
+          %td(data-th-label="Streak")= "#{player.current_streak.streak_type}#{player.current_streak.streak_length}"
         - else
-          %td -
+          %td(data-th-label="Streak") -
