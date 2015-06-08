@@ -20,6 +20,10 @@
     @include phone {
       display: block;
 
+      &:empty {
+        display: none;
+      }
+
       &:before {
         display: inline-block;
         width: 100px;
