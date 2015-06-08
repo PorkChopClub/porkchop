@@ -34,7 +34,7 @@ class Matchmaker
 
     def players_who_should_play
       players.select do |player|
-        player.matches_since_last_played > 2.0 / total_player_count
+        player.matches_since_last_played >= total_player_count / 2.0 - 1
       end.count
     end
 
