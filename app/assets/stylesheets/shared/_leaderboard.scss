@@ -40,6 +40,10 @@
 
 .elo-change-positive {
   color: green;
+
+  &:before {
+    content: "+";
+  }
 }
 
 .elo-change-negative {

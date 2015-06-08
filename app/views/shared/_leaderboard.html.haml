@@ -16,16 +16,12 @@
         %td(data-th-label="Elo")= player.elo
         %td(data-th-label="Today")
           - change = player.elo - player.elo_on(Date.yesterday)
-          - if change < 0
-            %span.elo-change-negative= change
-          - elsif change > 0
-            %span.elo-change-positive +#{change}
+          - unless change == 0
+            %span(class="elo-change-#{change < 0 ? 'negative' : 'positive'}")= change
         %td(data-th-label="This Week")
           - change = player.elo - player.elo_on(Date.yesterday.beginning_of_week(:sunday))
-          - if change < 0
-            %span.elo-change-negative= change
-          - elsif change > 0
-            %span.elo-change-positive +#{change}
+          - unless change == 0
+            %span(class="elo-change-#{change < 0 ? 'negative' : 'positive'}")= change
         %td(data-th-label="L10")= player.stats.last_10_results.join("-")
         - if player.current_streak
           %td(data-th-label="Streak")= "#{player.current_streak.streak_type}#{player.current_streak.streak_length}"
