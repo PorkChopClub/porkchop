@@ -69,7 +69,7 @@ RSpec.describe Matchmaker do
 
       it "plays all matchups" do
         Player.find_each do |player|
-          expect(player.matches.count).to be_within(3).of 32
+          expect(player.matches.count).to eq 32
         end
       end
     end
