@@ -43,7 +43,7 @@ RSpec.describe Matchmaker do
     it "returns an arbitrary representation of the result of the matchup ranking" do
       expect(subject).to eq [{
         players: ["Bert", "Ernie"],
-        result: 22.0,
+        result: 4.0,
         breakdown: [
           {
             name: "Matchup matches since last played",
@@ -52,10 +52,10 @@ RSpec.describe Matchmaker do
             value: 2.0
           },
           {
-            name: "Players who should have played by now",
+            name: "Combined matches since players last played",
             base_value: 2.0,
-            factor: 10.0,
-            value: 20.0
+            factor: 1.0,
+            value: 2.0
           }
         ]
       }]
@@ -69,7 +69,7 @@ RSpec.describe Matchmaker do
 
       it "plays all matchups" do
         Player.find_each do |player|
-          expect(player.matches.count).to eq 32
+          expect(player.matches.count).to be_within(2).of 32
         end
       end
     end
