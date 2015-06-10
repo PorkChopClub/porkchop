@@ -43,13 +43,13 @@ RSpec.describe Matchmaker do
     it "returns an arbitrary representation of the result of the matchup ranking" do
       expect(subject).to eq [{
         players: ["Bert", "Ernie"],
-        result: 4.0,
+        result: 3.0,
         breakdown: [
           {
             name: "Matchup matches since last played",
             base_value: 2.0,
-            factor: 1.0,
-            value: 2.0
+            factor: 0.5,
+            value: 1.0
           },
           {
             name: "Combined matches since players last played",
