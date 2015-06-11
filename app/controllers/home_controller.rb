@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     @ranked_players = Player.all.
                       select do |p|
                         p.matches.finalized.count >= 20 &&
-                        p.last_played_at > 30.days.ago
+                        p.matches.finalized.where("finalized_at > ?", 14.days.ago).count > 4
                       end.
                       sort_by(&:elo).
                       reverse
