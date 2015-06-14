@@ -1,5 +1,12 @@
 .player-summary {
+  position: relative;
   @include clearfix;
+}
+
+.player-edit-link {
+  position: absolute;
+  top: 1em;
+  right: 1em;
 }
 
 .player-win-percentages {

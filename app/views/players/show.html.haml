@@ -1,9 +1,7 @@
 .player-summary.porkbox-light
   = image_tag @player.avatar_url, class: "player-summary-avatar"
-  %h1
-    = @player.name
-    &nbsp;
-    = link_to "(edit)", edit_player_path(@player)
+  %h1= @player.name
+  = link_to "(edit)", edit_player_path(@player), class: "player-edit-link"
   - if @player.nickname.present?
     %p= "Nickname: #{@player.nickname}"
   %h2
