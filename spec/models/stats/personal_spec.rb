@@ -161,4 +161,33 @@ RSpec.describe Stats::Personal do
 
     it { is_expected.to eq 900 }
   end
+
+  describe "#longest_winning_streak" do
+    subject { stats.longest_winning_streak }
+
+    before do
+      FactoryGirl.create_list :streak, 2, :finished, player: player
+      FactoryGirl.create :streak, streak_length: 4, player: player
+    end
+
+    it { is_expected.to eq 4 }
+  end
+
+  describe "#longest_losing_streak" do
+    subject { stats.longest_losing_streak }
+
+    before do
+      FactoryGirl.create_list :streak,
+                              2,
+                              :finished,
+                              player: player,
+                              streak_type: "L"
+      FactoryGirl.create :streak,
+                         streak_length: 5,
+                         streak_type: "L",
+                         player: player
+    end
+
+    it { is_expected.to eq 5 }
+  end
 end

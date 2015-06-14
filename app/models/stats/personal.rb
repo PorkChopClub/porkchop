@@ -39,6 +39,14 @@ class Stats::Personal
     @player.elo_ratings.minimum(:rating)
   end
 
+  def longest_winning_streak
+    @player.streaks.where(streak_type: "W").maximum(:streak_length)
+  end
+
+  def longest_losing_streak
+    @player.streaks.where(streak_type: "L").maximum(:streak_length)
+  end
+
   private
 
   attr_reader :player
