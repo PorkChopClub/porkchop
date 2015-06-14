@@ -137,4 +137,28 @@ RSpec.describe Stats::Personal do
 
     it { is_expected.to eq [2, 1] }
   end
+
+  describe "#highest_elo_rating" do
+    subject { stats.highest_elo_rating }
+
+    before do
+      FactoryGirl.create :elo_rating,
+                         player: player,
+                         rating: 1100
+    end
+
+    it { is_expected.to eq 1100 }
+  end
+
+  describe "#lowest_elo_rating" do
+    subject { stats.lowest_elo_rating }
+
+    before do
+      FactoryGirl.create :elo_rating,
+                         player: player,
+                         rating: 900
+    end
+
+    it { is_expected.to eq 900 }
+  end
 end

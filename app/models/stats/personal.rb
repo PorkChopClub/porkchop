@@ -31,6 +31,14 @@ class Stats::Personal
     [last_10_victory_count, last_10_loss_count]
   end
 
+  def highest_elo_rating
+    @player.elo_ratings.maximum(:rating)
+  end
+
+  def lowest_elo_rating
+    @player.elo_ratings.minimum(:rating)
+  end
+
   private
 
   attr_reader :player
