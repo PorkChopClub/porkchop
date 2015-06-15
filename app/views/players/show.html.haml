@@ -49,5 +49,5 @@
       %dd= ratio
 
 .player-match-history.porkbox-light
-  %h2 Match History
-  = render "matches/list", matches: @player.matches.finalized.order(finalized_at: :desc)
+  %h2 Last 10 Matches
+  = render "matches/list", matches: @player.matches.finalized.order(finalized_at: :desc).limit(10)
