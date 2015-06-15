@@ -4,13 +4,42 @@
   = link_to "(edit)", edit_player_path(@player), class: "player-edit-link"
   - if @player.nickname.present?
     %p= "Nickname: #{@player.nickname}"
-  %h2
-    Rating:&nbsp;
-    = @player.elo
-  %h3
-    Record:&nbsp;
-    = @stats.record.join("-")
-  %canvas.player-elo-chart{ data: { ratings: @player.elo_ratings.sorted_ratings } }
+
+.porkbox-light
+  %table.player-stats
+    %thead
+      %tr
+        %th
+        %th(colspan="4") Record
+        %th(colspan="3") Elo Ratings
+        %th(colspan="3") Streaks
+      %tr
+        %th
+        %th GP
+        %th W
+        %th L
+        %th W%
+        %th(title="Current Elo Rating") CER
+        %th(title="Highest Elo Rating") HER
+        %th(title="Lowest Elo Rating") LER
+        %th(title="Current Streak") CS
+        %th(title="Longest Winning Streak") LWS
+        %th(title="Longest Losing Streak") LLS
+    %tbody
+      %tr
+        %td Career
+        %td(data-label="GP:")= @player.matches.count
+        %td(data-label="W:")= @player.victories.count
+        %td(data-label="L:")= @player.losses.count
+        %td(data-label="W%:")= @stats.win_ratio
+        %td(data-label="Elo:")= @player.elo
+        %td(data-label="Highest Elo:")= @stats.highest_elo_rating
+        %td(data-label="Lowest Elo:")= @stats.lowest_elo_rating
+        %td(data-label="Streak:")= "#{@player.current_streak.streak_type}#{@player.current_streak.streak_length}"
+        %td(data-label="Longest Winning Streak:")= @stats.longest_winning_streak
+        %td(data-label="Longest Losing Streak:")= @stats.longest_losing_streak
+
+%canvas.player-elo-chart.porkbox-light{ data: { ratings: @player.elo_ratings.sorted_ratings } }
 
 .player-win-percentages.porkbox-light
   %h2 Win Ratio by Opponent

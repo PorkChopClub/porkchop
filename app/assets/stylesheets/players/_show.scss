@@ -9,6 +9,31 @@
   right: 1em;
 }
 
+.player-stats {
+  width: 100%;
+
+  thead {
+    @include mobile {
+      display: none;
+    }
+  }
+
+  th,
+  td {
+    padding: 0 10px;
+
+    @include mobile {
+      display: block;
+
+      &:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
 .player-win-percentages {
 }
 
@@ -35,10 +60,11 @@
 }
 
 .player-summary-avatar {
-  height: 200px;
+  height: 100px;
 
   @include desktop {
-    float: right;
+    float: left;
+    margin-right: 1em;
   }
 }
 
