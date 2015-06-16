@@ -51,3 +51,4 @@
 .player-match-history.porkbox-light
   %h2 Last 10 Matches
   = render "matches/list", matches: @player.matches.finalized.order(finalized_at: :desc).limit(10)
+  %p= link_to "All Matches", player_matches_path(@player)

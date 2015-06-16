@@ -1,0 +1,4 @@
+.player-match-history.porkbox-light
+  %p= link_to "← Back", @player
+  %h1= "#{@player.name}'s Match History"
+  = render "matches/list", matches: @player.matches.finalized.order(finalized_at: :desc)
