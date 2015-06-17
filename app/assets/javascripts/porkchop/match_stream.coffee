@@ -52,3 +52,4 @@ class PorkChop.MatchStream
     @finished = match.map(".finished")
     @finalized = match.map(".finalized")
     @deleted = match.map(".deleted").toProperty()
+    @league_match = match.map(".league_match")

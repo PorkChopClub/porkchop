@@ -71,6 +71,10 @@ $bottom-bar-height: 120px;
   bottom: $bottom-bar-height;
   left: 0;
   background-color: darken($blue, 15);
+
+  &.league-match {
+    background-color: darken($green, 10);
+  }
 }
 
 .scoreboard-message {
