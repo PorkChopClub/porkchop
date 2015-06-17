@@ -58,6 +58,16 @@ RSpec.describe Match, type: :model do
         expect(subject.away_player).to eq kelly
       end
     end
+
+    context "with an open season (not on rabbits)" do
+      let(:season) { FactoryGirl.create(:season) }
+      before { season.players = [carrie, kelly] }
+
+      it "associates the match to the season" do
+        subject
+        expect(subject.season).to eq season
+      end
+    end
   end
 
   describe "#to_matchup" do

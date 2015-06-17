@@ -7,7 +7,7 @@ class Match < ActiveRecord::Base
 
   has_many :points, dependent: :destroy
 
-  has_one :season_match
+  has_one :season_match, dependent: :destroy
   has_one :season, through: :season_match
 
   validates :home_player, :away_player, presence: true
@@ -25,13 +25,24 @@ class Match < ActiveRecord::Base
                       player1.matches_against(player2).
                       order(created_at: :asc).last.away_player == player1
 
-    if player1_at_home
-      Match.create!(home_player: player1,
-                    away_player: player2)
-    else
-      Match.create!(home_player: player2,
-                    away_player: player1)
+    match = if player1_at_home
+              Match.create!(
+                home_player: player1,
+                away_player: player2
+              )
+            else
+              Match.create!(
+                home_player: player2,
+                away_player: player1
+              )
+            end
+
+    ongoing_season = Season.ongoing.first
+    if ongoing_season && ongoing_season.eligible?(matchup)
+      match.season = ongoing_season
     end
+
+    match
   end
 
   def all_matches_before

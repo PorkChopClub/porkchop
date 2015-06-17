@@ -7,7 +7,7 @@ class Season < ActiveRecord::Base
   has_many :season_matches
   has_many :matches, through: :season_matches
 
-  scope :ongiong, -> { where finalized_at: nil }
+  scope :ongoing, -> { where finalized_at: nil }
 
   def eligible?(matchup)
     matches.count do |match|
