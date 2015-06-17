@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602054518) do
+ActiveRecord::Schema.define(version: 20150617032511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(version: 20150602054518) do
   add_index "points", ["match_id"], name: "index_points_on_match_id", using: :btree
   add_index "points", ["victor_id"], name: "index_points_on_victor_id", using: :btree
 
+  create_table "season_matches", force: :cascade do |t|
+    t.integer  "match_id"
+    t.integer  "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "season_matches", ["match_id"], name: "index_season_matches_on_match_id", using: :btree
+  add_index "season_matches", ["season_id"], name: "index_season_matches_on_season_id", using: :btree
+
   create_table "season_memberships", force: :cascade do |t|
     t.integer  "player_id"
     t.integer  "season_id"
@@ -111,6 +121,8 @@ ActiveRecord::Schema.define(version: 20150602054518) do
   add_foreign_key "matches", "players", column: "victor_id"
   add_foreign_key "points", "matches"
   add_foreign_key "points", "players", column: "victor_id"
+  add_foreign_key "season_matches", "matches"
+  add_foreign_key "season_matches", "seasons"
   add_foreign_key "season_memberships", "players"
   add_foreign_key "season_memberships", "seasons"
   add_foreign_key "streaks", "players"
