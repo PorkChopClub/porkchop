@@ -34,8 +34,9 @@ RSpec.describe Season, type: :model do
     end
     let(:matchup) { Matchup.new(luke, vader) }
     let(:season) { FactoryGirl.create(:season) }
+    let(:season_players) { [luke, vader] }
 
-    before { season.players = [luke, vader] }
+    before { season.players = season_players }
 
     subject { season.eligible?(matchup) }
 
@@ -47,6 +48,18 @@ RSpec.describe Season, type: :model do
         ]
       end
       it { is_expected.to be_falsy }
+    end
+
+    # Regression: counting all matches rather than the ones with these players
+    context "when other matches have been played" do
+      let(:season_players){ [luke, vader, leia] }
+      before do
+        season.matches = [
+          FactoryGirl.create(:complete_match, home_player: luke, away_player: leia),
+          FactoryGirl.create(:complete_match, home_player: vader, away_player: leia)
+        ]
+      end
+      it { is_expected.to be_truthy }
     end
 
     context "when matchup has not been played yet" do
