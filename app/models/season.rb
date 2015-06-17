@@ -9,6 +9,12 @@ class Season < ActiveRecord::Base
 
   scope :ongiong, -> { where finalized_at: nil }
 
+  def eligible?(matchup)
+    matches.count do |match|
+      match.to_matchup == matchup
+    end < games_per_matchup && (matchup.players - players).empty?
+  end
+
   def finalize!
     touch(:finalized_at) unless finalized_at
   end

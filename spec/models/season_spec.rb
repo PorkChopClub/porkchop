@@ -10,6 +10,55 @@ RSpec.describe Season, type: :model do
   it { is_expected.to have_many(:season_matches) }
   it { is_expected.to have_many(:matches) }
 
+  describe "#eligible?" do
+    let(:luke) do
+      FactoryGirl.create(
+        :player,
+        active: true,
+        name: "Luke Skywalker"
+      )
+    end
+    let(:vader) do
+      FactoryGirl.create(
+        :player,
+        active: true,
+        name: "Darth Vader"
+      )
+    end
+    let(:leia) do
+      FactoryGirl.create(
+        :player,
+        active: true,
+        name: "Leia Organa"
+      )
+    end
+    let(:matchup) { Matchup.new(luke, vader) }
+    let(:season) { FactoryGirl.create(:season) }
+
+    before { season.players = [luke, vader] }
+
+    subject { season.eligible?(matchup) }
+
+    context "when all matchups have already been played" do
+      before do
+        season.matches = [
+          FactoryGirl.create(:complete_match, home_player: luke, away_player: vader),
+          FactoryGirl.create(:complete_match, home_player: vader, away_player: luke)
+        ]
+      end
+      it { is_expected.to be_falsy }
+    end
+
+    context "when matchup has not been played yet" do
+      it { is_expected.to be_truthy }
+    end
+
+    context "when matchup has players not part of the season" do
+      let(:matchup) { Matchup.new(luke, leia) }
+      it { is_expected.to be_falsy }
+    end
+  end
+
   describe "#finalize!" do
     subject { season.finalize! }
 
