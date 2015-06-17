@@ -6,6 +6,9 @@ RSpec.describe Season, type: :model do
   it { is_expected.to have_many(:season_memberships) }
   it { is_expected.to have_many(:players) }
 
+  it { is_expected.to have_many(:season_matches) }
+  it { is_expected.to have_many(:matches) }
+
   describe "#finalize!" do
     subject { season.finalize! }
 

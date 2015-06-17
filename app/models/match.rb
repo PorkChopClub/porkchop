@@ -7,6 +7,9 @@ class Match < ActiveRecord::Base
 
   has_many :points, dependent: :destroy
 
+  has_one :season_match
+  has_one :season, through: :season_match
+
   validates :home_player, :away_player, presence: true
 
   scope :ongoing, -> { where finalized_at: nil }

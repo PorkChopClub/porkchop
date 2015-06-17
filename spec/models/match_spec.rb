@@ -5,6 +5,9 @@ RSpec.describe Match, type: :model do
   it { is_expected.to belong_to :away_player }
   it { is_expected.to belong_to :victor }
 
+  it { is_expected.to have_one :season_match }
+  it { is_expected.to have_one :season }
+
   it { is_expected.to validate_presence_of :home_player }
   it { is_expected.to validate_presence_of :away_player }
 
@@ -192,7 +195,7 @@ RSpec.describe Match, type: :model do
 
     describe "#home_points" do
       subject { match.home_points }
-      it { is_expected.to eq [home_point_1, home_point_2] }
+      it { is_expected.to match_array [home_point_1, home_point_2] }
     end
 
     describe "#away_points" do
