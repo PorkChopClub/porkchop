@@ -6,6 +6,7 @@ class Api::OngoingMatchesController < ApplicationController
 
   before_action :authorize_update,
                 except: [:show]
+  before_action :set_next_match
 
   def show
     if !match
@@ -49,6 +50,10 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   private
+
+  def set_next_match
+    @next_match = Matchmaker.choose
+  end
 
   def match
     @match ||= PingPong::Match.new ongoing_match

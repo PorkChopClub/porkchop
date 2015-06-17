@@ -20,3 +20,6 @@ json.match do
   json.comment @match.comment || ""
   json.instructions @match.instructions || ""
 end
+json.next_match do
+  json.players @next_match.players, :name, :nickname, :avatar_url
+end

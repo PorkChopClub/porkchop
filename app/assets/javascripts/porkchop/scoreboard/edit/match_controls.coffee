@@ -46,7 +46,7 @@ $ ->
       ga 'send', 'event', 'button', 'click', 'matchmake'
       { url: '/api/ongoing_match/matchmake.json', type: 'PUT' }
 
-  match = Bacon
+  data = Bacon
     .mergeAll(
       initialFetch,
       polling,
@@ -57,8 +57,9 @@ $ ->
       finalization,
       cancellations,
       matchmakes
-    )
-    .ajax().map(".match")
+    ).ajax()
+
+  match = data.map(".match")
     .mapError -> {
       home_score: 0,
       away_score: 0,
@@ -68,6 +69,14 @@ $ ->
       home_player_service: true,
       away_player_service: false
     }
+
+  nextMatch = data.map(".next_match")
+  nextMatchInfo = nextMatch.map (m) ->
+    if m.players.length == 2
+      "Next Match: #{m.players[0].name} vs #{m.players[1].name}"
+    else
+      ""
+  nextMatchInfo.assign $(".next-match"), "text"
 
   matchId = match.map(".id").toProperty()
 
