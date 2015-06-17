@@ -70,6 +70,20 @@ RSpec.describe Match, type: :model do
     end
   end
 
+  describe "#league_match?" do
+    subject { match.league_match? }
+
+    context "when the match has a season" do
+      let(:match) { FactoryGirl.create :league_match }
+      it { is_expected.to be_truthy }
+    end
+
+    context "when the match does not have a season" do
+      let(:match) { FactoryGirl.create :match }
+      it { is_expected.to be_falsy }
+    end
+  end
+
   describe "#to_matchup" do
     subject { match.to_matchup }
 

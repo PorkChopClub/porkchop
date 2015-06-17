@@ -36,6 +36,10 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_season do
+      season
+    end
+
     trait :first_service_by_home_player do
       first_service :first_service_by_home_player
     end
@@ -46,5 +50,6 @@ FactoryGirl.define do
 
     factory :complete_match, traits: [:finalized, :finished]
     factory :new_match, traits: [:at_start]
+    factory :league_match, traits: [:with_season]
   end
 end

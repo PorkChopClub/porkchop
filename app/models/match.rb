@@ -45,6 +45,10 @@ class Match < ActiveRecord::Base
     match
   end
 
+  def league_match?
+    !!season
+  end
+
   def all_matches_before
     Match.where('id < ?', id)
   end
