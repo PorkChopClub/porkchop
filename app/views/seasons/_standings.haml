@@ -1,0 +1,16 @@
+%table.season-standings
+  %thead
+    %tr
+      %th
+      %th Player
+      %th GP
+      %th W
+      %th L
+  %tbody
+    - season.players.sort_by {|p| season.matches.where(victor: p).count }.reverse.each_with_index do |player, i|
+      %tr.season-standings-player
+        %td(data-th-label="Rank")= i + 1
+        %td(data-th-label="Name")= player.name
+        %td(data-th-label="Games Played")= games_played = season.matches.where("home_player_id = :player OR away_player_id = :player", player: player).count
+        %td(data-th-label="Wins")= wins = season.matches.where(victor: player).count
+        %td(data-th-label="Losses")= games_played - wins

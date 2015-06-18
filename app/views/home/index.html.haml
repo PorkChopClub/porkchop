@@ -1,3 +1,8 @@
+- if season = Season.ongoing.last
+  .homepage-recent-matches.porkbox-light
+    %h2 Season Standings
+    = render "seasons/standings", season: season
+
 .homepage-recent-matches.porkbox-light
   %h2 Recent matches
   = render "matches/list", matches: @recent_matches
