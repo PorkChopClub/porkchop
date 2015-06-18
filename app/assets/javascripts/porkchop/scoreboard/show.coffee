@@ -31,6 +31,9 @@ $ ->
   match.league_match
     .assign($(".scoreboard-message-area"), "toggleClass", "league-match")
 
+  match.league_match
+    .assign($(".scoreboard-league-match"), "toggle")
+
   match.awayPlayerService
     .assign($(".scoreboard-away-player"), "toggleClass", "has-service")
   match.homePlayerService

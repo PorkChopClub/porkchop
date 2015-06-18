@@ -99,6 +99,15 @@ $bottom-bar-height: 120px;
   to   { opacity: 1.0; }
 }
 
+.scoreboard-league-match {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  opacity: 0.5;
+  color: white;
+  font-size: modular-scale(5);
+}
+
 .scoreboard-instructions {
   position: absolute;
   bottom: 16px;
