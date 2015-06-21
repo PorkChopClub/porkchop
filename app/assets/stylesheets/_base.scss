@@ -22,3 +22,7 @@ a {
     text-decoration: underline;
   }
 }
+
+.clearfix {
+  @include clearfix;
+}
