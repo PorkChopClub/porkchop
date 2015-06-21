@@ -24,3 +24,10 @@ h1 { font-size: modular-scale(3); }
 h2 { font-size: modular-scale(2); }
 h3 { font-size: modular-scale(1); }
 h4 { font-size: modular-scale(0); }
+
+table {
+
+  &.alternating-rows tbody tr:nth-child(even) {
+    background: #f0f0f0;
+  }
+}
