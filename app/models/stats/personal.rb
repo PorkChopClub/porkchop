@@ -14,7 +14,7 @@ class Stats::Personal
   def win_ratio_by_opponent
     Hash[
       opponents.map do |opponent|
-        [opponent.name, win_ratio_against(opponent)]
+        [opponent, win_ratio_against(opponent)]
       end
     ]
   end

@@ -52,7 +52,7 @@
       %tbody
         - @stats.win_ratio_by_opponent.each do |opponent, ratio|
           %tr
-            %td= opponent
+            %td= opponent.name
             %td= ratio
 
   .player-match-history
