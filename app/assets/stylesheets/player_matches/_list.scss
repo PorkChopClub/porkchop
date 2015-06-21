@@ -1,0 +1,18 @@
+.player-matches-list {
+  width: 100%;
+  text-align: center;
+}
+
+.player-match {
+
+  &:nth-child(even) {
+    background: #f0f0f0;
+  }
+}
+
+.player-match-score {
+
+  strong {
+    margin-right: 5px;
+  }
+}
