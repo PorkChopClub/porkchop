@@ -41,14 +41,21 @@
 
 %canvas.player-elo-chart.porkbox-light{ data: { ratings: @player.elo_ratings.sorted_ratings } }
 
-.player-win-percentages.porkbox-light
-  %h2 Win Ratio by Opponent
-  %dl.player-win-percentage-list
-    - @stats.win_ratio_by_opponent.each do |opponent, ratio|
-      %dt= opponent
-      %dd= ratio
+.porkbox-light.clearfix
+  .player-win-percentages
+    %h2 Win Ratio by Opponent
+    %table.player-win-percentage-list.alternating-rows
+      %thead
+        %tr
+          %th Opponent
+          %th(title="Winning Percentage") W%
+      %tbody
+        - @stats.win_ratio_by_opponent.each do |opponent, ratio|
+          %tr
+            %td= opponent
+            %td= ratio
 
-.player-match-history.porkbox-light
-  %h2 Last 10 Matches
-  = render "player_matches/list", matches: @player.matches.finalized.order(finalized_at: :desc).limit(10)
-  %p= link_to "All Matches", player_matches_path(@player)
+  .player-match-history
+    %h2 Last 10 Matches
+    = render "player_matches/list", matches: @player.matches.finalized.order(finalized_at: :desc).limit(10)
+    %p= link_to "All Matches →", player_matches_path(@player)

@@ -34,29 +34,25 @@
   }
 }
 
-.player-win-percentages {
+.player-win-percentages,
+.player-match-history {
+  @include desktop {
+    width: 50%;
+    float: left;
+    padding-top: modular-scale(2);
+
+    &:first-child {
+      padding-right: modular-scale(2);
+    }
+
+    &:last-child {
+      padding-left: modular-scale(2);
+    }
+  }
 }
 
 .player-win-percentage-list {
-  font-size: modular-scale(2);
-  @include clearfix;
-
-  dt, dd {
-    float: left;
-    margin: 0;
-    text-align: center;
-  }
-
-  dt {
-    width: 80%;
-  }
-
-  dd {
-    width: 20%;
-  }
-}
-
-.player-match-history {
+  width: 100%;
 }
 
 .player-summary-avatar {
