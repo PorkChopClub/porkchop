@@ -48,11 +48,15 @@
       %thead
         %tr
           %th Opponent
+          %th W
+          %th L
           %th(title="Winning Percentage") W%
       %tbody
         - @stats.win_ratio_by_opponent.each do |opponent, ratio|
           %tr
             %td= opponent.name
+            %td= @stats.record_against(opponent)[0]
+            %td= @stats.record_against(opponent)[1]
             %td= ratio
 
   .player-match-history
