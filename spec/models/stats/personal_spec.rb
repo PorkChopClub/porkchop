@@ -74,9 +74,9 @@ RSpec.describe Stats::Personal do
     end
 
     it "is a hash of the win ratios by opponents" do
-      expect(subject).to eq(georgie => 0.0,
+      expect(subject).to eq(candice => 1.0,
                             shirley => 0.333,
-                            candice => 1.0)
+                            georgie => 0.0)
     end
   end
 

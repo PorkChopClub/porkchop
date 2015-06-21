@@ -16,6 +16,7 @@ class Stats::Personal
       opponents.map do |opponent|
         [opponent, win_ratio_against(opponent)]
       end
+      .sort_by{ |k, v| v }.reverse
     ]
   end
 
