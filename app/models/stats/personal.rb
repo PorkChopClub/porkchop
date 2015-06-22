@@ -5,9 +5,9 @@ class Stats::Personal
 
   def win_ratio
     if match_count != 0
-      (victory_count / match_count.to_f).round 3
+      calculate_ratio(victory_count, match_count)
     else
-      0.0
+      ".000"
     end
   end
 
@@ -59,7 +59,12 @@ class Stats::Personal
            to: :player
 
   def win_ratio_against(opponent)
-    (victory_count_against(opponent) / match_count_against(opponent).to_f).round 3
+    calculate_ratio(victory_count_against(opponent), match_count_against(opponent))
+  end
+
+  def calculate_ratio(wins, losses)
+    ratio = (wins.to_f / losses.to_f)
+    ("%.3f" % ratio).sub(/\A0/, "")
   end
 
   def victory_count_against(opponent)

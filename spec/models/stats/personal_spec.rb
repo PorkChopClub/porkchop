@@ -74,9 +74,9 @@ RSpec.describe Stats::Personal do
     end
 
     it "is a hash of the win ratios by opponents" do
-      expect(subject).to eq(candice => 1.0,
-                            shirley => 0.333,
-                            georgie => 0.0)
+      expect(subject).to eq(candice => "1.000",
+                            shirley => ".333",
+                            georgie => ".000")
     end
   end
 
@@ -96,11 +96,11 @@ RSpec.describe Stats::Personal do
         FactoryGirl.create :complete_match, away_player: player
       end
 
-      it { is_expected.to eq 0.667 }
+      it { is_expected.to eq ".667" }
     end
 
     context "when the player has not played any games" do
-      it { is_expected.to eq 0.0 }
+      it { is_expected.to eq ".000" }
     end
   end
 

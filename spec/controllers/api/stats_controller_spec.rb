@@ -30,9 +30,9 @@ RSpec.describe Api::StatsController, type: :controller do
     end
 
     it "renders the players by total score" do
-      expect(JSON.parse(subject.body)['percentages']).to eq("Jared" => 0.667,
-                                                            "Gray" => 0.333,
-                                                            "Clarke" => 0.0)
+      expect(JSON.parse(subject.body)['percentages']).to eq("Jared" => ".667",
+                                                            "Gray" => ".333",
+                                                            "Clarke" => ".000")
     end
   end
 
