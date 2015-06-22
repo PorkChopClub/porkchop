@@ -3,6 +3,21 @@
   @include clearfix;
 }
 
+.player-summary-content {
+  @include desktop {
+    @include calc(margin-left, "100px + 1em"); // avatar + gutter
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    strong {
+      margin-right: 5px;
+    }
+  }
+}
+
 .player-edit-link {
   position: absolute;
   top: 1em;
@@ -60,7 +75,6 @@
 
   @include desktop {
     float: left;
-    margin-right: 1em;
   }
 }
 

@@ -1,9 +1,17 @@
 .player-summary.porkbox-light
   = image_tag @player.avatar_url, class: "player-summary-avatar"
-  %h1= @player.name
-  = link_to "(edit)", edit_player_path(@player), class: "player-edit-link"
-  - if @player.nickname.present?
-    %p= "Nickname: #{@player.nickname}"
+  .player-summary-content
+    %h1= @player.name
+    = link_to "(edit)", edit_player_path(@player), class: "player-edit-link"
+    - if @player.nickname.present?
+      %p= "Nickname: #{@player.nickname}"
+    %ul
+      %li
+        %strong Elo:
+        = @player.elo
+      %li
+        %strong Streak:
+        = "#{@player.current_streak.streak_type}#{@player.current_streak.streak_length}"
 
 .porkbox-light
   %table.player-stats
@@ -11,18 +19,16 @@
       %tr
         %th
         %th(colspan="4") Record
-        %th(colspan="3") Elo Ratings
-        %th(colspan="3") Streaks
+        %th(colspan="2") Elo Ratings
+        %th(colspan="2") Streaks
       %tr
         %th
         %th GP
         %th W
         %th L
         %th W%
-        %th(title="Current Elo Rating") CER
         %th(title="Highest Elo Rating") HER
         %th(title="Lowest Elo Rating") LER
-        %th(title="Current Streak") CS
         %th(title="Longest Winning Streak") LWS
         %th(title="Longest Losing Streak") LLS
     %tbody
@@ -32,10 +38,8 @@
         %td(data-label="W:")= @player.victories.count
         %td(data-label="L:")= @player.losses.count
         %td(data-label="W%:")= @stats.win_ratio
-        %td(data-label="Elo:")= @player.elo
         %td(data-label="Highest Elo:")= @stats.highest_elo_rating
         %td(data-label="Lowest Elo:")= @stats.lowest_elo_rating
-        %td(data-label="Streak:")= "#{@player.current_streak.streak_type}#{@player.current_streak.streak_length}"
         %td(data-label="Longest Winning Streak:")= @stats.longest_winning_streak
         %td(data-label="Longest Losing Streak:")= @stats.longest_losing_streak
 
