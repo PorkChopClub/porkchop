@@ -28,7 +28,7 @@
     %tbody
       %tr
         %td Career
-        %td(data-label="GP:")= @player.matches.count
+        %td(data-label="GP:")= @player.matches.finalized.count
         %td(data-label="W:")= @player.victories.count
         %td(data-label="L:")= @player.losses.count
         %td(data-label="W%:")= @stats.win_ratio
