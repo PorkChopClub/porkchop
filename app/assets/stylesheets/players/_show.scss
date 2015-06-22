@@ -37,6 +37,12 @@
   td {
     padding: 0 10px;
 
+    @include desktop {
+      &:not(:first-child) {
+        text-align: center;
+      }
+    }
+
     @include mobile {
       display: block;
 
