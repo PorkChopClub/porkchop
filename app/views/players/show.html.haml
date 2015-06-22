@@ -9,9 +9,10 @@
       %li
         %strong Elo:
         = @player.elo
-      %li
-        %strong Streak:
-        = "#{@player.current_streak.streak_type}#{@player.current_streak.streak_length}"
+      - if @player.current_streak
+        %li
+          %strong Streak:
+          = "#{@player.current_streak.streak_type}#{@player.current_streak.streak_length}"
 
 .porkbox-light
   %table.player-stats
