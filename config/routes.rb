@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :players, only: [:index, :show, :edit, :update] do
     resources :matches, controller: "player_matches", only: :index
   end
+  resources :seasons, only: [:show]
 
   get 'signin', to: redirect('/auth/twitter')
   delete 'signout', to: 'sessions#destroy', as: 'signout'
