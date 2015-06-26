@@ -1,6 +1,8 @@
 class Season < ActiveRecord::Base
   validates :games_per_matchup, numericality: { greater_than: 0, even: true }
 
+  belongs_to :league
+
   has_many :season_memberships
   has_many :players, through: :season_memberships
 
