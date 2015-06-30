@@ -1,0 +1,9 @@
+.season-summary.porkbox-light.clearfix
+  %h1= "#{@season.league.name}: Season #{@season.id}"
+
+  - if @season.finalized_at
+    %p This season has finished.
+
+  .season-summary-standings
+    %h2 Standings
+    = render "seasons/standings", season: @season
