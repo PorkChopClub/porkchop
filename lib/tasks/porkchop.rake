@@ -1,10 +1,16 @@
 namespace :porkchop do
   desc "Generate sample data"
-  task sample_data: [:environment] do
+
+  task create_season: [:environment] do
+    league = League.create name: "PorkChop Club"
+    season = Season.create games_per_matchup: 4, league: league
+    season.players << Player.all
+  end
+
+  task simulate_matches: [:environment] do
     require 'factory_girl_rails'
 
     Player.update_all active: true
-
     Match.setup!
 
     90.downto(0).each do |n|
