@@ -3,22 +3,19 @@ namespace :porkchop do
   task sample_data: [:environment] do
     require 'factory_girl_rails'
 
-    players = Player.all.to_a
+    Player.update_all active: true
+
+    Match.setup!
+
     90.downto(0).each do |n|
       puts "Generating matches #{n} days ago."
       finalized_at = n.days.ago.at_beginning_of_day + rand(0..23).hours + rand(0..59).minutes + rand(0..59).seconds
       rand(0..4).times do
-        partners = players.shuffle[0..1]
+        match = Match.ongoing.last
 
-        home = partners[0]
-        away = partners[1]
         scores = [11, rand(0..9)].shuffle
-
-        match = FactoryGirl.create :match,
-                                   home_player: home,
-                                   away_player: away,
-                                   home_score: scores[0],
-                                   away_score: scores[1]
+        FactoryGirl.create_list :point, scores[0], victor: match.home_player, match: match
+        FactoryGirl.create_list :point, scores[1], victor: match.away_player, match: match
 
         PingPong::Finalization.new(
           PingPong::Match.new(match)
@@ -32,6 +29,9 @@ namespace :porkchop do
         match.update_column :finalized_at, finalized_at
       end
     end
+
+    Match.ongoing.last.destroy
+    Player.update_all active: false
   end
 
   namespace :stats do
