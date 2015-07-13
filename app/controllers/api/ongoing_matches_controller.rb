@@ -8,12 +8,7 @@ class Api::OngoingMatchesController < ApplicationController
                 except: [:show]
 
   def show
-    if match.present?
-      # FIXME
-      if match.created_at < 2.minutes.ago
-        fresh_when(match)
-      end
-    else
+    if !match
       head :not_found
     end
   end
