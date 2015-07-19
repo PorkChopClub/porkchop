@@ -1,8 +1,7 @@
 $ ->
   return unless $('.match-controls').length
 
-  initialFetch = Bacon.once { url: '/api/ongoing_match.json' }
-  polling = Bacon.interval(3000, { url: '/api/ongoing_match.json' })
+  ajaxOptions = { url: '/api/ongoing_match.json' }
 
   homePlayerPoints = $('.match-controls-home-player')
     .asEventStream('click')
@@ -48,16 +47,17 @@ $ ->
 
   data = Bacon
     .mergeAll(
-      initialFetch,
-      polling,
-      homePlayerPoints,
-      awayPlayerPoints,
-      serviceToggle,
-      rewinds,
-      finalization,
-      cancellations,
-      matchmakes
-    ).ajax()
+      Bacon.ajaxPoll(ajaxOptions, 3000),
+      Bacon.mergeAll(
+        homePlayerPoints,
+        awayPlayerPoints,
+        serviceToggle,
+        rewinds,
+        finalization,
+        cancellations,
+        matchmakes
+      ).ajax()
+    )
 
   match = data.map(".match")
     .mapError -> {

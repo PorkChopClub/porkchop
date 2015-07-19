@@ -1,11 +1,9 @@
 class PorkChop.AchievementStream
   @polling: (interval) ->
     ajaxOptions = { url: '/api/achievements.json' }
+    data = Bacon.ajaxPoll(ajaxOptions, interval)
 
-    achievements = Bacon.mergeAll([
-      Bacon.interval(interval, ajaxOptions),
-      Bacon.once(ajaxOptions)
-    ]).ajax().map('.achievements')
+    achievements = data.map('.achievements')
 
     achievementEqual = (a, b) ->
       a.id == b.id && a.rank == b.rank
