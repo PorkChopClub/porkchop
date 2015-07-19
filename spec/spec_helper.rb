@@ -40,5 +40,9 @@ RSpec.configure do |config|
 
   config.order = :random
 
+  config.before do
+    Rails.cache.clear
+  end
+
   Kernel.srand config.seed
 end
