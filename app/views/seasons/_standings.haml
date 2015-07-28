@@ -6,11 +6,13 @@
       %th GP
       %th W
       %th L
+      %th W%
   %tbody
-    - season.players.sort_by {|p| season.matches.finalized.where(victor: p).count }.reverse.each_with_index do |player, i|
+    - season.players.map{ |p| Stats::SeasonPersonal.new(season, p) }.sort_by(&:win_ratio).reverse.each_with_index do |stats, i|
       %tr.season-standings-player
         %td(data-th-label="Rank")= i + 1
-        %td(data-th-label="Name")= player.name
-        %td(data-th-label="Games Played")= games_played = season.matches.finalized.where("home_player_id = :player OR away_player_id = :player", player: player).count
-        %td(data-th-label="Wins")= wins = season.matches.finalized.where(victor: player).count
-        %td(data-th-label="Losses")= games_played - wins
+        %td(data-th-label="Name")= stats.player.name
+        %td(data-th-label="Games Played")= stats.matches_played
+        %td(data-th-label="Wins")= stats.matches_won
+        %td(data-th-label="Losses")= stats.matches_lost
+        %td(data-th-label="Win Ratio")= stats.win_ratio
