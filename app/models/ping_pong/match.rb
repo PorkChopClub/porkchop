@@ -3,7 +3,8 @@ class PingPong::Match < SimpleDelegator
 
   def home_player_service?
     return unless first_service
-    first_service_by_away_player? ^ (points.count / 2).even?
+    points_count = points.count
+    first_service_by_away_player? ^ (points_count >= 20 ? points_count : points_count / 2).even?
   end
 
   def away_player_service?

@@ -67,6 +67,30 @@ RSpec.describe PingPong::Match do
         it { is_expected.to be false }
       end
     end
+
+    context "when both players have 10 points" do
+      let(:match) do
+        FactoryGirl.create :match, home_score: 10, away_score: 10
+      end
+
+      context "and the away player serves first" do
+        before { match.first_service_by_away_player! }
+        it { is_expected.to be false }
+        it "alternates every service" do
+          FactoryGirl.create :point, match: match, victor: match.home_player
+          expect(subject).to be true
+        end
+      end
+
+      context "and the home player serves first" do
+        before { match.first_service_by_home_player! }
+        it { is_expected.to be true }
+        it "alternates every service" do
+          FactoryGirl.create :point, match: match, victor: match.home_player
+          expect(subject).to be false
+        end
+      end
+    end
   end
 
   describe "#away_player_service?" do
