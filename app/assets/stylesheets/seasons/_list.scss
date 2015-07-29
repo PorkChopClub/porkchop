@@ -7,3 +7,15 @@
     }
   }
 }
+
+.point-differential-positive {
+  color: green;
+
+  &:before {
+    content: "+";
+  }
+}
+
+.point-differential-negative {
+  color: red;
+}
