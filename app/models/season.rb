@@ -34,9 +34,7 @@ class Season < ActiveRecord::Base
   private
 
   def matchups
-    players.
-      combination(2).
-      map { |p1, p2| Matchup.new(p1, p2) }
+    Matchup.all(players: players)
   end
 
   def matchup_count(matchup)
