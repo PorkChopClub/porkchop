@@ -11,6 +11,10 @@ class Season < ActiveRecord::Base
 
   scope :ongoing, -> { where finalized_at: nil }
 
+  def remaining_match_count
+    total_match_count - matches.finalized.count
+  end
+
   def eligible?(matchup)
     matches.to_a.count do |match|
       match.to_matchup == matchup
@@ -19,5 +23,11 @@ class Season < ActiveRecord::Base
 
   def finalize!
     touch(:finalized_at) unless finalized_at
+  end
+
+  private
+
+  def total_match_count
+    (players.count ** 2 - players.count) * games_per_matchup / 2
   end
 end

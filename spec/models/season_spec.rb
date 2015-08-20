@@ -12,6 +12,62 @@ RSpec.describe Season, type: :model do
   it { is_expected.to have_many(:season_matches) }
   it { is_expected.to have_many(:matches) }
 
+  describe "#remaining_match_count" do
+    subject { season.remaining_match_count }
+
+    let(:season) do
+      FactoryGirl.create(:season, players: [luke, vader])
+    end
+
+    let(:luke) do
+      FactoryGirl.create(
+        :player,
+        active: true,
+        name: "Luke Skywalker"
+      )
+    end
+    let(:vader) do
+      FactoryGirl.create(
+        :player,
+        active: true,
+        name: "Darth Vader"
+      )
+    end
+
+    context "when no games have been played" do
+      it { is_expected.to eq 2 }
+    end
+
+    context "when some games have been played" do
+      before do
+        season.matches << FactoryGirl.create(
+          :complete_match,
+          home_player: luke,
+          away_player: vader
+        )
+      end
+
+      it { is_expected.to eq 1 }
+    end
+
+    context "when all games have been played" do
+      before do
+        season.matches << FactoryGirl.create(
+          :complete_match,
+          home_player: luke,
+          away_player: vader
+        )
+        season.matches << FactoryGirl.create(
+          :complete_match,
+          home_player: vader,
+          away_player: luke
+        )
+      end
+
+      it { is_expected.to eq 0 }
+    end
+  end
+
   describe "#eligible?" do
     let(:luke) do
       FactoryGirl.create(
