@@ -12,6 +12,43 @@ RSpec.describe Season, type: :model do
   it { is_expected.to have_many(:season_matches) }
   it { is_expected.to have_many(:matches) }
 
+  describe "#remaining_matchups" do
+    subject { season.remaining_matchups }
+
+    let(:season) do
+      FactoryGirl.create(:season, players: [luke, vader])
+    end
+
+    let(:luke) do
+      FactoryGirl.create(
+        :player,
+        active: true,
+        name: "Luke Skywalker"
+      )
+    end
+    let(:vader) do
+      FactoryGirl.create(
+        :player,
+        active: true,
+        name: "Darth Vader"
+      )
+    end
+
+    before do
+      season.matches << FactoryGirl.create(
+        :complete_match,
+        home_player: luke,
+        away_player: vader
+      )
+    end
+
+    it "returns a hash where the keys are matchups and the values are the counts" do
+      expect(subject.length).to eq 1
+      expect(subject.keys.first).to eq Matchup.new(luke, vader)
+      expect(subject.values.first).to eq 1
+    end
+  end
+
   describe "#remaining_match_count" do
     subject { season.remaining_match_count }
 

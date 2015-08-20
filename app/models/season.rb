@@ -11,6 +11,12 @@ class Season < ActiveRecord::Base
 
   scope :ongoing, -> { where finalized_at: nil }
 
+  def remaining_matchups
+    Hash[matchups.map do |matchup|
+      [matchup, games_per_matchup - matchup_count(matchup)]
+    end]
+  end
+
   def remaining_match_count
     total_match_count - matches.finalized.count
   end
@@ -26,6 +32,16 @@ class Season < ActiveRecord::Base
   end
 
   private
+
+  def matchups
+    players.
+      combination(2).
+      map { |p1, p2| Matchup.new(p1, p2) }
+  end
+
+  def matchup_count(matchup)
+    matches.finalized.count { |match| match.to_matchup == matchup }
+  end
 
   def total_match_count
     (players.count ** 2 - players.count) * games_per_matchup / 2
