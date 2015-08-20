@@ -40,7 +40,7 @@ class Season < ActiveRecord::Base
   end
 
   def matchup_count(matchup)
-    matches.finalized.count { |match| match.to_matchup == matchup }
+    matches.finalized.to_a.count { |match| match.to_matchup == matchup }
   end
 
   def total_match_count
