@@ -1,6 +1,7 @@
 - if season = Season.ongoing.last
   .homepage-recent-matches.porkbox-light
-    %h2 Season Standings
+    %h2
+      = link_to "Season Standings", season
     = render "seasons/standings", season: season
 
 .homepage-recent-matches.porkbox-light
