@@ -10,6 +10,7 @@ development:
 test:
   <<: *default
   database: porkchop_test
+  username: porkchop
 
 production:
   <<: *default
