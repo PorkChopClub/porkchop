@@ -74,6 +74,12 @@ ActiveRecord::Schema.define(version: 20150719212032) do
   add_index "points", ["match_id"], name: "index_points_on_match_id", using: :btree
   add_index "points", ["victor_id"], name: "index_points_on_victor_id", using: :btree
 
+  create_table "rails_schema_migrations", id: false, force: :cascade do |t|
+    t.string "version", null: false
+  end
+
+  add_index "rails_schema_migrations", ["version"], name: "unique_schema_migrations", unique: true, using: :btree
+
   create_table "season_matches", force: :cascade do |t|
     t.integer  "match_id"
     t.integer  "season_id"
