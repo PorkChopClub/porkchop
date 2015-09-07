@@ -4,6 +4,8 @@
   %title Porkchop
 
   = stylesheet_link_tag 'application', '//fonts.googleapis.com/css?family=Roboto:400,400italic,300,700'
+  :javascript
+    window.CHOP_HOST = "#{ENV["CHOP_HOST"]}";
 
   = javascript_include_tag 'application'
 
