@@ -2,7 +2,7 @@ defmodule Chop.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", Chop.RoomChannel
+  channel "games:ongoing", Chop.GameChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

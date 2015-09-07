@@ -1,4 +1,10 @@
 $ ->
+  socket = new Phoenix.Socket("ws://localhost:2278/socket")
+  socket.connect()
+
+  channel = socket.channel("games:ongoing", {})
+  channel.join().receive "ok", (payload) -> console.log payload
+
   return unless $('.scoreboard').length
 
   achievements = PorkChop.AchievementStream.polling(500).buffered(10000)
