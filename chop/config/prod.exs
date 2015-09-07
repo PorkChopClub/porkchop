@@ -13,8 +13,9 @@ use Mix.Config
 # which you typically run after static files are built.
 config :chop, Chop.Endpoint,
   http: [port: 2278],
-  url: [host: "chop.porkchop.com"],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [host: "chop.porkchop.club"],
+  cache_static_manifest: "priv/static/manifest.json",
+  check_origin: ["chop.porkchop.club", "porkchop.club"]
 
 # Do not print debug messages in production
 config :logger, level: :info
