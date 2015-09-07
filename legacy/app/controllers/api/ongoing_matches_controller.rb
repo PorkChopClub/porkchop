@@ -77,9 +77,22 @@ class Api::OngoingMatchesController < ApplicationController
 
   def perform(action)
     if action
+      notify_chop!
       render :show
     else
       render :show, status: :unprocessable_entity
+    end
+  end
+
+  def notify_chop!
+    return unless ENV['CHOP_HOST']
+
+    Faraday.new("http://#{ENV['CHOP_HOST']}") do |faraday|
+      faraday.adapter  Faraday.default_adapter
+    end.post do |req|
+      req.url '/api/ongoing_match'
+      req.headers['Content-Type'] = 'application/json'
+      req.body = match.to_builder.target!
     end
   end
 end

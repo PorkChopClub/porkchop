@@ -19,8 +19,9 @@ defmodule Chop.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Chop do
-  #   pipe_through :api
-  # end
+  scope "/api", Chop do
+    pipe_through :api
+
+    post "/ongoing_match", Api.LegacyController, :update_ongoing_match
+  end
 end

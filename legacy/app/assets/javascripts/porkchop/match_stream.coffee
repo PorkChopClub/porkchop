@@ -1,21 +1,42 @@
 class PorkChop.MatchStream
-  @polling: (interval) ->
-    ajaxOptions = { url: '/api/ongoing_match.json' }
-    matchPolls = Bacon.ajaxPoll(ajaxOptions, interval)
+  EMPTY_MATCH = {
+    home_score: "",
+    away_score: "",
+    home_player_name: "",
+    away_player_name: "",
+    home_player_nickname: "",
+    away_player_nickname: "",
+    home_player_service: false,
+    away_player_service: false,
+    comment: "",
+    instructions: ""
+  }
 
-    match = matchPolls
-      .map(".match")
-      .mapError -> {
-        home_score: "",
-        away_score: "",
-        home_player_name: "",
-        away_player_name: "",
-        home_player_service: false,
-        away_player_service: false,
-        comment: "",
-        instructions: ""
-      }
-      .toProperty()
+  @polling: (interval) ->
+    if CHOP_HOST
+      socket = new Phoenix.Socket("ws://#{CHOP_HOST}/socket")
+      socket.connect()
+
+      channel = socket.channel("games:ongoing", {})
+      channel.join()
+
+      matchUpdates = Bacon.fromBinder (sink) ->
+        sink(EMPTY_MATCH)
+
+        channel.on "update", (payload) ->
+          sink(payload.body)
+
+      matchUpdates.log("Game Update")
+
+      match = matchUpdates.toProperty()
+    else
+      ajaxOptions = { url: '/api/ongoing_match.json' }
+      matchPolls = Bacon.ajaxPoll(ajaxOptions, interval)
+
+      match = matchPolls
+        .map(".match")
+        .mapError -> EMPTY_MATCH
+        .toProperty()
 
     new @ match
 
