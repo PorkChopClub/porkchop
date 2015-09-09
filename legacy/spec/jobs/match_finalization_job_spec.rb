@@ -32,10 +32,7 @@ RSpec.describe MatchFinalizationJob, type: :job do
     let(:achievement) { instance_double Achievement }
 
     before do
-      allow(ENV).
-        to receive(:[]).
-        with("SLACK_WEBHOOK_URL").
-        and_return("http://en.wikipedia.org/wiki/Candice_Bergen")
+      ENV['SLACK_WEBHOOK_URL'] = "http://en.wikipedia.org/wiki/Candice_Bergen"
 
       allow(Slack::Notifier).to receive(:new).and_return(notifier)
       allow(notifier).to receive(:ping)
@@ -45,6 +42,10 @@ RSpec.describe MatchFinalizationJob, type: :job do
 
       allow(Stats::StreakAdjustment).to receive(:new).and_return(streak_adjustment)
       allow(streak_adjustment).to receive(:adjust!)
+    end
+
+    after do
+      ENV['SLACK_WEBHOOK_URL'] = nil
     end
 
     it "notifies Slack about the match" do
