@@ -42,6 +42,8 @@ class Match < ActiveRecord::Base
       match.season = ongoing_season
     end
 
+    PingPong::Match.new(match).notify_chop!
+
     match
   end
 
