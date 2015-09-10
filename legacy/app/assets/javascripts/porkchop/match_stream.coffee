@@ -24,7 +24,7 @@ class PorkChop.MatchStream
         sink(EMPTY_MATCH)
 
         channel.on "update", (payload) ->
-          sink(payload.body)
+          sink(_.defaults(payload.body, EMPTY_MATCH))
 
       matchUpdates.log("Game Update")
 
