@@ -24,7 +24,7 @@ class Api::TableController < ApplicationController
   private
 
   def notify_chop
-    match.notify_chop!
+    ChopNotifier.notify!
   end
 
   def check_table_token

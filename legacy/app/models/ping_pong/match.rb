@@ -45,18 +45,6 @@ class PingPong::Match < SimpleDelegator
     (away_score - home_score).abs
   end
 
-  def notify_chop!
-    return unless ENV['CHOP_HOST']
-
-    Faraday.new("http://#{ENV['CHOP_HOST']}") do |faraday|
-      faraday.adapter  Faraday.default_adapter
-    end.post do |req|
-      req.url '/api/ongoing_match'
-      req.headers['Content-Type'] = 'application/json'
-      req.body = to_builder.target!
-    end
-  end
-
   def to_builder
     Jbuilder.new do |match|
       match.id to_param

@@ -77,7 +77,7 @@ class Api::OngoingMatchesController < ApplicationController
 
   def perform(action)
     if action
-      match.notify_chop!
+      ChopNotifier.notify!
       render :show
     else
       render :show, status: :unprocessable_entity
