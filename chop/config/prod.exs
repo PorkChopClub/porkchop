@@ -15,7 +15,8 @@ config :chop, Chop.Endpoint,
   http: [port: 2278],
   url: [host: "chop.porkchop.club"],
   cache_static_manifest: "priv/static/manifest.json",
-  check_origin: ["http://chop.porkchop.club", "http://porkchop.club"]
+  check_origin: ["http://chop.porkchop.club", "http://porkchop.club"],
+  server: true
 
 # Do not print debug messages in production
 config :logger, level: :info
