@@ -28,7 +28,9 @@ class PorkChop.MatchStream
 
       matchUpdates.log("Game Update")
 
-      match = matchUpdates.toProperty()
+      initialRequest = Bacon.once(ajaxOptions)
+
+      match = matchUpdates.merge(initialRequest).toProperty()
     else
       ajaxOptions = { url: '/api/ongoing_match.json' }
       matchPolls = Bacon.ajaxPoll(ajaxOptions, interval)
