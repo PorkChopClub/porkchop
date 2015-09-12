@@ -3,7 +3,7 @@ defmodule Chop.Mixfile do
 
   def project do
     [app: :chop,
-     version: "0.0.1",
+     version: get_version,
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:make, :phoenix] ++ Mix.compilers,
@@ -38,5 +38,10 @@ defmodule Chop.Mixfile do
      {:dismake, "~> 1.0.0"},
      {:exrm, "~> 0.19.5"}
    ]
+  end
+
+  defp get_version do
+    ver  = :os.cmd('git rev-parse --short HEAD') |> List.to_string |> String.strip(?\n)
+    "0.1.0-#{ver}"
   end
 end
