@@ -17,6 +17,7 @@ defmodule Chop.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/scoreboard", PageController, :scoreboard
   end
 
   scope "/api", Chop do
