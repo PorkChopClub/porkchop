@@ -4,10 +4,10 @@
   "description": "",
   "repository": "",
   "dependencies": {
-    "flux": "^2.1.1",
-    "react": "^0.13.3",
     "babel-core": "^5.8.24",
     "babel-loader": "^5.3.2",
+    "nuclear-js": "^1.1.1",
+    "react": "^0.13.3",
     "webpack": "^1.12.1"
   },
   "license": "MIT"

@@ -1,1 +1,2 @@
+<div id="scoreboard"></div>
 <script src="<%= static_path(@conn, "/js/scoreboard.js") %>"></script>
