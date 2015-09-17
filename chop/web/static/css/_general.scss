@@ -3,3 +3,7 @@ html {
   color: palette(grey 5);
   font-family: Roboto;
 }
+
+* {
+  @include box-sizing(border-box);
+}

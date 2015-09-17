@@ -7,6 +7,6 @@ node_modules: package.json
 	npm install
 
 sass:
-	(bundle check || bundle install) && bundle exec sass -r bourbon web/static/css/pork.scss priv/static/css/pork.css
+	(bundle check || bundle install) && bundle exec sass -I bower_components -r bourbon web/static/css/pork.scss priv/static/css/pork.css
 
 .PHONY: default webpack sass

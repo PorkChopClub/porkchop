@@ -13,7 +13,7 @@ config :chop, Chop.Endpoint,
   cache_static_lookup: false,
   check_origin: false,
   watchers: [node: ~w(node_modules/webpack/bin/webpack.js --watch --colors --progress),
-             bundle: ~w(exec sass -r bourbon --watch web/static/css/pork.scss:priv/static/css/pork.css)]
+             bundle: ~w(exec sass -I bower_components -r bourbon --watch web/static/css/pork.scss:priv/static/css/pork.css)]
 
 # Watch static and templates for browser reloading.
 config :chop, Chop.Endpoint,

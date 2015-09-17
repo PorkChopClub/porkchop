@@ -1,0 +1,73 @@
+.scoreboard {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  background-color: palette(grey 1);
+}
+
+.scoreboard-players {
+  position: absolute;
+  right: 80px;
+  bottom: 80px;
+  left: 80px;
+  border: 12px solid palette(grey 4);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.scoreboard-player {
+  line-height: 1.5;
+  font-size: 70px;
+  float: left;
+  width: 50%;
+  height: 3em;
+
+  // Away Player
+  &:first-child {
+    border-right: 3px solid palette(grey 4);
+
+    .scoreboard-player-name,
+    .scoreboard-player-score {
+      float: left;
+    }
+
+    .scoreboard-player-score {
+      border-right: 6px solid palette(grey 4);
+    }
+  }
+
+  // Home Player
+  &:last-child {
+    border-left: 3px solid palette(grey 4);
+
+    .scoreboard-player-name,
+    .scoreboard-player-score {
+      float: right;
+    }
+
+    .scoreboard-player-score {
+      border-left: 6px solid palette(grey 4);
+    }
+  }
+}
+
+.scoreboard-player-name,
+.scoreboard-player-score {
+  height: 100%;
+}
+
+.scoreboard-player-name {
+  @include linear-gradient(palette(grey 2) 0, palette(grey 2) 48%, palette(grey 1) 52%);
+  @include padding(0 0.25em);
+  width: 75%;
+}
+
+.scoreboard-player-score {
+  width: 25%;
+  font-size: 2em;
+  text-align: center;
+
+  .has-service & {
+    background-color: palette(pink 4);
+  }
+}

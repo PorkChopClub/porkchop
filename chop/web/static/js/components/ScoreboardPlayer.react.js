@@ -1,12 +1,18 @@
-let React = require("react");
+let React = require("react/addons");
 
 let ScoreboardPlayer = module.exports = React.createClass({
+  classes() {
+    return React.addons.classSet({
+      "scoreboard-player": true,
+      "has-service": this.props.hasService
+    });
+  },
+
   render() {
     return (
-      <div className="scoreboard-player">
-        {this.props.hasService ? <span>*</span> : null}
-        <span className="scoreboard-player-name">{this.props.playerName}</span>:
-        <span className="scoreboard-player-score">{this.props.playerScore}</span>
+      <div className={this.classes()}>
+        <div className="scoreboard-player-score">{this.props.playerScore}</div>
+        <div className="scoreboard-player-name">{this.props.playerName}</div>
       </div>
     );
   }

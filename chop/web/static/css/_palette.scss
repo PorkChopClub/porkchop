@@ -1,6 +1,7 @@
 $palette: (
-  grey:   (#111111 null    null    null    #FFFFFF),
-  purple: (null    null    #361857 null    null   )
+  grey:   (#111111 #313131 null    #EEEEEE #FFFFFF),
+  purple: (null    null    #361857 null    null   ),
+  pink:   (null    null    null    #F6258C null   )
 );
 
 @function palette($colour) {
