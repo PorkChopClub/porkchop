@@ -1,0 +1,8 @@
+$palette: (
+  grey:   (#111111 null    null    null    #FFFFFF),
+  purple: (null    null    #361857 null    null   )
+);
+
+@function palette($colour) {
+  @return nth(map-get($palette, nth($colour, 1)), nth($colour, 2));
+}

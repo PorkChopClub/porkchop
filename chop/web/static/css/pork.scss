@@ -1,27 +1,5 @@
 @import "bourbon";
 
-html {
-  background-color: #C62452;
-  color: #ffffff;
-  font-family: Roboto;
-}
-
-.homepage-coming-soon {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-
-  h1 {
-    margin: 0;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 4rem;
-    text-align: center;
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1)
-  }
-}
-
+@import "palette";
+@import "general";
+@import "homepage";
