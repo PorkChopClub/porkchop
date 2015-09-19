@@ -12,7 +12,11 @@ let ScoreboardPlayer = module.exports = React.createClass({
     return (
       <div className={this.classes()}>
         <div className="scoreboard-player-score">{this.props.playerScore}</div>
-        <div className="scoreboard-player-name">{this.props.playerName}</div>
+        <div className="scoreboard-player-name-wrap">
+          <div className="scoreboard-player-name">
+            {this.props.playerName}
+          </div>
+        </div>
       </div>
     );
   }
