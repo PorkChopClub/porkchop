@@ -1,19 +1,17 @@
-defmodule Chop.Game do
+defmodule Chop.Point do
   use Chop.Web, :model
 
+  import Chop.Game
   import Chop.Player
 
-  schema "matches" do
-    belongs_to :home_player, Player
-    belongs_to :away_player, Player
-    belongs_to :victor, Player
-    field :finalized_at, Ecto.DateTime
-    field :first_service, :integer
+  schema "points" do
+    belongs_to :game, Game, foreign_key: :match_id
+    belongs_to :winner, Player, foreign_key: :victor_id
     timestamps inserted_at: :created_at
   end
 
-  @required_fields ~w()
-  @optional_fields ~w(finalized_at first_service)
+  @required_fields ~w(match_id victor_id)
+  @optional_fields ~w()
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -24,6 +22,5 @@ defmodule Chop.Game do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> validate_inclusion(:first_service, [0,1])
   end
 end
