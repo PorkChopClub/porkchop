@@ -1,7 +1,7 @@
 defmodule Chop.Game do
   use Chop.Web, :model
 
-  import Chop.Player
+  alias Chop.Player
 
   schema "matches" do
     belongs_to :home_player, Player

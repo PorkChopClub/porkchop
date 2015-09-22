@@ -1,8 +1,8 @@
 defmodule Chop.Point do
   use Chop.Web, :model
 
-  import Chop.Game
-  import Chop.Player
+  alias Chop.Game
+  alias Chop.Player
 
   schema "points" do
     belongs_to :game, Game, foreign_key: :match_id
