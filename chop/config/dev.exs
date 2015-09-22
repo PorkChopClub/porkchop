@@ -1,5 +1,13 @@
 use Mix.Config
 
+sass_args = [
+  "--include-path bower_components",
+  "--include-path node_modules/bourbon/app/assets/stylesheets",
+  "--watch --recursive",
+  "web/static/css/pork.scss",
+  "priv/static/css/pork.css"
+] |> Enum.join(" ")
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -12,8 +20,8 @@ config :chop, Chop.Endpoint,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
-  watchers: [node: ~w(node_modules/webpack/bin/webpack.js --watch --colors --progress),
-             bundle: ~w(exec sass -I bower_components -r bourbon --watch web/static/css/pork.scss:priv/static/css/pork.css)]
+  watchers: [node: ~w(node_modules/.bin/webpack --watch --colors --progress),
+             node: ~w(node_modules/.bin/node-sass #{sass_args})]
 
 # Watch static and templates for browser reloading.
 config :chop, Chop.Endpoint,
