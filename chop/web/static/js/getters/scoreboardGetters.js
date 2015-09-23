@@ -1,13 +1,31 @@
-let scoreboardGetters = module.exports = {
-  homePlayerName: ['ongoingGame', 'home_player_name'],
-  awayPlayerName: ['ongoingGame', 'away_player_name'],
-  homePlayerScore: ['ongoingGame', 'home_score'],
-  awayPlayerScore: ['ongoingGame', 'away_score'],
-  homePlayerService: ['ongoingGame', 'home_player_service'],
-  awayPlayerService: [
-    ['ongoingGame', 'home_player_service'],
-    function(homePlayerService) {
-      return !homePlayerService;
+let currentService = function(player) {
+  return function(firstService, homeScore, awayScore) {
+    let totalScore = homeScore + awayScore;
+    let firstPlayerService =
+      (totalScore >= 20 ? totalScore : totalScore / 2) % 2 === 0;
+    if (firstService !== null) {
+      return firstService !== player ? !firstPlayerService : firstPlayerService;
+    } else {
+      return false;
     }
+  };
+};
+
+let scoreboardGetters = module.exports = {
+  homePlayerName: ['ongoingGame', 'home', 'name'],
+  awayPlayerName: ['ongoingGame', 'away', 'name'],
+  homePlayerScore: ['ongoingGame', 'home', 'score'],
+  awayPlayerScore: ['ongoingGame', 'away', 'score'],
+  homePlayerService: [
+    ['ongoingGame', 'firstService'],
+    ['ongoingGame', 'home', 'score'],
+    ['ongoingGame', 'away', 'score'],
+    currentService("home")
+  ],
+  awayPlayerService: [
+    ['ongoingGame', 'firstService'],
+    ['ongoingGame', 'home', 'score'],
+    ['ongoingGame', 'away', 'score'],
+    currentService("away")
   ]
 };

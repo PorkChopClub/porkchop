@@ -1,7 +1,7 @@
 defmodule Chop.Player do
   use Chop.Web, :model
 
-  schema "players" do
+ schema "players" do
     field :name, :string
     field :nickname, :string
     field :avatar_url, :string

@@ -1,8 +1,10 @@
 defmodule Chop.Api.LegacyController do
   use Chop.Web, :controller
 
-  def update_ongoing_match(conn, params) do
-    Chop.Endpoint.broadcast!("games:ongoing", "update", %{body: params})
+  alias Chop.OngoingGame
+
+  def update_ongoing_match(conn, _params) do
+    Chop.OngoingGame.update!
     text conn, ""
   end
 end

@@ -2,11 +2,13 @@ defmodule Chop.Game do
   use Chop.Web, :model
 
   alias Chop.Player
+  alias Chop.Point
 
   schema "matches" do
     belongs_to :home_player, Player
     belongs_to :away_player, Player
     belongs_to :victor, Player
+    has_many :points, Point, foreign_key: :match_id
     field :finalized_at, Ecto.DateTime
     field :first_service, :integer
     timestamps inserted_at: :created_at
