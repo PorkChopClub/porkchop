@@ -2,7 +2,7 @@ let currentService = function(player) {
   return function(firstService, homeScore, awayScore) {
     let totalScore = homeScore + awayScore;
     let firstPlayerService =
-      (totalScore >= 20 ? totalScore : totalScore / 2) % 2 === 0;
+      (totalScore >= 20 ? totalScore : (totalScore / 2) | 0) % 2 === 0;
     if (firstService !== null) {
       return firstService !== player ? !firstPlayerService : firstPlayerService;
     } else {
