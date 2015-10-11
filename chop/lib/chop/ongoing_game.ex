@@ -34,6 +34,7 @@ defmodule Chop.OngoingGame do
         :home_player -> Game.home_score(game)
         :away_player -> Game.away_score(game)
       end,
+      avatar_url: player.avatar_url,
       service: case Game.service_info(game) do
         {^player_position, count} -> count
         _ -> nil

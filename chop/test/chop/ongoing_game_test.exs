@@ -22,11 +22,13 @@ defmodule Chop.OngoingGameTest do
       id: ^id,
       home: %{
         name: "Spiderman",
+        avatar_url: "http://placekitten.com/200/200",
         score: 0,
         service: 1
       },
       away: %{
         name: "Carmen Sandiego",
+        avatar_url: nil,
         score: 0,
         service: nil
       }
@@ -36,7 +38,8 @@ defmodule Chop.OngoingGameTest do
   defp home_player do
     Repo.insert! %Player{
       name: "Waldo",
-      nickname: "Spiderman"
+      nickname: "Spiderman",
+      avatar_url: "http://placekitten.com/200/200"
     }
   end
 
