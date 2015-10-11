@@ -4,8 +4,12 @@ let ScoreboardPlayer = module.exports = React.createClass({
   classes() {
     return React.addons.classSet({
       "scoreboard-player": true,
-      "has-service": this.props.hasService
+      "has-service": this.hasService()
     });
+  },
+
+  hasService() {
+    return !!this.props.serviceCount;
   },
 
   render() {

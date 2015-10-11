@@ -32,10 +32,10 @@ let Scoreboard = module.exports = React.createClass({
         <div className="scoreboard-players">
           <ScoreboardPlayer playerName={this.state.awayPlayerName}
                             playerScore={this.state.awayPlayerScore}
-                            hasService={this.state.awayPlayerService} />
+                            serviceCount={this.state.awayPlayerService} />
           <ScoreboardPlayer playerName={this.state.homePlayerName}
                             playerScore={this.state.homePlayerScore}
-                            hasService={this.state.homePlayerService} />
+                            serviceCount={this.state.homePlayerService} />
         </div>
       </div>
     );

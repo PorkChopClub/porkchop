@@ -1,54 +1,44 @@
 defmodule Chop.OngoingGame do
+  @derive [Access]
+  defstruct id: nil,
+            home: nil,
+            away: nil
+
   import Ecto.Query
 
   alias Chop.Repo
   alias Chop.Game
   alias Chop.Player
 
-  def update! do
+  def fetch do
     case ongoing_game do
-      nil ->
-        Chop.Endpoint.broadcast!("games:ongoing", "no_game", %{body: %{}})
+      nil -> nil
       game = %Game{
         id: id,
-        home_player: %Player{
-          id: home_player_id,
-          name: home_player_name,
-          nickname: home_player_nickname
-        },
-        away_player: %Player{
-          id: away_player_id,
-          name: away_player_name,
-          nickname: away_player_nickname
-        },
-        points: points,
-        first_service: first_service
+        home_player: home_player,
+        away_player: away_player
       } ->
-        # FIXME: Much of the knowledge encoded here should be extracted into
-        # the Chop.Game module.
-        Chop.Endpoint.broadcast!("games:ongoing", "update", %{
-          body: %{
-            id: id,
-            firstService: case first_service do
-              nil -> nil
-              1 -> :home
-              2 -> :away
-            end,
-            home: %{
-              name: home_player_nickname || home_player_name,
-              score: points |> Enum.count(fn
-                p -> p.victor_id == home_player_id
-              end)
-            },
-            away: %{
-              name: away_player_nickname || away_player_name,
-              score: points |> Enum.count(fn
-                p -> p.victor_id == away_player_id
-              end)
-            }
-          }
-        })
+        %__MODULE__{
+          id: id,
+          home: player_payload(game, :home_player),
+          away: player_payload(game, :away_player)
+        }
     end
+  end
+
+  defp player_payload(game, player_position) do
+    player = Map.fetch!(game, player_position)
+    %{
+      name: Player.display_name(player),
+      score: case player_position do
+        :home_player -> Game.home_score(game)
+        :away_player -> Game.away_score(game)
+      end,
+      service: case Game.service_info(game) do
+        {^player_position, count} -> count
+        _ -> nil
+      end
+    }
   end
 
   defp ongoing_game do
@@ -56,9 +46,7 @@ defmodule Chop.OngoingGame do
     where: is_nil(g.finalized_at),
     select: g,
     limit: 1,
-    preload: [:home_player,
-              :away_player,
-              :points])
+    preload: [:home_player, :away_player])
     |> Repo.one
   end
 end

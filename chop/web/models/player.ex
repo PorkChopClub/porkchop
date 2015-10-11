@@ -22,4 +22,8 @@ defmodule Chop.Player do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def display_name(%__MODULE__{name: name, nickname: nickname}) do
+    nickname || name
+  end
 end
