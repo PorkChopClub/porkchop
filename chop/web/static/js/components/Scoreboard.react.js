@@ -1,15 +1,18 @@
 let React = require("react");
 
 let ScoreboardPlayer = require("./ScoreboardPlayer.react");
+let ScoreboardAvatar = require("./ScoreboardAvatar.react");
 
 let { ReactMixin } = require("../reactors/scoreboardReactor");
 let {
   homePlayerName,
-  awayPlayerName,
   homePlayerScore,
-  awayPlayerScore,
   homePlayerService,
-  awayPlayerService
+  homePlayerAvatarUrl,
+  awayPlayerName,
+  awayPlayerScore,
+  awayPlayerService,
+  awayPlayerAvatarUrl
 } = require("../getters/scoreboardGetters");
 
 let Scoreboard = module.exports = React.createClass({
@@ -18,17 +21,26 @@ let Scoreboard = module.exports = React.createClass({
   getDataBindings() {
     return {
       homePlayerName: homePlayerName,
-      awayPlayerName: awayPlayerName,
       homePlayerScore: homePlayerScore,
-      awayPlayerScore: awayPlayerScore,
       homePlayerService: homePlayerService,
-      awayPlayerService: awayPlayerService
+      homePlayerAvatarUrl: homePlayerAvatarUrl,
+
+      awayPlayerName: awayPlayerName,
+      awayPlayerScore: awayPlayerScore,
+      awayPlayerService: awayPlayerService,
+      awayPlayerAvatarUrl: awayPlayerAvatarUrl
     }
   },
 
   render() {
     return (
       <div className="scoreboard">
+        <div className="scoreboard-player-avatars">
+          <ScoreboardAvatar avatarUrl={this.state.awayPlayerAvatarUrl}
+                            hasService={!!this.state.awayPlayerService} />
+          <ScoreboardAvatar avatarUrl={this.state.homePlayerAvatarUrl}
+                            hasService={!!this.state.homePlayerService} />
+        </div>
         <div className="scoreboard-players">
           <ScoreboardPlayer playerName={this.state.awayPlayerName}
                             playerScore={this.state.awayPlayerScore}
