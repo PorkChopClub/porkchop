@@ -13,7 +13,7 @@ config :chop, Chop.Endpoint,
   cache_static_lookup: false,
   check_origin: false,
   watchers: [
-    {"node_modules/.bin/webpack", ["--watch", "--colors", "--progress"]}
+    node: ["node_modules/.bin/webpack", "--watch", "--colors", "--progress"]
   ]
 
 # Watch static and templates for browser reloading.
