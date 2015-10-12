@@ -1,5 +1,7 @@
 let React = require("react/addons");
 
+let ScoreboardServiceMessage = require("./ScoreboardServiceMessage.react")
+
 let ScoreboardPlayer = module.exports = React.createClass({
   classes() {
     return React.addons.classSet({
@@ -12,6 +14,14 @@ let ScoreboardPlayer = module.exports = React.createClass({
     return !!this.props.serviceCount;
   },
 
+  serviceMessageComponent() {
+    if (this.hasService()) {
+      return (
+        <ScoreboardServiceMessage serviceCount={this.props.serviceCount} />
+      );
+    }
+  },
+
   render() {
     return (
       <div className={this.classes()}>
@@ -21,6 +31,7 @@ let ScoreboardPlayer = module.exports = React.createClass({
             {this.props.playerName}
           </div>
         </div>
+        {this.serviceMessageComponent()}
       </div>
     );
   }
