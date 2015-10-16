@@ -24,7 +24,7 @@ var config = module.exports = {
 
   output: {
     path: join("priv/static"),
-    filename: "js/[name].js"
+    filename: "js/scoreboard.js"
   },
 
   module: {
