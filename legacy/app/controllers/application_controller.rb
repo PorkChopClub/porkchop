@@ -10,9 +10,4 @@ class ApplicationController < ActionController::Base
     @ongoing_match ||= Match.ongoing.first
   end
   helper_method :ongoing_match
-
-  def current_user
-    @current_user ||= User.find_by_id session[:user_id]
-  end
-  helper_method :current_user
 end
