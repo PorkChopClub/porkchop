@@ -10,10 +10,9 @@ Rails.application.routes.draw do
   resources :seasons, only: [:show]
 
   get 'signin', to: redirect('/auth/twitter')
-  delete 'signout', to: 'sessions#destroy', as: 'signout'
 
-  get 'auth/:provider/callback', to: 'sessions#create'
-  post 'auth/:provider/callback', to: 'sessions#create'
+  post 'login', to: 'sessions#authenticate'
+
   get 'auth/failure', to: redirect('/')
 
   namespace :api do

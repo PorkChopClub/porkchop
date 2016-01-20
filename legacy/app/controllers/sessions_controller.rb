@@ -2,22 +2,12 @@ class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
   skip_authorization_check
 
-  def create
-    user = User.from_omniauth omniauth
-    session[:user_id] = user.id
-
-    redirect_to root_url
-  end
-
-  def destroy
-    session.delete(:user_id)
-
-    redirect_to root_url
-  end
-
-  private
-
-  def omniauth
-    request.env["omniauth.auth"]
+  def authenticate
+    if params[:password] == ENV['WRITE_ACCESS_PASSWORD']
+      session[:write_access] = true
+      render nothing: true, status: :ok
+    else
+      render nothing: true, status: :unauthorized
+    end
   end
 end

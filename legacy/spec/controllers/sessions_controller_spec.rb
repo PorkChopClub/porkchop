@@ -2,41 +2,31 @@ require 'rails_helper'
 require 'omniauth_helper'
 
 RSpec.describe SessionsController, type: :controller do
-  describe "GET create" do
-    subject { get :create, provider: :twitter }
+  describe "POST authenticate" do
+    subject { post :authenticate, password: password }
 
     before do
-      request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:twitter]
+      request.env["HTTP_REFERER"] = "/the/future"
     end
 
-    it "creates a user" do
-      expect { subject }.
-        to change { User.count }.
-        from(0).to(1)
+    context "with the wrong password" do
+      let(:password) { "psswrd" }
+
+      it { is_expected.to have_http_status :unauthorized }
+
+      it "sets the authenticates the session" do
+        expect { subject }.not_to change { session[:write_access] }
+      end
     end
 
-    it { is_expected.to redirect_to "/" }
+    context "with the correct password" do
+      let(:password) { "password" }
 
-    it "sets the user_id on the session" do
-      expect { subject }.
-        to change { session[:user_id] }.
-        from(nil)
-    end
-  end
+      it { is_expected.to have_http_status :ok }
 
-  describe "DELETE destroy" do
-    subject { delete :destroy }
-
-    before do
-      session[:user_id] = 1
-    end
-
-    it { is_expected.to redirect_to "/" }
-
-    it "removes the user_id from the session" do
-      expect { subject }.
-        to change { session[:user_id] }.
-        from(1).to(nil)
+      it "sets the authenticates the session" do
+        expect { subject }.to change { session[:write_access] }.from(nil).to(true)
+      end
     end
   end
 end
