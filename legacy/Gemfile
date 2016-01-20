@@ -25,8 +25,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml'
 gem 'simple_form'
 
-gem 'omniauth-twitter'
-gem 'cancancan', '~> 1.10'
 gem 'slack-notifier'
 gem 'bugsnag'
 gem 'elo2'
