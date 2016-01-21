@@ -10,4 +10,9 @@ class ApplicationController < ActionController::Base
     @ongoing_match ||= Match.ongoing.first
   end
   helper_method :ongoing_match
+
+  def write_access?
+    session[:write_access]
+  end
+  helper_method :write_access?
 end

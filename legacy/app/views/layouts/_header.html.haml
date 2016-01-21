@@ -1,11 +1,10 @@
 %header.main-header
   %nav.secondary-navigation
-    %ul
-      - if current_user
-        %li= link_to "Log Out (#{current_user.username})",
-          signout_path, method: :delete
-      - else
-        %li= link_to "Log in with Twitter", "/auth/twitter"
+    - unless write_access?
+      = form_tag login_path do
+        = label_tag "Authenticate:"
+        = text_field_tag :password
+        = submit_tag "Submit"
   %h1.main-title
     = link_to root_path do
       %span PorkChop&nbsp;

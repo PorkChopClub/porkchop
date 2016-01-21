@@ -9,11 +9,7 @@ Rails.application.routes.draw do
   end
   resources :seasons, only: [:show]
 
-  get 'signin', to: redirect('/auth/twitter')
-
   post 'login', to: 'sessions#authenticate'
-
-  get 'auth/failure', to: redirect('/')
 
   namespace :api do
     resources :players, only: :index
