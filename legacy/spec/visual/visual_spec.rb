@@ -1,4 +1,4 @@
-require 'visual_spec_helper'
+require 'visual_helper'
 
 RSpec.describe "Visuals", type: :feature do
   describe "homepage" do
