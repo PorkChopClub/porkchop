@@ -1,6 +1,4 @@
 class Api::StatsController < ApplicationController
-  skip_authorization_check
-
   def win_percentage
     @percentages = Hash[
       Player.all.map do |player|

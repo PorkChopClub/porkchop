@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Api::ActivationsController, type: :controller do
-  include_context "controller authorization"
   render_views
 
   describe "GET index" do
     subject { get :index, format: :json }
-    before { ability.can :read, Player }
 
     let!(:player1) do
       FactoryGirl.create :player, name: "Joe", active: true
@@ -27,10 +25,10 @@ RSpec.describe Api::ActivationsController, type: :controller do
   end
 
   describe "PUT activate" do
-    subject { put :activate, id: player.id, format: :json }
-    before do
-      ability.can :read, Player
-      ability.can :update, player
+    subject do
+      put :activate,
+          { id: player.id, format: :json },
+          { write_access: true }
     end
 
     let(:player) do
@@ -48,10 +46,10 @@ RSpec.describe Api::ActivationsController, type: :controller do
   end
 
   describe "PUT deactivate" do
-    subject { put :deactivate, id: player.id, format: :json }
-    before do
-      ability.can :read, Player
-      ability.can :update, player
+    subject do
+      put :deactivate,
+          { id: player.id, format: :json },
+          { write_access: true }
     end
 
     let(:player) do

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'omniauth_helper'
 
 RSpec.describe SessionsController, type: :controller do
   describe "POST authenticate" do

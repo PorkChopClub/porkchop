@@ -1,11 +1,7 @@
 class Api::OngoingMatchesController < ApplicationController
   before_action :match
 
-  authorize_resource :match,
-                     only: [:show]
-
-  before_action :authorize_update,
-                except: [:show]
+  before_action :require_write_access, except: %i(show)
   before_action :set_next_match
 
   def show

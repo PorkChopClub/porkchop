@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PlayerMatchesController, type: :controller do
-  include_context "controller authorization"
-
   describe "GET index" do
     subject { get :index, player_id: player.to_param }
-    before { ability.can :read, Player }
 
     let(:player) { FactoryGirl.create :player }
 

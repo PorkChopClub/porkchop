@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_authorization_check only: [:index]
+  before_action :require_write_access, except: [:index]
 
   def index
     @recent_matches = Match.finalized.order(finalized_at: :desc).limit(10)

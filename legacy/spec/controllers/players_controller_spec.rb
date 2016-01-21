@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PlayersController, type: :controller do
-  include_context "controller authorization"
-
   describe "GET index" do
     subject { get :index }
-    before { ability.can :read, Player }
 
     let(:players) { FactoryGirl.create_list :player, 3 }
 
@@ -20,7 +17,6 @@ RSpec.describe PlayersController, type: :controller do
 
   describe "GET show" do
     subject { get :show, id: player.to_param }
-    before { ability.can :read, player }
 
     let(:player) { FactoryGirl.create :player }
     let(:stats) { instance_double Stats::Personal }
@@ -47,10 +43,13 @@ RSpec.describe PlayersController, type: :controller do
   end
 
   describe "GET edit" do
-    subject { get :edit, id: player.to_param }
+    subject do
+      get :edit,
+          { id: player.to_param },
+          { write_access: true }
+    end
 
     let(:player) { FactoryGirl.create :player }
-    before { ability.can :update, player }
 
     specify { expect(subject.status).to eq 200 }
     it { is_expected.to render_template :edit }
@@ -62,8 +61,11 @@ RSpec.describe PlayersController, type: :controller do
   end
 
   describe "PATCH update" do
-    subject { patch :update, id: player.to_param, player: player_params }
-    before { ability.can :update, player }
+    subject do
+      patch :update,
+            { id: player.to_param, player: player_params },
+            { write_access: true }
+    end
 
     let(:player) { FactoryGirl.create :player, nickname: "Candice Bergen" }
 

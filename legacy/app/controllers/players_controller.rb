@@ -1,8 +1,9 @@
 class PlayersController < ApplicationController
-  load_and_authorize_resource
+  before_action :load_player, only: %i(show update edit)
+  before_action :require_write_access, only: %i(update edit)
 
   def index
-    @players = @players.order(:name)
+    @players = Player.all.order(:name)
   end
 
   def show
@@ -18,6 +19,10 @@ class PlayersController < ApplicationController
   end
 
   private
+
+  def load_player
+    @player = Player.find(params[:id])
+  end
 
   def player_params
     params.require(:player).permit(:nickname)

@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'capybara/rails'
 require 'capybara/poltergeist'
-require 'omniauth_helper'
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new app,

@@ -1,3 +1,5 @@
 class Api::PlayersController < ApplicationController
-  load_and_authorize_resource
+  def index
+    @players = Player.all
+  end
 end

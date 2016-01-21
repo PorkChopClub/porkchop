@@ -1,11 +1,10 @@
 class ScoreboardsController < ApplicationController
-  skip_authorization_check only: [:show, :edit]
+  before_action :require_write_access, except: %i(show)
 
   def show
     render layout: "minimal"
   end
 
   def edit
-    authorize! :edit, ongoing_match
   end
 end
