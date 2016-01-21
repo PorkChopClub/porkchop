@@ -25,8 +25,11 @@ RSpec.describe "Visuals", type: :feature do
 
   context 'as admin' do
     let!(:user){ FactoryGirl.create :admin_user }
+
     before do
-      visit '/auth/twitter'
+      visit '/'
+      fill_in :password, with: "password"
+      click_button "Submit"
     end
 
     it "create, and score game" do
