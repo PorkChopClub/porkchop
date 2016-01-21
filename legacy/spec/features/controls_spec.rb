@@ -11,9 +11,9 @@ RSpec.describe "controls page" do
 
   scenario "recording a normal game" do
     visit "/"
-    click_on "Log in with Twitter"
-    click_on "Match Controls"
-    # FIXME: Test activating players.
+    fill_in :password, with: "password"
+    click_button "Submit"
+    visit "/scoreboard/edit"
     click_on "Matchmake"
 
     expect(player_name(:home)).to have_content "Candice"
