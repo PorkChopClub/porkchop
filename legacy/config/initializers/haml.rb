@@ -1,1 +1,1 @@
-Haml::Template.options[:remove_whitespace] = true
+Hamlit::Template.options[:remove_whitespace] = true

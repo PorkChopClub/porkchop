@@ -22,7 +22,7 @@ gem 'jquery-rails'
 
 # Frontend
 gem 'jbuilder', '~> 2.0'
-gem 'haml'
+gem 'hamlit'
 gem 'simple_form'
 
 gem 'slack-notifier'
