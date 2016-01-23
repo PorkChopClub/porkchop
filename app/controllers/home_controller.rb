@@ -1,8 +1,15 @@
 class HomeController < ApplicationController
-  before_action :require_write_access, except: [:index]
+  before_action :load_recent_matches
+  before_action :load_ranked_players
+  before_action :load_elo_data
 
-  def index
+  private
+
+  def load_recent_matches
     @recent_matches = Match.finalized.order(finalized_at: :desc).limit(10)
+  end
+
+  def load_ranked_players
     @ranked_players = Player.all.
                       select do |p|
                         p.matches.finalized.count >= 20 &&
@@ -10,7 +17,9 @@ class HomeController < ApplicationController
                       end.
                       sort_by(&:elo).
                       reverse
+  end
 
+  def load_elo_data
     @elo_range = (30.days.ago.to_date..Date.current)
 
     @all_elo_ratings = EloRating.where(created_at: @elo_range).group_by do |rating|
