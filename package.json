@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "watch": "webpack --watch --colors --progress",
+    "compile": "webpack --colors --progress",
     "eslint": "eslint app/webpack"
   },
   "repository": {

@@ -13,32 +13,13 @@ class PorkChop.MatchStream
   }
 
   @polling: (interval) ->
-    if CHOP_HOST
-      socket = new Phoenix.Socket("ws://#{CHOP_HOST}/socket")
-      socket.connect()
+    ajaxOptions = { url: '/api/ongoing_match.json' }
+    matchPolls = Bacon.ajaxPoll(ajaxOptions, interval)
 
-      channel = socket.channel("games:ongoing", {})
-      channel.join()
-
-      matchUpdates = Bacon.fromBinder (sink) ->
-        sink(EMPTY_MATCH)
-
-        channel.on "update", (payload) ->
-          sink(_.defaults(payload.body, EMPTY_MATCH))
-
-      matchUpdates.log("Game Update")
-
-      initialRequest = Bacon.once(ajaxOptions)
-
-      match = matchUpdates.merge(initialRequest).toProperty()
-    else
-      ajaxOptions = { url: '/api/ongoing_match.json' }
-      matchPolls = Bacon.ajaxPoll(ajaxOptions, interval)
-
-      match = matchPolls
-        .map(".match")
-        .mapError -> EMPTY_MATCH
-        .toProperty()
+    match = matchPolls
+      .map(".match")
+      .mapError -> EMPTY_MATCH
+      .toProperty()
 
     new @ match
 
