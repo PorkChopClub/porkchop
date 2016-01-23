@@ -1,0 +1,14 @@
+engines:
+  csslint:
+    enabled: false
+  coffeelint:
+    enabled: false
+  duplication:
+    enabled: true
+ratings:
+  paths:
+    - app/**
+    - lib/**
+exclude_paths:
+  - spec/**/*
+  - vendor/**/
