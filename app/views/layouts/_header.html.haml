@@ -1,0 +1,16 @@
+%header.main-header
+  %nav.secondary-navigation
+    - unless write_access?
+      = form_tag login_path do
+        = label_tag "Authenticate:"
+        = text_field_tag :password
+        = submit_tag "Submit"
+  %h1.main-title
+    = link_to root_path do
+      %span PorkChop&nbsp;
+      %span Club League
+  %nav.primary-navigation
+    %ul
+      %li= link_to "Match Controls", edit_scoreboard_path
+      %li= link_to "Players", players_path
+      %li= link_to "Match History", matches_path
