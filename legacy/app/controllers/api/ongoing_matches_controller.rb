@@ -55,10 +55,6 @@ class Api::OngoingMatchesController < ApplicationController
     @match ||= PingPong::Match.new ongoing_match
   end
 
-  def authorize_update
-    authorize! :update, @match || Match
-  end
-
   def finalize_match
     PingPong::Finalization.new(match).finalize!
   end
