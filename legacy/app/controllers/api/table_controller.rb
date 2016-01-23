@@ -2,7 +2,6 @@ class Api::TableController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :check_table_token
   before_action :match
-  after_action :notify_chop
 
   def home_button
     table.home_button
@@ -20,10 +19,6 @@ class Api::TableController < ApplicationController
   end
 
   private
-
-  def notify_chop
-    ChopNotifier.notify!
-  end
 
   def check_table_token
     unless params[:table_token] == ENV['TABLE_TOKEN']

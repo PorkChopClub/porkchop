@@ -42,8 +42,6 @@ class Match < ActiveRecord::Base
       match.season = ongoing_season
     end
 
-    ChopNotifier.notify!
-
     match
   end
 
