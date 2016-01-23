@@ -1,10 +1,13 @@
 engines:
-  csslint:
-    enabled: false
-  coffeelint:
-    enabled: false
+  rubocop:
+    enabled: true
+  fixme:
+    enabled: true
   duplication:
     enabled: true
+    config:
+      languages:
+        - ruby
 ratings:
   paths:
     - app/**
