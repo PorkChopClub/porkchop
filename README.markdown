@@ -1,15 +1,5 @@
-# Porkchop
+# PorkChop.club
 
-You like ping pong?
+[![Build Status](https://travis-ci.org/porkchopclub/porkchop.svg?branch=master)](https://travis-ci.org/porkchopclub/porkchop)
 
-
-## Getting started
-
-To login in development, visit `/auth/developer`
-
-```
-name: admin
-email: admin@example.com
-```
-
-Or enter any value for name and email to create a new user.
+The [Stembolt](https://stembolt.com/) ping pong scoreboard and stat-tracking application.
