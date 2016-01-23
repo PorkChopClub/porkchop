@@ -3,3 +3,6 @@ services:
   - postgresql
 before_script:
   - cp config/database.yml.travis config/database.yml
+  - bundle exec rake db:test:prepare
+script:
+  - bundle exec rspec
