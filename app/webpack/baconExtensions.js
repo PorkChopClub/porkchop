@@ -1,6 +1,7 @@
 import Bacon from 'baconjs';
 import $ from 'jquery';
 
+// FIXME: We have a fetch polyfill and should use it.
 Bacon.Observable.prototype.ajax = function() {
   return this.flatMapLatest(
     (params) => Bacon.fromPromise($.ajax(params))
