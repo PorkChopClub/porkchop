@@ -17,3 +17,9 @@
 
 # Ignore .env
 /.env
+
+# Node
+/node_modules
+
+# Generated JS
+/app/assets/javascripts/entries

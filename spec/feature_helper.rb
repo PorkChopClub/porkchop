@@ -9,3 +9,10 @@ Capybara.register_driver :poltergeist do |app|
 end
 Capybara.javascript_driver = :poltergeist
 Capybara.default_driver = :poltergeist
+
+RSpec.configure do |config|
+  config.before(:suite) do
+    Porkchop::Application.load_tasks
+    Rake::Task[:webpack].invoke
+  end
+end

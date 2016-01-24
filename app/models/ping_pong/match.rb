@@ -50,14 +50,14 @@ class PingPong::Match < SimpleDelegator
       match.id to_param
 
       match.home_score home_score
-      match.home_player_name home_player.try(:name)
-      match.home_player_nickname home_player.try(:nickname)
-      match.home_player_avatar_url home_player.try(:avatar_url)
+      match.home_player_name home_player.try!(:name)
+      match.home_player_nickname home_player.try!(:nickname)
+      match.home_player_avatar_url home_player.try!(:avatar_url)
 
       match.away_score away_score
-      match.away_player_name away_player.try(:name)
-      match.away_player_nickname away_player.try(:nickname)
-      match.away_player_avatar_url away_player.try(:avatar_url)
+      match.away_player_name away_player.try!(:name)
+      match.away_player_nickname away_player.try!(:nickname)
+      match.away_player_avatar_url away_player.try!(:avatar_url)
 
       match.home_player_service !!home_player_service?
       match.away_player_service !!away_player_service?

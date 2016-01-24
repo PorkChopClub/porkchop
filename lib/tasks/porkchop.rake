@@ -1,6 +1,22 @@
 namespace :porkchop do
-  desc "Generate sample data"
+  desc "Pretend someone is pressing buttons on the table"
+  task press_buttons: [:environment] do
+    loop do
+      sleep rand(0.2..0.8)
+      match = PingPong::Match.new(Match.ongoing.first)
+      controls = PingPong::TableControls.new(match)
+      case rand(2)
+      when 0
+        puts "Home button!"
+        controls.home_button
+      when 1
+        puts "Away button!"
+        controls.away_button
+      end
+    end
+  end
 
+  desc "Generate sample data"
   task create_season: [:environment] do
     league = League.create name: "PorkChop Club"
     season = Season.create games_per_matchup: 4, league: league
