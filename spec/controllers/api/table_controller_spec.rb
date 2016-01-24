@@ -74,7 +74,7 @@ RSpec.describe Api::TableController, type: :controller do
       before do
         expect(PingPong::Rewind).
           to receive(:new).
-          with(match).
+          with(instance_of(PingPong::Match)).
           and_return(rewind)
 
         expect(rewind).
