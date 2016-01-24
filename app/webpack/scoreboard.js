@@ -7,6 +7,22 @@ import ongoingMatch from './observables/ongoingMatch';
 
 $(() => {
   ongoingMatch
+    .map('.comment')
+    .assign(
+      $('.scoreboard-message'),
+      'text'
+    );
+
+  ongoingMatch
+    .map('.comment')
+    .map((message) => !!message)
+    .assign(
+      $('.scoreboard-message-area'),
+      'toggleClass',
+      'message-present'
+    );
+
+  ongoingMatch
     .map('.instructions')
     .assign($('.scoreboard-instructions'), 'text');
 
