@@ -25,7 +25,8 @@ class HomeController < ApplicationController
 
     @all_elo_ratings =
       EloRating.
-      where(created_at: @elo_range).
+      where("created_at > ?", 30.days.ago).
+      order(:created_at).
       group_by { |rating| [rating.player_id, rating.created_at.to_date] }.
       map { |(player_id, date), ratings| [[player_id, date], ratings.last.rating] }.
       to_h
