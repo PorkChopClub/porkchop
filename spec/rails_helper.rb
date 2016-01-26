@@ -8,6 +8,13 @@ require 'factory_girl_rails'
 require 'database_cleaner'
 require 'shoulda/matchers'
 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
