@@ -13,7 +13,7 @@ gem 'dotenv-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails'
 gem 'bourbon'
-gem 'normalize-rails', github: 'markmcconachie/normalize-rails'
+gem 'normalize-rails'
 
 # Javascript
 gem 'uglifier', '>= 1.3.0'
