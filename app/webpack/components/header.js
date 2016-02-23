@@ -8,4 +8,6 @@ module.exports = ($element) => {
 
   isMenuOpen
     .assign($('.main-header-menu-button'), 'toggleClass', 'active');
+  isMenuOpen
+    .assign($element, 'toggleClass', 'controls-open');
 };
