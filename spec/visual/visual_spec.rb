@@ -28,6 +28,8 @@ RSpec.describe "Visuals", type: :feature do
 
     before do
       visit '/'
+      expect(page).to have_css '.main-header-menu-button'
+      find('.main-header-menu-button').click
       fill_in :password, with: "password"
       click_button "Submit"
     end
