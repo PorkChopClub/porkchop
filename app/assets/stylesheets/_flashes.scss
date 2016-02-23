@@ -1,0 +1,21 @@
+.site-flash-wrap {
+  color: white;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+
+  &.notice {
+    background-color: lighten($blue, 15);
+  }
+
+  &.error {
+    background-color: lighten($red, 5);
+  }
+}
+
+.site-flash {
+  @include margin(0 auto);
+  @include padding(0.5rem 0);
+  max-width: 500px;
+  text-align: center;
+}

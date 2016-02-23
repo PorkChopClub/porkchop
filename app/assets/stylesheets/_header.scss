@@ -6,7 +6,7 @@ $header-padding: 20px;
   @include linear-gradient(90deg, $color-porkchop-red 0%, $color-porkchop-red 50%, $color-porkchop-blue 51%, $color-porkchop-blue 100%);
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .main-header {

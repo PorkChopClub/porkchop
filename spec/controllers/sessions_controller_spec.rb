@@ -11,21 +11,21 @@ RSpec.describe SessionsController, type: :controller do
     context "with the wrong password" do
       let(:password) { "psswrd" }
 
-      it { is_expected.to have_http_status :unauthorized }
-
-      it "sets the authenticates the session" do
+      it "doesn't authenticate the session" do
         expect { subject }.not_to change { session[:write_access] }
       end
+
+      it { is_expected.to redirect_to "/the/future" }
     end
 
     context "with the correct password" do
       let(:password) { "password" }
 
-      it { is_expected.to have_http_status :ok }
-
-      it "sets the authenticates the session" do
+      it "authenticates the session" do
         expect { subject }.to change { session[:write_access] }.from(nil).to(true)
       end
+
+      it { is_expected.to redirect_to "/the/future" }
     end
   end
 end
