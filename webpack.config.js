@@ -8,6 +8,7 @@ config.context = __dirname;
 
 config.entry = {
   scoreboard: './app/webpack/scoreboard.js',
+  default: './app/webpack/default.js'
 };
 
 config.output = {

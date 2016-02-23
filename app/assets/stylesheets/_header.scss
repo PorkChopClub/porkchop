@@ -6,7 +6,16 @@ $color-porkchop-red: #CD3117;
 .main-header-wrap {
   @include padding(0 1rem);
   @include linear-gradient(90deg, $color-porkchop-red 0%, $color-porkchop-red 50%, $color-porkchop-blue 51%, $color-porkchop-blue 100%);
-  box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.main-header-shadow {
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 1;
+  @include padding(4px 0 0 0);
+  @include margin(0 0 -4px 0);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .main-header {

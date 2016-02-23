@@ -1,19 +1,20 @@
-.main-header-wrap
-  %header.main-header
-    %h1.site-title
-      = link_to root_path do
-        PorkChop<span>.Club</span>
-    = image_tag "header-paddle.svg", class: "main-header-paddle"
+%nav.main-navigation
+  .main-header-wrap
+    %header.main-header
+      %h1.site-title
+        = link_to root_path do
+          PorkChop<span>.Club</span>
+      = image_tag "header-paddle.svg", class: "main-header-paddle"
+  .main-header-shadow
 
-%nav.primary-navigation
-  %ul
-    %li= link_to "Match Controls", edit_scoreboard_path
-    %li= link_to "Players", players_path
-    %li= link_to "Match History", matches_path
+-# %ul
+-#   %li= link_to "Match Controls", edit_scoreboard_path
+-#   %li= link_to "Players", players_path
+-#   %li= link_to "Match History", matches_path
 
-%nav.secondary-navigation
-  - unless write_access?
-    = form_tag login_path do
-      = label_tag "Authenticate:"
-      = text_field_tag :password
-      = submit_tag "Submit"
+-# %nav.secondary-navigation
+-#   - unless write_access?
+-#     = form_tag login_path do
+-#       = label_tag "Authenticate:"
+-#       = text_field_tag :password
+-#       = submit_tag "Submit"

@@ -1,7 +1,6 @@
-import $ from 'jquery';
+import './shared';
 
-// FIXME: Pull this out into shared setup.
-import './baconExtensions';
+import $ from 'jquery';
 
 import ongoingMatch from './observables/ongoingMatch';
 
