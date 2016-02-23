@@ -13,6 +13,26 @@ $(() => {
     );
 
   ongoingMatch
+    .map('.warmup_timer')
+    .map((seconds) => {
+      let minutesPart = seconds >= 60 ? "1:" : "0:";
+      let secondsPart = seconds % 60 >= 10 ? seconds % 60 : `0${seconds % 60}`;
+      return minutesPart + secondsPart;
+    })
+    .assign(
+      $('.scoreboard-warm-up-countdown'),
+      'text'
+    );
+
+  ongoingMatch
+    .map('.warmup')
+    .assign(
+      $('.scoreboard-warm-up'),
+      'toggleClass',
+      'active'
+    );
+
+  ongoingMatch
     .map('.comment')
     .map((message) => !!message)
     .assign(
@@ -61,10 +81,16 @@ $(() => {
 
   ongoingMatch
     .map('.home_player_name')
-    .assign($('.scoreboard-home-player-name'), 'text');
+    .assign(
+      $('.scoreboard-home-player-name, .scoreboard-warm-up-home-player-name'),
+      'text'
+    );
   ongoingMatch
     .map('.away_player_name')
-    .assign($('.scoreboard-away-player-name'), 'text');
+    .assign(
+      $('.scoreboard-away-player-name, .scoreboard-warm-up-away-player-name'),
+      'text'
+    );
 
   let backgroundmap = (url) => (url ? `url(${url})` : 'none')
   ongoingMatch

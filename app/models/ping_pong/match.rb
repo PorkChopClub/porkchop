@@ -45,29 +45,12 @@ class PingPong::Match < SimpleDelegator
     (away_score - home_score).abs
   end
 
-  def to_builder
-    Jbuilder.new do |match|
-      match.id to_param
+  def warmup?
+    first_service.nil? && warmup_seconds_left > 0
+  end
 
-      match.home_score home_score
-      match.home_player_name home_player.try!(:name)
-      match.home_player_nickname home_player.try!(:nickname)
-      match.home_player_avatar_url home_player.try!(:avatar_url)
-
-      match.away_score away_score
-      match.away_player_name away_player.try!(:name)
-      match.away_player_nickname away_player.try!(:nickname)
-      match.away_player_avatar_url away_player.try!(:avatar_url)
-
-      match.home_player_service !!home_player_service?
-      match.away_player_service !!away_player_service?
-      match.finished finished?
-      match.finalized finalized?
-      match.deleted destroyed?
-      match.league_match league_match?
-      match.comment comment || ""
-      match.instructions instructions || ""
-    end
+  def warmup_seconds_left
+    [90 - (Time.zone.now - created_at.to_time).to_i, 0].max
   end
 
   private

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'timecop'
 
 RSpec.describe PingPong::Match do
   let(:ping_pong_match) { described_class.new match }
@@ -319,5 +320,44 @@ RSpec.describe PingPong::Match do
     end
 
     it { is_expected.to eq 'foo' }
+  end
+
+  describe "#warmup?" do
+    subject { ping_pong_match.warmup? }
+
+    context "when service isn't selected" do
+      let(:match) { FactoryGirl.create :match, first_service: nil }
+
+      context "when the game was created less than 90 seconds ago" do
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the game was created more than 90 seconds ago" do
+        before { match.created_at = 91.seconds.ago }
+        it { is_expected.to be_falsy }
+      end
+    end
+
+    context "when service is selected" do
+      let(:match) { FactoryGirl.create :match }
+      it { is_expected.to be_falsy }
+    end
+  end
+
+  describe "#warmup_seconds_left" do
+    subject { ping_pong_match.warmup_seconds_left }
+
+    before { Timecop.freeze }
+    after { Timecop.return }
+
+    context "when the game was created less than 90 seconds ago" do
+      let(:match) { FactoryGirl.create :match, created_at: 39.seconds.ago }
+      it { is_expected.to eq 51 }
+    end
+
+    context "when the game was created more than 90 seconds ago" do
+      let(:match) { FactoryGirl.create :match, created_at: 99.seconds.ago }
+      it { is_expected.to eq 0 }
+    end
   end
 end

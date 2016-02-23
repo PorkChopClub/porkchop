@@ -144,3 +144,31 @@ $bottom-bar-height: 120px;
 
 .scoreboard-home-player-avatar { right: 0; }
 .scoreboard-away-player-avatar { left: 0;  }
+
+.scoreboard-warm-up {
+  @include padding(30px);
+  opacity: 0;
+  position: absolute;
+  background-color: $blue;
+  width: 100%;
+  height: 100%;
+  @include transition(opacity 100ms ease-in-out);
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.scoreboard-warm-up-matchup {
+  color: #fff;
+  font-size: 60px;
+  border-bottom: 8px solid #fff;
+}
+
+.scoreboard-warm-up-countdown {
+  position: absolute;
+  right: 30px;
+  bottom: 8px;
+  color: #fff;
+  font-size: 64px;
+}
