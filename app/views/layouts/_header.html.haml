@@ -5,12 +5,12 @@
         = link_to root_path do
           PorkChop<span>.Club</span>
       = image_tag "header-paddle.svg", class: "main-header-paddle"
-      .main-header-menu-button.active
-
--# %ul
--#   %li= link_to "Match Controls", edit_scoreboard_path
--#   %li= link_to "Players", players_path
--#   %li= link_to "Match History", matches_path
+      .main-header-menu-button
+  .header-controls
+    %ul
+      %li= link_to "Match Controls", edit_scoreboard_path
+      %li= link_to "Players", players_path
+      %li= link_to "Match History", matches_path
 
 -# %nav.secondary-navigation
 -#   - unless write_access?
