@@ -52,6 +52,7 @@ $header-padding: 20px;
   border-bottom: $border;
   position: relative;
   cursor: pointer;
+  @include transition(125ms);
 
   &:before,
   &:after {
@@ -63,5 +64,18 @@ $header-padding: 20px;
     right: 0;
     left: 0;
     position: absolute;
+    @include transition(125ms);
+  }
+
+  &.active {
+    border-color: transparent;
+
+    &:before {
+      @include transform(rotate(-45deg));
+    }
+
+    &:after {
+      @include transform(rotate(45deg));
+    }
   }
 }
