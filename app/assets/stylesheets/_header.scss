@@ -46,7 +46,7 @@ $header-padding: 20px;
   $bar-height: 4px;
   float: right;
   @include size($button-width $button-height);
-  @include margin(($header-height - $button-height) / 2);
+  @include margin((($header-height - $button-height) / 2) 0);
   $border: $bar-height solid white;
   border-top: $border;
   border-bottom: $border;
