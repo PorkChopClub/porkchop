@@ -11,13 +11,13 @@ select {
 a {
   &:link,
   &:visited {
-    color: $green;
+    color: $blue;
     text-decoration: none;
   }
 
   &:hover,
   &:active {
-    color: darken($green, 10);
+    color: lighten($blue, 10);
     text-decoration: underline;
   }
 }

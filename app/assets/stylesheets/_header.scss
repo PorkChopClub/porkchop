@@ -1,7 +1,5 @@
 $header-height: 48px;
 $header-padding: 20px;
-$color-porkchop-blue: #24306F;
-$color-porkchop-red: #CD3117;
 
 .main-header-wrap {
   @include padding(0 1rem);
@@ -42,11 +40,28 @@ $color-porkchop-red: #CD3117;
   height: $header-height;
 }
 
-.secondary-navigation {
-  background-color: darken($off-white, 3);
-  text-align: right;
+.main-header-menu-button {
+  $button-width: 28px;
+  $button-height: 24px;
+  $bar-height: 4px;
+  float: right;
+  @include size($button-width $button-height);
+  @include margin(($header-height - $button-height) / 2);
+  $border: $bar-height solid white;
+  border-top: $border;
+  border-bottom: $border;
+  position: relative;
+  cursor: pointer;
 
-  a {
-    color: $dark-grey;
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    height: $bar-height;
+    background-color: white;
+    top: ($button-height - 3 * $bar-height) / 2;
+    right: 0;
+    left: 0;
+    position: absolute;
   }
 }
