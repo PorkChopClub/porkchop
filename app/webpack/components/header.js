@@ -4,7 +4,7 @@ module.exports = ($element) => {
   let isMenuOpen =
     $element
       .asEventStream('click', '.main-header-menu-button')
-      .scan(true, (value) => !value); // FIXME: this should not default to true
+      .scan(false, (value) => !value);
 
   isMenuOpen
     .assign($('.main-header-menu-button'), 'toggleClass', 'active');
