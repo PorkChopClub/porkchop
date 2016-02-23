@@ -313,7 +313,7 @@ RSpec.describe PingPong::Match do
     before do
       expect(PingPong::Commentator).
         to receive(:new).
-          with(match: match) { commentator }
+        and_return(commentator)
 
       expect(commentator).to receive(:comment) { 'foo' }
     end

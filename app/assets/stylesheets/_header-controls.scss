@@ -1,0 +1,87 @@
+.header-controls-wrap {
+  display: none;
+  @include padding(1rem);
+  background-color: $green;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+
+  .controls-open & {
+    display: block;
+  }
+
+  .requires-write-access {
+    display: none;
+
+    .has-write-access & {
+      display: block;
+    }
+  }
+
+  .has-write-access & .hide-for-write-access {
+    display: none;
+  }
+}
+
+.header-controls {
+  @include margin(0 auto);
+  max-width: 900px;
+  color: white;
+}
+
+.site-navigation {
+  @include padding(0);
+  @include margin(0);
+  list-style-type: none;
+
+  li {
+    font-size: 14px;
+    @include padding(0.25rem 0);
+  }
+
+  a {
+    display: block;
+    color: white;
+    font-weight: $font-weight-bold;
+  }
+}
+
+.authentication-form {
+  @include margin(1rem auto 0 auto);
+  max-width: 256px;
+  background-color: darken($green, 5%);
+  @include padding(0.5rem);
+  text-align: center;
+
+  label {
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.1em;
+    display: block;
+  }
+
+  input[type=password] {
+    @include padding(0.25rem);
+    @include margin(0.5rem 0);
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    height: 2rem;
+    line-height: 1.5rem;
+    outline: none;
+  }
+
+  input[type=submit] {
+    @include margin(0.125rem 0);
+    @include padding(0.25rem 0.5rem);
+    background-color: $blue;
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.1em;
+    border: none;
+  }
+}

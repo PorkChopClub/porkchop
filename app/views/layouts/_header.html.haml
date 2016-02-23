@@ -1,16 +1,26 @@
-%header.main-header
-  %nav.secondary-navigation
-    - unless write_access?
+%nav.main-navigation{ class: [write_access? && "has-write-access"] }
+  .main-header-wrap
+    %header.main-header
+      %h1.site-title
+        = link_to root_path do
+          PorkChop<span>.Club</span>
+      = image_tag "header-paddle.svg", class: "main-header-paddle"
+      .main-header-menu-button
+  .header-controls-wrap
+    .header-controls
+      %ul.site-navigation
+        %li.requires-write-access= link_to "Match Controls", edit_scoreboard_path
+        %li= link_to "Players", players_path
+        %li= link_to "Match History", matches_path
+
+    .authentication-form.hide-for-write-access
       = form_tag login_path do
-        = label_tag "Authenticate:"
-        = text_field_tag :password
+        = label_tag "Authenticate"
+        = password_field_tag :password
+        %br
         = submit_tag "Submit"
-  %h1.main-title
-    = link_to root_path do
-      %span PorkChop&nbsp;
-      %span Club League
-  %nav.primary-navigation
-    %ul
-      %li= link_to "Match Controls", edit_scoreboard_path
-      %li= link_to "Players", players_path
-      %li= link_to "Match History", matches_path
+
+  - flash.each do |name, message|
+    .site-flash-wrap{ class: name }
+      .site-flash= message
+

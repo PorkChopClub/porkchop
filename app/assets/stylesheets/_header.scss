@@ -1,93 +1,81 @@
+$header-height: 48px;
+$header-padding: 20px;
+
+.main-header-wrap {
+  @include padding(0 1rem);
+  @include linear-gradient(90deg, $color-porkchop-red 0%, $color-porkchop-red 50%, $color-porkchop-blue 51%, $color-porkchop-blue 100%);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 3;
+}
+
 .main-header {
-  line-height: 2.5;
-  font-size: modular-scale(1);
-  background-color: $off-white;
+  @include clearfix;
+  @include margin(0 auto);
+  max-width: 1024px - 2 * $header-padding;
+  background-color: $color-porkchop-blue;
 
-  a {
-    color: inherit;
-    text-decoration: none;
+  .site-title {
+    float: left;
+    line-height: $header-height;
+    font-size: 24px;
+    background-color: $color-porkchop-red;
 
-    &:hover,
-    &:active {
-      text-decoration: underline;
+    a {
+      font-weight: bold;
+      color: #fff;
+
+      span {
+        font-size: 16px;
+        font-weight: 400;
+        // Hack so it doesn't affect the height of the .site-title element.
+        line-height: 0;
+      }
     }
   }
 }
 
-.main-title {
-  padding: 0.5em 0.5rem;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: inherit;
-  line-height: 1.3;
-
-  a {
-    &:link,
-    &:visited {
-      display: inline-block;
-      border-radius: 2px;
-      text-decoration: none;
-    }
-
-    &:hover,
-    &:active {
-    }
-  }
-
-  span {
-    color: $dark-grey;
-
-    &:first-child {
-      font-weight: $font-weight-light;
-    }
-
-    &:last-child {
-      font-weight: $font-weight-bold;
-    }
-  }
+.main-header-paddle {
+  float: left;
+  height: $header-height;
 }
 
-.primary-navigation,
-.secondary-navigation {
-  font-size: modular-scale(-1);
-  line-height: 1.6;
+.main-header-menu-button {
+  $button-width: 28px;
+  $button-height: 24px;
+  $bar-height: 4px;
+  float: right;
+  @include size($button-width $button-height);
+  @include margin((($header-height - $button-height) / 2) 0);
+  $border: $bar-height solid white;
+  border-top: $border;
+  border-bottom: $border;
+  position: relative;
+  cursor: pointer;
+  @include transition(125ms);
 
-  @include phone {
-    text-align: center;
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    height: $bar-height;
+    background-color: white;
+    top: ($button-height - 3 * $bar-height) / 2;
+    right: 0;
+    left: 0;
+    position: absolute;
+    @include transition(125ms);
   }
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0 0.5rem;
-  }
+  &.active {
+    border-color: transparent;
 
-  li {
-    display: inline;
-
-    margin-right: 0.75em;
-
-    &:last-child {
-      margin-right: 0;
+    &:before {
+      @include transform(rotate(-45deg));
     }
-  }
-}
 
-.primary-navigation {
-  background-color: $dark-grey;
-  @include padding(0.25em null);
-
-  a {
-    color: $off-white;
-    text-transform: uppercase;
-  }
-}
-
-.secondary-navigation {
-  background-color: darken($off-white, 3);
-  text-align: right;
-
-  a {
-    color: $dark-grey;
+    &:after {
+      @include transform(rotate(45deg));
+    }
   }
 }

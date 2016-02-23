@@ -11,6 +11,8 @@ RSpec.describe "controls page" do
 
   scenario "recording a normal game" do
     visit "/"
+    expect(page).to have_css '.main-header-menu-button'
+    find('.main-header-menu-button').click
     fill_in :password, with: "password"
     click_button "Submit"
     visit "/scoreboard/edit"
