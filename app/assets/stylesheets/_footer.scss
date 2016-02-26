@@ -1,21 +1,46 @@
-.main-footer-information {
-  font-size: modular-scale(-1);
-  color: lighten($dark-grey, 25);
+.main-footer-wrapper,
+.footer-sitemap-wrapper {
+  color: white;
+}
+
+.main-footer,
+.footer-sitemap {
+  @include margin(null auto);
+  @include padding(null 1rem);
+  max-width: $width-max;
 
   a {
-    color: lighten($dark-grey, 40);
+    color: inherit;
     text-decoration: underline;
   }
+}
 
-  h3 {
-    color: lighten($dark-grey, 45);
-    font-size: modular-scale(0);
-    text-transform: uppercase;
-    font-weight: $font-weight-medium;
-    letter-spacing: 0.05em;
-  }
+.main-footer-wrapper {
+  margin-top: 3rem;
+  padding: 3rem 0;
+  background: $color-porkchop-blue;
+  box-shadow: 0 -4px 0 rgba(0, 0, 0, 0.1);
 
   p {
     margin-bottom: 0;
+  }
+}
+
+.footer-sitemap-wrapper {
+  padding: 0.5rem 0;
+  background: $color-porkchop-red;
+}
+
+.footer-sitemap {
+  list-style: none;
+
+  li {
+    @include margin(0.5rem null);
+    display: inline-block;
+    font-size: 18px;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
   }
 }

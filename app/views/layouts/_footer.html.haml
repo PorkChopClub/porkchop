@@ -1,10 +1,17 @@
-%footer.main-footer.porkbox-dark
-  .main-footer-information
+.main-footer-wrapper
+  %footer.main-footer
     %h3 About PorkChop Club
     %p
       PorkChop Club began as a pure JavaScript scoreboard for helping us keep track
-      of service in our table tennis matches at <a href="http://freerunningtech.com">FreeRunning Technologies</a>.
+      of service in our table tennis matches at <a href="https://stembolt.com">Stembolt</a>.
       Named for the <a href="http://en.wikipedia.org/wiki/Table_tennis#Chop">chop</a>
       shot and its use of <a href="https://github.com/baconjs/bacon.js/">Bacon.js</a>,
       it quickly evolved into a full fledged Rails application that tracks our
       game records, Elo ratings, and achievements.
+
+.footer-sitemap-wrapper
+  %ul.footer-sitemap
+    - if write_access?
+      %li= link_to "Match Controls", edit_scoreboard_path
+    %li= link_to "Players", players_path
+    %li= link_to "Match History", matches_path

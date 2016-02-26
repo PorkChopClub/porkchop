@@ -2,7 +2,9 @@
 @import "modular-scale";
 @import "bourbon";
 
-@import "palette";
+@import "setup/layout";
+@import "setup/palette";
+
 @import "animations";
 @import "base";
 @import "tables";
