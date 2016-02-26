@@ -1,4 +1,5 @@
 $bottom-bar-height: 120px;
+$false-border-margin: 32px;
 
 .scoreboard {
   position: fixed;
@@ -8,15 +9,13 @@ $bottom-bar-height: 120px;
 
 .scoreboard-player {
   position: absolute;
-  width: 50%;
-  height: $bottom-bar-height;
+  height: 100%;
   bottom: 0;
-  color: $dark-grey;
-  background-color: $off-white;
+  color: white;
+  width: 45%;
 
   &.has-service {
-    color: $off-white;
-    background-color: $blue;
+    width: 55%;
   }
 }
 
@@ -24,43 +23,50 @@ $bottom-bar-height: 120px;
 .scoreboard-home-player { right: 0; }
 
 .scoreboard-player-name {
-  font-size: modular-scale(5);
+  position: absolute;
+  bottom: 0;
+  font-size: modular-scale(3);
   line-height: $bottom-bar-height;
   padding: 0 modular-scale(2);
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+  $player-name-shadow: 0 0 16px $blue;
+  text-shadow: $player-name-shadow, $player-name-shadow, $player-name-shadow;
+  text-align: center;
+  font-weight: 800;
+  opacity: 0.75;
+  @include transition(ease-in 250ms);
 
-  .scoreboard-home-player & {
-    text-align: left;
+  // Hacks to make the player names centered on the images which are in a
+  // larger container.
+  width: calc(100% + #{$false-border-margin});
+  .scoreboard-away-player & { left:  -$false-border-margin; }
+  .scoreboard-home-player & { right: -$false-border-margin; }
+
+  .has-service & {
+    font-size: modular-scale(5);
+    bottom: 9px;
+    opacity: 1;
   }
 
-  .scoreboard-away-player & {
-    text-align: right;
+  .message-present & {
+    opacity: 0.25;
   }
 }
 
 .scoreboard-player-score {
   position: absolute;
-  bottom: 0;
-  font-size: modular-scale(10);
+  top: 0;
+  font-size: modular-scale(9);
+  font-weight: 800;
   line-height: 1;
-  text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.15);
-  padding: 0 modular-scale(2);
-  text-align: center;
-  min-width: 375px;
-  background-color: $off-white;
-
-  .has-service & {
-    background-color: $blue;
-  }
+  padding: 0 modular-scale(5);
+  line-height: 1.4;
 
   .scoreboard-home-player & {
     right: 0;
-    border-radius: modular-scale(2) 0 0 0;
   }
 
   .scoreboard-away-player & {
     left: 0;
-    border-radius: 0 modular-scale(2) 0 0;
   }
 }
 
@@ -68,12 +74,12 @@ $bottom-bar-height: 120px;
   position: absolute;
   top: 0;
   right: 0;
-  bottom: $bottom-bar-height;
+  bottom: 0;
   left: 0;
   background-color: darken($blue, 15);
 
   &.league-match {
-    background-color: darken($green, 10);
+    background-color: darken($green, 12%);
   }
 }
 
@@ -82,7 +88,7 @@ $bottom-bar-height: 120px;
   top: 50%;
   left: 50%;
   @include transform(translate(-50%, -50%));
-  font-size: modular-scale(7);
+  font-size: modular-scale(6);
   width: 100%;
   max-height: 100%;
   padding: 0 modular-scale(7);
@@ -101,22 +107,29 @@ $bottom-bar-height: 120px;
 
 .scoreboard-league-match {
   position: absolute;
+  top: 0;
   width: 100%;
   text-align: center;
   opacity: 0.5;
   color: white;
-  font-size: modular-scale(5);
+  font-size: modular-scale(4);
+  font-weight: bold;
+  letter-spacing: 0.025em;
+  line-height: 2;
 }
 
 .scoreboard-instructions {
   position: absolute;
-  bottom: 16px;
+  bottom: 24px + $false-border-margin;
   font-size: modular-scale(3);
   width: 100%;
   text-align: center;
   line-height: 1.2;
   color: $yellow;
   text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 
   -webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
@@ -124,18 +137,33 @@ $bottom-bar-height: 120px;
   -webkit-animation-duration: 1s;
 }
 
+.scoreboard-false-border {
+  border: 5px solid white;
+  position: absolute;
+  top: $false-border-margin;
+  right: $false-border-margin;
+  bottom: $false-border-margin;
+  left: $false-border-margin;
+}
+
 .scoreboard-home-player-avatar,
 .scoreboard-away-player-avatar {
   position: absolute;
   top: 0;
-  width: 50%;
   height: 100%;
   background-repeat: none;
-  background-size: contain;
+  background-size: 100% auto;
   background-position: 50% 100%;
   background-repeat: no-repeat;
   opacity: 1.0;
-  @include transition(opacity 200ms ease-out);
+  @include transition(250ms ease-out);
+  opacity: 0.5;
+  width: 45%;
+
+  &.has-service {
+    width: 55%;
+    opacity: 1;
+  }
 
   .message-present & {
     opacity: 0.25;

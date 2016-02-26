@@ -16,7 +16,7 @@ $(() => {
     .map('.comment')
     .map((message) => !!message)
     .assign(
-      $('.scoreboard-message-area'),
+      $('.scoreboard'),
       'toggleClass',
       'message-present'
     );
@@ -40,14 +40,14 @@ $(() => {
   ongoingMatch
     .map('.away_player_service')
     .assign(
-      $('.scoreboard-away-player'),
+      $('.scoreboard-away-player, .scoreboard-away-player-avatar'),
       'toggleClass',
       'has-service'
     );
   ongoingMatch
     .map('.home_player_service')
     .assign(
-      $('.scoreboard-home-player'),
+      $('.scoreboard-home-player, .scoreboard-home-player-avatar'),
       'toggleClass',
       'has-service'
     );
