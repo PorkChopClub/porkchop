@@ -68,7 +68,7 @@ $bottom-bar-height: 120px;
   position: absolute;
   top: 0;
   right: 0;
-  bottom: $bottom-bar-height;
+  bottom: 0;
   left: 0;
   background-color: darken($blue, 15);
 
@@ -122,6 +122,16 @@ $bottom-bar-height: 120px;
   -webkit-animation-iteration-count: infinite;
   -moz-animation-timing-function: linear;
   -webkit-animation-duration: 1s;
+}
+
+.scoreboard-false-border {
+  border: 5px solid white;
+  position: absolute;
+  $false-border-margin: 32px;
+  top: $false-border-margin;
+  right: $false-border-margin;
+  bottom: $false-border-margin;
+  left: $false-border-margin;
 }
 
 .scoreboard-home-player-avatar,
