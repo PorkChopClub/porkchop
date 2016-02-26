@@ -79,7 +79,7 @@ $false-border-margin: 32px;
   background-color: darken($blue, 15);
 
   &.league-match {
-    background-color: darken($green, 10);
+    background-color: darken($green, 12%);
   }
 }
 
@@ -107,22 +107,29 @@ $false-border-margin: 32px;
 
 .scoreboard-league-match {
   position: absolute;
+  top: 0;
   width: 100%;
   text-align: center;
   opacity: 0.5;
   color: white;
-  font-size: modular-scale(5);
+  font-size: modular-scale(4);
+  font-weight: bold;
+  letter-spacing: 0.025em;
+  line-height: 2;
 }
 
 .scoreboard-instructions {
   position: absolute;
-  bottom: 16px;
+  bottom: 24px + $false-border-margin;
   font-size: modular-scale(3);
   width: 100%;
   text-align: center;
   line-height: 1.2;
   color: $yellow;
   text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 
   -webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
