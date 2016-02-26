@@ -29,7 +29,7 @@ namespace :porkchop do
     Player.update_all active: true
     Match.setup!
 
-    90.downto(0).each do |n|
+    14.downto(0).each do |n|
       puts "Generating matches #{n} days ago."
       finalized_at = n.days.ago.at_beginning_of_day + rand(0..23).hours + rand(0..59).minutes + rand(0..59).seconds
       rand(0..4).times do
