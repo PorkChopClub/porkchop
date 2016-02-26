@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
   before_action :require_write_access, only: %i(new create)
 
   def index
-    @matches = @matches.finalized.order(finalized_at: :desc)
+    @matches = Match.finalized.order(finalized_at: :desc)
   end
 
   def show
