@@ -9,8 +9,11 @@ class Match < ActiveRecord::Base
 
   has_one :season_match, dependent: :destroy
   has_one :season, through: :season_match
+  has_one :betting_info, dependent: :destroy
 
   validates :home_player, :away_player, presence: true
+
+  after_create :record_odds
 
   scope :ongoing, -> { where finalized_at: nil }
   scope :finalized, -> { where.not finalized_at: nil }
@@ -106,5 +109,13 @@ class Match < ActiveRecord::Base
 
   def loser
     Player.find(([home_player_id, away_player_id] - [victor_id]).first)
+  end
+
+  private
+
+  def record_odds
+    if home_player.matches_against(away_player).count >= Betting::MINIMUM_MATCH_COUNT
+      create_betting_info!
+    end
   end
 end
