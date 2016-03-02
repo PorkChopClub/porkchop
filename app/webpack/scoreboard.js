@@ -125,4 +125,22 @@ $(() => {
       'css',
       'background-image'
     );
+
+  ongoingMatch
+    .map('.away_player_overlays')
+    .map('.flames')
+    .assign(
+      $('.scoreboard-away-player-avatar .flames'),
+      'toggleClass',
+      'active'
+    );
+
+  ongoingMatch
+    .map('.home_player_overlays')
+    .map('.flames')
+    .assign(
+      $('.scoreboard-home-player-avatar .flames'),
+      'toggleClass',
+      'active'
+    );
 });
