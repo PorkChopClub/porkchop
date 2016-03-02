@@ -142,6 +142,22 @@ $bottom-bar-height: 120px;
   }
 }
 
+.scoreboard-overlay {
+  @include position(absolute, 0);
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  &.flames {
+    background-position: 0% 100%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: image-url('overlays/flames.gif');
+  }
+}
+
 .scoreboard-home-player-avatar { right: 0; }
 .scoreboard-away-player-avatar { left: 0;  }
 

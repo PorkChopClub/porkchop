@@ -1,4 +1,4 @@
-Player.create! name: "Jared Norman", avatar_url: "http://i.imgur.com/idCKWDT.png"
+Player.create! name: "Jared Norman", avatar_url: "/avatars/jared.png"
 Player.create! name: "Gray Gilmore", avatar_url: "http://i.imgur.com/s7d1vVo.png"
 Player.create! name: "Sean Taylor"
 Player.create! name: "Naomi Aro"
