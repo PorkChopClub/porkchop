@@ -109,6 +109,7 @@ $(() => {
   let backgroundmap = (url) => (url ? `url(${url})` : 'none')
   ongoingMatch
     .map('.home_player_avatar_url')
+    .map((url) => (url || '/avatars/default.png'))
     .map(backgroundmap)
     .assign(
       $('.scoreboard-home-player-avatar'),
@@ -117,6 +118,7 @@ $(() => {
     );
   ongoingMatch
     .map('.away_player_avatar_url')
+    .map((url) => (url || '/avatars/default.png'))
     .map(backgroundmap)
     .assign(
       $('.scoreboard-away-player-avatar'),
