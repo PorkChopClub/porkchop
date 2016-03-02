@@ -7,6 +7,7 @@ RSpec.describe Match, type: :model do
 
   it { is_expected.to have_one :season_match }
   it { is_expected.to have_one :season }
+  it { is_expected.to have_one :betting_info }
 
   it { is_expected.to validate_presence_of :home_player }
   it { is_expected.to validate_presence_of :away_player }
@@ -67,6 +68,26 @@ RSpec.describe Match, type: :model do
         subject
         expect(subject.season).to eq season
       end
+    end
+  end
+
+  describe "#betting_info" do
+    subject { match.betting_info }
+
+    let(:match) { FactoryGirl.create :match, home_player: kevin, away_player: murphy }
+    let(:kevin) { FactoryGirl.create :player, name: "Kevin" }
+    let(:murphy) { FactoryGirl.create :player, name: "Murphy" }
+
+    before { FactoryGirl.create_list :complete_match, match_count, home_player: kevin, away_player: murphy }
+
+    context "when the players have played at least 10 games" do
+      let(:match_count) { 10 }
+      it { is_expected.to be_a BettingInfo }
+    end
+
+    context "when the players haven't played at least 10 games" do
+      let(:match_count) { 9 }
+      it { is_expected.to be_nil }
     end
   end
 

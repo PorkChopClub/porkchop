@@ -17,7 +17,18 @@ json.match do
   json.league_match @match.league_match?
   json.comment @match.comment || ""
   json.instructions @match.instructions || ""
+
+  json.warmup @match.warmup?
+  json.warmup_timer @match.warmup_seconds_left
+
+  json.betting_info do
+    if @match.betting_info
+      json.favourite @match.betting_info.favourite.try!(:name)
+      json.spread @match.betting_info.spread
+    end
+  end
 end
+
 json.next_match do
   json.players @next_match.players, :name, :nickname, :avatar_url
 end
