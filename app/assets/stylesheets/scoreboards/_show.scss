@@ -172,3 +172,15 @@ $bottom-bar-height: 120px;
   color: #fff;
   font-size: 64px;
 }
+
+.scoreboard-warm-up-data {
+  font-size: 75px;
+  color: white;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    @include margin(0.5em 0);
+  }
+}

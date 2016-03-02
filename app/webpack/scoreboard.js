@@ -13,6 +13,20 @@ $(() => {
     );
 
   ongoingMatch
+    .map('.betting_info')
+    .map((bettingInfo) => {
+      if (bettingInfo) {
+        return `${bettingInfo.favourite} (+${bettingInfo.spread})`;
+      } else {
+        return 'Insufficient matches played'
+      }
+    })
+    .assign(
+      $('.scoreboard-warm-up-spread'),
+      'text'
+    )
+
+  ongoingMatch
     .map('.warmup_timer')
     .map((seconds) => {
       let minutesPart = seconds >= 60 ? "1:" : "0:";
