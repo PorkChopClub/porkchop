@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "watch": "webpack --watch --colors --progress",
-    "compile": "webpack --colors --progress",
+    "compile": "webpack --no-colors --optimize-minimize --optimize-dedupe --optimize-occurence-order",
     "eslint": "eslint app/webpack"
   },
   "repository": {
