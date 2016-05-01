@@ -6,9 +6,16 @@ before_script:
   - bundle exec rake db:test:prepare
 script:
   - bundle exec rspec
+env:
+  global:
+    - NPM_CONFIG_PROGRESS="false"
 addons:
   code_climate:
     repo_token: 7874401dea920ec562008f8735921e38a01ff559f4377bcedbdba1a8b54145ca
+cache:
+  bundler: true
+  directories:
+  - node_modules
 deploy:
   provider: heroku
   api_key:
