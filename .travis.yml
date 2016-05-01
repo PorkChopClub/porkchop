@@ -9,3 +9,10 @@ script:
 addons:
   code_climate:
     repo_token: 7874401dea920ec562008f8735921e38a01ff559f4377bcedbdba1a8b54145ca
+deploy:
+  provider: heroku
+  api_key:
+    secure: CHFON45m9nMNIeVqKbAnGu3yRRHPQMr9rOYtXQIqPWX/I/xg1WBOUyLWGrTLnMwxBBU4W18dmUvDh0C0USop7WrWFIzyEs2Gkm+kLEI/pwrmsi/vewS/m3WxirjYPA4xXn5eq+jE5qIa4TkKPV1DQzq1n73GvH/267I2er39XZM=
+  app: porkchop-prod
+  on:
+    repo: porkchopclub/porkchop
