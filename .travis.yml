@@ -23,3 +23,6 @@ deploy:
   app: porkchop-prod
   on:
     repo: porkchopclub/porkchop
+  run:
+    - "rake db:migrate"
+    - restart
