@@ -159,8 +159,6 @@ GEM
     rake (10.5.0)
     rake-compiler (0.9.5)
       rake
-    rdoc (4.2.2)
-      json (~> 1.4)
     rspec-core (3.4.3)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -196,9 +194,6 @@ GEM
       sprockets (> 2.11)
       sprockets-rails
       tilt
-    sdoc (0.4.1)
-      json (~> 1.7, >= 1.7.7)
-      rdoc (~> 4.0)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
     simple_form (3.2.1)
@@ -266,7 +261,6 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   sassc-rails
-  sdoc (~> 0.4.0)
   shoulda-matchers
   simple_form
   slack-notifier
