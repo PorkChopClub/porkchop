@@ -8,8 +8,6 @@ gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
 gem 'rails', '~> 4.2.2'
 gem 'pg'
 gem 'puma'
-gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'dotenv-rails'
 
 # CSS
 gem 'sass-rails', '~> 5.0'
@@ -32,11 +30,14 @@ gem 'bugsnag'
 gem 'elo2'
 gem 'faraday'
 
-gem 'stackprof', require: false
-gem 'flamegraph', require: false
-gem 'rack-mini-profiler', require: false
+group :development do
+  gem 'stackprof', require: false
+  gem 'flamegraph', require: false
+  gem 'rack-mini-profiler', require: false
+end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'
 
