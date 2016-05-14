@@ -31,7 +31,7 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def destroy
-    perform match.try! :destroy
+    perform(match.present? && match.destroy)
   end
 
   def matchmake
