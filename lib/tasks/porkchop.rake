@@ -18,8 +18,8 @@ namespace :porkchop do
 
   desc "Generate sample data"
   task create_season: [:environment] do
-    league = League.create name: "PorkChop Club"
-    season = Season.create games_per_matchup: 4, league: league
+    league = League.create! name: "PorkChop Club"
+    season = Season.create! games_per_matchup: 4, league: league
     season.players << Player.all
   end
 
@@ -33,7 +33,7 @@ namespace :porkchop do
       puts "Generating matches #{n} days ago."
       finalized_at = n.days.ago.at_beginning_of_day + rand(0..23).hours + rand(0..59).minutes + rand(0..59).seconds
       rand(0..4).times do
-        match = Match.ongoing.last
+        match = Match.ongoing.last!
 
         scores = [11, rand(0..9)].shuffle
         FactoryGirl.create_list :point, scores[0], victor: match.home_player, match: match
