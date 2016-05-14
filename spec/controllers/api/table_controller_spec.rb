@@ -17,7 +17,7 @@ RSpec.describe Api::TableController, type: :controller do
 
   describe "#home_button" do
     subject do
-      put :home_button, table_token: token
+      put :home_button, params: { table_token: token }
     end
 
     include_examples "without valid token"
@@ -40,7 +40,7 @@ RSpec.describe Api::TableController, type: :controller do
 
   describe "#away_button" do
     subject do
-      put :away_button, table_token: token
+      put :away_button, params: { table_token: token }
     end
 
     include_examples "without valid token"
@@ -63,7 +63,7 @@ RSpec.describe Api::TableController, type: :controller do
 
   describe "#center_button" do
     subject do
-      put :center_button, table_token: token
+      put :center_button, params: { table_token: token }
     end
 
     include_examples "without valid token"

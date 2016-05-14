@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
   describe "POST authenticate" do
-    subject { post :authenticate, password: password }
+    subject { post :authenticate, params: { password: password } }
 
     before do
       request.env["HTTP_REFERER"] = "/the/future"
