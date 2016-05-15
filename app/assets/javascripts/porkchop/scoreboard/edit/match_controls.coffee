@@ -56,7 +56,7 @@ $ ->
         finalization,
         cancellations,
         matchmakes
-      ).ajax()
+      ).serialAjax()
     )
 
   match = data.map(".match")
