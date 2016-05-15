@@ -1,3 +1,5 @@
+require_dependency "ping_pong/service"
+
 class Api::OngoingMatchesController < ApplicationController
   before_action :match
 
