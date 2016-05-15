@@ -8,6 +8,12 @@ Bacon.Observable.prototype.ajax = function() {
   );
 };
 
+Bacon.Observable.prototype.serialAjax = function() {
+  return this.flatMapConcat(
+    (params) => Bacon.fromPromise($.ajax(params))
+  );
+};
+
 Bacon.ajaxPoll = (ajaxOptions, interval) => {
   let requests = new Bacon.Bus();
   let responses = requests.ajax();
