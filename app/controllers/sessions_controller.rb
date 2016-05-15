@@ -2,9 +2,11 @@ class SessionsController < ApplicationController
   def authenticate
     if params[:password] == ENV['WRITE_ACCESS_PASSWORD']
       session[:write_access] = true
-      redirect_to :back, flash: { notice: "Access granted." }
+      flash[:notice] = "Access granted."
     else
-      redirect_to :back, flash: { error: "Access denied." }
+      flash[:error] = "Access denied."
     end
+
+    redirect_back fallback_location: root_url
   end
 end

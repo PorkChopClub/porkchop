@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PlayerMatchesController, type: :controller do
   describe "GET index" do
-    subject { get :index, player_id: player.to_param }
+    subject { get :index, params: { player_id: player.to_param } }
 
     let(:player) { FactoryGirl.create :player }
 

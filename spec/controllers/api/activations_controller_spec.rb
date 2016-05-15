@@ -27,8 +27,8 @@ RSpec.describe Api::ActivationsController, type: :controller do
   describe "PUT activate" do
     subject do
       put :activate,
-          { id: player.id, format: :json },
-          { write_access: true }
+          params: { id: player.id, format: :json },
+          session: { write_access: true }
     end
 
     let(:player) do
@@ -48,8 +48,8 @@ RSpec.describe Api::ActivationsController, type: :controller do
   describe "PUT deactivate" do
     subject do
       put :deactivate,
-          { id: player.id, format: :json },
-          { write_access: true }
+          params: { id: player.id, format: :json },
+          session: { write_access: true }
     end
 
     let(:player) do

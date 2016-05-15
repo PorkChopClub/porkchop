@@ -6,7 +6,7 @@ class Matchup
   validate :exactly_two_players
 
   def self.all(players:)
-    players.combination(2).map { |players| new(*players) }
+    players.to_a.combination(2).map { |players| new(*players) }
   end
 
   def initialize(*players)

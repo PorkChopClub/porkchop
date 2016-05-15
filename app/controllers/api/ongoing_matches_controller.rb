@@ -1,3 +1,5 @@
+require_dependency "ping_pong/service"
+
 class Api::OngoingMatchesController < ApplicationController
   before_action :match
 
@@ -31,7 +33,7 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def destroy
-    perform match.try! :destroy
+    perform(match.present? && match.destroy)
   end
 
   def matchmake

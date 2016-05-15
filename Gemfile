@@ -5,7 +5,7 @@ ruby '2.3.0'
 # This should be first.
 gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
 
-gem 'rails', '~> 4.2.2'
+gem 'rails', '~> 5.0.0.rc1'
 gem 'pg'
 gem 'puma'
 
@@ -38,7 +38,8 @@ end
 
 group :development, :test do
   gem 'dotenv-rails'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.5.0.beta3'
+  gem 'rails-controller-testing'
   gem 'pry-rails'
 
   gem 'factory_girl_rails', require: false

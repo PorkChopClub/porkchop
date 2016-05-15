@@ -4,7 +4,7 @@ RSpec.describe MatchesController, type: :controller do
   describe "GET show" do
     let!(:match) { FactoryGirl.create :complete_match }
 
-    subject { get :show, id: match.to_param }
+    subject { get :show, params: { id: match.to_param } }
 
     it { is_expected.to have_http_status :ok }
 

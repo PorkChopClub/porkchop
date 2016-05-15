@@ -16,7 +16,7 @@ RSpec.describe PlayersController, type: :controller do
   end
 
   describe "GET show" do
-    subject { get :show, id: player.to_param }
+    subject { get :show, params: { id: player.to_param } }
 
     let(:player) { FactoryGirl.create :player }
     let(:stats) { instance_double Stats::Personal }
@@ -45,8 +45,8 @@ RSpec.describe PlayersController, type: :controller do
   describe "GET edit" do
     subject do
       get :edit,
-          { id: player.to_param },
-          { write_access: true }
+          params: { id: player.to_param },
+          session: { write_access: true }
     end
 
     let(:player) { FactoryGirl.create :player }
@@ -63,8 +63,8 @@ RSpec.describe PlayersController, type: :controller do
   describe "PATCH update" do
     subject do
       patch :update,
-            { id: player.to_param, player: player_params },
-            { write_access: true }
+            params: { id: player.to_param, player: player_params },
+            session: { write_access: true }
     end
 
     let(:player) { FactoryGirl.create :player, nickname: "Candice Bergen" }

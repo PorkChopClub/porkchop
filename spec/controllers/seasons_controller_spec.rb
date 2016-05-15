@@ -4,7 +4,7 @@ RSpec.describe SeasonsController, type: :controller do
   describe "GET show" do
     let!(:season) { FactoryGirl.create :season }
 
-    subject { get :show, id: season.to_param }
+    subject { get :show, params: { id: season.to_param } }
 
     specify { expect(subject.status).to eq 200 }
 
