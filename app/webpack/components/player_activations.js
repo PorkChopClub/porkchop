@@ -1,4 +1,7 @@
+import $ from 'jquery';
+import Bacon from 'baconjs';
 import { select } from 'lodash';
+$.fn.asEventStream = Bacon.$.asEventStream;
 
 $(function() {
   if (!$('.player-activations').length) { return; }

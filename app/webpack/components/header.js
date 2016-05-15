@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import Bacon from 'baconjs';
+$.fn.asEventStream = Bacon.$.asEventStream;
 
 module.exports = ($element) => {
   let isMenuOpen =

@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import './shared';
 import header from './components/header';
 import './components/player_elo_chart';

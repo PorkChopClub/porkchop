@@ -1,6 +1,13 @@
 import Bacon from 'baconjs';
 import $ from 'jquery';
 
+$.ajaxSetup( {
+  beforeSend: function ( xhr ) {
+    let token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
+    xhr.setRequestHeader( 'X-CSRF-Token', token );
+  }
+});
+
 // FIXME: We have a fetch polyfill and should use it.
 Bacon.Observable.prototype.ajax = function() {
   return this.flatMapLatest(

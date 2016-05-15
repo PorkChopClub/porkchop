@@ -1,3 +1,7 @@
+import $ from 'jquery';
+import Bacon from 'baconjs';
+$.fn.asEventStream = Bacon.$.asEventStream;
+
 $(function() {
   if (!$('.match-controls').length) { return; }
 
