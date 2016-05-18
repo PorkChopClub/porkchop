@@ -2,7 +2,7 @@ import $ from 'jquery';
 import Bacon from 'baconjs';
 $.fn.asEventStream = Bacon.$.asEventStream;
 
-module.exports = ($element) => {
+export default ($element) => {
   let isMenuOpen =
     $element
       .asEventStream('click', '.main-header-menu-button')

@@ -16,7 +16,7 @@ const EMPTY_MATCH = {
 let ajaxOptions = { url: '/api/ongoing_match.json' };
 let matchPolls = ajaxPoll(ajaxOptions, 300);
 
-module.exports = matchPolls
+export default matchPolls
   .map(".match")
   .mapError(EMPTY_MATCH)
   .toProperty();

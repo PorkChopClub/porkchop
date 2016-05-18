@@ -35,6 +35,6 @@ config.module = {
 }
 
 config.resolve = {
-  // So we can do `require('./utils')` instead of `require('./utils.js')`
-  extensions: ['', '.js']
+  extensions: ['', '.js'],
+  root: [path.join(__dirname, "app/webpack")]
 };
