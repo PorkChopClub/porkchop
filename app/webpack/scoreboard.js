@@ -1,8 +1,8 @@
-import './shared';
+import 'shared';
 
 import $ from 'jquery';
 
-import ongoingMatch from './observables/ongoingMatch';
+import ongoingMatch from 'observables/ongoingMatch';
 
 $(() => {
   ongoingMatch

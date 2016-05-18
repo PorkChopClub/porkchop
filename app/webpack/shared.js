@@ -1,1 +1,1 @@
-import './baconExtensions';
+import 'baconExtensions';
