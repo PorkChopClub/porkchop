@@ -4,6 +4,10 @@ The [Stembolt](https://stembolt.com/) ping pong scoreboard and stat-tracking app
 
 ## Development
 
+Requirements: a reasonable version on NodeJS, whatever Ruby version is
+specified in the `Gemfile`, and a Redis server (on an Ubuntu system, all you
+need to do is `sudo apt-get install redis-server`).
+
 ```shell
 # Initial setup
 $ bundle install
@@ -12,6 +16,7 @@ $ npm install
 
 # Actual development (run simultaneously)
 $ bundle exec rails s -p 2277
+$ bundle exec sidekiq
 $ npm run watch
 ```
 
