@@ -29,6 +29,7 @@ gem 'slack-notifier'
 gem 'bugsnag'
 gem 'elo2'
 gem 'faraday'
+gem 'devise'
 
 group :development do
   gem 'stackprof', require: false
