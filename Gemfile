@@ -30,6 +30,7 @@ gem 'bugsnag'
 gem 'elo2'
 gem 'faraday'
 gem 'devise'
+gem 'cancancan'
 
 group :development do
   gem 'stackprof', require: false

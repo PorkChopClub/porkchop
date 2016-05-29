@@ -46,6 +46,7 @@ GEM
       thor (~> 0.19)
     bugsnag (4.2.1)
     builder (3.2.2)
+    cancancan (1.14.0)
     capybara (2.7.1)
       addressable
       mime-types (>= 1.16)
@@ -252,6 +253,7 @@ PLATFORMS
 DEPENDENCIES
   bourbon
   bugsnag
+  cancancan
   capybara
   codeclimate-test-reporter
   database_cleaner
