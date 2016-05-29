@@ -34,6 +34,7 @@ group :development do
   gem 'stackprof', require: false
   gem 'flamegraph', require: false
   gem 'rack-mini-profiler', require: false
+  gem 'letter_opener'
 end
 
 group :development, :test do
