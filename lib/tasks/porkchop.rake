@@ -31,17 +31,28 @@ namespace :porkchop do
 
     14.downto(0).each do |n|
       puts "Generating matches #{n} days ago."
-      finalized_at = n.days.ago.at_beginning_of_day + rand(0..23).hours + rand(0..59).minutes + rand(0..59).seconds
+      finalized_at =
+        n.days.ago.at_beginning_of_day +
+        rand(0..23).hours +
+        rand(0..59).minutes +
+        rand(0..59).seconds
+
       rand(0..4).times do
         match = Match.ongoing.last!
 
         scores = [11, rand(0..9)].shuffle
-        FactoryGirl.create_list :point, scores[0], victor: match.home_player, match: match
-        FactoryGirl.create_list :point, scores[1], victor: match.away_player, match: match
+        FactoryGirl.create_list(:point,
+                                scores[0],
+                                victor: match.home_player,
+                                match: match)
+        FactoryGirl.create_list(:point,
+                                scores[1],
+                                victor: match.away_player,
+                                match: match)
 
         PingPong::Finalization.new(
           PingPong::Match.new(match)
-        ).finalize!
+        ).finalize!(async: false)
 
         EloRating.
           order(created_at: :desc).
