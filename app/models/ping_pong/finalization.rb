@@ -3,13 +3,17 @@ class PingPong::Finalization
     @match = match
   end
 
-  def finalize!
+  def finalize!(async: true)
     return true if match.finalized?
     return false unless match.finished?
     match.victor = match.leader
     match.finalize!
     # NOTE: ActiveJob canot serialize a PingPong::Match.
-    MatchFinalizationJob.perform_later match.__getobj__
+    if async
+      MatchFinalizationJob.perform_later match.__getobj__
+    else
+      MatchFinalizationJob.perform_now match.__getobj__
+    end
     true
   end
 
