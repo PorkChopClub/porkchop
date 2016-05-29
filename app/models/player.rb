@@ -1,6 +1,14 @@
 class Player < ActiveRecord::Base
   BASE_ELO = 1000
 
+  devise :database_authenticatable,
+         :registerable,
+         :confirmable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable
+
   scope :active, -> { where(active: true) }
 
   has_many :achievements

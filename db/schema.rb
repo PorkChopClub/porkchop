@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302054217) do
+ActiveRecord::Schema.define(version: 20160529165159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,20 +30,18 @@ ActiveRecord::Schema.define(version: 20160302054217) do
     t.datetime "updated_at",                           null: false
     t.decimal  "spread",       precision: 3, scale: 1
     t.integer  "favourite_id"
+    t.index ["favourite_id"], name: "index_betting_infos_on_favourite_id", using: :btree
+    t.index ["match_id"], name: "index_betting_infos_on_match_id", using: :btree
   end
-
-  add_index "betting_infos", ["favourite_id"], name: "index_betting_infos_on_favourite_id", using: :btree
-  add_index "betting_infos", ["match_id"], name: "index_betting_infos_on_match_id", using: :btree
 
   create_table "elo_ratings", force: :cascade do |t|
     t.integer  "player_id"
     t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["player_id", "created_at"], name: "index_elo_ratings_on_player_id_and_created_at", using: :btree
+    t.index ["player_id"], name: "index_elo_ratings_on_player_id", using: :btree
   end
-
-  add_index "elo_ratings", ["player_id", "created_at"], name: "index_elo_ratings_on_player_id_and_created_at", using: :btree
-  add_index "elo_ratings", ["player_id"], name: "index_elo_ratings_on_player_id", using: :btree
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name"
@@ -59,20 +57,36 @@ ActiveRecord::Schema.define(version: 20160302054217) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "first_service"
+    t.index ["away_player_id"], name: "index_matches_on_away_player_id", using: :btree
+    t.index ["finalized_at"], name: "index_matches_on_finalized_at", using: :btree
+    t.index ["home_player_id"], name: "index_matches_on_home_player_id", using: :btree
+    t.index ["victor_id"], name: "index_matches_on_victor_id", using: :btree
   end
-
-  add_index "matches", ["away_player_id"], name: "index_matches_on_away_player_id", using: :btree
-  add_index "matches", ["finalized_at"], name: "index_matches_on_finalized_at", using: :btree
-  add_index "matches", ["home_player_id"], name: "index_matches_on_home_player_id", using: :btree
-  add_index "matches", ["victor_id"], name: "index_matches_on_victor_id", using: :btree
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
-    t.string   "avatar_url", default: "http://i.imgur.com/ya5NxSH.png"
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
+    t.string   "avatar_url",             default: "http://i.imgur.com/ya5NxSH.png"
     t.string   "nickname"
-    t.boolean  "active",     default: false
+    t.boolean  "active",                 default: false
+    t.string   "email",                  default: "",                               null: false
+    t.string   "encrypted_password",     default: "",                               null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,                                null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_players_on_confirmation_token", unique: true, using: :btree
+    t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "points", force: :cascade do |t|
@@ -80,36 +94,27 @@ ActiveRecord::Schema.define(version: 20160302054217) do
     t.integer  "victor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_points_on_match_id", using: :btree
+    t.index ["victor_id"], name: "index_points_on_victor_id", using: :btree
   end
-
-  add_index "points", ["match_id"], name: "index_points_on_match_id", using: :btree
-  add_index "points", ["victor_id"], name: "index_points_on_victor_id", using: :btree
-
-  create_table "rails_schema_migrations", id: false, force: :cascade do |t|
-    t.string "version", null: false
-  end
-
-  add_index "rails_schema_migrations", ["version"], name: "unique_schema_migrations", unique: true, using: :btree
 
   create_table "season_matches", force: :cascade do |t|
     t.integer  "match_id"
     t.integer  "season_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_season_matches_on_match_id", using: :btree
+    t.index ["season_id"], name: "index_season_matches_on_season_id", using: :btree
   end
-
-  add_index "season_matches", ["match_id"], name: "index_season_matches_on_match_id", using: :btree
-  add_index "season_matches", ["season_id"], name: "index_season_matches_on_season_id", using: :btree
 
   create_table "season_memberships", force: :cascade do |t|
     t.integer  "player_id"
     t.integer  "season_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_season_memberships_on_player_id", using: :btree
+    t.index ["season_id"], name: "index_season_memberships_on_season_id", using: :btree
   end
-
-  add_index "season_memberships", ["player_id"], name: "index_season_memberships_on_player_id", using: :btree
-  add_index "season_memberships", ["season_id"], name: "index_season_memberships_on_season_id", using: :btree
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "games_per_matchup"
@@ -126,9 +131,8 @@ ActiveRecord::Schema.define(version: 20160302054217) do
     t.datetime "finished_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["player_id"], name: "index_streaks_on_player_id", using: :btree
   end
-
-  add_index "streaks", ["player_id"], name: "index_streaks_on_player_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"
