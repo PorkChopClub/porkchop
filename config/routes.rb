@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   end
   resources :seasons, only: [:show]
 
-  post 'login', to: 'sessions#authenticate'
-
   namespace :api do
     resources :players, only: :index
     resources :achievements, only: :index
