@@ -35,6 +35,40 @@ RSpec.describe Player, type: :model do
     end
   end
 
+  describe "#admin?" do
+    subject { player.admin? }
+
+    let(:player) { create :player, email: email, confirmed_at: confirmed_at }
+
+    context "when the player is confirmed" do
+      let(:confirmed_at) { 1.day.ago }
+
+      context "when the player has a stembolt.com email" do
+        let(:email) { "skeleton@stembolt.com" }
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the player doesn't have a stembolt.com email" do
+        let(:email) { "stembolt.com@steamboat.com" }
+        it { is_expected.to be_falsey }
+      end
+    end
+
+    context "when the player isn't confirmed" do
+      let(:confirmed_at) { nil }
+
+      context "when the player has a stembolt.com email" do
+        let(:email) { "skeleton@stembolt.com" }
+        it { is_expected.to be_falsey }
+      end
+
+      context "when the player doesn't have a stembolt.com email" do
+        let(:email) { "stembolt.com@steamboat.com" }
+        it { is_expected.to be_falsey }
+      end
+    end
+  end
+
   describe "#matches_since_last_played" do
     subject { player.matches_since_last_played }
 

@@ -23,6 +23,10 @@ class Player < ActiveRecord::Base
 
   after_save :record_rating
 
+  def admin?
+    confirmed? && /@stembolt.com\z/ =~ email
+  end
+
   def matches
     Match.where "matches.home_player_id = :id OR matches.away_player_id = :id",
                 id: id
