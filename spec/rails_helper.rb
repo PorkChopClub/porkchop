@@ -20,6 +20,8 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
+
   config.use_transactional_fixtures = false
 
   config.before :suite do
