@@ -23,4 +23,9 @@ class ApplicationController < ActionController::Base
     session[:write_access]
   end
   helper_method :write_access?
+
+  def current_ability
+    @current_ability ||=
+      Ability.new(current_player)
+  end
 end

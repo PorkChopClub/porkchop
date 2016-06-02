@@ -49,6 +49,8 @@ RSpec.describe PlayersController, type: :controller do
           session: { write_access: true }
     end
 
+    before { sign_in create(:admin_player) }
+
     let(:player) { FactoryGirl.create :player }
 
     specify { expect(subject.status).to eq 200 }
@@ -66,6 +68,8 @@ RSpec.describe PlayersController, type: :controller do
             params: { id: player.to_param, player: player_params },
             session: { write_access: true }
     end
+
+    before { sign_in create(:admin_player) }
 
     let(:player) { FactoryGirl.create :player, nickname: "Candice Bergen" }
 

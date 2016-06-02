@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   before_action :load_player, only: %i(show update edit)
-  before_action :require_write_access, only: %i(update edit)
+  authorize_resource
 
   def index
     @players = Player.all.order(:name)
