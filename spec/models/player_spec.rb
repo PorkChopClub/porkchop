@@ -9,14 +9,12 @@ RSpec.describe Player, type: :model do
   it { is_expected.to have_many :seasons }
   it { is_expected.to have_many :streaks }
 
+  it { is_expected.to validate_presence_of :name }
+
   let(:player) { FactoryGirl.create :player }
 
   it "is invalid without a name" do
     expect(described_class.new.valid?).to be false
-  end
-
-  it "is valid with a name" do
-    expect(described_class.new(name: 'Jeff').valid?).to be true
   end
 
   describe "#matches" do
