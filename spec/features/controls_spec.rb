@@ -7,14 +7,9 @@ RSpec.describe "controls page" do
   let!(:home) { FactoryGirl.create :player, active: true, name: "Candice Bergen" }
   let!(:away) { FactoryGirl.create :player, active: true, name: "Shirley Schmidt" }
 
-  let!(:user) { FactoryGirl.create :admin_user }
+  before { login_as create(:admin_player), scope: :player }
 
   scenario "recording a normal game" do
-    visit "/"
-    expect(page).to have_css '.main-header-menu-button'
-    find('.main-header-menu-button').click
-    fill_in :password, with: "password"
-    click_button "Submit"
     visit "/scoreboard/edit"
     click_on "Matchmake"
 
