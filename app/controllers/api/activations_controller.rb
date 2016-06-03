@@ -1,8 +1,9 @@
 class Api::ActivationsController < ApplicationController
-  before_action :require_write_access, except: %i(index)
+  before_action :authorize_write_player, only: %i(activate deactivate)
 
   def index
     @players = find_players
+    authorize! :read, @players
   end
 
   def activate
@@ -25,6 +26,10 @@ class Api::ActivationsController < ApplicationController
 
   def player
     @player ||= Player.find_by_id(params[:id])
+  end
+
+  def authorize_write_player
+    authorize! :update, player
   end
 
   def find_players
