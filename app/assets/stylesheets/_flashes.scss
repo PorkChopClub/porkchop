@@ -8,6 +8,11 @@
     background-color: lighten($blue, 15);
   }
 
+  &.alert {
+    background-color: $yellow;
+    color: $dark-grey;
+  }
+
   &.error {
     background-color: lighten($red, 5);
   }
