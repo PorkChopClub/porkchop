@@ -13,13 +13,6 @@
         %li= link_to "Players", players_path
         %li= link_to "Match History", matches_path
 
-    .authentication-form.hide-for-write-access
-      = form_tag login_path do
-        = label_tag "Authenticate"
-        = password_field_tag :password
-        %br
-        = submit_tag "Submit"
-
   - flash.each do |name, message|
     .site-flash-wrap{ class: name }
       .site-flash= message
