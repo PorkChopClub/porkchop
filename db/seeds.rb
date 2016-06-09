@@ -1,6 +1,7 @@
 Player.create!(name: "Jared Norman",
-               email: "jared@example.com",
+               email: "admin@stembolt.com",
                password: "password",
+               confirmed_at: 1.day.ago,
                avatar_url: "/avatars/jared.png")
 
 Player.create!(name: "Gray Gilmore",

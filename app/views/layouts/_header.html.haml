@@ -12,6 +12,11 @@
         %li.requires-write-access= link_to "Match Controls", edit_scoreboard_path
         %li= link_to "Players", players_path
         %li= link_to "Match History", matches_path
+        - if current_player
+          %li= link_to "Sign Out", destroy_player_session_path, method: :delete
+        - else
+          %li= link_to "Sign In", new_player_session_path
+          %li= link_to "Sign Up", new_player_registration_path
 
   - flash.each do |name, message|
     .site-flash-wrap{ class: name }
