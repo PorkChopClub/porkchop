@@ -35,6 +35,12 @@ class AddDeviseToPlayers < ActiveRecord::Migration[5.0]
       # t.timestamps null: false
     end
 
+    # This could be done vastly more efficiently, but we don't have many
+    # players, and this'll only happen once.
+    Player.find_each do |player|
+      player.update_column(:email, "player#{player.id}@example.com")
+    end
+
     add_index :players, :email,                unique: true
     add_index :players, :reset_password_token, unique: true
     add_index :players, :confirmation_token,   unique: true
