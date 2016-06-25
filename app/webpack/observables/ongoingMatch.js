@@ -12,7 +12,7 @@ const EMPTY_MATCH = {
   home_player_overlays: {flames: false},
   away_player_overlays: {flames: false},
   comment: "",
-  instructions: ""
+  instructions: "Waiting for players",
   league_match: false,
   warmup: false
 };
