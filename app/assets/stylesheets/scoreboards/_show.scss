@@ -91,6 +91,7 @@ $bottom-bar-height: 120px;
   line-height: 1.2;
   color: $off-white;
   text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  z-index: 1;
 }
 
 @-webkit-keyframes blinker {
@@ -117,6 +118,7 @@ $bottom-bar-height: 120px;
   line-height: 1.2;
   color: $yellow;
   text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  z-index: 1;
 
   -webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
