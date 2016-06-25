@@ -1,5 +1,6 @@
 import 'shared';
 
+import _ from 'lodash';
 import $ from 'jquery';
 
 import ongoingMatch from 'observables/ongoingMatch';
@@ -28,10 +29,10 @@ $(() => {
 
   ongoingMatch
     .map('.warmup_timer')
-    .map((seconds) => {
-      let minutesPart = seconds >= 60 ? "1:" : "0:";
-      let secondsPart = seconds % 60 >= 10 ? seconds % 60 : `0${seconds % 60}`;
-      return minutesPart + secondsPart;
+    .map((time) => {
+      let minutes = Math.floor(time / 60);
+      let seconds = time % 60;
+      return [minutes, _.padLeft(seconds, 2)].join(':');
     })
     .assign(
       $('.scoreboard-warm-up-countdown'),
