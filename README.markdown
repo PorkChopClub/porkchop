@@ -10,8 +10,7 @@ need to do is `sudo apt-get install redis-server`).
 
 ```shell
 # Initial setup
-$ bundle install
-$ sh bootstrap.sh
+$ ./bin/setup
 $ npm install
 
 # Actual development (run simultaneously)
@@ -19,4 +18,3 @@ $ bundle exec rails s -p 2277
 $ bundle exec sidekiq
 $ npm run watch
 ```
-
