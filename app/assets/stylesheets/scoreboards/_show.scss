@@ -40,7 +40,7 @@ $bottom-bar-height: 120px;
 
 .scoreboard-player-score {
   position: absolute;
-  bottom: 0;
+  bottom: $bottom-bar-height;
   font-size: modular-scale(10);
   line-height: 1;
   text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.15);
