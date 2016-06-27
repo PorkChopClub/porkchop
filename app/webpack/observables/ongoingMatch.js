@@ -9,8 +9,12 @@ const EMPTY_MATCH = {
   away_player_nickname: "",
   home_player_service: false,
   away_player_service: false,
+  home_player_overlays: {flames: false},
+  away_player_overlays: {flames: false},
   comment: "",
-  instructions: ""
+  instructions: "Waiting for players",
+  league_match: false,
+  warmup: false
 };
 
 let ajaxOptions = { url: '/api/ongoing_match.json' };
