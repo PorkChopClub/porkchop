@@ -41,44 +41,4 @@ RSpec.describe PlayersController, type: :controller do
       expect(assigns(:stats)).to eq stats
     end
   end
-
-  describe "GET edit" do
-    subject do
-      get :edit,
-          params: { id: player.to_param },
-          session: { write_access: true }
-    end
-
-    let(:player) { FactoryGirl.create :player }
-
-    specify { expect(subject.status).to eq 200 }
-    it { is_expected.to render_template :edit }
-
-    it "assigns the player as @player" do
-      subject
-      expect(assigns(:player)).to eq player
-    end
-  end
-
-  describe "PATCH update" do
-    subject do
-      patch :update,
-            params: { id: player.to_param, player: player_params },
-            session: { write_access: true }
-    end
-
-    let(:player) { FactoryGirl.create :player, nickname: "Candice Bergen" }
-
-    context "with valid params" do
-      let(:player_params) { { "nickname" => "Bandice Cergen" } }
-
-      it { is_expected.to redirect_to player }
-
-      it "updates the player" do
-        expect { subject }.
-          to change { player.reload.nickname }.
-          from("Candice Bergen").to("Bandice Cergen")
-      end
-    end
-  end
 end

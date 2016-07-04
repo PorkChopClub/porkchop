@@ -24,15 +24,7 @@ RSpec.describe "Visuals", type: :feature do
   end
 
   context 'as admin' do
-    let!(:user){ FactoryGirl.create :admin_user }
-
-    before do
-      visit '/'
-      expect(page).to have_css '.main-header-menu-button'
-      find('.main-header-menu-button').click
-      fill_in :password, with: "password"
-      click_button "Submit"
-    end
+    before { login_as create(:admin_player), scope: :player }
 
     it "create, and score game" do
       FactoryGirl.create :player, name: "Dave", active: true

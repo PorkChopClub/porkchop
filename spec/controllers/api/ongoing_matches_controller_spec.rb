@@ -18,18 +18,20 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
       before { subject }
 
-      specify { expect(response.status).to eq 200 }
+      it { is_expected.to have_http_status :ok }
 
       it_behaves_like "renders match"
     end
 
     context "when there is not an ongoing match" do
-      specify { expect(subject.status).to eq 404 }
+      it { is_expected.to have_http_status :not_found }
     end
   end
 
   describe "PUT home_point" do
     subject { put :home_point, params: { format: :json }, session: { write_access: true } }
+
+    before { sign_in create(:admin_player) }
 
     context "when the point can be scored" do
       let!(:match) { FactoryGirl.create :match, home_score: 0 }
@@ -48,7 +50,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
       it_behaves_like "renders match"
 
-      specify { expect(subject.status).to eq 422 }
+      it { is_expected.to have_http_status :unprocessable_entity }
 
       it "doesn't change the home score" do
         expect { subject }.not_to change { match.home_points.count }
@@ -58,6 +60,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "PUT away_point" do
     subject { put :away_point, params: { format: :json }, session: { write_access: true } }
+
+    before { sign_in create(:admin_player) }
 
     context "when the point can be scored" do
       let!(:match) { FactoryGirl.create :match, away_score: 0 }
@@ -76,7 +80,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
       it_behaves_like "renders match"
 
-      specify { expect(subject.status).to eq 422 }
+      it { is_expected.to have_http_status :unprocessable_entity }
 
       it "doesn't change the away score" do
         expect { subject }.not_to change { match.away_points.count }
@@ -85,9 +89,11 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "PUT toggle_service" do
+    subject { put :toggle_service, params: { format: :json }, session: { write_access: true } }
+
     let!(:match) { FactoryGirl.create :match, :at_start }
 
-    subject { put :toggle_service, params: { format: :json }, session: { write_access: true } }
+    before { sign_in create(:admin_player) }
 
     context "when the service can be toggled" do
       it_behaves_like "renders match"
@@ -112,7 +118,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
       it_behaves_like "renders match"
 
-      specify { expect(subject.status).to eq 422 }
+      it { is_expected.to have_http_status :unprocessable_entity }
 
       it "doesn't toggle the service" do
         expect { subject }.
@@ -125,6 +131,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "PUT rewind" do
     subject { put :rewind, params: { format: :json }, session: { write_access: true } }
+
+    before { sign_in create(:admin_player) }
 
     let!(:match) { FactoryGirl.create :match }
     let(:rewind) { instance_double PingPong::Rewind }
@@ -142,7 +150,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     context "when the match can be rewound" do
       let(:success) { true }
 
-      specify { expect(subject.status).to eq 200 }
+      it { is_expected.to have_http_status :ok }
 
       it_behaves_like "renders match"
     end
@@ -150,7 +158,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     context "when the match cannot be rewound" do
       let(:success) { false }
 
-      specify { expect(subject.status).to eq 422 }
+      it { is_expected.to have_http_status :unprocessable_entity }
 
       it_behaves_like "renders match"
     end
@@ -158,6 +166,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
   describe "PUT finalize" do
     subject { put :finalize, params: { format: :json }, session: { write_access: true } }
+
+    before { sign_in create(:admin_player) }
 
     let!(:match) { FactoryGirl.create :match }
     let(:finalization) do
@@ -175,7 +185,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
       it_behaves_like "renders match"
 
-      specify { expect(subject.status).to eq 200 }
+      it { is_expected.to have_http_status :ok }
     end
 
     context "when the match cannot be finalized" do
@@ -183,19 +193,21 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
       it_behaves_like "renders match"
 
-      specify { expect(subject.status).to eq 422 }
+      it { is_expected.to have_http_status :unprocessable_entity }
     end
   end
 
   describe "DELETE destroy" do
     subject { delete :destroy, params: { format: :json }, session: { write_access: true } }
 
+    before { sign_in create(:admin_player) }
+
     let!(:complete_match) { FactoryGirl.create :complete_match }
 
     context "when there is an ongoing match" do
       let!(:match) { FactoryGirl.create :match }
 
-      specify { expect(subject.status).to eq 200 }
+      it { is_expected.to have_http_status :ok }
 
       it "destroys the ongoing match" do
         expect { subject }.
@@ -205,7 +217,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     end
 
     context "when there is not an ongoing match" do
-      specify { expect(subject.status).to eq 422 }
+      it { is_expected.to have_http_status :unprocessable_entity }
 
       it "doesn't destroy anything" do
         expect { subject }.not_to change { Match.count }
@@ -216,6 +228,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   describe "PUT matchmake" do
     subject { put :matchmake, params: { format: :json }, session: { write_access: true } }
 
+    before { sign_in create(:admin_player) }
+
     let!(:player1){ FactoryGirl.create :player, active: true }
     let!(:player2){ FactoryGirl.create :player, active: true }
 
@@ -225,7 +239,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     context "when there is an ongoing match" do
       let!(:match) { FactoryGirl.create :match }
 
-      specify { expect(subject.status).to eq 200 }
+      it { is_expected.to have_http_status :ok }
 
       it "removes the existing match" do
         expect { subject }.

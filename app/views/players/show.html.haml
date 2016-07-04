@@ -2,7 +2,8 @@
   = image_tag @player.avatar_url, class: "player-summary-avatar"
   .player-summary-content
     %h1= @player.name
-    = link_to "(edit)", edit_player_path(@player), class: "player-edit-link"
+    - if @player == current_player
+      = link_to "(edit)", edit_player_registration_path, class: "player-edit-link"
     - if @player.nickname.present?
       %p= "Nickname: #{@player.nickname}"
     %ul

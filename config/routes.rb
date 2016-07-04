@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :players
   root to: 'home#index'
 
   resource :scoreboard, only: [:show, :edit]
 
   resources :matches, only: [:index, :show]
-  resources :players, only: [:index, :show, :edit, :update] do
+  resources :players, only: [:index, :show] do
     resources :matches, controller: "player_matches", only: :index
   end
   resources :seasons, only: [:show]
-
-  post 'login', to: 'sessions#authenticate'
 
   namespace :api do
     resources :players, only: :index

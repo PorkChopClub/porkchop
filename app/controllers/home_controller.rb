@@ -7,6 +7,7 @@ class HomeController < ApplicationController
 
   def load_recent_matches
     @recent_matches = Match.finalized.order(finalized_at: :desc).limit(10)
+    authorize! :read, :recent_matches
   end
 
   def load_ranked_players
@@ -18,6 +19,7 @@ class HomeController < ApplicationController
       end.
       sort_by(&:elo).
       reverse
+    authorize! :read, :ranked_players
   end
 
   def load_elo_data

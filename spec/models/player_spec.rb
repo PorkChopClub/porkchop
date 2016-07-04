@@ -9,14 +9,12 @@ RSpec.describe Player, type: :model do
   it { is_expected.to have_many :seasons }
   it { is_expected.to have_many :streaks }
 
+  it { is_expected.to validate_presence_of :name }
+
   let(:player) { FactoryGirl.create :player }
 
   it "is invalid without a name" do
     expect(described_class.new.valid?).to be false
-  end
-
-  it "is valid with a name" do
-    expect(described_class.new(name: 'Jeff').valid?).to be true
   end
 
   describe "#matches" do
@@ -34,6 +32,40 @@ RSpec.describe Player, type: :model do
 
     it "includes both home and away matches" do
       expect(subject).to match_array [home_match, away_match]
+    end
+  end
+
+  describe "#admin?" do
+    subject { player.admin? }
+
+    let(:player) { create :player, email: email, confirmed_at: confirmed_at }
+
+    context "when the player is confirmed" do
+      let(:confirmed_at) { 1.day.ago }
+
+      context "when the player has a stembolt.com email" do
+        let(:email) { "skeleton@stembolt.com" }
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the player doesn't have a stembolt.com email" do
+        let(:email) { "stembolt.com@steamboat.com" }
+        it { is_expected.to be_falsey }
+      end
+    end
+
+    context "when the player isn't confirmed" do
+      let(:confirmed_at) { nil }
+
+      context "when the player has a stembolt.com email" do
+        let(:email) { "skeleton@stembolt.com" }
+        it { is_expected.to be_falsey }
+      end
+
+      context "when the player doesn't have a stembolt.com email" do
+        let(:email) { "stembolt.com@steamboat.com" }
+        it { is_expected.to be_falsey }
+      end
     end
   end
 

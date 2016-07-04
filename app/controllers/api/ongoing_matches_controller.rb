@@ -3,13 +3,12 @@ require_dependency "ping_pong/service"
 class Api::OngoingMatchesController < ApplicationController
   before_action :match
 
-  before_action :require_write_access, except: %i(show)
+  before_action :authorize_ongoing_match, except: %i(show)
   before_action :set_next_match
 
   def show
-    if !match
-      head :not_found
-    end
+    authorize! :read, ongoing_match
+    head :not_found unless ongoing_match
   end
 
   def home_point
@@ -48,6 +47,10 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   private
+
+  def authorize_ongoing_match
+    authorize! :update, ongoing_match
+  end
 
   def set_next_match
     @next_match = Matchmaker.choose

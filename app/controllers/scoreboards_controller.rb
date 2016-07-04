@@ -1,11 +1,11 @@
 class ScoreboardsController < ApplicationController
-  before_action :require_write_access, except: %i(show)
-
   def show
+    authorize! :read, ongoing_match
     @javascript_entrypoint = "scoreboard"
     render layout: "minimal"
   end
 
   def edit
+    authorize! :update, ongoing_match
   end
 end

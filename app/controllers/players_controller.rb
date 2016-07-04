@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
-  before_action :load_player, only: %i(show update edit)
-  before_action :require_write_access, only: %i(update edit)
+  before_action :load_player, only: %i(show update)
+  authorize_resource
 
   def index
     @players = Player.all.order(:name)
@@ -8,14 +8,6 @@ class PlayersController < ApplicationController
 
   def show
     @stats = Stats::Personal.new(@player)
-  end
-
-  def update
-    if @player.update player_params
-      redirect_to @player
-    else
-      render :edit
-    end
   end
 
   private

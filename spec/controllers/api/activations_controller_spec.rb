@@ -31,6 +31,8 @@ RSpec.describe Api::ActivationsController, type: :controller do
           session: { write_access: true }
     end
 
+    before { sign_in create(:admin_player) }
+
     let(:player) do
       FactoryGirl.create :player, active: false
     end
@@ -51,6 +53,8 @@ RSpec.describe Api::ActivationsController, type: :controller do
           params: { id: player.id, format: :json },
           session: { write_access: true }
     end
+
+    before { sign_in create(:admin_player) }
 
     let(:player) do
       FactoryGirl.create :player, active: true

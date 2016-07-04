@@ -1,6 +1,14 @@
 class Player < ActiveRecord::Base
   BASE_ELO = 1000
 
+  devise :database_authenticatable,
+         :registerable,
+         :confirmable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable
+
   scope :active, -> { where(active: true) }
 
   has_many :achievements
@@ -14,6 +22,10 @@ class Player < ActiveRecord::Base
   validates :name, presence: true
 
   after_save :record_rating
+
+  def admin?
+    confirmed? && /@stembolt.com\z/ =~ email
+  end
 
   def matches
     Match.where "matches.home_player_id = :id OR matches.away_player_id = :id",
