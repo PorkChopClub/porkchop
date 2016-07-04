@@ -16,9 +16,6 @@ cache:
   bundler: true
   directories:
   - node_modules
-before_deploy:
-  - git reset --hard
-  - git clean -df
 deploy:
   provider: heroku
   api_key:
