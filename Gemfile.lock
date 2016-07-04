@@ -46,7 +46,7 @@ GEM
       thor (~> 0.19)
     bugsnag (4.2.1)
     builder (3.2.2)
-    cancancan (1.14.0)
+    cancancan (1.15.0)
     capybara (2.7.1)
       addressable
       mime-types (>= 1.16)
@@ -134,7 +134,6 @@ GEM
       pry (>= 0.9.10)
     puma (3.4.0)
     rack (2.0.1)
-      json
     rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
     rack-test (0.6.3)
@@ -290,7 +289,7 @@ DEPENDENCIES
   visdiff
 
 RUBY VERSION
-   ruby 2.3.0p0
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.12.5
