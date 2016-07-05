@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705002434) do
+ActiveRecord::Schema.define(version: 20160705060746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,8 +125,6 @@ ActiveRecord::Schema.define(version: 20160705002434) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "league_id"
-    t.integer  "table_id"
-    t.index ["table_id"], name: "index_seasons_on_table_id", using: :btree
   end
 
   create_table "streaks", force: :cascade do |t|
@@ -161,6 +159,5 @@ ActiveRecord::Schema.define(version: 20160705002434) do
   add_foreign_key "season_memberships", "players"
   add_foreign_key "season_memberships", "seasons"
   add_foreign_key "seasons", "leagues"
-  add_foreign_key "seasons", "tables"
   add_foreign_key "streaks", "players"
 end
