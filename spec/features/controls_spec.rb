@@ -7,7 +7,10 @@ RSpec.describe "controls page" do
   let!(:home) { FactoryGirl.create :player, active: true, name: "Candice Bergen" }
   let!(:away) { FactoryGirl.create :player, active: true, name: "Shirley Schmidt" }
 
-  before { login_as create(:admin_player), scope: :player }
+  before do
+    login_as create(:admin_player), scope: :player
+    create :default_table
+  end
 
   scenario "recording a normal game" do
     visit "/scoreboard/edit"

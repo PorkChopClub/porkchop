@@ -4,6 +4,7 @@ RSpec.describe Match, type: :model do
   it { is_expected.to belong_to :home_player }
   it { is_expected.to belong_to :away_player }
   it { is_expected.to belong_to :victor }
+  it { is_expected.to belong_to :table }
 
   it { is_expected.to have_one :season_match }
   it { is_expected.to have_one :season }
@@ -11,8 +12,13 @@ RSpec.describe Match, type: :model do
 
   it { is_expected.to validate_presence_of :home_player }
   it { is_expected.to validate_presence_of :away_player }
+  it { is_expected.to validate_presence_of :table }
 
   describe ".setup!" do
+    subject { Match.setup! }
+
+    before { create :default_table }
+
     let!(:kelly) do
       FactoryGirl.create(:player,
                          active: true,
@@ -23,8 +29,6 @@ RSpec.describe Match, type: :model do
                          active: true,
                          name: "Carrie Underwood")
     end
-
-    subject { Match.setup! }
 
     context "when the players have played before" do
       before do

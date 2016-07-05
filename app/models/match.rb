@@ -2,6 +2,7 @@ class Match < ActiveRecord::Base
   belongs_to :home_player, class_name: "Player"
   belongs_to :away_player, class_name: "Player"
   belongs_to :victor, class_name: "Player"
+  belongs_to :table
 
   enum first_service: { first_service_by_home_player: 1, first_service_by_away_player: 2 }
 
@@ -11,14 +12,14 @@ class Match < ActiveRecord::Base
   has_one :season, through: :season_match
   has_one :betting_info, dependent: :destroy
 
-  validates :home_player, :away_player, presence: true
+  validates :home_player, :away_player, :table, presence: true
 
   after_create :record_odds
 
   scope :ongoing, -> { where finalized_at: nil }
   scope :finalized, -> { where.not finalized_at: nil }
 
-  def self.setup!(matchup = nil)
+  def self.setup!(matchup = nil, table: Table.default)
     matchup ||= Matchmaker.choose
     return unless matchup.valid?
 
@@ -31,12 +32,14 @@ class Match < ActiveRecord::Base
     match = if player1_at_home
               Match.create!(
                 home_player: player1,
-                away_player: player2
+                away_player: player2,
+                table: table
               )
             else
               Match.create!(
                 home_player: player2,
-                away_player: player1
+                away_player: player1,
+                table: table
               )
             end
 

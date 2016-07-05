@@ -2,6 +2,8 @@ FactoryGirl.define do
   factory :match do
     association :home_player, factory: :player
     association :away_player, factory: :player
+    table
+
     first_service :first_service_by_home_player
 
     transient do
