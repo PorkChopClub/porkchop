@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705001658) do
+ActiveRecord::Schema.define(version: 20160705002434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20160705001658) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "table_id"
+    t.index ["table_id"], name: "index_leagues_on_table_id", using: :btree
   end
 
   create_table "matches", force: :cascade do |t|
@@ -56,9 +58,11 @@ ActiveRecord::Schema.define(version: 20160705001658) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "first_service"
+    t.integer  "table_id"
     t.index ["away_player_id"], name: "index_matches_on_away_player_id", using: :btree
     t.index ["finalized_at"], name: "index_matches_on_finalized_at", using: :btree
     t.index ["home_player_id"], name: "index_matches_on_home_player_id", using: :btree
+    t.index ["table_id"], name: "index_matches_on_table_id", using: :btree
     t.index ["victor_id"], name: "index_matches_on_victor_id", using: :btree
   end
 
@@ -121,6 +125,8 @@ ActiveRecord::Schema.define(version: 20160705001658) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "league_id"
+    t.integer  "table_id"
+    t.index ["table_id"], name: "index_seasons_on_table_id", using: :btree
   end
 
   create_table "streaks", force: :cascade do |t|
@@ -143,9 +149,11 @@ ActiveRecord::Schema.define(version: 20160705001658) do
   add_foreign_key "betting_infos", "matches"
   add_foreign_key "betting_infos", "players", column: "favourite_id"
   add_foreign_key "elo_ratings", "players"
+  add_foreign_key "leagues", "tables"
   add_foreign_key "matches", "players", column: "away_player_id"
   add_foreign_key "matches", "players", column: "home_player_id"
   add_foreign_key "matches", "players", column: "victor_id"
+  add_foreign_key "matches", "tables"
   add_foreign_key "points", "matches"
   add_foreign_key "points", "players", column: "victor_id"
   add_foreign_key "season_matches", "matches"
@@ -153,5 +161,6 @@ ActiveRecord::Schema.define(version: 20160705001658) do
   add_foreign_key "season_memberships", "players"
   add_foreign_key "season_memberships", "seasons"
   add_foreign_key "seasons", "leagues"
+  add_foreign_key "seasons", "tables"
   add_foreign_key "streaks", "players"
 end
