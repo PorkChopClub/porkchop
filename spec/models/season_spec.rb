@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.describe Season, type: :model do
   it { is_expected.to validate_numericality_of(:games_per_matchup).is_greater_than(0) }
   it { is_expected.to validate_numericality_of(:games_per_matchup).even }
+  it { is_expected.to validate_presence_of(:table) }
 
   it { is_expected.to belong_to(:league) }
+  it { is_expected.to belong_to(:table) }
 
   it { is_expected.to have_many(:season_memberships) }
   it { is_expected.to have_many(:players) }

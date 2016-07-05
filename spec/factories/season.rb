@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :season do
     games_per_matchup 2
+    table
 
     trait :finalized do
       sequence(:finalized_at) { |n| n.minutes.ago }
