@@ -1,3 +1,5 @@
+Table.create!(name: "Stembolt Langley")
+
 Player.create!(name: "Jared Norman",
                email: "admin@stembolt.com",
                password: "password",

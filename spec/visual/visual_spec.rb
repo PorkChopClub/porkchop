@@ -24,7 +24,10 @@ RSpec.describe "Visuals", type: :feature do
   end
 
   context 'as admin' do
-    before { login_as create(:admin_player), scope: :player }
+    before do
+      create :default_table
+      login_as create(:admin_player), scope: :player
+    end
 
     it "create, and score game" do
       FactoryGirl.create :player, name: "Dave", active: true

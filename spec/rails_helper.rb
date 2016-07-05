@@ -21,9 +21,13 @@ end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.use_transactional_fixtures = false
+
+  config.before do
+    Rails.cache.clear
+  end
 
   config.before :suite do
     DatabaseCleaner.clean_with :truncation

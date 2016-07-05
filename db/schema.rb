@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602043328) do
+ActiveRecord::Schema.define(version: 20160705060746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +46,8 @@ ActiveRecord::Schema.define(version: 20160602043328) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "table_id"
+    t.index ["table_id"], name: "index_leagues_on_table_id", using: :btree
   end
 
   create_table "matches", force: :cascade do |t|
@@ -57,9 +58,11 @@ ActiveRecord::Schema.define(version: 20160602043328) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "first_service"
+    t.integer  "table_id"
     t.index ["away_player_id"], name: "index_matches_on_away_player_id", using: :btree
     t.index ["finalized_at"], name: "index_matches_on_finalized_at", using: :btree
     t.index ["home_player_id"], name: "index_matches_on_home_player_id", using: :btree
+    t.index ["table_id"], name: "index_matches_on_table_id", using: :btree
     t.index ["victor_id"], name: "index_matches_on_victor_id", using: :btree
   end
 
@@ -134,13 +137,21 @@ ActiveRecord::Schema.define(version: 20160602043328) do
     t.index ["player_id"], name: "index_streaks_on_player_id", using: :btree
   end
 
+  create_table "tables", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "achievements", "players"
   add_foreign_key "betting_infos", "matches"
   add_foreign_key "betting_infos", "players", column: "favourite_id"
   add_foreign_key "elo_ratings", "players"
+  add_foreign_key "leagues", "tables"
   add_foreign_key "matches", "players", column: "away_player_id"
   add_foreign_key "matches", "players", column: "home_player_id"
   add_foreign_key "matches", "players", column: "victor_id"
+  add_foreign_key "matches", "tables"
   add_foreign_key "points", "matches"
   add_foreign_key "points", "players", column: "victor_id"
   add_foreign_key "season_matches", "matches"

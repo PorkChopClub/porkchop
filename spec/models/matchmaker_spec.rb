@@ -65,7 +65,10 @@ RSpec.describe Matchmaker do
   describe "matchmaking algorithm" do
     context "with 5 players playing 80 matches" do
       let!(:players) { FactoryGirl.create_list(:player, 5, active: true) }
-      before { 80.times { Match.setup!.finalize! } }
+      before do
+        create :default_table
+        80.times { Match.setup!.finalize! }
+      end
 
       it "plays all matchups" do
         Player.find_each do |player|

@@ -4,6 +4,8 @@ RSpec.describe MatchFinalizationJob, type: :job do
   describe "#perform" do
     subject { described_class.new.perform match }
 
+    before { create :default_table }
+
     let!(:anne) do
       FactoryGirl.create :player, name: "Anne", active: true
     end

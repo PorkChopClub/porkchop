@@ -228,7 +228,10 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   describe "PUT matchmake" do
     subject { put :matchmake, params: { format: :json }, session: { write_access: true } }
 
-    before { sign_in create(:admin_player) }
+    before do
+      sign_in create(:admin_player)
+      create :default_table
+    end
 
     let!(:player1){ FactoryGirl.create :player, active: true }
     let!(:player2){ FactoryGirl.create :player, active: true }
