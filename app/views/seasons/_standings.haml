@@ -7,6 +7,7 @@
       %th W
       %th L
       %th W%
+      %th GB
       %th(title="Points For") PF
       %th(title="Points Against") PA
       %th(title="Point Differential") PD
@@ -19,6 +20,7 @@
         %td(data-th-label="Wins")= stats.matches_won
         %td(data-th-label="Losses")= stats.matches_lost
         %td(data-th-label="Win Ratio")= stats.win_ratio
+        %td(data-th-label="Games Back")= stats.games_back || '-'
         %td(data-th-label="Points For")= stats.points_for
         %td(data-th-label="Points Against")= stats.points_against
         %td(data-th-label="Point Differential")
