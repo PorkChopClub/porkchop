@@ -46,7 +46,22 @@ class Stats::SeasonPersonal
     points_for - points_against
   end
 
+  def games_back
+    player_records = season.players.map do |player|
+      [
+        player.id,
+        [
+          season.matches.with_player(player).where(victor: player).count,
+          season.matches.with_player(player).where.not(victor: player).count
+        ]
+      ]
+    end.to_h
+
+    GamesBack.calculate(player_records)[player.id]
+  end
+
   private
+
   attr_reader :season
 
   def matches

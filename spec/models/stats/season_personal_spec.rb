@@ -74,4 +74,9 @@ RSpec.describe Stats::SeasonPersonal do
     subject { stats.point_differential }
     it { is_expected.to eq 5 }
   end
+
+  describe "#games_back" do
+    subject { stats.games_back }
+    it { is_expected.to eq nil }
+  end
 end
