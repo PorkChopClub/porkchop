@@ -18,6 +18,10 @@ class Match < ActiveRecord::Base
 
   scope :ongoing, -> { where finalized_at: nil }
   scope :finalized, -> { where.not finalized_at: nil }
+  scope :with_player, ->(player) {
+    finalized.where("home_player_id = :player OR away_player_id = :player",
+                    player: player)
+  }
 
   def self.setup!(matchup = nil, table: Table.default)
     matchup ||= Matchmaker.choose
