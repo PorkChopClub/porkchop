@@ -31,6 +31,7 @@ gem 'elo2'
 gem 'faraday'
 gem 'devise'
 gem 'cancancan'
+gem 'games_back', '~> 1.0'
 
 group :development do
   gem 'stackprof', require: false
