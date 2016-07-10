@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import Chart from 'chart.js'
 
-$(function() {
+$(() => {
   const canvas = $('.player-elo-chart')
   if (!canvas.length) { return }
 
