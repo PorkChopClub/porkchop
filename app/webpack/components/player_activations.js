@@ -1,53 +1,53 @@
-import $ from 'jquery';
-import Bacon from 'baconjs';
-import { filter } from 'lodash';
-$.fn.asEventStream = Bacon.$.asEventStream;
+import $ from 'jquery'
+import Bacon from 'baconjs'
+import { filter } from 'lodash'
+$.fn.asEventStream = Bacon.$.asEventStream
 
 $(function() {
-  if (!$('.player-activations').length) { return; }
+  if (!$('.player-activations').length) { return }
 
-  let activePlayerList = $('.active-players-list');
-  let inactivePlayerList = $('.inactive-players-list');
+  const activePlayerList = $('.active-players-list')
+  const inactivePlayerList = $('.inactive-players-list')
 
-  let initialFetch = Bacon.once({ url: '/api/activations' });
+  const initialFetch = Bacon.once({ url: '/api/activations' })
 
-  let activations = inactivePlayerList
+  const activations = inactivePlayerList
     .asEventStream('click', 'li')
     .map(function(event) {
-      let id = $(event.target).data('id');
-      return { url: `/api/activations/${id}/activate.json`, type: 'PUT' };
-    });
+      const id = $(event.target).data('id')
+      return { url: `/api/activations/${id}/activate.json`, type: 'PUT' }
+    })
 
-  let deactivations = activePlayerList
+  const deactivations = activePlayerList
     .asEventStream('click', 'li')
     .map(function(event) {
-      let id = $(event.target).data('id');
-      return { url: `/api/activations/${id}/deactivate.json`, type: 'PUT' };
-    });
+      const id = $(event.target).data('id')
+      return { url: `/api/activations/${id}/deactivate.json`, type: 'PUT' }
+    })
 
-  let players = Bacon.mergeAll([initialFetch, activations, deactivations])
+  const players = Bacon.mergeAll([initialFetch, activations, deactivations])
     .ajax()
-    .map(".players");
+    .map('.players')
 
-  let activePlayers = players
-    .map(players => filter(players, player => player.active));
+  const activePlayers = players
+    .map(players => filter(players, player => player.active))
 
-  let inactivePlayers = players
-    .map(players => filter(players, player => !player.active));
+  const inactivePlayers = players
+    .map(players => filter(players, player => !player.active))
 
   activePlayers.onValue(players => {
-    activePlayerList.empty();
+    activePlayerList.empty()
     for (let i = 0; i < players.length; i++) {
-      let player = players[i];
-      activePlayerList.append(`<li data-id=\"${player.id}\">${player.name}</li>`);
+      const player = players[i]
+      activePlayerList.append(`<li data-id=\"${player.id}\">${player.name}</li>`)
     }
-  });
+  })
 
   inactivePlayers.onValue(players => {
-    inactivePlayerList.empty();
+    inactivePlayerList.empty()
     for (let i = 0; i < players.length; i++) {
-      let player = players[i];
-      inactivePlayerList.append(`<li data-id=\"${player.id}\">${player.name}</li>`);
+      const player = players[i]
+      inactivePlayerList.append(`<li data-id=\"${player.id}\">${player.name}</li>`)
     }
-  });
-});
+  })
+})
