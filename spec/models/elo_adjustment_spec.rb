@@ -57,7 +57,7 @@ RSpec.describe EloAdjustment do
 
     it "returns the change in elo for the loser" do
       subject
-      expect(subject).to eq -20
+      expect(subject).to eq(-20)
     end
   end
 end

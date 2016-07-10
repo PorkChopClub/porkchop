@@ -27,7 +27,7 @@ class Stats::SeasonPersonal
 
   def win_ratio
     return format_ratio(0) if matches_played.zero?
-    format_ratio (matches_won.to_f / matches_played.to_f)
+    format_ratio(matches_won.to_f / matches_played.to_f)
   end
 
   def points_for

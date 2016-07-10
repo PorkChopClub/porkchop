@@ -27,7 +27,7 @@ module PingPong::Comments
              to: :match
 
     def seconds_since_creation
-      @seconds_since_creation ||= (Time.zone.now - match.created_at.to_time).to_i
+      @seconds_since_creation ||= (Time.zone.now - match.created_at).to_i
     end
   end
 end

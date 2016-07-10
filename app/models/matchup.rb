@@ -1,12 +1,12 @@
 class Matchup
   include ActiveModel::Validations
 
-  EPOCH = Time.at(0)
+  EPOCH = Time.zone.at(0)
 
   validate :exactly_two_players
 
   def self.all(players:)
-    players.to_a.combination(2).map { |players| new(*players) }
+    players.to_a.combination(2).map { |player_pair| new(*player_pair) }
   end
 
   def initialize(*players)
@@ -15,9 +15,9 @@ class Matchup
 
   attr_reader :players
 
-  def ==(other_object)
-    if other_object.respond_to?(:players)
-      players == other_object.players
+  def ==(other)
+    if other.respond_to?(:players)
+      players == other.players
     else
       super
     end
