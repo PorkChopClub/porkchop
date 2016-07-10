@@ -2,56 +2,56 @@ import $ from 'jquery'
 import Bacon from 'baconjs'
 $.fn.asEventStream = Bacon.$.asEventStream
 
-$(function() {
+$(() => {
   if (!$('.match-controls').length) { return }
 
   const ajaxOptions = { url: '/api/ongoing_match.json' }
 
   const homePlayerPoints = $('.match-controls-home-player')
     .asEventStream('click')
-    .map(function() {
+    .map(() => {
       ga('send', 'event', 'button', 'click', 'home point')
       return { url: '/api/ongoing_match/home_point.json', type: 'PUT' }
     })
 
   const awayPlayerPoints = $('.match-controls-away-player')
     .asEventStream('click')
-    .map(function() {
+    .map(() => {
       ga('send', 'event', 'button', 'click', 'away point')
       return { url: '/api/ongoing_match/away_point.json', type: 'PUT' }
     })
 
   const serviceToggle = $('.match-controls-toggle-service')
     .asEventStream('click')
-    .map(function() {
+    .map(() => {
       ga('send', 'event', 'button', 'click', 'toggle service')
       return { url: '/api/ongoing_match/toggle_service.json', type: 'PUT' }
     })
 
   const rewinds = $('.match-controls-rewind')
     .asEventStream('click')
-    .map(function() {
+    .map(() => {
       ga('send', 'event', 'button', 'click', 'rewind')
       return { url: '/api/ongoing_match/rewind.json', type: 'PUT' }
     })
 
   const finalization = $('.match-controls-finalize-match')
     .asEventStream('click')
-    .map(function() {
+    .map(() => {
       ga('send', 'event', 'button', 'click', 'finalize match')
       return { url: '/api/ongoing_match/finalize.json', type: 'PUT' }
     })
 
   const cancellations = $('.match-controls-cancel-match')
     .asEventStream('click')
-    .map(function() {
+    .map(() => {
       ga('send', 'event', 'button', 'click', 'cancel match')
       return { url: '/api/ongoing_match.json', type: 'DELETE' }
     })
 
   const matchmakes = $('.match-controls-matchmake')
     .asEventStream('click')
-    .map(function() {
+    .map(() => {
       ga('send', 'event', 'button', 'click', 'matchmake')
       return { url: '/api/ongoing_match/matchmake.json', type: 'PUT' }
     })
@@ -82,7 +82,7 @@ $(function() {
     }))
 
   const nextMatch = data.map('.next_match')
-  const nextMatchInfo = nextMatch.map(function(m) {
+  const nextMatchInfo = nextMatch.map((m) => {
     if (m.players.length === 2) {
       return `Next Match: ${m.players[0].name} vs ${m.players[1].name}`
     } else {
