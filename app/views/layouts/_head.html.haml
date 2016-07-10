@@ -6,11 +6,6 @@
 
   = stylesheet_link_tag 'application', '//fonts.googleapis.com/css?family=Roboto:400,400italic,300,700'
 
-  - if @javascript_entrypoint
-    = javascript_include_tag "entries/#{@javascript_entrypoint}"
-  - else
-    = javascript_include_tag 'application'
-
   %link(rel="manifest" href="/manifest.json")
   = csrf_meta_tags
 

@@ -7,7 +7,5 @@ import './components/homepage_elo_chart'
 import './components/player_activations'
 import './components/match_controls'
 
-$(() => {
-  header($('.main-navigation'))
-});
+header($('.main-navigation'))
 
