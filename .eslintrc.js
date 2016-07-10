@@ -13,6 +13,9 @@ module.exports = {
   "rules": {
     "semi": ["error", "never"],
     "space-before-function-paren": ["error", "never"],
-    "func-names": ["error", "never"]
+    "func-names": ["error", "never"],
+    "new-cap": ["error", {
+      "capIsNewExceptions": ["Line"]
+    }]
   }
 };
