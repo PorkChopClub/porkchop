@@ -85,9 +85,8 @@ $(() => {
   const nextMatchInfo = nextMatch.map((m) => {
     if (m.players.length === 2) {
       return `Next Match: ${m.players[0].name} vs ${m.players[1].name}`
-    } else {
-      return ''
     }
+    return ''
   })
   nextMatchInfo.assign($('.next-match'), 'text')
 
