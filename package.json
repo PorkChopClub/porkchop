@@ -5,7 +5,8 @@
   "scripts": {
     "watch": "webpack --watch --progress",
     "compile": "webpack --optimize-minimize --optimize-dedupe",
-    "lint": "eslint app/webpack"
+    "lint": "eslint app/webpack",
+    "autofix": "eslint --fix app/webpack"
   },
   "repository": {
     "type": "git",
