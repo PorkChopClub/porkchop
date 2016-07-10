@@ -18,9 +18,8 @@ $(() => {
     .map((bettingInfo) => {
       if (bettingInfo) {
         return `${bettingInfo.favourite} (+${bettingInfo.spread})`
-      } else {
-        return 'Insufficient matches played'
       }
+      return 'Insufficient matches played'
     })
     .assign(
       $('.scoreboard-warm-up-spread'),
