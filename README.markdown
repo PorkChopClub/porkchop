@@ -11,7 +11,6 @@ need to do is `sudo apt-get install redis-server`).
 ```shell
 # Run these to these to get the project setup:
 $ ./bin/setup
-$ npm install
 
 # For development run these simultaneously:
 $ bundle exec rails s -p 2277
