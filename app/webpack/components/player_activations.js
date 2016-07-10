@@ -25,14 +25,14 @@ $(() => {
       return { url: `/api/activations/${id}/deactivate.json`, type: 'PUT' }
     })
 
-  const players = Bacon.mergeAll([initialFetch, activations, deactivations])
+  const allPlayers = Bacon.mergeAll([initialFetch, activations, deactivations])
     .ajax()
     .map('.players')
 
-  const activePlayers = players
+  const activePlayers = allPlayers
     .map(players => filter(players, player => player.active))
 
-  const inactivePlayers = players
+  const inactivePlayers = allPlayers
     .map(players => filter(players, player => !player.active))
 
   activePlayers.onValue(players => {
