@@ -12,6 +12,7 @@ module.exports = {
   },
   "rules": {
     "semi": ["error", "never"],
-    "space-before-function-paren": ["error", "never"]
+    "space-before-function-paren": ["error", "never"],
+    "func-names": ["error", "never"]
   }
 };
