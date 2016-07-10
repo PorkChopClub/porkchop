@@ -34,8 +34,7 @@ module.exports = function(options) {
   }
 
   config.resolve = {
-    extensions: ['', '.js'],
-    modules: [path.join(__dirname, "app/webpack"), 'node_modules']
+    root: path.resolve(__dirname, "./app/webpack")
   };
 
   return config;
