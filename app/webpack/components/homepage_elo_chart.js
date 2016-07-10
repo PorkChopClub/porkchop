@@ -32,7 +32,8 @@ $(() => {
 
   const chartData = {
     labels: $.map(labels, (label, idx) => {
-      if (idx % 7 === 0) { return label } else { return '' }
+      if (idx % 7 === 0) { return label }
+      return ''
     }),
     datasets: $.map(rawData, (_, player) => {
       const playerIndex = players.indexOf(player)
@@ -40,7 +41,7 @@ $(() => {
         label: player,
         fillColor: 'rgba(0,0,0,0)',
         strokeColor: colors[playerIndex],
-        data: $.map(rawData[player], (_, date) => rawData[player][date]
+        data: $.map(rawData[player], (_index, date) => rawData[player][date]
         ),
       }
     }),
