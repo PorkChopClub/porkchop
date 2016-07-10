@@ -26,5 +26,5 @@ $(document).on('click', 'a[data-method]', function(event) {
   document.body.appendChild(form)
   $(form).submit()
   event.preventDefault()
-  return false
+  event.stopPropagation()
 })
