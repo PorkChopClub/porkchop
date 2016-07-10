@@ -4,6 +4,7 @@ module.exports = {
     "react"
   ],
   "rules": {
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "space-before-function-paren": ["error", "never"]
   }
 };
