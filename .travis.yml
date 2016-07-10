@@ -5,6 +5,7 @@ before_script:
   - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:test:prepare
 script:
+  - npm run lint
   - bundle exec rspec
 env:
   global:
