@@ -19,7 +19,8 @@ RSpec.describe Stats::StreakAdjustment do
       context "and they win another game" do
         it "increases their streak by 1" do
           expect{ subject }.to change{
-            player.current_streak.streak_length }.by(1)
+            player.current_streak.streak_length
+          }.by(1)
         end
       end
 

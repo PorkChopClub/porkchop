@@ -1,5 +1,5 @@
 class Table < ApplicationRecord
-  DEFAULT_TABLE_NAME = "Stembolt Langley"
+  DEFAULT_TABLE_NAME = "Stembolt Langley".freeze
 
   class << self
     def default

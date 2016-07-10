@@ -42,6 +42,6 @@ class Season < ActiveRecord::Base
   end
 
   def total_match_count
-    (players.count ** 2 - players.count) * games_per_matchup / 2
+    (players.count**2 - players.count) * games_per_matchup / 2
   end
 end

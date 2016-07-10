@@ -1,6 +1,6 @@
 module PingPong::Comments
   class FanFavourite < PingPong::Comment
-    FAN_FAVOURITE_NAME = "Adam Mueller"
+    FAN_FAVOURITE_NAME = "Adam Mueller".freeze
 
     def available?
       score_differential >= 3 &&

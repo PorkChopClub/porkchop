@@ -12,10 +12,10 @@ class Api::StatsController < ApplicationController
     authorize! :read, Player
     @ratings = Hash[
       Player.all.
-      select { |p| p.matches.finalized.count >= 20 }.
-      sort_by(&:elo).
-      reverse.
-      map { |p| [p.name, p.elo] }
+               select { |p| p.matches.finalized.count >= 20 }.
+               sort_by(&:elo).
+               reverse.
+               map { |p| [p.name, p.elo] }
     ]
   end
 end

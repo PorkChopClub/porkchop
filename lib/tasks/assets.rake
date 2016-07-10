@@ -1,5 +1,5 @@
 namespace :assets do
-  task :precompile => :webpack
+  task precompile: :webpack
 end
 
 task :webpack do

@@ -14,7 +14,7 @@ RSpec.describe Matchup do
       expect(subject).to match_array [
         Matchup.new(candice, joseph),
         Matchup.new(candice, zooey),
-        Matchup.new(zooey, joseph),
+        Matchup.new(zooey, joseph)
       ]
     end
   end

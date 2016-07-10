@@ -66,7 +66,7 @@ class Matchmaker
     # matchmaking is dependent on the currently active players, and all matches
     # played. We cache the choice under this key.
     last_match = Match.last
-    cache_key = "matchmaker/#{Player.active.map(&:id).sort.join("/")}/#{last_match.cache_key if last_match}"
+    cache_key = "matchmaker/#{Player.active.map(&:id).sort.join('/')}/#{last_match.cache_key if last_match}"
     Rails.cache.fetch(cache_key) do
       new(Player.active).choose
     end
@@ -98,9 +98,9 @@ class Matchmaker
       RankedMatchup.total_player_count = players.length
 
       Matchup.all(players: players).
-        map { |matchup| RankedMatchup.new(matchup) }.
-        sort_by(&:rank).
-        reverse
+                         map { |matchup| RankedMatchup.new(matchup) }.
+                         sort_by(&:rank).
+                         reverse
     end
   end
 
