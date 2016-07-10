@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import Chart from 'chart.js'
 
-$(function() {
+$(() => {
   const canvas = $('.homepage-chart > .elo-chart')
   if (!canvas.length) { return }
 
@@ -31,10 +31,10 @@ $(function() {
   if (!players.length) { return }
 
   const chartData = {
-    labels: $.map(labels, function(label, idx) {
+    labels: $.map(labels, (label, idx) => {
       if (idx % 7 === 0) { return label } else { return '' }
     }),
-    datasets: $.map(rawData, function(_, player) {
+    datasets: $.map(rawData, (_, player) => {
       const playerIndex = players.indexOf(player)
       return {
         label: player,
