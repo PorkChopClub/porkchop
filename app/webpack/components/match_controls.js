@@ -90,8 +90,6 @@ $(() => {
   })
   nextMatchInfo.assign($('.next-match'), 'text')
 
-  const matchId = match.map('.id').toProperty()
-
   const matchHomeScore = match.map('.home_score').toProperty()
   const matchAwayScore = match.map('.away_score').toProperty()
 
@@ -103,7 +101,6 @@ $(() => {
 
   const matchFinished = match.map('.finished').toProperty()
   const matchFinalized = match.map('.finalized').toProperty()
-  const matchDeleted = match.map('.deleted').toProperty()
 
   matchFinalized.assign($('.match-controls-cancel-match'), 'prop', 'disabled')
 
