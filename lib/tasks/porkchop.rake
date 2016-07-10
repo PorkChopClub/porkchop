@@ -18,7 +18,7 @@ namespace :porkchop do
 
   desc "Generate sample data"
   task create_season: [:environment] do
-    league = League.create! name: "PorkChop Club"
+    league = League.create! name: "PorkChop Club", table: Table.first
     season = Season.create! games_per_matchup: 4, league: league
     season.players << Player.all
   end
