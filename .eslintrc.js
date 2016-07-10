@@ -10,6 +10,9 @@ module.exports = {
       }
     }
   },
+  "globals": {
+    "ga": true
+  },
   "rules": {
     "semi": ["error", "never"],
     "space-before-function-paren": ["error", "never"],
