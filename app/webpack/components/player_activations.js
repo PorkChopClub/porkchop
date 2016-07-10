@@ -3,7 +3,7 @@ import Bacon from 'baconjs'
 import { filter } from 'lodash'
 $.fn.asEventStream = Bacon.$.asEventStream
 
-$(function() {
+$(() => {
   if (!$('.player-activations').length) { return }
 
   const activePlayerList = $('.active-players-list')
@@ -13,14 +13,14 @@ $(function() {
 
   const activations = inactivePlayerList
     .asEventStream('click', 'li')
-    .map(function(event) {
+    .map((event) => {
       const id = $(event.target).data('id')
       return { url: `/api/activations/${id}/activate.json`, type: 'PUT' }
     })
 
   const deactivations = activePlayerList
     .asEventStream('click', 'li')
-    .map(function(event) {
+    .map((event) => {
       const id = $(event.target).data('id')
       return { url: `/api/activations/${id}/deactivate.json`, type: 'PUT' }
     })
