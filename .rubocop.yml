@@ -9,6 +9,9 @@ AllCops:
 Rails:
   Enabled: true
 
+Style/MultilineMethodCallIndentation:
+  Enabled: false
+
 Style/DotPosition:
   EnforcedStyle: trailing
 
