@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Bacon from 'baconjs';
-import { select } from 'lodash';
+import { filter } from 'lodash';
 $.fn.asEventStream = Bacon.$.asEventStream;
 
 $(function() {
@@ -30,10 +30,10 @@ $(function() {
     .map(".players");
 
   let activePlayers = players
-    .map(players => select(players, player => player.active));
+    .map(players => filter(players, player => player.active));
 
   let inactivePlayers = players
-    .map(players => select(players, player => !player.active));
+    .map(players => filter(players, player => !player.active));
 
   activePlayers.onValue(players => {
     activePlayerList.empty();

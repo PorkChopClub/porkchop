@@ -32,7 +32,7 @@ $(() => {
     .map((time) => {
       let minutes = Math.floor(time / 60);
       let seconds = time % 60;
-      return [minutes, _.padLeft(seconds, 2)].join(':');
+      return [minutes, _.padStart(seconds, 2)].join(':');
     })
     .assign(
       $('.scoreboard-warm-up-countdown'),
