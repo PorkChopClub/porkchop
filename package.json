@@ -5,7 +5,7 @@
   "scripts": {
     "watch": "webpack --watch --progress",
     "compile": "webpack --optimize-minimize --optimize-dedupe",
-    "eslint": "eslint app/webpack"
+    "lint": "eslint app/webpack"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,10 @@
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^4.1.5",
-    "eslint": "^1.10.1"
+    "eslint": "^3.0.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.10.2",
+    "eslint-plugin-jsx-a11y": "^1.5.5",
+    "eslint-plugin-react": "^5.2.2"
   }
 }
