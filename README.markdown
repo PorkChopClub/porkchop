@@ -19,3 +19,9 @@ $ npm run watch
 # If you want to use LiveReload, also run:
 $ bundle exec guard
 ```
+
+# Style Guides
+
+This project inherits from Airbnb's JavaScript style guide, with a few changes.
+Run `npm run lint` to see your violations. Use `npm run autofix` to fix any
+that can be automatically fixed.
