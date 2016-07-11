@@ -8,5 +8,6 @@ import './components/match_controls'
 
 import Header from './components/Header'
 
-render(<Header/>, document.getElementById('main-navigation'))
+const header = document.getElementById('main-navigation')
+render(<Header loggedIn={ header.dataset.loggedIn === "true" }/>, header)
 

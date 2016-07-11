@@ -27,15 +27,7 @@ class Header extends Component {
               <li>
                 <a href="/matches">Match History</a>
               </li>
-              <li>
-                <a href="/players/sign_out" data-method="delete">Sign Out</a>
-              </li>
-              <li>
-                <a href="/players/sign_in">Sign In</a>
-              </li>
-              <li>
-                <a href="/players/sign_up">Sign Up</a>
-              </li>
+              { this.sessionControls() }
             </ul>
           </div>
         </div>
@@ -59,6 +51,20 @@ class Header extends Component {
       "main-header-menu-button": true,
       "active": this.state.controlsOpen
     })
+  }
+
+  sessionControls() {
+    if (this.props.loggedIn) {
+      return <li><a href="/players/sign_out" data-method="delete">Sign Out</a></li>
+    }
+    return [
+      <li>
+        <a href="/players/sign_in">Sign In</a>
+      </li>,
+      <li>
+        <a href="/players/sign_up">Sign Up</a>
+      </li>
+    ]
   }
 }
 
