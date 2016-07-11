@@ -1,1 +1,1 @@
-%nav#main-navigation.main-navigation{ "data-logged-in": (!!current_player).to_s }
+%nav#main-navigation.main-navigation{ data: { "logged-in": (!!current_player).to_s, "show-controls": (!!current_player.try!(:admin?)).to_s  } }

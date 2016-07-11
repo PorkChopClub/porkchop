@@ -18,9 +18,7 @@ class Header extends Component {
         <div className="header-controls-wrap">
           <div className="header-controls">
             <ul className="site-navigation">
-              <li>
-                <a href="/scoreboard/edit">Match Controls</a>
-              </li>
+              {this.matchControls()}
               <li>
                 <a href="/players">Player List</a>
               </li>
@@ -51,6 +49,12 @@ class Header extends Component {
       "main-header-menu-button": true,
       "active": this.state.controlsOpen
     })
+  }
+
+  matchControls() {
+    if (this.props.showControls) {
+      return <li><a href="/scoreboard/edit">Match Controls</a></li>
+    }
   }
 
   sessionControls() {
