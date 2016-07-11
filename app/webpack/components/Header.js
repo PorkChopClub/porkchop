@@ -5,7 +5,7 @@ import classnames from 'classnames'
 class Header extends Component {
   render() {
     return (
-      <div className={ this.state.controlsOpen ? "controls-open" : "" }>
+      <div>
         <div className="main-header-wrap">
           <header className="main-header">
             <h1 className="site-title">
@@ -15,6 +15,26 @@ class Header extends Component {
             <div className={ this.buttonClasses() } onClick={ this.toggleControls }/>
           </header>
         </div>
+        {this.headerControls()}
+      </div>
+    )
+  }
+
+  @bind
+  toggleControls(e) {
+    this.setState({ controlsOpen: !this.state.controlsOpen })
+  }
+
+  buttonClasses() {
+    return classnames({
+      "main-header-menu-button": true,
+      "active": this.state.controlsOpen
+    })
+  }
+
+  headerControls() {
+    if (this.state.controlsOpen) {
+      return (
         <div className="header-controls-wrap">
           <div className="header-controls">
             <ul className="site-navigation">
@@ -29,26 +49,8 @@ class Header extends Component {
             </ul>
           </div>
         </div>
-      </div>
-    )
-  }
-
-  @bind
-  toggleControls(e) {
-    this.setState({ controlsOpen: !this.state.controlsOpen })
-  }
-
-  containerClasses() {
-    return classnames({
-      "controls-open": this.state.controlsOpen
-    })
-  }
-
-  buttonClasses() {
-    return classnames({
-      "main-header-menu-button": true,
-      "active": this.state.controlsOpen
-    })
+      )
+    }
   }
 
   matchControls() {
