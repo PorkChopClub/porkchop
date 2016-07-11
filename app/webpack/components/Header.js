@@ -12,7 +12,7 @@ class Header extends Component {
               <a href="/">PorkChop<span>.club</span></a>
             </h1>
             <div className="main-header-paddle" />
-            <div className={ this.buttonClasses() } onClick={ this.toggleControls }/>
+            <div className={this.buttonClasses()} onClick={this.toggleControls}/>
           </header>
         </div>
         {this.headerControls()}
@@ -45,7 +45,7 @@ class Header extends Component {
               <li>
                 <a href="/matches">Match History</a>
               </li>
-              { this.sessionControls() }
+              {this.sessionControls()}
             </ul>
           </div>
         </div>
