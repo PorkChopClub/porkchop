@@ -1,4 +1,5 @@
 module.exports = {
+  "parser": "babel-eslint",
   "extends": "airbnb",
   "plugins": [
     "react"
@@ -19,6 +20,9 @@ module.exports = {
     "func-names": ["error", "never"],
     "new-cap": ["error", {
       "capIsNewExceptions": ["Line"]
-    }]
+    }],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^h$" }]
   }
 };

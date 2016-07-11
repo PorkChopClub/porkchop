@@ -3,32 +3,15 @@ import { bind } from 'decko'
 import classnames from 'classnames'
 
 class Header extends Component {
-  render() {
-    return (
-      <div>
-        <div className="main-header-wrap">
-          <header className="main-header">
-            <h1 className="site-title">
-              <a href="/">PorkChop<span>.club</span></a>
-            </h1>
-            <div className="main-header-paddle" />
-            <div className={this.buttonClasses()} onClick={this.toggleControls}/>
-          </header>
-        </div>
-        {this.headerControls()}
-      </div>
-    )
-  }
-
   @bind
-  toggleControls(e) {
+  toggleControls() {
     this.setState({ controlsOpen: !this.state.controlsOpen })
   }
 
   buttonClasses() {
     return classnames({
-      "main-header-menu-button": true,
-      "active": this.state.controlsOpen
+      'main-header-menu-button': true,
+      active: this.state.controlsOpen,
     })
   }
 
@@ -51,12 +34,14 @@ class Header extends Component {
         </div>
       )
     }
+    return null
   }
 
   matchControls() {
     if (this.props.showControls) {
       return <li><a href="/scoreboard/edit">Match Controls</a></li>
     }
+    return null
   }
 
   sessionControls() {
@@ -69,8 +54,25 @@ class Header extends Component {
       </li>,
       <li>
         <a href="/players/sign_up">Sign Up</a>
-      </li>
+      </li>,
     ]
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="main-header-wrap">
+          <header className="main-header">
+            <h1 className="site-title">
+              <a href="/">PorkChop<span>.club</span></a>
+            </h1>
+            <div className="main-header-paddle" />
+            <div className={this.buttonClasses()} onClick={this.toggleControls} />
+          </header>
+        </div>
+        {this.headerControls()}
+      </div>
+    )
   }
 }
 
