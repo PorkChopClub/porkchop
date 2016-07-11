@@ -1,0 +1,4 @@
+- if @javascript_entrypoint
+  = javascript_include_tag "entries/#{@javascript_entrypoint}"
+- else
+  = javascript_include_tag 'application'

@@ -4,7 +4,12 @@ services:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:test:prepare
+  - nvm install 6.2
+  - nvm use 6.2
+  - npm install
 script:
+  - npm run lint
+  - bundle exec rubocop
   - bundle exec rspec
 env:
   global:

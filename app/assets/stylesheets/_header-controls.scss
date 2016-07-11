@@ -1,14 +1,9 @@
 .header-controls-wrap {
-  display: none;
   @include padding(1rem);
   background-color: $green;
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 2;
-
-  .controls-open & {
-    display: block;
-  }
 
   .requires-write-access {
     display: none;

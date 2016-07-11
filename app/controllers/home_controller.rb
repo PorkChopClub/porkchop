@@ -15,7 +15,7 @@ class HomeController < ApplicationController
       Player.all.
       select do |p|
         p.matches.finalized.count >= 20 &&
-        p.matches.finalized.where("finalized_at > ?", 14.days.ago).count > 4
+          p.matches.finalized.where("finalized_at > ?", 14.days.ago).count > 4
       end.
       sort_by(&:elo).
       reverse

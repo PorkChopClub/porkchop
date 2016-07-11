@@ -4,7 +4,11 @@
 %body
   = render "layouts/header"
 
+  = render "layouts/flashes"
+
   .outer-container
     = yield
 
   = render "layouts/footer"
+
+  = render 'layouts/javascript'

@@ -8,6 +8,6 @@ RSpec.describe Stats::Streak do
 
   it "is either a winning streak or losing streak" do
     is_expected.to validate_inclusion_of(:streak_type).
-                     in_array(%w[W L])
+      in_array(%w[W L])
   end
 end

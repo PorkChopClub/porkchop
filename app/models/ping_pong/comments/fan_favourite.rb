@@ -1,6 +1,11 @@
 module PingPong::Comments
   class FanFavourite < PingPong::Comment
-    FAN_FAVOURITE_NAME = "Adam Mueller"
+    FAN_FAVOURITE_NAME = "Adam Mueller".freeze
+
+    delegate(:players,
+             :leader,
+             :score_differential,
+             to: :match)
 
     def available?
       score_differential >= 3 &&
@@ -24,12 +29,5 @@ module PingPong::Comments
         "Sorry Adam. You're fucked."
       end
     end
-
-    private
-
-    delegate(:players,
-             :leader,
-             :score_differential,
-             to: :match)
   end
 end

@@ -74,7 +74,7 @@ class Player < ActiveRecord::Base
   end
 
   def last_played_at
-    matches.maximum(:created_at) || Time.at(0)
+    matches.maximum(:created_at) || Time.zone.at(0)
   end
 
   def stats

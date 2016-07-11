@@ -1,0 +1,7 @@
+{
+  presets: ['es2015-webpack', 'react'],
+  plugins: [
+    ["transform-react-jsx", {"pragma": "h"}],
+    ["babel-plugin-transform-decorators-legacy"]
+  ]
+}

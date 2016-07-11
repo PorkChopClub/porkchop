@@ -7,8 +7,8 @@ module PingPong
       PingPong::Comments::PreviousRecord,
       PingPong::Comments::Streak,
       PingPong::Comments::Victory,
-      PingPong::Comments::WarmUp,
-    ]
+      PingPong::Comments::WarmUp
+    ].freeze
 
     def initialize(match:)
       @match = match

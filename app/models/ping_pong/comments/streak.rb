@@ -1,7 +1,7 @@
 module PingPong::Comments
   class Streak < PingPong::Comment
     def available?
-      points.length != 0 && streak_length > 2
+      !points.empty? && streak_length > 2
     end
 
     def priority

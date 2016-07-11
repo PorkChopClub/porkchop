@@ -1,2 +1,2 @@
-import 'baconExtensions';
-import 'utils/method'
+import './baconExtensions'
+import './utils/method'

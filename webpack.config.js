@@ -25,17 +25,13 @@ module.exports = function(options) {
     loaders: [
       { test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ['es2015-webpack']
-        }
+        loader: "babel-loader"
       }
     ]
   }
 
   config.resolve = {
-    extensions: ['', '.js'],
-    modules: [path.join(__dirname, "app/webpack"), 'node_modules']
+    root: path.resolve(__dirname, "./app/webpack")
   };
 
   return config;

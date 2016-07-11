@@ -19,7 +19,7 @@ RSpec.describe Stats::SeasonPersonal do
     end
     context "when they have the same win ratio" do
       subject { stats <=> other }
-      it { is_expected.to eq -1 }
+      it { is_expected.to eq(-1) }
     end
     context "when the win ratio is the same" do
       before do

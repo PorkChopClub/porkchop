@@ -1,37 +1,37 @@
-import Bacon from 'baconjs';
-import $ from 'jquery';
+import Bacon from 'baconjs'
+import $ from 'jquery'
 
-$.ajaxSetup( {
-  beforeSend: function ( xhr ) {
-    let token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
-    xhr.setRequestHeader( 'X-CSRF-Token', token );
-  }
-});
+$.ajaxSetup({
+  beforeSend(xhr) {
+    const token = $('meta[name="csrf-token"]').attr('content')
+    xhr.setRequestHeader('X-CSRF-Token', token)
+  },
+})
 
 // FIXME: We have a fetch polyfill and should use it.
 Bacon.Observable.prototype.ajax = function() {
   return this.flatMapLatest(
     (params) => Bacon.fromPromise($.ajax(params))
-  );
-};
+  )
+}
 
 Bacon.Observable.prototype.serialAjax = function() {
   return this.flatMapConcat(
     (params) => Bacon.fromPromise($.ajax(params))
-  );
-};
+  )
+}
 
 Bacon.ajaxPoll = (ajaxOptions, interval) => {
-  let requests = new Bacon.Bus();
-  let responses = requests.ajax();
+  const requests = new Bacon.Bus()
+  const responses = requests.ajax()
 
   requests.plug(
     Bacon.once(ajaxOptions)
-  );
+  )
 
   requests.plug(
     responses.mapError().delay(interval).map(() => ajaxOptions)
-  );
+  )
 
-  return responses;
-};
+  return responses
+}

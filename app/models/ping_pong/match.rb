@@ -50,7 +50,7 @@ class PingPong::Match < SimpleDelegator
   end
 
   def warmup_seconds_left
-    [90 - (Time.zone.now - created_at.to_time).to_i, 0].max
+    [90 - (Time.zone.now - created_at).to_i, 0].max
   end
 
   private

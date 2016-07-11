@@ -8,7 +8,7 @@ json.match do
     json.flames begin
       points = @match.points.order(created_at: :desc)
       points.first.try!(:victor) == @match.home_player &&
-        points.chunk(&:victor).to_a[0][1].size > 4
+      points.chunk(&:victor).to_a[0][1].size > 4
     end
   end
 
@@ -19,7 +19,7 @@ json.match do
     json.flames begin
       points = @match.points.order(created_at: :desc)
       points.first.try!(:victor) == @match.away_player &&
-        points.chunk(&:victor).to_a[0][1].size > 4
+      points.chunk(&:victor).to_a[0][1].size > 4
     end
   end
 

@@ -37,7 +37,10 @@ $header-padding: 20px;
 
 .main-header-paddle {
   float: left;
+  width: $header-height;
   height: $header-height;
+  background-size: cover;
+  background-image: image-url('header-paddle.svg');
 }
 
 .main-header-menu-button {

@@ -15,8 +15,8 @@ class Stats::Personal
     Hash[
       opponents.map do |opponent|
         [opponent, win_ratio_against(opponent)]
-      end
-      .sort_by{ |k, v| v }.reverse
+      end.
+      sort_by{ |_k, v| v }.reverse
     ]
   end
 
