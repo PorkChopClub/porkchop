@@ -1,11 +1,12 @@
-import $ from 'jquery'
+import { h, render } from 'preact'
 
 import './shared'
-import header from './components/header'
 import './components/player_elo_chart'
 import './components/homepage_elo_chart'
 import './components/player_activations'
 import './components/match_controls'
 
-header($('.main-navigation'))
+import Header from './components/Header'
+
+render(<Header/>, document.getElementById('main-navigation'))
 
