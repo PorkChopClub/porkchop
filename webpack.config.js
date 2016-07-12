@@ -11,7 +11,7 @@ module.exports = function(options) {
   };
 
   config.output = {
-    path: path.join(__dirname, "app/assets/javascripts/entries"),
+    path: path.join(__dirname, "app/assets/javascripts"),
     filename: "[name].js"
   }
 
