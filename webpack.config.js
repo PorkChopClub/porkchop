@@ -7,6 +7,7 @@ module.exports = function(options) {
 
   config.entry = {
     scoreboard: './app/webpack/scoreboard.js',
+    legacy_scoreboard: './app/webpack/legacy_scoreboard.js',
     default: './app/webpack/default.js'
   };
 
