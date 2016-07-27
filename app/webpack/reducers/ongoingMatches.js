@@ -1,1 +1,1 @@
-export default (state = true, action) => state
+export default (state = {}, action) => state

@@ -1,11 +1,14 @@
 import { h, Component } from 'preact'
+import { connect } from 'preact-redux'
 
-class Scoreboard extends Component {
-  render() {
-    return (
-      <div>Scoreboard!</div>
-    )
-  }
+const mapState = (state) => {
+  return {}
 }
 
-export default Scoreboard
+const Scoreboard = ({ foo }) => {
+  return (
+    <div>Scoreboard! {foo}</div>
+  )
+}
+
+export default connect(mapState)(Scoreboard)
