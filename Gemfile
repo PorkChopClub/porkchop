@@ -33,6 +33,7 @@ gem 'elo2'
 gem 'faraday'
 gem 'devise'
 gem 'cancancan'
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'games_back', '~> 1.0'
 
 group :production do
