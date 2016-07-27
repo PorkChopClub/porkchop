@@ -1,5 +1,5 @@
-import ongoingMatches from './reducers/ongoingMatches';
+import matches from './reducers/matches';
 
 export default {
-  ongoingMatches
+  matches
 };
