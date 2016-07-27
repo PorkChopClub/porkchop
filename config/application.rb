@@ -16,6 +16,12 @@ Bundler.require(*Rails.groups)
 
 module Porkchop
   class Application < Rails::Application
+    config.generators do |generate|
+      generate.helper false
+      generate.assets false
+      generate.view_specs false
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

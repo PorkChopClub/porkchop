@@ -12,6 +12,16 @@ Rails.application.routes.draw do
   resources :seasons, only: [:show]
 
   namespace :api do
+    namespace :v2 do
+      resources :tables, only: [] do
+        resources :matches, only: [] do
+          collection do
+            get :ongoing
+          end
+        end
+      end
+    end
+
     resources :players, only: :index
     resources :achievements, only: :index
 
