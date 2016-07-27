@@ -36,6 +36,7 @@
     "preact": "^4.8.0",
     "preact-redux": "^1.0.1",
     "redux": "^3.5.2",
+    "redux-actions": "^0.10.1",
     "redux-thunk": "^2.1.0",
     "webpack": "^2.1.0-beta.15",
     "whatwg-fetch": "^1.0.0"
