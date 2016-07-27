@@ -2,12 +2,19 @@ import { h, Component } from 'preact'
 import { connect } from 'preact-redux'
 
 const mapState = (state) => {
-  return {}
+  const tableId = state.scoreboard.tableId
+  for (var match of state.matches.values()) {
+    console.log(match)
+  }
+  return { tableId, match }
 }
 
-const Scoreboard = ({ foo }) => {
+const Scoreboard = ({ tableId, match }) => {
   return (
-    <div>Scoreboard! {foo}</div>
+    <div>
+      <h1>Scoreboard!</h1>
+      <h2>Spectating table {tableId}</h2>
+    </div>
   )
 }
 
