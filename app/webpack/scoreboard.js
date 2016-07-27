@@ -6,6 +6,7 @@ import { Provider } from 'preact-redux'
 import Scoreboard from './components/Scoreboard'
 import store from './store'
 import { trackTable } from './actions/tables'
+import { setTable } from './actions/scoreboard'
 
 render(
   <Provider store={store}>
@@ -14,4 +15,7 @@ render(
   document.body
 )
 
-store.dispatch(trackTable(document.body.dataset.tableId))
+const tableId = document.body.dataset.tableId
+
+store.dispatch(trackTable(tableId))
+store.dispatch(setTable(tableId))

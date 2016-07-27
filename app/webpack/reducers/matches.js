@@ -1,7 +1,6 @@
 import { handleActions } from 'redux-actions';
 
-const defaultState = {
-}
+const defaultState = {}
 
 export default handleActions({
   MATCH_UPDATE: (state, { payload }) => {
