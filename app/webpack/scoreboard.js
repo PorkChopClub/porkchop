@@ -1,11 +1,14 @@
 import './shared'
 
 import { h, render } from 'preact'
-import Scoreboard from './components/Scoreboard'
+import { Provider } from 'preact-redux'
 
-const scoreboard = document.getElementById('scoreboard')
+import Scoreboard from './components/Scoreboard'
+import store from './store'
 
 render(
-  <Scoreboard />,
-  scoreboard
+  <Provider store={store}>
+    <Scoreboard />
+  </Provider>,
+  document.body
 )
