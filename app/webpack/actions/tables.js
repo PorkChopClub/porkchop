@@ -1,8 +1,5 @@
-import { createAction } from 'redux-actions';
-
+import { updateMatch } from './matches'
 import deserializeMatch from '../jsonApi/deserializeMatch'
-
-const updateMatch = createAction('MATCH_UPDATE')
 
 export const trackTable = (tableId) => {
   return (dispatch) => {

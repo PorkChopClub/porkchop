@@ -5,7 +5,7 @@ import { Provider } from 'preact-redux'
 
 import Scoreboard from './components/Scoreboard'
 import store from './store'
-import { trackTable } from './actions/ongoingMatch'
+import { trackTable } from './actions/tables'
 
 render(
   <Provider store={store}>
