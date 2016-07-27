@@ -1,7 +1,13 @@
 import { handleActions } from 'redux-actions';
 
-const defaultState = {}
+const defaultState = {
+  matches: {}
+}
 
 export default handleActions({
-  ONGOING_MATCH_TRACK_TABLE: (state, action) => state
+  MATCH_UPDATE: (state, { payload }) => {
+    const matches = { ...state.matches }
+    matches[payload.id] = payload
+    return { ...state, matches: matches }
+  }
 }, defaultState)
