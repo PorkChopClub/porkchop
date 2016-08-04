@@ -6,6 +6,7 @@ ruby '2.3.1'
 gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
 
 gem 'rails', '~> 5.0.0'
+gem 'rack-cors'
 gem 'pg'
 gem 'puma'
 gem 'sidekiq'

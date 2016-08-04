@@ -169,6 +169,7 @@ GEM
       pry (>= 0.9.10)
     puma (3.4.0)
     rack (2.0.1)
+    rack-cors (0.4.0)
     rack-livereload (0.3.16)
       rack
     rack-mini-profiler (0.10.1)
@@ -326,6 +327,7 @@ DEPENDENCIES
   poltergeist
   pry-rails
   puma
+  rack-cors
   rack-livereload
   rack-mini-profiler
   rails (~> 5.0.0)
