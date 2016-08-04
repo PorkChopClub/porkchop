@@ -9,7 +9,7 @@ import './components/match_controls'
 import Header from './components/Header'
 
 const header = document.getElementById('main-navigation')
-console.log('why?')
+
 render(
   <Header
     loggedIn={header.dataset.loggedIn === 'true'}
