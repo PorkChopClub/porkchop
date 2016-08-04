@@ -4,5 +4,9 @@ end
 
 task :webpack do
   sh "npm install"
-  sh "npm run compile"
+  if Rails.env.production?
+    sh "NODE_ENV=production npm run compile"
+  else
+    sh "npm run compile"
+  end
 end
