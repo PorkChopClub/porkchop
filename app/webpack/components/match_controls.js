@@ -1,60 +1,59 @@
 import $ from 'jquery'
 import Bacon from 'baconjs'
-import api from '../utils/api'
 $.fn.asEventStream = Bacon.$.asEventStream
 
 $(() => {
   if (!$('.match-controls').length) { return }
 
-  const ajaxOptions = { url: api('ongoing_match.json') }
+  const ajaxOptions = { url: '/api/ongoing_match.json' }
 
   const homePlayerPoints = $('.match-controls-home-player')
     .asEventStream('click')
     .map(() => {
       ga('send', 'event', 'button', 'click', 'home point')
-      return { url: api('ongoing_match/home_point.json'), type: 'PUT' }
+      return { url: '/api/ongoing_match/home_point.json', type: 'PUT' }
     })
 
   const awayPlayerPoints = $('.match-controls-away-player')
     .asEventStream('click')
     .map(() => {
       ga('send', 'event', 'button', 'click', 'away point')
-      return { url: api('ongoing_match/away_point.json'), type: 'PUT' }
+      return { url: '/api/ongoing_match/away_point.json', type: 'PUT' }
     })
 
   const serviceToggle = $('.match-controls-toggle-service')
     .asEventStream('click')
     .map(() => {
       ga('send', 'event', 'button', 'click', 'toggle service')
-      return { url: api('ongoing_match/toggle_service.json'), type: 'PUT' }
+      return { url: '/api/ongoing_match/toggle_service.json', type: 'PUT' }
     })
 
   const rewinds = $('.match-controls-rewind')
     .asEventStream('click')
     .map(() => {
       ga('send', 'event', 'button', 'click', 'rewind')
-      return { url: api('ongoing_match/rewind.json'), type: 'PUT' }
+      return { url: '/api/ongoing_match/rewind.json', type: 'PUT' }
     })
 
   const finalization = $('.match-controls-finalize-match')
     .asEventStream('click')
     .map(() => {
       ga('send', 'event', 'button', 'click', 'finalize match')
-      return { url: api('ongoing_match/finalize.json'), type: 'PUT' }
+      return { url: '/api/ongoing_match/finalize.json', type: 'PUT' }
     })
 
   const cancellations = $('.match-controls-cancel-match')
     .asEventStream('click')
     .map(() => {
       ga('send', 'event', 'button', 'click', 'cancel match')
-      return { url: api('ongoing_match.json'), type: 'DELETE' }
+      return { url: '/api/ongoing_match.json', type: 'DELETE' }
     })
 
   const matchmakes = $('.match-controls-matchmake')
     .asEventStream('click')
     .map(() => {
       ga('send', 'event', 'button', 'click', 'matchmake')
-      return { url: api('ongoing_match/matchmake.json'), type: 'PUT' }
+      return { url: '/api/ongoing_match/matchmake.json', type: 'PUT' }
     })
 
   const data = Bacon

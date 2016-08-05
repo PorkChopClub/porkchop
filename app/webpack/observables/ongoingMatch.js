@@ -1,5 +1,4 @@
 import { ajaxPoll } from 'baconjs'
-import api from '../utils/api'
 
 const EMPTY_MATCH = {
   home_score: '',
@@ -18,7 +17,7 @@ const EMPTY_MATCH = {
   warmup: false,
 }
 
-const ajaxOptions = { url: api('ongoing_match.json') }
+const ajaxOptions = { url: '/api/ongoing_match.json' }
 const matchPolls = ajaxPoll(ajaxOptions, 300)
 
 export default matchPolls
