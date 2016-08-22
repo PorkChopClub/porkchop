@@ -17,11 +17,11 @@ class Matchmaker
 
       add_term(name: "Matchup matches since last played",
                base_value: [matches_since_last_played, total_possible_matchups * 2.0].min,
-               factor: 0.5 / total_possible_matchups)
+               factor: 0.25 / total_possible_matchups)
 
       add_term(name: "Combined matches since players last played",
                base_value: [players.sum(&:matches_since_last_played), (total_player_count - 1) * 2.0].min,
-               factor: 1.0 / (total_player_count - 1))
+               factor: 2.0 / (total_player_count - 1))
     end
 
     def rank
