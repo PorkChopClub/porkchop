@@ -47,13 +47,15 @@ RSpec.describe Matchmaker do
         breakdown: [
           {
             name: "Matchup matches since last played",
-            base_value: 2.0,
+            base_value: Float::INFINITY,
+            max: 2.0,
             factor: 0.25,
             value: 0.5
           },
           {
             name: "Combined matches since players last played",
-            base_value: 2.0,
+            base_value: Float::INFINITY,
+            max: 2.0,
             factor: 2.0,
             value: 4.0
           }
