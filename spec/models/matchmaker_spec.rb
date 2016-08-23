@@ -37,25 +37,34 @@ RSpec.describe Matchmaker do
 
     let(:matchmaker) { Matchmaker.new(players) }
     let(:players) { [bert, ernie] }
-    let(:ernie) { FactoryGirl.create :player, name: "Ernie", active: true }
-    let(:bert) { FactoryGirl.create :player, name: "Bert", active: true }
+    let(:ernie) { FactoryGirl.create :player, name: "Ernie", elo: 400, active: true }
+    let(:bert) { FactoryGirl.create :player, name: "Bert", elo: 1200, active: true }
 
     it "returns an arbitrary representation of the result of the matchup ranking" do
       expect(subject).to eq [{
         players: %w(Bert Ernie),
-        result: 3.0,
+        result: 5.25,
         breakdown: [
           {
             name: "Matchup matches since last played",
-            base_value: 2.0,
-            factor: 0.5,
-            value: 1.0
+            base_value: Float::INFINITY,
+            max: 2.0,
+            factor: 0.25,
+            value: 0.5
           },
           {
             name: "Combined matches since players last played",
-            base_value: 2.0,
-            factor: 1.0,
-            value: 2.0
+            base_value: Float::INFINITY,
+            max: 2.0,
+            factor: 2.0,
+            value: 4.0
+          },
+          {
+            name: "Difference in skill rating",
+            base_value: 0.375,
+            max: 1.0,
+            factor: 2.0,
+            value: 0.75
           }
         ]
       }]

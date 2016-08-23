@@ -1,8 +1,8 @@
 class Matchmaker
   class RankedMatchup
-    Term = Struct.new(:name, :base_value, :factor) do
+    Term = Struct.new(:name, :base_value, :max, :factor) do
       def value
-        base_value * factor
+        [base_value, max].min * factor
       end
     end
 
@@ -16,12 +16,27 @@ class Matchmaker
       @terms = []
 
       add_term(name: "Matchup matches since last played",
-               base_value: [matches_since_last_played, total_possible_matchups * 2.0].min,
-               factor: 0.5 / total_possible_matchups)
+               base_value: matches_since_last_played,
+               max: total_possible_matchups * 2.0,
+               factor: 0.25 / total_possible_matchups)
 
       add_term(name: "Combined matches since players last played",
-               base_value: [players.sum(&:matches_since_last_played), (total_player_count - 1) * 2.0].min,
-               factor: 1.0 / (total_player_count - 1))
+               base_value: players.sum(&:matches_since_last_played),
+               max: (total_player_count - 1) * 2.0,
+               factor: 2.0 / (total_player_count - 1))
+
+      elo_difference = players.map(&:elo).inject(:-).abs
+      base_value =
+        if elo_difference < 300
+          1.0
+        else
+          [300.0 / elo_difference, 0.25].max
+        end
+
+      add_term(name: "Difference in skill rating",
+               base_value: base_value,
+               max: 1.0,
+               factor: 2.0)
     end
 
     def rank
@@ -33,6 +48,7 @@ class Matchmaker
         {
           name: term.name,
           base_value: term.base_value,
+          max: term.max,
           factor: term.factor,
           value: term.value
         }
@@ -49,8 +65,8 @@ class Matchmaker
       total_player_count * (total_player_count - 1) / 2
     end
 
-    def add_term(name:, base_value:, factor: 1)
-      terms << Term.new(name, base_value, factor)
+    def add_term(name:, base_value:, max:, factor: 1)
+      terms << Term.new(name, base_value, max, factor)
     end
   end
 
