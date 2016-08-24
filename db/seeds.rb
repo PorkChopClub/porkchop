@@ -1,5 +1,4 @@
-Table.create!(name: "Stembolt Langley")
-Table.create!(name: "Stembolt Courtney")
+Table.create!(name: Table::DEFAULT_TABLE_NAME)
 
 Player.create!(name: "Jared Norman",
                email: "admin@stembolt.com",
