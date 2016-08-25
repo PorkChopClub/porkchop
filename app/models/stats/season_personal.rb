@@ -12,13 +12,11 @@ class Stats::SeasonPersonal
   end
 
   def matches_played
-    matches.size
+    matches.count
   end
 
   def matches_won
-    matches.select do |match|
-      match.victor_id == player.id
-    end.size
+    matches.where(victor_id: player.id).count
   end
 
   def matches_lost
@@ -31,15 +29,11 @@ class Stats::SeasonPersonal
   end
 
   def points_for
-    points.select do |match|
-      match.victor_id == player.id
-    end.size
+    points.where(victor_id: player.id).count
   end
 
   def points_against
-    points.select do |match|
-      match.victor_id != player.id
-    end.size
+    points.where.not(victor_id: player.id).count
   end
 
   def point_differential
@@ -69,7 +63,7 @@ class Stats::SeasonPersonal
   end
 
   def points
-    @points ||= matches.map(&:points).flatten
+    @points ||= Point.where(match: matches)
   end
 
   def format_ratio(ratio)
