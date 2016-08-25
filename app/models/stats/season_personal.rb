@@ -12,13 +12,11 @@ class Stats::SeasonPersonal
   end
 
   def matches_played
-    matches.size
+    matches.count
   end
 
   def matches_won
-    matches.select do |match|
-      match.victor_id == player.id
-    end.size
+    matches.where(victor_id: player.id).count
   end
 
   def matches_lost
