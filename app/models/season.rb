@@ -31,6 +31,10 @@ class Season < ActiveRecord::Base
     touch(:finalized_at) unless finalized_at
   end
 
+  def stats
+    Stats::Season.new(self)
+  end
+
   private
 
   def matchups
@@ -38,7 +42,17 @@ class Season < ActiveRecord::Base
   end
 
   def matchup_count(matchup)
-    matches.finalized.merge(matchup.match_scope).count
+    ids = matchup.players.map(&:id)
+    match_counts_by_player_ids[ids] + match_counts_by_player_ids[ids.reverse]
+  end
+
+  def match_counts_by_player_ids
+    @match_counts_by_player_ids ||=
+      begin
+        hash = Hash.new(0)
+        hash.update matches.group(:home_player_id, :away_player_id).count
+        hash
+      end
   end
 
   def total_match_count
