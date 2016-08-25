@@ -24,8 +24,7 @@ class Stats::SeasonPersonal
   end
 
   def win_ratio
-    return format_ratio(0) if matches_played.zero?
-    format_ratio(matches_won.to_f / matches_played.to_f)
+    @win_ratio ||= format_ratio(matches_won, matches_played)
   end
 
   def points_for
@@ -66,7 +65,12 @@ class Stats::SeasonPersonal
     @points ||= Point.where(match: matches)
   end
 
-  def format_ratio(ratio)
+  def format_ratio(numerator, denominator)
+    if numerator.zero?
+      ratio = 0
+    else
+      ratio = numerator.to_f / denominator.to_f
+    end
     ("%.3f" % ratio).sub(/\A0/, "")
   end
 end
