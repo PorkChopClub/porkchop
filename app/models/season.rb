@@ -31,6 +31,10 @@ class Season < ActiveRecord::Base
     touch(:finalized_at) unless finalized_at
   end
 
+  def stats
+    Stats::Season.new(self)
+  end
+
   private
 
   def matchups

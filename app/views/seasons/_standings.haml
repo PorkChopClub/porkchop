@@ -12,7 +12,7 @@
       %th(title="Points Against") PA
       %th(title="Point Differential") PD
   %tbody
-    - season.players.map{ |p| Stats::SeasonPersonal.new(season, p) }.sort.reverse.each_with_index do |stats, i|
+    - season.stats.players.each_with_index do |stats, i|
       %tr.season-standings-player
         %td(data-th-label="Rank")= i + 1
         %td(data-th-label="Name")= stats.player.name
