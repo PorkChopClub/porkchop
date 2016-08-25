@@ -31,13 +31,16 @@ class Matchup
     end
   end
 
-  def match_history
+  def match_scope
     p1, p2 = *players
     Match.
       where("home_player_id = :p1 AND away_player_id = :p2 OR home_player_id = :p2 AND away_player_id = :p1",
             p1: p1,
-            p2: p2).
-      order(created_at: :asc)
+            p2: p2)
+  end
+
+  def match_history
+    match_scope.order(created_at: :asc)
   end
 
   private
