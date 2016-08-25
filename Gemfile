@@ -34,6 +34,10 @@ gem 'devise'
 gem 'cancancan'
 gem 'games_back', '~> 1.0'
 
+group :production do
+  gem 'redis-rails'
+end
+
 group :development do
   gem 'stackprof', require: false
   gem 'flamegraph', require: false
