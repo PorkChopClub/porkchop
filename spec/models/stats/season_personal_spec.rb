@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Stats::SeasonPersonal do
-  let(:stats) { described_class.new(season, player) }
+  let(:season_stats) { Stats::Season.new(season) }
+  let(:stats) { described_class.new(season_stats, player) }
   let(:season) { FactoryGirl.create :season }
   let(:player) { FactoryGirl.create :player }
 
@@ -12,7 +13,7 @@ RSpec.describe Stats::SeasonPersonal do
   end
 
   describe "#<=>" do
-    let!(:other) { described_class.new(season, other_player) }
+    let!(:other) { described_class.new(season_stats, other_player) }
     let(:other_player) { FactoryGirl.create :player }
     before do
       FactoryGirl.create :complete_match, home_player: other_player, season: season
@@ -55,7 +56,7 @@ RSpec.describe Stats::SeasonPersonal do
 
     context "when the player has not played any games" do
       let(:other) { FactoryGirl.create :player }
-      let(:stats) { described_class.new(season, other) }
+      let(:stats) { described_class.new(season_stats, other) }
       it { is_expected.to eq ".000" }
     end
   end

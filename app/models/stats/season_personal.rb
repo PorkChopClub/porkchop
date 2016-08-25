@@ -3,8 +3,8 @@ class Stats::SeasonPersonal
 
   attr_reader :player
 
-  def initialize(season, player)
-    @season, @player = season, player
+  def initialize(season_stats, player)
+    @season_stats, @player = season_stats, player
   end
 
   def <=>(other)
@@ -12,15 +12,15 @@ class Stats::SeasonPersonal
   end
 
   def matches_played
-    matches.count
+    matches_won + matches_lost
   end
 
   def matches_won
-    matches.where(victor_id: player.id).count
+    season_stats.matches_won_by_player[player.id]
   end
 
   def matches_lost
-    matches_played - matches_won
+    season_stats.matches_lost_by_player[player.id]
   end
 
   def win_ratio
@@ -28,11 +28,11 @@ class Stats::SeasonPersonal
   end
 
   def points_for
-    points.where(victor_id: player.id).count
+    season_stats.points_for_by_player[player.id]
   end
 
   def points_against
-    points.where.not(victor_id: player.id).count
+    season_stats.points_against_by_player[player.id]
   end
 
   def point_differential
@@ -40,37 +40,16 @@ class Stats::SeasonPersonal
   end
 
   def games_back
-    player_records = season.players.map do |player|
-      [
-        player.id,
-        [
-          season.matches.with_player(player).where(victor: player).count,
-          season.matches.with_player(player).where.not(victor: player).count
-        ]
-      ]
-    end.to_h
-
-    GamesBack.calculate(player_records)[player.id]
+    season_stats.games_back_by_player[player.id]
   end
 
   private
 
-  attr_reader :season
-
-  def matches
-    @matches ||= season.matches.finalized.where("home_player_id = :player OR away_player_id = :player", player: player)
-  end
-
-  def points
-    @points ||= Point.where(match: matches)
-  end
+  attr_reader :season_stats
+  delegate :season, to: :season_stats
 
   def format_ratio(numerator, denominator)
-    if numerator.zero?
-      ratio = 0
-    else
-      ratio = numerator.to_f / denominator.to_f
-    end
+    ratio = numerator.zero? ? 0 : numerator.to_f / denominator.to_f
     ("%.3f" % ratio).sub(/\A0/, "")
   end
 end
