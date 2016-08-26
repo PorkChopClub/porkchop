@@ -11,14 +11,7 @@ class HomeController < ApplicationController
   end
 
   def load_ranked_players
-    @ranked_players =
-      Player.all.
-      select do |p|
-        p.matches.finalized.count >= 20 &&
-          p.matches.finalized.where("finalized_at > ?", 14.days.ago).count > 4
-      end.
-      sort_by(&:elo).
-      reverse
+    @ranked_players = Player.ranked
     authorize! :read, :ranked_players
   end
 
