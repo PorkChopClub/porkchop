@@ -23,6 +23,13 @@ class Player < ActiveRecord::Base
 
   after_save :record_rating
 
+  def self.ranked
+    joins('INNER JOIN "matches" ON ("home_player_id" = "players"."id" OR "away_player_id" = "players"."id")').
+      group('"players"."id"').
+      having(%{SUM(CASE WHEN finalized_at > '#{14.days.ago.to_s :db}' THEN 1 ELSE 0 END) > 4 AND COUNT(*) >= 20}).
+      order(%{(SELECT rating FROM "elo_ratings" WHERE player_id = "players"."id" ORDER BY "elo_ratings"."created_at" DESC LIMIT 1 ) DESC})
+  end
+
   def admin?
     confirmed? && /@stembolt.com\z/ =~ email
   end
