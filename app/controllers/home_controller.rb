@@ -22,14 +22,16 @@ class HomeController < ApplicationController
       EloRating.
       where("created_at > ?", 30.days.ago).
       order(:created_at).
-      group_by { |rating| [rating.player_id, rating.created_at.to_date] }.
-      map { |(player_id, date), ratings| [[player_id, date], ratings.last.rating] }.
+      pluck(:player_id, :created_at, :rating).
+      group_by { |player_id, created_at, _rating| [player_id, created_at.to_date] }.
+      map { |(player_id, date), ratings| [[player_id, date], ratings.last[2]] }.
       to_h
 
     @elo_data =
       @ranked_players.
       map do |player|
-        previous_rating = player.elo_on(@elo_range.first)
+        previous_rating = @all_elo_ratings[[player.id, @elo_range.begin]]
+        previous_rating ||= player.elo_on(@elo_range.first)
         [
           player.name,
           @elo_range.map do |d|
