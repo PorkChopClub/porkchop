@@ -1,18 +1,19 @@
 .scoreboard
+  - flip = params.has_key?(:flip)
   .scoreboard-message-area
-    .scoreboard-away-player-avatar
+    .scoreboard-away-player-avatar{:class => flip ? 'scoreboard-left-avatar' : 'scoreboard-right-avatar'}
       .scoreboard-overlay.flames
-    .scoreboard-home-player-avatar
+    .scoreboard-home-player-avatar{:class => flip ? 'scoreboard-right-avatar' : 'scoreboard-left-avatar'}
       .scoreboard-overlay.flames
 
     .scoreboard-message
     .scoreboard-instructions
 
-  .scoreboard-player.scoreboard-away-player
+  .scoreboard-player.scoreboard-away-player{:class => flip ? 'scoreboard-left-player' : 'scoreboard-right-player'}
     .scoreboard-player-name.scoreboard-away-player-name
     .scoreboard-player-score.scoreboard-away-player-score
 
-  .scoreboard-player.scoreboard-home-player
+  .scoreboard-player.scoreboard-home-player{:class => flip ? 'scoreboard-right-player' : 'scoreboard-left-player'}
     .scoreboard-player-name.scoreboard-home-player-name
     .scoreboard-player-score.scoreboard-home-player-score
 

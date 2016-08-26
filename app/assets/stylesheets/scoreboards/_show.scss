@@ -20,8 +20,8 @@ $bottom-bar-height: 120px;
   }
 }
 
-.scoreboard-away-player { left:  0; }
-.scoreboard-home-player { right: 0; }
+.scoreboard-left-player { left:  0; }
+.scoreboard-right-player { right: 0; }
 
 .scoreboard-player-name {
   font-size: modular-scale(5);
@@ -29,11 +29,11 @@ $bottom-bar-height: 120px;
   padding: 0 modular-scale(2);
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
 
-  .scoreboard-home-player & {
+  .scoreboard-left-player & {
     text-align: left;
   }
 
-  .scoreboard-away-player & {
+  .scoreboard-right-player & {
     text-align: right;
   }
 }
@@ -53,12 +53,12 @@ $bottom-bar-height: 120px;
     background-color: $blue;
   }
 
-  .scoreboard-home-player & {
+  .scoreboard-right-player & {
     right: 0;
     border-radius: modular-scale(2) 0 0 0;
   }
 
-  .scoreboard-away-player & {
+  .scoreboard-left-player & {
     left: 0;
     border-radius: 0 modular-scale(2) 0 0;
   }
@@ -160,8 +160,8 @@ $bottom-bar-height: 120px;
   }
 }
 
-.scoreboard-home-player-avatar { right: 0; }
-.scoreboard-away-player-avatar { left: 0;  }
+.scoreboard-right-avatar { right: 0; }
+.scoreboard-left-avatar { left: 0;  }
 
 .scoreboard-warm-up {
   @include padding(30px);
