@@ -10,6 +10,7 @@ gem 'rack-cors'
 gem 'pg'
 gem 'puma'
 gem 'sidekiq'
+gem 'kaminari'
 
 # CSS
 gem 'sass-rails', '~> 5.0'
