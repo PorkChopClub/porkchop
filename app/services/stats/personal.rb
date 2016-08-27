@@ -96,11 +96,11 @@ class Stats::Personal
   end
 
   def last_10_victory_count
-    last_10_matches.select { |m| m.victor == player }.size
+    last_10_matches.select { |m| m.victor_id == player.id }.size
   end
 
   def last_10_loss_count
-    last_10_matches.select { |m| m.victor != player }.size
+    last_10_matches.select { |m| m.victor_id != player.id }.size
   end
 
   def victories_by_player_id
