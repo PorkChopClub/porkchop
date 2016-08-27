@@ -1,24 +1,28 @@
 class HomeController < ApplicationController
-  before_action :load_recent_matches
-  before_action :load_ranked_players
-  before_action :load_elo_data
+  def index
+    authorize! :read, :home
+  end
 
   private
 
-  def load_recent_matches
-    @recent_matches = Match.finalized.order(finalized_at: :desc).limit(10)
+  def recent_matches
     authorize! :read, :recent_matches
+    @recent_matches ||= Match.finalized.order(finalized_at: :desc).limit(10)
   end
+  helper_method :recent_matches
 
-  def load_ranked_players
-    @ranked_players = Player.ranked
+  def ranked_players
     authorize! :read, :ranked_players
+    @ranked_players ||= Player.ranked
+  end
+  helper_method :ranked_players
+
+  def elo_range
+    @elo_range ||= (30.days.ago.to_date..Date.current)
   end
 
-  def load_elo_data
-    @elo_range = (30.days.ago.to_date..Date.current)
-
-    @all_elo_ratings =
+  def elo_data
+    @all_elo_ratings ||=
       EloRating.
       where("created_at > ?", 30.days.ago).
       order(:created_at).
@@ -27,14 +31,14 @@ class HomeController < ApplicationController
       map { |(player_id, date), ratings| [[player_id, date], ratings.last[2]] }.
       to_h
 
-    @elo_data =
+    @elo_data ||=
       @ranked_players.
       map do |player|
-        previous_rating = @all_elo_ratings[[player.id, @elo_range.begin]]
-        previous_rating ||= player.elo_on(@elo_range.first)
+        previous_rating = @all_elo_ratings[[player.id, elo_range.begin]]
+        previous_rating ||= player.elo_on(elo_range.first)
         [
           player.name,
-          @elo_range.map do |d|
+          elo_range.map do |d|
             rating = @all_elo_ratings[[player.id, d]]
             previous_rating = rating if rating
             [d, rating || previous_rating]
@@ -43,4 +47,7 @@ class HomeController < ApplicationController
       end.
       to_h
   end
+
+  helper_method :elo_data
+  helper_method :elo_range
 end

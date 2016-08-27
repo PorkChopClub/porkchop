@@ -15,8 +15,9 @@
           %strong Streak:
           = "#{@player.current_streak.streak_type}#{@player.current_streak.streak_length}"
 
-- if @player.matches.finalized.count > 0
-  = render "players/stats", player: @player
+- if last_played_match = @player.matches.finalized.last
+  = cache last_played_match do
+    = render "players/stats", player: @player
 - else
   .porkbox-light
     %p This player hasn't even played a game yet. What were you expecting to see?
