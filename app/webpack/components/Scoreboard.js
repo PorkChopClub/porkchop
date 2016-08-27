@@ -5,7 +5,7 @@ class Scoreboard extends Component {
     return (
       <div>
         <h1>Scoreboard!</h1>
-        <h2>Spectating table poo {this.props.tableId}</h2>
+        <h2>Spectating table {this.props.tableId}</h2>
       </div>
     )
   }
