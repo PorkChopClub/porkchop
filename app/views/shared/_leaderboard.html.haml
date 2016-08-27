@@ -9,21 +9,19 @@
       %th L10
       %th Streak
   %tbody
-    - players.each_with_index do |player, i|
+    - Stats::Leaderboard.new.rows.each do |row|
+      - player = row.player
       %tr.leaderboard-list-player
-        %td(data-th-label="Rank")= i + 1
+        %td(data-th-label="Rank")= row.rank
         %td(data-th-label="Name")= link_to player.name, player
-        %td(data-th-label="Elo")= player.elo
+        %td(data-th-label="Elo")= row.elo
         %td(data-th-label="Today")
-          - change = player.elo - player.elo_on(Date.yesterday)
+          - change = row.elo_change_day
           - unless change == 0
             %span(class="elo-change-#{change < 0 ? 'negative' : 'positive'}")= change
         %td(data-th-label="This Week")
-          - change = player.elo - player.elo_on(Date.yesterday.beginning_of_week(:sunday))
+          - change = row.elo_change_week
           - unless change == 0
             %span(class="elo-change-#{change < 0 ? 'negative' : 'positive'}")= change
-        %td(data-th-label="L10")= player.stats.last_10_results.join("-")
-        - if player.current_streak
-          %td(data-th-label="Streak")= "#{player.current_streak.streak_type}#{player.current_streak.streak_length}"
-        - else
-          %td(data-th-label="Streak") -
+        %td(data-th-label="L10")= "#{row.last_10_wins}-#{row.last_10_losses}"
+        %td(data-th-label="Streak")= "#{row.streak_type}#{row.streak_length}"
