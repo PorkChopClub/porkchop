@@ -1,8 +1,6 @@
 import _ from 'lodash'
 import $ from 'jquery'
 
-import './shared'
-
 import ongoingMatch from './observables/ongoingMatch'
 
 ongoingMatch
