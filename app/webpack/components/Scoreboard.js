@@ -44,7 +44,7 @@ class Scoreboard extends Component {
 
   secondsRemaining() {
     const now = (Date.now() / 1000)
-    return Math.round(this.state.matchStart + 10 - now)
+    return Math.round(this.state.matchStart + 90 - now)
   }
 
   matchStarted() {
