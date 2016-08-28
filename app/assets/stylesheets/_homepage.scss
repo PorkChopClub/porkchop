@@ -12,27 +12,5 @@
 }
 
 .homepage-chart {
-  .elo-chart {
-    width: 100%;
-  }
-
-  .elo-legend {
-    list-style: none;
-
-    @include desktop {
-      @include columns(4);
-    }
-
-    @include mobile {
-      @include columns(2);
-    }
-
-    .swatch {
-      display: inline-block;
-      height: 18px;
-      width: 18px;
-      margin: 0 12px 6px -12px;
-      vertical-align: middle;
-    }
-  }
+  @include user-select(none);
 }
