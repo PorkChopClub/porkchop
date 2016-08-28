@@ -9,13 +9,19 @@ class Scoreboard extends Component {
   }
 
   render() {
-    console.log(this.state.ongoingMatch)
-    return (
-      <div>
-        <h1>Scoreboard! Time: {this.state.ongoingMatch}</h1>
-        <h2>Spectating table {this.props.tableId}</h2>
-      </div>
-    )
+    return <div>{this.currentView()}</div>
+  }
+
+  currentView() {
+    if (this.state.ongoingMatch) {
+      return (
+        <h1>Yes match.</h1>
+      )
+    } else {
+      return (
+        <h1>No match.</h1>
+      )
+    }
   }
 }
 

@@ -11,6 +11,8 @@ const checkStatus = (response) => {
 const parseJSON = (response) => response.json()
 
 const deserializeMatch = (json) => {
+  if (!json.data) { return }
+
   let resources = [json.data].concat(json.included)
 
   resources = resources.map((resource) => {
@@ -56,8 +58,8 @@ export const ongoingMatch = (tableId, interval) => {
   }
   const handleFailure = (error) => {
     refetchOngoingMatch()
-    if (error.response.status === 404) {
-      callbacks.forEach((callback) => callback(null))
+    if (!error.response) {
+      throw error
     } else {
       console.log('Failed to fetch ongoing match:', error)
     }
