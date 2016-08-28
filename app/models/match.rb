@@ -122,15 +122,15 @@ class Match < ActiveRecord::Base
     highest_score > 10 && (away_score - home_score).abs >= 2
   end
 
+  def highest_score
+    [home_score, away_score].max
+  end
+
   private
 
   def record_odds
     if home_player.matches_against(away_player).count >= Betting::MINIMUM_MATCH_COUNT
       create_betting_info!
     end
-  end
-
-  def highest_score
-    [home_score, away_score].max
   end
 end
