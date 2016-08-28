@@ -1,5 +1,7 @@
 import { h, Component } from 'preact'
 
+import ScoreboardMatch from './ScoreboardMatch.js'
+
 import { ongoingMatch } from '../api/matches'
 
 class Scoreboard extends Component {
@@ -15,7 +17,7 @@ class Scoreboard extends Component {
   currentView() {
     if (this.state.ongoingMatch) {
       return (
-        <h1>Yes match.</h1>
+        <ScoreboardMatch match={this.state.ongoingMatch}/>
       )
     } else {
       return (
