@@ -1,8 +1,11 @@
 .players-listing
   - @players.each do |player|
-    .list-player
-      = link_to player_path(player) do
-        = image_tag player.avatar_url, class: "list-player-avatar"
-        .list-player-details
-          %h3= player.name
-          %p= Stats::Personal.new(player).record.join('-')
+    = link_to player_path(player), class: 'list-player' do
+      = image_tag player.avatar_url, class: "list-player-avatar"
+      .list-player-details
+        .name= player.name
+        - if player.nickname.present?
+          .alias
+            %span.aka aka.
+            %span.nickname= player.nickname
+        %p= Stats::Personal.new(player).record.join('-')
