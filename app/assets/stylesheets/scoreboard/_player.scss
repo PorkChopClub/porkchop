@@ -14,11 +14,16 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  font-size: 64px;
+  font-size: 48px;
   text-align: center;
   @include radial-gradient(circle at 50% 50%, #555 50%, #222 75%, #000);
 
+  .long-name & {
+    font-size: 32px;
+  }
+
   .has-service & {
     @include radial-gradient(circle at 50% 50%, #f00 50%, #e00 75%, #c00);
+    font-size: 64px;
   }
 }
