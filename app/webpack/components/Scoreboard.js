@@ -48,7 +48,7 @@ class Scoreboard extends Component {
   }
 
   matchStarted() {
-    return false //this.state.ongoingMatch
+    return this.state.ongoingMatch['service-selected']
   }
 }
 

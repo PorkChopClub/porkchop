@@ -3,7 +3,8 @@ class MatchSerializer < ActiveModel::Serializer
              :home_score,
              :away_score,
              :home_service,
-             :away_service
+             :away_service,
+             :service_selected
 
   belongs_to :home_player
   belongs_to :away_player
@@ -19,5 +20,9 @@ class MatchSerializer < ActiveModel::Serializer
   def away_service
     return unless object.first_service? || object.finished?
     !home_service
+  end
+
+  def service_selected
+    !object.first_service.nil?
   end
 end
