@@ -7,7 +7,7 @@ export default ({ player, score, hasService }) => {
 
   const componentClasses = classNames({
     "scoreboard-player": true,
-    "has-service": hasService === false,
+    "has-service": hasService !== false,
     "long-name": longName
   })
 
