@@ -37,32 +37,30 @@ $(() => {
     }),
     datasets: $.map(rawData, (_, player) => {
       const playerIndex = players.indexOf(player)
+      const data = $.map(rawData[player], (_index, date) => rawData[player][date])
       return {
+        data,
         label: player,
-        fillColor: 'rgba(0,0,0,0)',
-        strokeColor: colors[playerIndex],
-        data: $.map(rawData[player], (_index, date) => rawData[player][date]
-        ),
+        fill: false,
+        borderColor: colors[playerIndex],
+        backgroundColor: colors[playerIndex],
+
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHitRadius: 5,
       }
     }),
   }
   const options = {
     showTooltips: false,
-    scaleShowHorizontalLines: false,
-    scaleShowVerticalLines: false,
-    pointDot: false,
-    legendTemplate: '<ul class="elo-legend">' +
-      '<% for (var i=0; i<datasets.length; i++){ %>' +
-        '<li>' +
-          '<span class="swatch" style="background-color:<%= datasets[i].strokeColor %>"></span>' +
-          '<% if(datasets[i].label) { %>' +
-            '<%= datasets[i].label %>' +
-          '<% } %>' +
-        '</li>' +
-      '<% } %>' +
-    '</ul>',
+    responsive: true,
   }
   const ctx = canvas.get(0).getContext('2d')
-  const chart = new Chart(ctx).Line(chartData, options)
-  canvas.after(chart.generateLegend())
+
+  /* eslint-disable no-new */
+  new Chart(ctx, {
+    type: 'line',
+    data: chartData,
+    options,
+  })
 })

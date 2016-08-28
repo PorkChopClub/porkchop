@@ -85,6 +85,8 @@
 }
 
 .player-elo-chart {
+  @include user-select(none);
+
   float: left;
   width: 100%;
 }
