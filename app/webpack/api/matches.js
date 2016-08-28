@@ -10,7 +10,41 @@ const checkStatus = (response) => {
 
 const parseJSON = (response) => response.json()
 
-const deserializeMatch = (json) => json
+const deserializeMatch = (json) => {
+  let resources = [json.data].concat(json.included)
+
+  resources = resources.map((resource) => {
+    Object.assign(resource, resource.attributes)
+    delete resource.attributes
+
+
+    if (resource.relationships) {
+      for (let relationshipName in resource.relationships) {
+        const relationship = resource.relationships[relationshipName].data
+
+        if (Array.isArray(relationship)) {
+          const relatedResources = relationship.map((relationship) => {
+            return resources.find((resource) => {
+              return resource.id === relationship.id && resource.type === relationship.type
+            })
+          })
+          resource[relationshipName] = relatedResources
+        } else {
+          const relatedResource = resources.find((resource) => {
+            return resource.id === relationship.id && resource.type === relationship.type
+          })
+          resource[relationshipName] = relatedResource
+        }
+      }
+
+      delete resource.relationships
+    }
+
+    return resource
+  })
+
+  return resources[0]
+}
 
 export const ongoingMatch = (tableId, interval) => {
   const callbacks = []

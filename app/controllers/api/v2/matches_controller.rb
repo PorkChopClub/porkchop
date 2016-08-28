@@ -4,7 +4,7 @@ class Api::V2::MatchesController < ApplicationController
   def ongoing
     @match = @table.ongoing_match
     authorize! :read, @match
-    render json: @match
+    render json: @match, include: [:home_player, :away_player, :points]
   end
 
   private
