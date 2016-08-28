@@ -3,6 +3,15 @@
   width: 1920px;
   height: 1080px;
   position: relative;
+
+  &.time-to-play {
+    @include radial-gradient(
+      circle at 50% 50%,
+      $red 50%,
+      darken($red, 10) 80%,
+      darken($red, 20)
+    );
+  }
 }
 
 .scoreboard-prematch-text {
