@@ -3,6 +3,7 @@ class ScoreboardsController < ApplicationController
     if (table_id = params[:id])
       authorize! :read, Table.find(table_id)
       @javascript_entrypoint = "scoreboard"
+      @stylesheet = "scoreboard"
       @body_data = { "table-id": params[:id] }
       render layout: "minimal"
     else

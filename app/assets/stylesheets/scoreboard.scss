@@ -1,0 +1,11 @@
+@import "normalize-rails";
+@import "bourbon";
+
+@import "setup/palette";
+
+@import "animations";
+@import "base";
+@import "typography";
+
+@import "scoreboard/layout";
+@import "scoreboard/player";

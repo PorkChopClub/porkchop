@@ -5,7 +5,7 @@ import ScoreboardPlayer from './ScoreboardPlayer'
 export default ({ match }) => {
   console.log(match)
   return (
-    <div>
+    <div className="scoreboard">
       <ScoreboardPlayer
         player={match['home-player']}
         hasService={match['home-service']}

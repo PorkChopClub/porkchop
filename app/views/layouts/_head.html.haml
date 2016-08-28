@@ -4,7 +4,8 @@
 
   %title PorkChop.club
 
-  = stylesheet_link_tag 'application', '//fonts.googleapis.com/css?family=Roboto:400,400italic,300,700'
+  = stylesheet_link_tag @stylesheet || 'application'
+  = stylesheet_link_tag '//fonts.googleapis.com/css?family=Roboto:400,400italic,300,700'
 
   %link(rel="manifest" href="/manifest.json")
   = csrf_meta_tags

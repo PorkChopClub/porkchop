@@ -1,0 +1,24 @@
+.scoreboard-player {
+  position: relative;
+  width: 33%;
+  height: 100%;
+  float: left;
+
+  &.has-service {
+    width: 67%;
+  }
+}
+
+.scoreboard-player-name {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 64px;
+  text-align: center;
+  @include radial-gradient(circle at 50% 50%, #555 50%, #222 75%, #000);
+
+  .has-service & {
+    @include radial-gradient(circle at 50% 50%, #f00 50%, #e00 75%, #c00);
+  }
+}
