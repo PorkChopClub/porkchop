@@ -3,7 +3,6 @@ import { h, Component } from 'preact'
 import ScoreboardPlayer from './ScoreboardPlayer'
 
 export default ({ match }) => {
-  console.log(match)
   return (
     <div className="scoreboard">
       <ScoreboardPlayer
