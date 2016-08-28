@@ -2,63 +2,29 @@
 }
 
 .list-player {
-  display: inline-block;
-  vertical-align: top;
-  padding: 0 modular-scale(-1);
-  margin-bottom: modular-scale(1);
+  display: flex;
+  align-items: flex-start;
+  margin: 2em 0;
 
-  @include desktop {
-    width: 33.333%;
+  + .list-player {
+    border-top: 1px solid $dark-grey;
+    padding-top: 2em;
   }
-
-  @include tablet {
-    width: 50%;
-  }
-
-  @include phone {
-    width: 100%;
-  }
-
-  a {
-    display: block;
-    border: 1px solid $off-white;
-    padding-left: 5px;
-    overflow: hidden;
-  }
-}
-
-.list-player-avatar,
-.list-player-details {
-  display: inline-block;
-  vertical-align: middle;
 }
 
 .list-player-avatar {
-  max-width: 100px;
-  height: auto;
-  @include transform(translateY(10px));
-  @include transition(transform 0.2s ease-in);
+  margin: 0 1em;
 
-  a:hover > & {
-    @include transform(translateY(0));
-  }
+  width: 100px;
+  height: auto;
 }
 
 .list-player-details {
-  @include calc(width, "100% - 100px"); // width of the avatar
-  padding: 10px 10px 10px 20px;
+  flex: 1;
 
-  h3,
-  p {
-    color: white;
-  }
+  color: $dark-grey;
 
-  h3 {
-    margin: 0 0 10px;
-    line-height: 1.2;
-  }
-
-  p {
-    margin: 0;
+  .name {
+    font-size: 150%;
   }
 }
