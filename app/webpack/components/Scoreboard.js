@@ -2,6 +2,7 @@ import { h, Component } from 'preact'
 
 import ScoreboardMatch from './ScoreboardMatch.js'
 import ScoreboardPrematch from './ScoreboardPrematch.js'
+import ScoreboardNoMatch from './ScoreboardNoMatch.js'
 
 import { ongoingMatch } from '../api/matches'
 
@@ -36,9 +37,7 @@ class Scoreboard extends Component {
         )
       }
     } else {
-      return (
-        <h1>No match.</h1>
-      )
+      return <ScoreboardNoMatch/>
     }
   }
 

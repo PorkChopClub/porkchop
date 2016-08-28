@@ -1,8 +1,7 @@
-import { h, Component } from 'preact'
+import { h } from 'preact'
 import classNames from 'classnames'
 
 export default ({ player, score, hasService }) => {
-  console.log(player)
   const displayName = player.nickname || player.name
   const longName = displayName.length >= 24
 
