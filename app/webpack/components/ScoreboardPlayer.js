@@ -19,7 +19,9 @@ export default ({ player, score, hasService }) => {
   return (
     <div className={componentClasses}>
       <div className="scoreboard-player-avatar" style={avatarStyle}/>
-      <div className="scoreboard-player-name">{displayName}</div>
+      <div className="scoreboard-player-name">
+        <div className="scoreboard-player-name-text">{displayName}</div>
+      </div>
       <div className="scoreboard-player-score">{score}</div>
     </div>
   )
