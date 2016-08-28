@@ -1,5 +1,6 @@
 class PlayerSerializer < ActiveModel::Serializer
   attributes :id,
              :nickname,
-             :name
+             :name,
+             :avatar_url
 end
