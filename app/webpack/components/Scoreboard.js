@@ -3,6 +3,7 @@ import { h, Component } from 'preact'
 import ScoreboardMatch from './ScoreboardMatch.js'
 import ScoreboardPrematch from './ScoreboardPrematch.js'
 import ScoreboardNoMatch from './ScoreboardNoMatch.js'
+import ScoreboardFinishedMatch from './ScoreboardFinishedMatch.js'
 
 import { ongoingMatch } from '../api/matches'
 
@@ -27,7 +28,9 @@ class Scoreboard extends Component {
 
   currentView() {
     if (this.state.ongoingMatch) {
-      if (this.matchStarted()) {
+      if (this.state.ongoingMatch['finished?']) {
+        return <ScoreboardFinishedMatch match={this.state.ongoingMatch}/>
+      } else if (this.state.ongoingMatch['service-selected']) {
         return <ScoreboardMatch match={this.state.ongoingMatch}/>
       } else {
         return (
@@ -44,10 +47,6 @@ class Scoreboard extends Component {
   secondsRemaining() {
     const now = (Date.now() / 1000)
     return Math.round(this.state.matchStart + 90 - now)
-  }
-
-  matchStarted() {
-    return this.state.ongoingMatch['service-selected']
   }
 }
 

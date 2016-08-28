@@ -4,7 +4,8 @@ class MatchSerializer < ActiveModel::Serializer
              :away_score,
              :home_service,
              :away_service,
-             :service_selected
+             :service_selected,
+             :finished?
 
   belongs_to :home_player
   belongs_to :away_player
