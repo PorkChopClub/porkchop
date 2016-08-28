@@ -25,6 +25,7 @@ $(() => {
     scaleShowHorizontalLines: false,
     scaleShowVerticalLines: false,
     pointDot: false,
+    responsive: true,
   }
   const ctx = canvas.get(0).getContext('2d')
   new Chart(ctx).Line(chartData, options)
