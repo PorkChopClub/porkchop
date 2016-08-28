@@ -20,7 +20,7 @@ export default ({ player, score, hasService }) => {
     <div className={classes}>
       <div className="scoreboard-player-avatar" style={avatarStyle}/>
       <div className="scoreboard-player-name">{displayName}</div>
-      <div>{score}</div>
+      <div className="scoreboard-player-score">{score}</div>
     </div>
   )
 }
