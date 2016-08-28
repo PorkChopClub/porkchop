@@ -286,4 +286,35 @@ RSpec.describe Match, type: :model do
       it { is_expected.to be true }
     end
   end
+
+  describe "#finished?" do
+    subject { match.finished? }
+
+    let(:match) do
+      FactoryGirl.create :match,
+                         home_score: home_score,
+                         away_score: away_score
+    end
+
+    context "when a player has won at 11" do
+      let(:home_score) { 11 }
+      let(:away_score) { 9 }
+
+      it { is_expected.to eq true }
+    end
+
+    context "when a player has won past 11" do
+      let(:home_score) { 11 }
+      let(:away_score) { 13 }
+
+      it { is_expected.to eq true }
+    end
+
+    context "when the game can't be finished" do
+      let(:home_score) { 10 }
+      let(:away_score) { 9 }
+
+      it { is_expected.to eq false }
+    end
+  end
 end

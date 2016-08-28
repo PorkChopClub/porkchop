@@ -12,10 +12,6 @@ class PingPong::Match < SimpleDelegator
     !home_player_service?
   end
 
-  def finished?
-    highest_score > 10 && score_differential >= 2
-  end
-
   def leader
     return nil if home_score == away_score
     home_score > away_score ? home_player : away_player
@@ -57,9 +53,5 @@ class PingPong::Match < SimpleDelegator
 
   def commentator
     @commentator ||= PingPong::Commentator.new(match: self)
-  end
-
-  def highest_score
-    [home_score, away_score].max
   end
 end
