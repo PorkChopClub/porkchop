@@ -18,19 +18,19 @@ $(() => {
 
         pointRadius: 0,
         pointHoverRadius: 10,
-        pointHitRadius: 10,
-      },
-    ],
+        pointHitRadius: 10
+      }
+    ]
   }
   const options = {
     legend: {
-      display: false,
+      display: false
     },
     scales: {
       xAxes: [{
-        display: false,
-      }],
-    },
+        display: false
+      }]
+    }
   }
   const ctx = canvas.get(0).getContext('2d')
 
@@ -38,6 +38,6 @@ $(() => {
   new Chart(ctx, {
     type: 'line',
     data: chartData,
-    options,
+    options
   })
 })

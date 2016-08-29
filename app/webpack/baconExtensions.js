@@ -5,7 +5,7 @@ $.ajaxSetup({
   beforeSend(xhr) {
     const token = $('meta[name="csrf-token"]').attr('content')
     xhr.setRequestHeader('X-CSRF-Token', token)
-  },
+  }
 })
 
 // FIXME: We have a fetch polyfill and should use it.

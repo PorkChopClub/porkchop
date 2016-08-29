@@ -22,31 +22,32 @@ class Scoreboard extends Component {
       })
   }
 
-  render() {
-    return <div>{this.currentView()}</div>
-  }
-
   currentView() {
     if (this.state.ongoingMatch) {
       if (this.state.ongoingMatch['finished?']) {
-        return <ScoreboardFinishedMatch match={this.state.ongoingMatch}/>
+        return <ScoreboardFinishedMatch match={this.state.ongoingMatch} />
       } else if (this.state.ongoingMatch['service-selected']) {
-        return <ScoreboardMatch match={this.state.ongoingMatch}/>
+        return <ScoreboardMatch match={this.state.ongoingMatch} />
       } else {
         return (
           <ScoreboardPrematch
             match={this.state.ongoingMatch}
-            secondsRemaining={this.secondsRemaining()}/>
+            secondsRemaining={this.secondsRemaining()}
+          />
         )
       }
     } else {
-      return <ScoreboardNoMatch/>
+      return <ScoreboardNoMatch />
     }
   }
 
   secondsRemaining() {
     const now = (Date.now() / 1000)
     return Math.round(this.state.matchStart + 90 - now)
+  }
+
+  render() {
+    return <div>{this.currentView()}</div>
   }
 }
 

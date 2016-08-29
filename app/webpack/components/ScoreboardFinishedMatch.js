@@ -1,7 +1,11 @@
 import { h } from 'preact'
 
 export default ({ match }) => {
-  let winner, loser, winnerScore, loserScore
+  let winner
+  let loser
+  let winnerScore
+  let loserScore
+
   if (match['home-score'] > match['away-score']) {
     winner = match['home-player'].name
     loser = match['away-player'].name
@@ -18,11 +22,11 @@ export default ({ match }) => {
     <div className="scoreboard-finished-match">
       <div className="scoreboard-finished-match-text">
         {winner}
-        <br/>
+        <br />
         defeated
-        <br/>
+        <br />
         {loser}
-        <br/>
+        <br />
         {winnerScore} to {loserScore}
       </div>
     </div>

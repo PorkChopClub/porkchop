@@ -16,6 +16,7 @@ module.exports = {
   },
   "rules": {
     "semi": ["error", "never"],
+    "comma-dangle": ["error", "never"],
     "space-before-function-paren": ["error", "never"],
     "func-names": ["error", "never"],
     "new-cap": ["error", {
@@ -23,6 +24,7 @@ module.exports = {
     }],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "no-unused-vars": ["error", { "varsIgnorePattern": "^h$" }]
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^h$" }],
+    "no-else-return": "off"
   }
 };

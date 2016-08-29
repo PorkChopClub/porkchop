@@ -6,18 +6,18 @@ export default ({ player, score, hasService }) => {
   const longName = displayName.length >= 24
 
   const componentClasses = classNames({
-    "scoreboard-player": true,
-    "has-service": hasService !== false,
-    "long-name": longName
+    'scoreboard-player': true,
+    'has-service': hasService !== false,
+    'long-name': longName
   })
 
   const avatarStyle = {
-    "background-image": `url(${player['avatar-url']})`
+    'background-image': `url(${player['avatar-url']})`
   }
 
   return (
     <div className={componentClasses}>
-      <div className="scoreboard-player-avatar" style={avatarStyle}/>
+      <div className="scoreboard-player-avatar" style={avatarStyle} />
       <div className="scoreboard-player-name">
         <div className="scoreboard-player-name-text">{displayName}</div>
       </div>
