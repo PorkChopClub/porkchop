@@ -14,7 +14,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     subject { get :show, params: { format: :json } }
 
     context "when there is an ongoing match" do
-      let!(:match) { FactoryGirl.create :match }
+      let!(:match) { FactoryGirl.create :match, table: table }
+      let(:table) { create :default_table }
 
       before { subject }
 
@@ -31,10 +32,12 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   describe "PUT home_point" do
     subject { put :home_point, params: { format: :json }, session: { write_access: true } }
 
+    let(:table) { create :default_table }
+
     before { sign_in create(:admin_player) }
 
     context "when the point can be scored" do
-      let!(:match) { FactoryGirl.create :match, home_score: 0 }
+      let!(:match) { FactoryGirl.create :match, table: table, home_score: 0 }
 
       it_behaves_like "renders match"
 
@@ -46,7 +49,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     end
 
     context "when the point cannot be scored" do
-      let!(:match) { FactoryGirl.create :match, :finished }
+      let!(:match) { FactoryGirl.create :match, :finished, table: table }
 
       it_behaves_like "renders match"
 
@@ -61,10 +64,12 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   describe "PUT away_point" do
     subject { put :away_point, params: { format: :json }, session: { write_access: true } }
 
+    let(:table) { create :default_table }
+
     before { sign_in create(:admin_player) }
 
     context "when the point can be scored" do
-      let!(:match) { FactoryGirl.create :match, away_score: 0 }
+      let!(:match) { FactoryGirl.create :match, table: table, away_score: 0 }
 
       it_behaves_like "renders match"
 
@@ -76,7 +81,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     end
 
     context "when the point cannot be scored" do
-      let!(:match) { FactoryGirl.create :match, :finished }
+      let!(:match) { FactoryGirl.create :match, :finished, table: table }
 
       it_behaves_like "renders match"
 
@@ -91,7 +96,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   describe "PUT toggle_service" do
     subject { put :toggle_service, params: { format: :json }, session: { write_access: true } }
 
-    let!(:match) { FactoryGirl.create :match, :at_start }
+    let!(:match) { FactoryGirl.create :match, :at_start, table: table }
+    let(:table) { create :default_table }
 
     before { sign_in create(:admin_player) }
 
@@ -134,7 +140,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     before { sign_in create(:admin_player) }
 
-    let!(:match) { FactoryGirl.create :match }
+    let!(:match) { FactoryGirl.create :match, table: table }
+    let(:table) { create :default_table }
     let(:rewind) { instance_double PingPong::Rewind }
 
     before do
@@ -169,7 +176,8 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     before { sign_in create(:admin_player) }
 
-    let!(:match) { FactoryGirl.create :match }
+    let!(:match) { FactoryGirl.create :match, table: table }
+    let(:table) { create :default_table }
     let(:finalization) do
       instance_double PingPong::Finalization, finalize!: finalized
     end
@@ -202,10 +210,11 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     before { sign_in create(:admin_player) }
 
-    let!(:complete_match) { FactoryGirl.create :complete_match }
+    let!(:complete_match) { FactoryGirl.create :complete_match, table: table }
+    let(:table) { create :default_table }
 
     context "when there is an ongoing match" do
-      let!(:match) { FactoryGirl.create :match }
+      let!(:match) { FactoryGirl.create :match, table: table }
 
       it { is_expected.to have_http_status :ok }
 
@@ -228,11 +237,9 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   describe "PUT matchmake" do
     subject { put :matchmake, params: { format: :json }, session: { write_access: true } }
 
-    before do
-      sign_in create(:admin_player)
-      create :default_table
-    end
+    before { sign_in create(:admin_player) }
 
+    let!(:table) { create :default_table }
     let!(:player1){ FactoryGirl.create :player, active: true }
     let!(:player2){ FactoryGirl.create :player, active: true }
 
@@ -240,7 +247,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     let(:new_players){ [new_match.home_player, new_match.away_player] }
 
     context "when there is an ongoing match" do
-      let!(:match) { FactoryGirl.create :match }
+      let!(:match) { FactoryGirl.create :match, table: table }
 
       it { is_expected.to have_http_status :ok }
 
