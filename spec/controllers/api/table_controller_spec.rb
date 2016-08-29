@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Api::TableController, type: :controller do
   let(:token) { 'm37410c41yp53' }
-  let!(:match) { FactoryGirl.create :match }
+  let!(:match) { create :match, table: table }
+  let(:table) { create :default_table }
 
   before do
     ENV['TABLE_TOKEN'] = 'm37410c41yp53'
