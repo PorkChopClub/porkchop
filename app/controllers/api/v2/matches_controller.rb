@@ -1,5 +1,5 @@
 class Api::V2::MatchesController < ApplicationController
-  before_filter :load_table
+  before_action :load_table
 
   def ongoing
     @match = @table.ongoing_match

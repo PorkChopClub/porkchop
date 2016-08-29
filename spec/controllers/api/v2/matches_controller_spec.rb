@@ -33,7 +33,7 @@ RSpec.describe Api::V2::MatchesController, type: :controller do
     end
 
     context "when the table doesn't exist" do
-      let(:table_id) { 12345 }
+      let(:table_id) { 12_345 }
 
       it "should raise an error" do
         expect { subject }.
