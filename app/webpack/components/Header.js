@@ -11,7 +11,7 @@ class Header extends Component {
   buttonClasses() {
     return classnames({
       'main-header-menu-button': true,
-      active: this.state.controlsOpen,
+      active: this.state.controlsOpen
     })
   }
 
@@ -54,7 +54,7 @@ class Header extends Component {
       </li>,
       <li>
         <a href="/players/sign_up">Sign Up</a>
-      </li>,
+      </li>
     ]
   }
 

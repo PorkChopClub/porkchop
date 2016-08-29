@@ -118,6 +118,14 @@ class Match < ActiveRecord::Base
     Player.find(([home_player_id, away_player_id] - [victor_id]).first)
   end
 
+  def finished?
+    highest_score > 10 && (away_score - home_score).abs >= 2
+  end
+
+  def highest_score
+    [home_score, away_score].max
+  end
+
   private
 
   def record_odds

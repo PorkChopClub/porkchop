@@ -78,7 +78,7 @@ $(() => {
       away_player_name: '???',
       finished: false,
       home_player_service: true,
-      away_player_service: false,
+      away_player_service: false
     }))
 
   const nextMatch = data.map('.next_match')

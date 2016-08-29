@@ -5,9 +5,12 @@ module.exports = function(options) {
 
   config.context = __dirname;
 
+  const entry = (name) => ["./app/webpack/shared.js", `./app/webpack/${name}.js`]
+
   config.entry = {
-    scoreboard: './app/webpack/scoreboard.js',
-    default: './app/webpack/default.js'
+    scoreboard: entry('scoreboard'),
+    legacy_scoreboard: entry('legacy_scoreboard'),
+    default: entry('default')
   };
 
   config.output = {

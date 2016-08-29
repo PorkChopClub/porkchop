@@ -7,5 +7,11 @@ class Table < ApplicationRecord
     end
   end
 
+  has_many :matches
+
   validates :name, presence: true
+
+  def ongoing_match
+    matches.ongoing.first
+  end
 end

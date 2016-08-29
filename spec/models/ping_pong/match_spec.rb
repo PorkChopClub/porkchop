@@ -116,37 +116,6 @@ RSpec.describe PingPong::Match do
     end
   end
 
-  describe "#finished?" do
-    let(:match) do
-      FactoryGirl.create :match,
-                         home_score: home_score,
-                         away_score: away_score
-    end
-
-    subject { ping_pong_match.finished? }
-
-    context "when a player has won at 11" do
-      let(:home_score) { 11 }
-      let(:away_score) { 9 }
-
-      it { is_expected.to eq true }
-    end
-
-    context "when a player has won past 11" do
-      let(:home_score) { 11 }
-      let(:away_score) { 13 }
-
-      it { is_expected.to eq true }
-    end
-
-    context "when the game can't be finished" do
-      let(:home_score) { 10 }
-      let(:away_score) { 9 }
-
-      it { is_expected.to eq false }
-    end
-  end
-
   describe "#leader" do
     subject { ping_pong_match.leader }
 

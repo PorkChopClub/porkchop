@@ -14,7 +14,7 @@ const EMPTY_MATCH = {
   comment: '',
   instructions: 'Waiting for players',
   league_match: false,
-  warmup: false,
+  warmup: false
 }
 
 const ajaxOptions = { url: '/api/ongoing_match.json' }

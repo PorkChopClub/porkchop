@@ -21,7 +21,7 @@ $(() => {
     'rgba(255,  0,  0,1)',
     'rgba(255,116,  0,1)',
     'rgba(  0,238,238,1)',
-    'rgba(  0,246,  0,1)',
+    'rgba(  0,246,  0,1)'
   ]
 
   const rawData = canvas.data('ratings')
@@ -47,13 +47,13 @@ $(() => {
 
         pointRadius: 0,
         pointHoverRadius: 5,
-        pointHitRadius: 5,
+        pointHitRadius: 5
       }
-    }),
+    })
   }
   const options = {
     showTooltips: false,
-    responsive: true,
+    responsive: true
   }
   const ctx = canvas.get(0).getContext('2d')
 
@@ -61,6 +61,6 @@ $(() => {
   new Chart(ctx, {
     type: 'line',
     data: chartData,
-    options,
+    options
   })
 })

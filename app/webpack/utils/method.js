@@ -1,3 +1,4 @@
+// FIXME: Bring in vanilla-ujs and remove this.
 import $ from 'jquery'
 
 $(document).on('click', 'a[data-method]', function(event) {

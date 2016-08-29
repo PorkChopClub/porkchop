@@ -1,0 +1,38 @@
+.scoreboard-prematch {
+  @include radial-gradient(circle at 50% 50%, #333 50%, #222 80%, #000);
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+
+  &.time-to-play {
+    @include radial-gradient(
+      circle at 50% 50%,
+      $red 50%,
+      darken($red, 10) 80%,
+      darken($red, 20)
+    );
+  }
+}
+
+.scoreboard-prematch-text {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%));
+  text-align: center;
+  color: #fff;
+  text-shadow:
+    0px 0px 1px #fff,
+    0px 0px 2px #fff,
+    0px 0px 8px #ccc;
+}
+
+.scoreboard-prematch-players {
+  width: 100%;
+  font-size: 100px;
+}
+
+.scoreboard-prematch-countdown {
+  font-size: 200px;
+}

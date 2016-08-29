@@ -1,11 +1,12 @@
 require 'feature_helper'
 
 RSpec.describe "scoreboard page" do
-  let!(:other1) { FactoryGirl.create :player, name: "Dave" }
-  let!(:other2) { FactoryGirl.create :player, name: "Anne" }
+  let!(:other1) { create :player, name: "Dave" }
+  let!(:other2) { create :player, name: "Anne" }
 
-  let!(:home) { FactoryGirl.create :player, name: "Candice Bergen" }
-  let!(:away) { FactoryGirl.create :player, name: "Adam Mueller" }
+  let!(:home) { create :player, name: "Candice Bergen" }
+  let!(:away) { create :player, name: "Adam Mueller" }
+  let!(:table) { create :default_table }
 
   scenario "recording a normal game" do
     visit '/scoreboard'
@@ -16,17 +17,16 @@ RSpec.describe "scoreboard page" do
 
     expect(page).to have_content(home.name)
     expect(page).to have_content(away.name)
-    expect(page).to have_content("01:30")
     expect(page).to have_content("Waiting for match to start")
 
-    table.home_button
+    physical_table.home_button
     expect(page).to have_content("This is the first match between these players")
     expect(page).to have_css('.scoreboard-home-player.has-service')
     expect(page).to have_no_content("Select first service")
 
-    table.away_button
-    table.home_button
-    table.home_button
+    physical_table.away_button
+    physical_table.home_button
+    physical_table.home_button
 
     within '.scoreboard-home-player-score' do
       expect(page).to have_content '2'
@@ -36,22 +36,22 @@ RSpec.describe "scoreboard page" do
     end
     expect(page).to have_css('.scoreboard-away-player.has-service')
 
-    8.times { table.home_button }
+    8.times { physical_table.home_button }
 
     expect(page).to have_content('Game point')
-    table.home_button
+    physical_table.home_button
 
     expect(page).to have_content('Press to finalize')
-    table.home_button
+    physical_table.home_button
 
     # blank page again
   end
 
   def create_match
-    @match = FactoryGirl.create :match, :at_start, home_player: home, away_player: away
+    @match = create :match, :at_start, home_player: home, away_player: away, table: table
   end
 
-  def table
+  def physical_table
     PingPong::TableControls.new(PingPong::Match.new(@match))
   end
 end
