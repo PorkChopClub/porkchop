@@ -10,8 +10,6 @@ class MatchSerializer < ActiveModel::Serializer
   belongs_to :home_player
   belongs_to :away_player
 
-  has_many :points
-
   def home_service
     return unless object.first_service? || object.finished?
     points_count = object.points.count
