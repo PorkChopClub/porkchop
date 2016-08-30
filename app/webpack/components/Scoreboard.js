@@ -20,6 +20,7 @@ class Scoreboard extends Component {
           return newState
         })
       })
+    setInterval(() => this.forceUpdate(), 1000)
   }
 
   currentView() {
