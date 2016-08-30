@@ -9,7 +9,7 @@ import { ongoingMatch } from '../api/matches'
 
 class Scoreboard extends Component {
   componentDidMount() {
-    ongoingMatch(this.props.tableId, 300)
+    ongoingMatch(this.props.tableId)
       .subscribe((match) => {
         this.setState((previousState) => {
           const newState = { ...previousState }
