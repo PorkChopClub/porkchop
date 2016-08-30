@@ -6,10 +6,11 @@ RSpec.describe "controls page" do
 
   let!(:home) { FactoryGirl.create :player, active: true, name: "Candice Bergen" }
   let!(:away) { FactoryGirl.create :player, active: true, name: "Shirley Schmidt" }
+  let!(:previous_match) { create :complete_match, table: table, home_player: away, away_player: home }
+  let(:table) { create :default_table }
 
   before do
     login_as create(:admin_player), scope: :player
-    create :default_table
   end
 
   scenario "recording a normal game" do
@@ -58,7 +59,7 @@ RSpec.describe "controls page" do
     expect(player_name(:home)).to have_content "Shirley"
     expect(player_name(:away)).to have_content "Candice"
 
-    expect(Match.finalized.count).to eq 1
+    expect(Match.finalized.count).to eq 2
   end
 
   private
