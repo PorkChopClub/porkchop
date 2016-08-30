@@ -48,7 +48,9 @@ const deserializeMatch = (json) => {
 }
 /* eslint-enable no-param-reassign */
 
-export const ongoingMatch = (tableId, interval) => {
+export const ongoingMatch = (tableId) => {
+  let lastTimeSucceeded = Date.now()
+
   const callbacks = []
   const notifyCallbacks = (value) =>
     callbacks.forEach((callback) => callback(value))
@@ -56,6 +58,7 @@ export const ongoingMatch = (tableId, interval) => {
     // eslint-disable-next-line no-use-before-define
     refetchOngoingMatch()
     notifyCallbacks(value)
+    if (value) lastTimeSucceeded = Date.now()
   }
   const handleFailure = (error) => {
     // eslint-disable-next-line no-use-before-define
@@ -69,7 +72,20 @@ export const ongoingMatch = (tableId, interval) => {
       .then(deserializeMatch)
       .then(handleSuccess)
       .catch(handleFailure)
-  const refetchOngoingMatch = () => setTimeout(fetchOngoingMatch, interval)
+  const refetchOngoingMatch = () => {
+    const secondsPassed = (Date.now() - lastTimeSucceeded) / 1000
+    let interval
+    if (secondsPassed > 120) {
+      interval = 10000
+    } else if (secondsPassed > 60) {
+      interval = 1000
+    } else if (secondsPassed > 30) {
+      interval = 250
+    } else {
+      interval = 50
+    }
+    setTimeout(fetchOngoingMatch, interval)
+  }
 
   fetchOngoingMatch()
 
