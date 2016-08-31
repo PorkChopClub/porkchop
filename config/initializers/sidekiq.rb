@@ -1,7 +1,7 @@
 if ENV['REDIS_PROVIDER']
   Sidekiq.configure_server do |config|
     config.redis = {
-      size: 7,
+      size: 4,
       url: ENV['REDIS_PROVIDER']
     }
   end
