@@ -1,8 +1,9 @@
 module Stats
   class StreakAdjustment
-    def initialize(player:, match_result:)
+    def initialize(player:, match_result:, finished_at: Time.current)
       @player = player
       @match_result = match_result
+      @finished_at = finished_at
     end
 
     def adjust!
@@ -19,20 +20,21 @@ module Stats
 
     private
 
-    attr_reader :player, :match_result
+    attr_reader :player,
+                :match_result,
+                :finished_at
 
     def current_streak_type
       player.current_streak.streak_type if player.current_streak
     end
 
     def end_streak!
-      player.current_streak.update_attributes(finished_at: Time.current)
+      player.current_streak.update_attributes(finished_at: finished_at)
       start_new_streak!
     end
 
     def start_new_streak!
-      Stats::Streak.create(
-        player: player,
+      player.streaks.create(
         streak_length: 1,
         streak_type: match_result
       )

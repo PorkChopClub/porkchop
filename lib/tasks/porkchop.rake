@@ -71,6 +71,7 @@ namespace :porkchop do
     desc "Regenerate ELO and streaks"
     task regenerate: [:environment] do
       EloRating.delete_all
+      Stats::Streak.delete_all
 
       Match.all.finalized.order(finalized_at: :asc).find_each do |match|
         EloAdjustment.new(
@@ -86,11 +87,13 @@ namespace :porkchop do
 
         Stats::StreakAdjustment.new(
           player: match.victor,
-          match_result: "W"
+          match_result: "W",
+          finished_at: match.finalized_at
         ).adjust!
         Stats::StreakAdjustment.new(
           player: match.loser,
-          match_result: "L"
+          match_result: "L",
+          finished_at: match.finalized_at
         ).adjust!
       end
     end
