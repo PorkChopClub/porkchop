@@ -15,5 +15,7 @@ class Api::V2::MatchesController < ApplicationController
 
   def load_table
     @table = Table.find(params[:table_id])
+  rescue ActiveRecord::RecordNotFound
+    render json: { data: nil }, status: :not_found
   end
 end

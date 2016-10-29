@@ -3,7 +3,7 @@ require 'visual_helper'
 RSpec.describe "Visuals", type: :feature do
   describe "homepage" do
     it do
-      visit '/'
+      visit root_path
       observe! 'Homepage'
     end
   end
@@ -11,12 +11,13 @@ RSpec.describe "Visuals", type: :feature do
   context "with a running game" do
     let!(:player1) { FactoryGirl.create :player, name: "Dave" }
     let!(:player2) { FactoryGirl.create :player, name: "Anne" }
+
     let!(:match) do
       FactoryGirl.create :new_match, home_player: player1, away_player: player2
     end
 
     it "scoreboard" do
-      visit '/scoreboard'
+      visit scoreboard_path(match.table)
 
       sleep 1
       observe! 'scoreboard'

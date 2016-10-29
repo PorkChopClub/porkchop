@@ -5,11 +5,14 @@ module.exports = function(options) {
 
   config.context = __dirname;
 
-  const entry = (name) => ["./app/webpack/shared.js", `./app/webpack/${name}.js`]
+  const entry = (name) => [
+    "babel-polyfill",
+    "./app/webpack/shared.js",
+    `./app/webpack/${name}.js`
+  ]
 
   config.entry = {
     scoreboard: entry('scoreboard'),
-    legacy_scoreboard: entry('legacy_scoreboard'),
     default: entry('default')
   };
 
