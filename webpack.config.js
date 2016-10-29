@@ -36,9 +36,5 @@ module.exports = function(options) {
     ]
   }
 
-  config.resolve = {
-    root: path.resolve(__dirname, "./app/webpack")
-  };
-
   return config;
 };
