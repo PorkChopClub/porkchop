@@ -31,7 +31,6 @@ RSpec.describe MatchFinalizationJob, type: :job do
     let(:notifier) { instance_double Slack::Notifier }
     let(:elo_adjustment) { instance_double EloAdjustment }
     let(:streak_adjustment) { instance_double Stats::StreakAdjustment }
-    let(:achievement) { instance_double Achievement }
 
     before do
       ENV['SLACK_WEBHOOK_URL'] = "http://en.wikipedia.org/wiki/Candice_Bergen"
@@ -92,15 +91,6 @@ RSpec.describe MatchFinalizationJob, type: :job do
         match_result: "W"
       ).and_return(streak_adjustment)
       expect(streak_adjustment).to receive(:adjust!)
-      subject
-    end
-
-    it "collects all of the achievements" do
-      expect(match.home_player).to receive(:unearned_achievements).
-        and_return([achievement])
-      expect(match.away_player).to receive(:unearned_achievements).
-        and_return([achievement])
-      expect(achievement).to receive(:earned?).twice.and_return(false)
       subject
     end
   end

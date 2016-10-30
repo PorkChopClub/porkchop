@@ -4,7 +4,6 @@ RSpec.describe Player, type: :model do
   it { is_expected.to have_many :points }
   it { is_expected.to have_many :victories }
   it { is_expected.to have_many :elo_ratings }
-  it { is_expected.to have_many :achievements }
   it { is_expected.to have_many :season_memberships }
   it { is_expected.to have_many :seasons }
   it { is_expected.to have_many :streaks }
@@ -203,13 +202,6 @@ RSpec.describe Player, type: :model do
       it "returns the rating of the most recent one" do
         expect(subject).to eq 1200
       end
-    end
-  end
-
-  describe "#unearned_achievements" do
-    subject { player.unearned_achievements }
-    it "contains a victories achievement" do
-      expect(subject.first.variety).to eq "victories"
     end
   end
 

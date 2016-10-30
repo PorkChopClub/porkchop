@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     end
 
     resources :players, only: :index
-    resources :achievements, only: :index
 
     resource :ongoing_match, only: [:show, :destroy] do
       put "home_point"

@@ -6,7 +6,6 @@ class MatchFinalizationJob < ActiveJob::Base
     send_notification!
     adjust_elo!
     update_streaks!
-    collect_achievements!
     matchmake!
   end
 
@@ -29,12 +28,6 @@ class MatchFinalizationJob < ActiveJob::Base
   def update_streaks!
     Stats::StreakAdjustment.new(player: match.victor, match_result: "W").adjust!
     Stats::StreakAdjustment.new(player: match.loser, match_result: "L").adjust!
-  end
-
-  def collect_achievements!
-    [match.home_player, match.away_player].each do |player|
-      player.all_achievements.select(&:earned?).each(&:adjust_rank!)
-    end
   end
 
   def matchmake!
