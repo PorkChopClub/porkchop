@@ -42,9 +42,6 @@ Rails.application.routes.draw do
       end
     end
 
-    get "stats/win_percentage"
-    get "stats/rating"
-
     put "table/home_button"
     put "table/away_button"
     put "table/center_button"
