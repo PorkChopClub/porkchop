@@ -1,6 +1,4 @@
 class PingPong::Match < SimpleDelegator
-  delegate :comment, :instructions, to: :commentator
-
   def home_player_service?
     return unless first_service
     points_count = points.count
@@ -47,11 +45,5 @@ class PingPong::Match < SimpleDelegator
 
   def warmup_seconds_left
     [90 - (Time.zone.now - created_at).to_i, 0].max
-  end
-
-  private
-
-  def commentator
-    @commentator ||= PingPong::Commentator.new(match: self)
   end
 end

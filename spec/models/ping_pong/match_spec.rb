@@ -275,22 +275,6 @@ RSpec.describe PingPong::Match do
     end
   end
 
-  describe "#comment" do
-    subject { ping_pong_match.comment }
-    let(:match) { FactoryGirl.create :match }
-    let(:commentator) { instance_double PingPong::Commentator }
-
-    before do
-      expect(PingPong::Commentator).
-        to receive(:new).
-        and_return(commentator)
-
-      expect(commentator).to receive(:comment) { 'foo' }
-    end
-
-    it { is_expected.to eq 'foo' }
-  end
-
   describe "#warmup?" do
     subject { ping_pong_match.warmup? }
 

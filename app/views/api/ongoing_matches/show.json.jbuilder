@@ -29,8 +29,6 @@ json.match do
   json.finalized @match.finalized?
   json.deleted @match.destroyed?
   json.league_match @match.league_match?
-  json.comment @match.comment || ""
-  json.instructions @match.instructions || ""
 
   json.warmup @match.warmup?
   json.warmup_timer @match.warmup_seconds_left
