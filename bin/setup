@@ -10,7 +10,7 @@ Dir.chdir APP_ROOT do
   system "bundle check || bundle install"
 
   puts "\n== Installing JavaScript dependencies =="
-  system "npm install"
+  system "yarn install"
 
   puts "\n== Preparing database =="
   system "bin/rake db:reset"
