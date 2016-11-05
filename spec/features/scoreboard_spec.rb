@@ -47,6 +47,6 @@ RSpec.describe "scoreboard page" do
 
   def physical_table
     @physical_table ||=
-      PingPong::TableControls.new(PingPong::Match.new(match))
+      PingPong::TableControls.new(match)
   end
 end

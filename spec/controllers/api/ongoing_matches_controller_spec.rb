@@ -6,7 +6,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     it "assigns the match as @match" do
       subject
-      expect(assigns(:match)).to eq match
+      expect(assigns(:ongoing_match)).to eq match
     end
   end
 
@@ -107,7 +107,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it "toggles the service to the away player" do
         expect { subject }.
           to change {
-            PingPong::Match.new(match.reload).home_player_service?
+            match.reload.home_player_service?
           }.from(nil).to(true)
       end
     end
@@ -129,7 +129,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it "doesn't toggle the service" do
         expect { subject }.
           not_to change {
-            PingPong::Match.new(match.reload).home_player_service?
+            match.reload.home_player_service?
           }
       end
     end
@@ -147,7 +147,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     before do
       expect(PingPong::Rewind).
         to receive(:new).
-        with(instance_of(PingPong::Match)).
+        with(match).
         and_return(rewind)
       expect(rewind).
         to receive(:rewind!).

@@ -1,8 +1,6 @@
 require_dependency "ping_pong/service"
 
 class Api::OngoingMatchesController < ApplicationController
-  before_action :match
-
   before_action :authorize_ongoing_match, except: %i(show)
   before_action :set_next_match
 
@@ -12,15 +10,15 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def home_point
-    perform record_service(match.home_player)
+    perform record_service(ongoing_match.home_player)
   end
 
   def away_point
-    perform record_service(match.away_player)
+    perform record_service(ongoing_match.away_player)
   end
 
   def toggle_service
-    perform match.toggle_service
+    perform ongoing_match.toggle_service
   end
 
   def rewind
@@ -32,18 +30,18 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def destroy
-    perform(match.present? && match.destroy)
+    perform(ongoing_match.present? && ongoing_match.destroy)
   end
 
   def matchmake
-    if match.present?
-      if !match.destroy
+    if ongoing_match.present?
+      if !ongoing_match.destroy
         render :show, status: :unprocessable_entity
         return
       end
     end
 
-    perform @match = PingPong::Match.new(Match.setup!)
+    perform @ongoing_match = Match.setup!
   end
 
   private
@@ -56,21 +54,17 @@ class Api::OngoingMatchesController < ApplicationController
     @next_match = Matchmaker.choose
   end
 
-  def match
-    @match ||= PingPong::Match.new ongoing_match
-  end
-
   def finalize_match
     MatchFinalizationJob.perform_later(ongoing_match)
     true
   end
 
   def record_service(victor)
-    PingPong::Service.new(match: match, victor: victor).record!
+    PingPong::Service.new(match: ongoing_match, victor: victor).record!
   end
 
   def rewind_match
-    PingPong::Rewind.new(match).rewind!
+    PingPong::Rewind.new(ongoing_match).rewind!
   end
 
   def perform(action)
