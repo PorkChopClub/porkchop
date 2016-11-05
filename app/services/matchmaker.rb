@@ -24,19 +24,6 @@ class Matchmaker
                base_value: players.sum(&:matches_since_last_played),
                max: (total_player_count - 1) * 2.0,
                factor: 2.0 / (total_player_count - 1))
-
-      elo_difference = players.map(&:elo).inject(:-).abs
-      base_value =
-        if elo_difference < 300
-          1.0
-        else
-          [300.0 / elo_difference, 0.25].max
-        end
-
-      add_term(name: "Difference in skill rating",
-               base_value: base_value,
-               max: 1.0,
-               factor: 2.0)
     end
 
     def rank

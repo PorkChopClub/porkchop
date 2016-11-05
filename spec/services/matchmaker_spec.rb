@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe Matchmaker do
   describe "#choose" do
     let(:matchmaker) { Matchmaker.new(players) }
-    let(:least_recently_played_player) { FactoryGirl.create :player, name: "Least", active: true }
+    let(:least_recently_played_player) do
+      FactoryGirl.create :player, name: "Least", active: true
+    end
 
     subject { matchmaker.choose }
 
@@ -43,7 +45,7 @@ RSpec.describe Matchmaker do
     it "returns an arbitrary representation of the result of the matchup ranking" do
       expect(subject).to eq [{
         players: %w(Bert Ernie),
-        result: 5.25,
+        result: 4.5,
         breakdown: [
           {
             name: "Matchup matches since last played",
@@ -58,13 +60,6 @@ RSpec.describe Matchmaker do
             max: 2.0,
             factor: 2.0,
             value: 4.0
-          },
-          {
-            name: "Difference in skill rating",
-            base_value: 0.375,
-            max: 1.0,
-            factor: 2.0,
-            value: 0.75
           }
         ]
       }]
