@@ -11,8 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def ongoing_match
-    ActiveSupport::Deprecation.
-      warn('This helper going to be removed in favor of table scoped ongoing matches.')
     @ongoing_match ||= Table.default.try!(:ongoing_match)
   end
   helper_method :ongoing_match
