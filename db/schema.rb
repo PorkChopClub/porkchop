@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718020342) do
+ActiveRecord::Schema.define(version: 20161029232109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "achievements", force: :cascade do |t|
-    t.integer  "player_id"
-    t.string   "variety"
-    t.integer  "rank",       default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "betting_infos", force: :cascade do |t|
     t.integer  "match_id",                             null: false
@@ -143,7 +135,6 @@ ActiveRecord::Schema.define(version: 20160718020342) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "achievements", "players"
   add_foreign_key "betting_infos", "matches"
   add_foreign_key "betting_infos", "players", column: "favourite_id"
   add_foreign_key "elo_ratings", "players"

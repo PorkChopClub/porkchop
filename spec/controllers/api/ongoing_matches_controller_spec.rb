@@ -6,7 +6,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     it "assigns the match as @match" do
       subject
-      expect(assigns(:match)).to eq match
+      expect(assigns(:ongoing_match)).to eq match
     end
   end
 
@@ -107,7 +107,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it "toggles the service to the away player" do
         expect { subject }.
           to change {
-            PingPong::Match.new(match.reload).home_player_service?
+            match.reload.home_player_service?
           }.from(nil).to(true)
       end
     end
@@ -129,7 +129,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       it "doesn't toggle the service" do
         expect { subject }.
           not_to change {
-            PingPong::Match.new(match.reload).home_player_service?
+            match.reload.home_player_service?
           }
       end
     end
@@ -147,7 +147,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
     before do
       expect(PingPong::Rewind).
         to receive(:new).
-        with(instance_of(PingPong::Match)).
+        with(match).
         and_return(rewind)
       expect(rewind).
         to receive(:rewind!).
@@ -178,31 +178,16 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     let!(:match) { FactoryGirl.create :match, table: table }
     let(:table) { create :default_table }
-    let(:finalization) do
-      instance_double PingPong::Finalization, finalize!: finalized
-    end
 
     before do
-      expect(PingPong::Finalization).
-        to receive(:new).
-        and_return(finalization)
+      expect(MatchFinalizationJob).
+        to receive(:perform_later).
+        with(match)
     end
 
-    context "when the match can be finalized" do
-      let(:finalized) { true }
+    it_behaves_like "renders match"
 
-      it_behaves_like "renders match"
-
-      it { is_expected.to have_http_status :ok }
-    end
-
-    context "when the match cannot be finalized" do
-      let(:finalized) { false }
-
-      it_behaves_like "renders match"
-
-      it { is_expected.to have_http_status :unprocessable_entity }
-    end
+    it { is_expected.to have_http_status :ok }
   end
 
   describe "DELETE destroy" do

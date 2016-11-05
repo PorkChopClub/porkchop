@@ -11,7 +11,6 @@ class Player < ActiveRecord::Base
 
   scope :active, -> { where(active: true) }
 
-  has_many :achievements
   has_many :points, foreign_key: 'victor_id'
   has_many :victories, class_name: "Match", foreign_key: 'victor_id'
   has_many :elo_ratings
@@ -70,14 +69,6 @@ class Player < ActiveRecord::Base
 
   def elo_on(date)
     elo_ratings.rating_on(date) || BASE_ELO
-  end
-
-  def all_achievements
-    achievements + unearned_achievements
-  end
-
-  def unearned_achievements
-    Achievement.unearned(self)
   end
 
   def last_played_at

@@ -4,104 +4,75 @@ RSpec.describe MatchFinalizationJob, type: :job do
   describe "#perform" do
     subject { described_class.new.perform match }
 
-    before { create :default_table }
-
-    let!(:anne) do
-      FactoryGirl.create :player, name: "Anne", active: true
-    end
-
-    let!(:dave) do
-      FactoryGirl.create :player, name: "Dave", active: true
-    end
-
-    let(:victor) do
-      FactoryGirl.create :player, name: "Candice", active: true
-    end
-
-    let(:loser) do
-      FactoryGirl.create :player, name: "Shirley", active: true
-    end
-
     let(:match) do
-      FactoryGirl.create :complete_match,
-                         away_player: loser, away_score: 10,
-                         home_player: victor, home_score: 12
+      instance_double Match,
+                      finalized?: finalized,
+                      finished?: finished,
+                      leader: "Winnie",
+                      victor: "Winnie",
+                      loser: "Waldo",
+                      all_matches_before: [:match]
     end
 
-    let(:notifier) { instance_double Slack::Notifier }
-    let(:elo_adjustment) { instance_double EloAdjustment }
-    let(:streak_adjustment) { instance_double Stats::StreakAdjustment }
-    let(:achievement) { instance_double Achievement }
+    context "when the match hasn't been finalized" do
+      let(:finalized) { false }
 
-    before do
-      ENV['SLACK_WEBHOOK_URL'] = "http://en.wikipedia.org/wiki/Candice_Bergen"
+      context "when the match is finished" do
+        let(:finished) { true }
+        let(:adjustment_double) { instance_double EloAdjustment }
+        let(:win_adjustment_double) { instance_double Stats::StreakAdjustment }
+        let(:loss_adjustment_double) { instance_double Stats::StreakAdjustment }
+        let(:notification_double) { instance_double SlackNotification }
 
-      allow(Slack::Notifier).to receive(:new).and_return(notifier)
-      allow(notifier).to receive(:ping)
+        it "performs match finalization" do
+          expect(match).to receive(:victor=).with("Winnie")
+          expect(match).to receive(:finalize!)
 
-      allow(EloAdjustment).to receive(:new).and_return(elo_adjustment)
-      allow(elo_adjustment).to receive(:adjust!)
+          expect(EloAdjustment).
+            to receive(:new).
+            with(victor: "Winnie", loser: "Waldo", matches: [:match]).
+            and_return(adjustment_double)
+          expect(adjustment_double).to receive(:adjust!)
 
-      allow(Stats::StreakAdjustment).to receive(:new).and_return(streak_adjustment)
-      allow(streak_adjustment).to receive(:adjust!)
+          expect(Stats::StreakAdjustment).
+            to receive(:new).
+            with(player: "Winnie", match_result: "W").
+            and_return(win_adjustment_double)
+          expect(Stats::StreakAdjustment).
+            to receive(:new).
+            with(player: "Waldo", match_result: "L").
+            and_return(loss_adjustment_double)
+          expect(win_adjustment_double).to receive(:adjust!)
+          expect(loss_adjustment_double).to receive(:adjust!)
+
+          expect(Match).to receive(:setup!)
+
+          expect(SlackGameEndJob).
+            to receive(:perform_later).
+            with(match)
+
+          subject
+        end
+      end
+
+      context "when the match isn't finished" do
+        let(:finished) { false }
+
+        it "doesn't do anything" do
+          expect(match).not_to receive :finalize!
+          subject
+        end
+      end
     end
 
-    after do
-      ENV['SLACK_WEBHOOK_URL'] = nil
-    end
+    context "when the match is already finalized" do
+      let(:finalized) { true }
+      let(:finished) { true }
 
-    it "notifies Slack about the match" do
-      expect(Slack::Notifier).to receive(:new).with(
-        "http://en.wikipedia.org/wiki/Candice_Bergen",
-        username: "PorkChop",
-        icon_emoji: ":trophy:"
-      ).and_return(notifier)
-
-      expect(notifier).to receive(:ping).with(
-        "Candice defeated Shirley",
-        attachments: [{
-          fallback: "Candice 12 - 10 Shirley",
-          fields: [
-            { title: "Candice", value: 12 },
-            { title: "Shirley", value: 10 }
-          ]
-        }]
-      )
-
-      subject
-    end
-
-    it "creates a new match between other active players" do
-      subject
-      expect(Match.ongoing.first!).to_not be_nil
-    end
-
-    it "adjusts the elo" do
-      expect(EloAdjustment).to receive(:new).with(
-        victor: victor,
-        loser: loser,
-        matches: []
-      ).and_return(elo_adjustment)
-      expect(elo_adjustment).to receive(:adjust!)
-      subject
-    end
-
-    it "adjusts players' streaks" do
-      expect(Stats::StreakAdjustment).to receive(:new).with(
-        player: victor,
-        match_result: "W"
-      ).and_return(streak_adjustment)
-      expect(streak_adjustment).to receive(:adjust!)
-      subject
-    end
-
-    it "collects all of the achievements" do
-      expect(match.home_player).to receive(:unearned_achievements).
-        and_return([achievement])
-      expect(match.away_player).to receive(:unearned_achievements).
-        and_return([achievement])
-      expect(achievement).to receive(:earned?).twice.and_return(false)
-      subject
+      it "doesn't do anything" do
+        expect(match).not_to receive :finalize!
+        subject
+      end
     end
   end
 end

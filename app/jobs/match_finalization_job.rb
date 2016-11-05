@@ -1,13 +1,18 @@
-class MatchFinalizationJob < ActiveJob::Base
+class MatchFinalizationJob < ApplicationJob
   queue_as :default
 
   def perform(match)
     @match = match
-    send_notification!
-    adjust_elo!
+
+    return if match.finalized?
+    return unless match.finished?
+
+    match.victor = match.leader
+    match.finalize!
     update_streaks!
-    collect_achievements!
+    adjust_elo!
     matchmake!
+    send_notification!
   end
 
   private
@@ -15,7 +20,7 @@ class MatchFinalizationJob < ActiveJob::Base
   attr_reader :match
 
   def send_notification!
-    SlackNotification.new(match).deliver
+    SlackGameEndJob.perform_later(match)
   end
 
   def adjust_elo!
@@ -29,12 +34,6 @@ class MatchFinalizationJob < ActiveJob::Base
   def update_streaks!
     Stats::StreakAdjustment.new(player: match.victor, match_result: "W").adjust!
     Stats::StreakAdjustment.new(player: match.loser, match_result: "L").adjust!
-  end
-
-  def collect_achievements!
-    [match.home_player, match.away_player].each do |player|
-      player.all_achievements.select(&:earned?).each(&:adjust_rank!)
-    end
   end
 
   def matchmake!

@@ -6,7 +6,8 @@ before_script:
   - bundle exec rake db:test:prepare
   - nvm install 6.2
   - nvm use 6.2
-  - npm install
+  - npm install -g yarn
+  - yarn install
 script:
   - npm run lint
   - bundle exec rubocop
@@ -21,6 +22,7 @@ cache:
   bundler: true
   directories:
   - node_modules
+  - $HOME/.yarn-cache
 deploy:
   provider: heroku
   api_key:

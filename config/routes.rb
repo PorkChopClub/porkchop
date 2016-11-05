@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :players
   root to: 'home#index'
 
-  resource :scoreboard, only: [:show, :edit]
+  resource :scoreboard, only: :edit
   resources :scoreboards, only: :show
 
   resources :matches, only: [:index, :show]
@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     end
 
     resources :players, only: :index
-    resources :achievements, only: :index
 
     resource :ongoing_match, only: [:show, :destroy] do
       put "home_point"
@@ -42,9 +41,6 @@ Rails.application.routes.draw do
         put "deactivate"
       end
     end
-
-    get "stats/win_percentage"
-    get "stats/rating"
 
     put "table/home_button"
     put "table/away_button"

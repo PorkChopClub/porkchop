@@ -2,7 +2,6 @@ class Api::TableController < ApplicationController
   skip_authorization_check
   skip_before_action :verify_authenticity_token
   before_action :check_table_token
-  before_action :match
 
   def home_button
     table.home_button
@@ -27,12 +26,7 @@ class Api::TableController < ApplicationController
     end
   end
 
-  # FIXME: Copied out of Api::OngoingMatchController
-  def match
-    @match ||= PingPong::Match.new ongoing_match
-  end
-
   def table
-    @table ||= PingPong::TableControls.new(match)
+    @table ||= PingPong::TableControls.new(ongoing_match)
   end
 end

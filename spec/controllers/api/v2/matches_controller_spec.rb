@@ -34,11 +34,7 @@ RSpec.describe Api::V2::MatchesController, type: :controller do
 
     context "when the table doesn't exist" do
       let(:table_id) { 12_345 }
-
-      it "should raise an error" do
-        expect { subject }.
-          to raise_error ActiveRecord::RecordNotFound
-      end
+      it { is_expected.to have_http_status :not_found }
     end
   end
 end

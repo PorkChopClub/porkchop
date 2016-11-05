@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PingPong::TableControls do
   let(:home_player) { instance_double Player }
   let(:away_player) { instance_double Player }
-  let(:match) { double PingPong::Match, home_player: home_player, away_player: away_player, finalized?: finalized, finished?: finished }
+  let(:match) { instance_double Match, home_player: home_player, away_player: away_player, finalized?: finalized, finished?: finished }
   let(:finished) { false }
   let(:finalized) { false }
   let(:table) { described_class.new(match) }
@@ -23,13 +23,11 @@ RSpec.describe PingPong::TableControls do
 
     context 'game awaiting finalization' do
       let(:finished) { true }
-      let(:finalization) { instance_double PingPong::Finalization }
+
       it "finalizes the match" do
-        expect(PingPong::Finalization).
-          to receive(:new).
-          and_return(finalization)
-        expect(finalization).
-          to receive(:finalize!)
+        expect(MatchFinalizationJob).
+          to receive(:perform_later).
+          with(match)
         subject
       end
     end

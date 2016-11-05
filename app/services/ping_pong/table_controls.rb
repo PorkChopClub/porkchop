@@ -36,6 +36,6 @@ class PingPong::TableControls
   end
 
   def finalize_match
-    PingPong::Finalization.new(match).finalize!
+    MatchFinalizationJob.perform_later match
   end
 end

@@ -50,9 +50,7 @@ namespace :porkchop do
                                 victor: match.away_player,
                                 match: match)
 
-        PingPong::Finalization.new(
-          PingPong::Match.new(match)
-        ).finalize!(async: false)
+        MatchFinalizationJob.perform_now(match)
 
         EloRating.
           order(created_at: :desc).

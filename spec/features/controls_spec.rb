@@ -53,8 +53,8 @@ RSpec.describe "controls page" do
 
     click_button "Finalize match"
 
-    # Wait for the 1s polling on this page.
-    sleep 1
+    # Wait for the dynamic polling on this page.
+    sleep 5
 
     expect(player_name(:home)).to have_content "Shirley"
     expect(player_name(:away)).to have_content "Candice"
