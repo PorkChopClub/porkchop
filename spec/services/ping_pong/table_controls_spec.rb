@@ -23,13 +23,11 @@ RSpec.describe PingPong::TableControls do
 
     context 'game awaiting finalization' do
       let(:finished) { true }
-      let(:finalization) { instance_double PingPong::Finalization }
+
       it "finalizes the match" do
-        expect(PingPong::Finalization).
-          to receive(:new).
-          and_return(finalization)
-        expect(finalization).
-          to receive(:finalize!)
+        expect(MatchFinalizationJob).
+          to receive(:perform_later).
+          with(match)
         subject
       end
     end

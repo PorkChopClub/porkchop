@@ -178,31 +178,16 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
 
     let!(:match) { FactoryGirl.create :match, table: table }
     let(:table) { create :default_table }
-    let(:finalization) do
-      instance_double PingPong::Finalization, finalize!: finalized
-    end
 
     before do
-      expect(PingPong::Finalization).
-        to receive(:new).
-        and_return(finalization)
+      expect(MatchFinalizationJob).
+        to receive(:perform_later).
+        with(match)
     end
 
-    context "when the match can be finalized" do
-      let(:finalized) { true }
+    it_behaves_like "renders match"
 
-      it_behaves_like "renders match"
-
-      it { is_expected.to have_http_status :ok }
-    end
-
-    context "when the match cannot be finalized" do
-      let(:finalized) { false }
-
-      it_behaves_like "renders match"
-
-      it { is_expected.to have_http_status :unprocessable_entity }
-    end
+    it { is_expected.to have_http_status :ok }
   end
 
   describe "DELETE destroy" do

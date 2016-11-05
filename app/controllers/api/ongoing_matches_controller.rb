@@ -61,7 +61,8 @@ class Api::OngoingMatchesController < ApplicationController
   end
 
   def finalize_match
-    PingPong::Finalization.new(match).finalize!
+    MatchFinalizationJob.perform_later(ongoing_match)
+    true
   end
 
   def record_service(victor)
