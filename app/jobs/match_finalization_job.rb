@@ -3,10 +3,16 @@ class MatchFinalizationJob < ActiveJob::Base
 
   def perform(match)
     @match = match
-    send_notification!
-    adjust_elo!
+
+    return if match.finalized?
+    return unless match.finished?
+
+    match.victor = match.leader
+    match.finalize!
     update_streaks!
+    adjust_elo!
     matchmake!
+    send_notification!
   end
 
   private
