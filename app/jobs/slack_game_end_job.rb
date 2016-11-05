@@ -1,10 +1,9 @@
-class SlackNotification
-  def initialize(match)
-    @match = match
-  end
+class SlackGameEndJob < ApplicationJob
+  queue_as :default
 
-  def deliver
+  def perform(match)
     return unless webhook_url
+    @match = match
     notifier.ping title
   end
 

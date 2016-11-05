@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe SlackNotification do
-  describe "#deliver" do
-    subject { notification.deliver }
+RSpec.describe SlackGameEndJob do
+  describe "#perform" do
+    subject { described_class.new.perform game }
 
-    let(:notification) { described_class.new(match) }
-    let(:match) do
+    let(:game) do
       instance_double(
         Match,
         victor: victor,

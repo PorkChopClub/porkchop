@@ -20,7 +20,7 @@ class MatchFinalizationJob < ActiveJob::Base
   attr_reader :match
 
   def send_notification!
-    SlackNotification.new(match).deliver
+    SlackGameEndJob.perform_later(match)
   end
 
   def adjust_elo!

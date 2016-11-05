@@ -47,11 +47,9 @@ RSpec.describe MatchFinalizationJob, type: :job do
 
           expect(Match).to receive(:setup!)
 
-          expect(SlackNotification).
-            to receive(:new).
-            with(match).
-            and_return(notification_double)
-          expect(notification_double).to receive(:deliver)
+          expect(SlackGameEndJob).
+            to receive(:perform_later).
+            with(match)
 
           subject
         end
