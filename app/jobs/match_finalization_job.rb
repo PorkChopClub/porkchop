@@ -1,4 +1,4 @@
-class MatchFinalizationJob < ActiveJob::Base
+class MatchFinalizationJob < ApplicationJob
   queue_as :default
 
   def perform(match)
