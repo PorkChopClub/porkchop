@@ -5,7 +5,7 @@ class SlackNotification
 
   def deliver
     return unless webhook_url
-    notifier.ping title, attachments: attachments
+    notifier.ping title
   end
 
   private
@@ -13,25 +13,11 @@ class SlackNotification
   attr_reader :match
 
   def title
-    "#{victor_name} defeated #{loser_name}"
-  end
-
-  def attachments
-    [{
-      fallback: "#{home_player_name} #{match.home_score} - #{match.away_score} #{away_player_name}",
-      fields: [
-        { title: home_player_name, value: match.home_score },
-        { title: away_player_name, value: match.away_score }
-      ]
-    }]
-  end
-
-  def victor_name
-    match.victor.name
-  end
-
-  def loser_name
-    match.loser.name
+    if match.home_player == match.victor
+      "#{home_player_name} defeated #{away_player_name}, #{home_score} to #{away_score}"
+    else
+      "#{away_player_name} defeated #{home_player_name}, #{away_score} to #{home_score}"
+    end
   end
 
   def home_player_name
@@ -40,6 +26,14 @@ class SlackNotification
 
   def away_player_name
     match.away_player.name
+  end
+
+  def home_score
+    match.home_score
+  end
+
+  def away_score
+    match.away_score
   end
 
   def webhook_url
