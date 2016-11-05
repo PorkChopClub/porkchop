@@ -20,15 +20,12 @@ RSpec.describe SlackNotification do
     let(:loser) { instance_double(Player, name: "Kevin") }
 
     before do
-      ENV["SLACK_WEBHOOK_URL"] = "waldo"
-
       allow(Slack::Notifier).
         to receive(:new).
+        with("http://example.com/slack",
+             username: "PorkChop",
+             icon_emoji: ":trophy:").
         and_return(notifier_double)
-    end
-
-    after do
-      ENV["SLACK_WEBHOOK_URL"] = nil
     end
 
     it "notifies the things" do
