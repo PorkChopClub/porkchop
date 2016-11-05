@@ -62,7 +62,7 @@ end
 group :test do
   # Test fast or die trying.
   gem "simplecov", require: false
-  gem 'codeclimate-test-reporter', require: false
+  gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'capybara', require: false
   gem 'poltergeist', require: false
   gem 'database_cleaner', require: false

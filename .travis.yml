@@ -12,6 +12,7 @@ script:
   - npm run lint
   - bundle exec rubocop
   - bundle exec rspec
+  - bundle exec codeclimate-test-reporter
 env:
   global:
     - NPM_CONFIG_PROGRESS="false"

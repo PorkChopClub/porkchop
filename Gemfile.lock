@@ -339,7 +339,7 @@ DEPENDENCIES
   bugsnag
   cancancan
   capybara
-  codeclimate-test-reporter
+  codeclimate-test-reporter (~> 1.0.0)
   database_cleaner
   devise
   dotenv-rails
