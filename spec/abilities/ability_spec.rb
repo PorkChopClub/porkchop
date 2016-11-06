@@ -17,6 +17,7 @@ RSpec.describe Ability do
     let(:player) { create :player }
 
     it { is_expected.to be_able_to(:read, :all) }
+    it { is_expected.to be_able_to(:update, player) }
     it { is_expected.not_to be_able_to(:create, :all) }
     it { is_expected.not_to be_able_to(:update, :all) }
     it { is_expected.not_to be_able_to(:destroy, :all) }
