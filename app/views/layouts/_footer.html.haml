@@ -11,7 +11,5 @@
 
 .footer-sitemap-wrapper
   %ul.footer-sitemap
-    - if write_access?
-      %li= link_to "Match Controls", edit_scoreboard_path
     %li= link_to "Players", players_path
     %li= link_to "Match History", matches_path
