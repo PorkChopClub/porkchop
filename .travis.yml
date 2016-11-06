@@ -30,7 +30,7 @@ deploy:
     secure: CHFON45m9nMNIeVqKbAnGu3yRRHPQMr9rOYtXQIqPWX/I/xg1WBOUyLWGrTLnMwxBBU4W18dmUvDh0C0USop7WrWFIzyEs2Gkm+kLEI/pwrmsi/vewS/m3WxirjYPA4xXn5eq+jE5qIa4TkKPV1DQzq1n73GvH/267I2er39XZM=
   app: porkchop-prod
   on:
-    repo: porkchopclub/porkchop
+    repo: PorkChopClub/porkchop
   run:
     - "rake db:migrate"
     - restart
