@@ -17,6 +17,7 @@
 
 # Ignore .env
 /.env
+/.env.development
 
 # Node
 /node_modules
