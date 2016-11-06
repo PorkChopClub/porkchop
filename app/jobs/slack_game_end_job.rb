@@ -2,20 +2,19 @@ class SlackGameEndJob < ApplicationJob
   queue_as :default
 
   def perform(match)
-    return unless webhook_url
     @match = match
-    notifier.ping title
+    SlackMessage.new(message).send!
   end
 
   private
 
   attr_reader :match
 
-  def title
+  def message
     if match.home_player == match.victor
-      "#{home_player_name} defeated #{away_player_name}, #{home_score} to #{away_score}"
+      ":trophy: #{home_player_name} defeated #{away_player_name}, #{home_score} to #{away_score} :trophy:"
     else
-      "#{away_player_name} defeated #{home_player_name}, #{away_score} to #{home_score}"
+      ":trophy: #{away_player_name} defeated #{home_player_name}, #{away_score} to #{home_score} :trophy:"
     end
   end
 
@@ -33,17 +32,5 @@ class SlackGameEndJob < ApplicationJob
 
   def away_score
     match.away_score
-  end
-
-  def webhook_url
-    ENV["SLACK_WEBHOOK_URL"]
-  end
-
-  def notifier
-    @notifier ||= Slack::Notifier.new(
-      webhook_url,
-      username: "PorkChop",
-      icon_emoji: ":trophy:"
-    )
   end
 end

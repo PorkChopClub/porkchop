@@ -14,23 +14,17 @@ RSpec.describe SlackGameEndJob do
         away_score: 11
       )
     end
-    let(:notifier_double) { instance_double Slack::Notifier }
     let(:victor) { instance_double(Player, name: "Jared") }
     let(:loser) { instance_double(Player, name: "Kevin") }
-
-    before do
-      allow(Slack::Notifier).
-        to receive(:new).
-        with("http://example.com/slack",
-             username: "PorkChop",
-             icon_emoji: ":trophy:").
-        and_return(notifier_double)
-    end
+    let(:message_double) { instance_double SlackMessage }
 
     it "notifies the things" do
-      expect(notifier_double).
-        to receive(:ping).
-        with("Jared defeated Kevin, 11 to 0")
+      allow(SlackMessage).
+        to receive(:new).
+        with(":trophy: Jared defeated Kevin, 11 to 0 :trophy:").
+        and_return(message_double)
+      expect(message_double).
+        to receive(:send!)
 
       subject
     end

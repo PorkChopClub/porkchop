@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :players
   root to: 'home#index'
 
+  get 'play', to: 'activations#activate'
+
   resource :scoreboard, only: :edit
   resources :scoreboards, only: :show
 
