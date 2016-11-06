@@ -15,11 +15,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :ongoing_match
 
-  def write_access?
-    session[:write_access]
-  end
-  helper_method :write_access?
-
   def current_ability
     @current_ability ||=
       Ability.new(current_player)

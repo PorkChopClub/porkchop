@@ -30,7 +30,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "PUT home_point" do
-    subject { put :home_point, params: { format: :json }, session: { write_access: true } }
+    subject { put :home_point, params: { format: :json } }
 
     let(:table) { create :default_table }
 
@@ -62,7 +62,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "PUT away_point" do
-    subject { put :away_point, params: { format: :json }, session: { write_access: true } }
+    subject { put :away_point, params: { format: :json } }
 
     let(:table) { create :default_table }
 
@@ -94,7 +94,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "PUT toggle_service" do
-    subject { put :toggle_service, params: { format: :json }, session: { write_access: true } }
+    subject { put :toggle_service, params: { format: :json } }
 
     let!(:match) { FactoryGirl.create :match, :at_start, table: table }
     let(:table) { create :default_table }
@@ -136,7 +136,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "PUT rewind" do
-    subject { put :rewind, params: { format: :json }, session: { write_access: true } }
+    subject { put :rewind, params: { format: :json } }
 
     before { sign_in create(:admin_player) }
 
@@ -172,7 +172,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "PUT finalize" do
-    subject { put :finalize, params: { format: :json }, session: { write_access: true } }
+    subject { put :finalize, params: { format: :json } }
 
     before { sign_in create(:admin_player) }
 
@@ -191,7 +191,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "DELETE destroy" do
-    subject { delete :destroy, params: { format: :json }, session: { write_access: true } }
+    subject { delete :destroy, params: { format: :json } }
 
     before { sign_in create(:admin_player) }
 
@@ -220,7 +220,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
   end
 
   describe "PUT matchmake" do
-    subject { put :matchmake, params: { format: :json }, session: { write_access: true } }
+    subject { put :matchmake, params: { format: :json } }
 
     before { sign_in create(:admin_player) }
 
