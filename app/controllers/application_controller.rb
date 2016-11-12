@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     @current_ability ||=
       Ability.new(current_player)
   end
+
+  def update_match_channel
+    OngoingMatchChannel.broadcast_update
+  end
 end
