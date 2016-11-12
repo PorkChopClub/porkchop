@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   devise_for :players
+
   root to: 'home#index'
 
   get 'play', to: 'activations#activate'
