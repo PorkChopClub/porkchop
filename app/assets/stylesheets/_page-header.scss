@@ -1,0 +1,16 @@
+.page-header {
+  background-color: $lightest-grey;
+  border-bottom: 1px solid $light-grey;
+}
+
+.page-header-inner {
+  max-width: $header-width;
+  padding: $header-outer-padding 0.5rem;
+  margin: 0 auto;
+}
+
+.page-header-title {
+  font-size: 18px;
+  font-weight: normal;
+  color: #444;
+}

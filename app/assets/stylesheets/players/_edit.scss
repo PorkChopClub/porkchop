@@ -1,0 +1,26 @@
+.player-edit-form {
+  max-width: $main-area-width;
+  margin: 0 auto;
+  padding: $main-area-outer-padding 1rem;
+
+  .input.string {
+  }
+}
+
+.player-edit-profile-picture-fields {
+}
+
+.player-edit-profile-picture {
+  display: inline-block;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-bottom-width: 2px;
+  border-radius: 0.25rem;
+  background-color: $off-white;
+
+  img {
+    display: block;
+    max-width: 256px;
+    max-height: 128px;
+  }
+}
