@@ -11,9 +11,9 @@
       = cache match do
         %tr
           %td= l match.finalized_at, format: :short
-          %td{class: ["match-list-player", ("match-list-victor" if match.victor == match.home_player)]}
+          %td{class: ["match-list-player", ("match-list-victor" if match.victor_id == match.home_player_id)]}
             = link_to match.home_player.name, match.home_player
-          %td{class: ["match-list-player", ("match-list-victor" if match.victor == match.away_player)]}
+          %td{class: ["match-list-player", ("match-list-victor" if match.victor_id == match.away_player_id)]}
             = link_to match.away_player.name, match.away_player
           %td
             = [match.home_score, match.away_score].join(' - ')

@@ -1,16 +1,18 @@
 - if season = Season.ongoing.last
+  = cache [season, season.matches.last] do
+    .homepage-recent-matches.porkbox-light
+      %h2
+        = link_to "Season Standings", season
+      = render "seasons/standings", season: season
+
+= cache Match.finalized.order(:finalized_at).last do
   .homepage-recent-matches.porkbox-light
-    %h2
-      = link_to "Season Standings", season
-    = render "seasons/standings", season: season
+    %h2 Recent matches
+    = render "matches/list", matches: recent_matches
 
-.homepage-recent-matches.porkbox-light
-  %h2 Recent matches
-  = render "matches/list", matches: @recent_matches
+  .homepage-leaderboard-list.porkbox-light
+    %h2 Leaderboard
+    = render "shared/leaderboard", players: ranked_players
 
-.homepage-leaderboard-list.porkbox-light
-  %h2 Leaderboard
-  = render "shared/leaderboard", players: @ranked_players
-
-.homepage-chart.porkbox-light
-  %canvas.elo-chart{ data: { labels: @elo_range.map{ |x| l(x, format: :short) }.to_json, ratings: @elo_data.to_json } }
+  .homepage-chart.porkbox-light
+    %canvas.elo-chart{ data: { labels: elo_range.map{ |x| l(x, format: :short) }.to_json, ratings: elo_data.to_json } }

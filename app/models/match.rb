@@ -1,4 +1,12 @@
 class Match < ActiveRecord::Base
+  WINNER_SQL = %{ "matches"."victor_id" }.freeze
+  LOSER_SQL = <<-SQL.freeze
+    CASE
+    WHEN "matches"."victor_id" = "home_player_id" THEN "away_player_id"
+    ELSE "home_player_id"
+    END
+  SQL
+
   belongs_to :home_player, class_name: "Player"
   belongs_to :away_player, class_name: "Player"
   belongs_to :victor, class_name: "Player"

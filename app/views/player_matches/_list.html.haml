@@ -5,17 +5,18 @@
       %th Opponent
       %th Final Score
   %tbody
-    - matches.each do |match|
-      %tr.player-match
-        %td= l match.finalized_at, format: :short
-        %td
-          - if home_match = @player == match.home_player
-            = "vs #{match.away_player.name}"
-          - else
-            = "@ #{match.home_player.name}"
-        %td.player-match-score
-          - if @player == match.victor
-            %strong W
-          - else
-            %strong L
-          = [match.home_score, match.away_score].join(' - ')
+    = cache [@player, matches.last] do
+      - matches.each do |match|
+        %tr.player-match
+          %td= l match.finalized_at, format: :short
+          %td
+            - if @player == match.home_player
+              = "vs #{match.away_player.name}"
+            - else
+              = "@ #{match.home_player.name}"
+          %td.player-match-score
+            - if @player.id == match.victor_id
+              %strong W
+            - else
+              %strong L
+            = [match.home_score, match.away_score].join(' - ')

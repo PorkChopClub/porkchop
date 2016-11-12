@@ -68,15 +68,15 @@ class Stats::Personal
   end
 
   def victory_count_against(opponent)
-    matches_against(opponent).where(victor: player).count
+    victories_by_player_id[opponent.id]
   end
 
   def match_count_against(opponent)
-    matches_against(opponent).count
+    loss_count_against(opponent) + victory_count_against(opponent)
   end
 
   def loss_count_against(opponent)
-    match_count_against(opponent) - victory_count_against(opponent)
+    losses_by_player_id[opponent.id]
   end
 
   def victory_count
@@ -96,10 +96,18 @@ class Stats::Personal
   end
 
   def last_10_victory_count
-    last_10_matches.select { |m| m.victor == player }.size
+    last_10_matches.select { |m| m.victor_id == player.id }.size
   end
 
   def last_10_loss_count
-    last_10_matches.select { |m| m.victor != player }.size
+    last_10_matches.select { |m| m.victor_id != player.id }.size
+  end
+
+  def victories_by_player_id
+    @victories_by_player_id ||= Hash.new(0).update victories.group(Match::LOSER_SQL).count
+  end
+
+  def losses_by_player_id
+    @losses_by_player_id ||= Hash.new(0).update losses.group(Match::WINNER_SQL).count
   end
 end
