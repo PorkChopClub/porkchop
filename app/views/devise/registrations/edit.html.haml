@@ -8,6 +8,11 @@
     = f.input :nickname
     = f.input :email, required: true, autofocus: true
 
+    %p
+      %label My Avatar
+      = image_tag(f.object.profile_picture_url) if f.object.profile_picture?
+      = f.file_field :profile_picture
+
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       %p Currently waiting confirmation for: #{resource.unconfirmed_email}
 
