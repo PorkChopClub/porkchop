@@ -1,3 +1,5 @@
+import cable from '../cable'
+
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response
@@ -60,6 +62,18 @@ export const ongoingMatch = (tableId) => {
     notifyCallbacks(value)
     if (value) lastTimeSucceeded = Date.now()
   }
+
+  cable.subscriptions.create({ channel: 'OngoingMatchChannel', table_id: tableId }, {
+    connected: () => {
+      // eslint-disable-next-line no-console
+      console.log('listening to MatchChannel')
+    },
+    received: (data) => {
+      // eslint-disable-next-line no-console
+      console.log(data)
+    }
+  })
+
   const handleFailure = (error) => {
     // eslint-disable-next-line no-use-before-define
     refetchOngoingMatch()

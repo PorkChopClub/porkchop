@@ -13,6 +13,7 @@ class MatchFinalizationJob < ApplicationJob
     adjust_elo!
     matchmake!
     send_notification!
+    update_match_channel
   end
 
   private
@@ -38,5 +39,9 @@ class MatchFinalizationJob < ApplicationJob
 
   def matchmake!
     Match.setup!
+  end
+
+  def update_match_channel
+    OngoingMatchChannel.broadcast_update
   end
 end

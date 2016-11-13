@@ -93,4 +93,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.middleware.use Letsencrypt::Middleware
+
+  config.action_cable.url = 'wss://api.porkchop.club/cable'
+  config.action_cable.allowed_request_origins = ['https://api.porkchop.club', 'https://porkchop.club', 'http://porkchop.club']
 end

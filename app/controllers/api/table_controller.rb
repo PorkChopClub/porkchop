@@ -2,6 +2,7 @@ class Api::TableController < ApplicationController
   skip_authorization_check
   skip_before_action :verify_authenticity_token
   before_action :check_table_token
+  after_action :update_match_channel
 
   def home_button
     table.home_button

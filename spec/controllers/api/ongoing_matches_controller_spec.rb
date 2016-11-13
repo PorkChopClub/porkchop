@@ -116,6 +116,7 @@ RSpec.describe Api::OngoingMatchesController, type: :controller do
       before do
         expect(Match).
           to receive(:ongoing).
+          at_least(:once).
           and_return([match])
         expect(match).
           to receive(:toggle_service).

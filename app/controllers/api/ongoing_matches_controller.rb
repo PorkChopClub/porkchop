@@ -3,6 +3,7 @@ require_dependency "ping_pong/service"
 class Api::OngoingMatchesController < ApplicationController
   before_action :authorize_ongoing_match, except: %i(show)
   before_action :set_next_match
+  after_action :update_match_channel, except: :show
 
   def show
     authorize! :read, ongoing_match

@@ -68,6 +68,7 @@ group :test do
   gem "simplecov", require: false
   gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'capybara', require: false
+  gem 'capybara-screenshot', require: false
   gem 'poltergeist', require: false
   gem 'database_cleaner', require: false
   gem 'shoulda-matchers', require: false

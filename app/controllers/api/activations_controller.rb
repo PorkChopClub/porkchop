@@ -1,5 +1,6 @@
 class Api::ActivationsController < ApplicationController
   before_action :authorize_write_player, only: %i(activate deactivate)
+  after_action :update_match_channel, except: :index
 
   def index
     @players = find_players

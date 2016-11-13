@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'capybara/rails'
 require 'capybara/poltergeist'
+require 'capybara-screenshot/rspec'
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(
@@ -13,6 +14,7 @@ Capybara.register_driver :poltergeist do |app|
 end
 Capybara.javascript_driver = :poltergeist
 Capybara.default_driver = :poltergeist
+Capybara.server = :puma
 
 RSpec.configure do |config|
   config.include Warden::Test::Helpers
