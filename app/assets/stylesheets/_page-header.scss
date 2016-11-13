@@ -7,10 +7,39 @@
   max-width: $header-width;
   padding: $header-outer-padding 0.5rem;
   margin: 0 auto;
+  @include display(flex);
 }
 
 .page-header-title {
   font-size: 18px;
   font-weight: normal;
   color: #444;
+  @include flex-grow(1);
+  line-height: 1.6;
+}
+
+.page-header-links {
+  @include flex-grow(0);
+  @include display(flex);
+
+  a {
+    font-size: 14px;
+    color: $medium-grey;
+    background-color: $off-white;
+    border: 1px solid $light-grey;
+    border-bottom-width: 2px;
+    border-radius: 3px;
+    padding: 0.125em 0.5em;
+    cursor: pointer;
+    margin-left: 0.5rem;
+
+    &:hover {
+      border-color: $medium-grey;
+      text-decoration: none;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 }

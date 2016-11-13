@@ -1,4 +1,4 @@
-.players-listing
+.players-listing.outer-container
   - @players.each do |player|
     = link_to player_path(player), class: 'list-player' do
       - if player.profile_picture?

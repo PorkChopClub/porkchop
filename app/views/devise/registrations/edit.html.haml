@@ -2,7 +2,7 @@
   .page-header-inner
     %h1.page-header-title Edit #{resource_name.to_s.humanize}
 
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'player-edit-form' }) do |f|
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'porkchop-form' }) do |f|
   - if f.error_notification
     .player-edit-errors.form-errors
       = f.error_notification
@@ -10,11 +10,7 @@
   .player-edit-name-fields.form-field-group
     %h2.form-field-group-title Names
     = f.input :nickname
-    = f.input :name, label: "Real name"
-    %p
-      Please make "Real name" your real life name, first and last. It is
-      important as we use this for definitively identifying users on screens
-      where it may not be obvious.
+    = f.input :name, label: "Real name", hint: "Please use your real life name, first and last. It is important as we use this for definitively identifying users on screens where it may not be obvious."
 
   .player-edit-email-fields.form-field-group
     = f.input :email, required: true, autofocus: true
@@ -42,6 +38,3 @@
 
   .player-edit-actions.form-actions
     = f.button :submit, "Save changes"
-    = f.button :submit, "Other thing"
-    = f.button :submit, "Do stuff"
-    = f.button :submit, "Explode"

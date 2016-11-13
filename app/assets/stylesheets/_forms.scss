@@ -1,3 +1,9 @@
+.porkchop-form {
+  max-width: $main-area-width;
+  margin: 0 auto;
+  padding: $main-area-outer-padding 1rem;
+}
+
 .form-errors {
   background-color: $lightest-grey;
   border: 1px solid $light-grey;
@@ -59,6 +65,12 @@
       color: $red;
       font-size: 14px;
     }
+
+    span.hint {
+      display: block;
+      color: $blue;
+      font-size: 14px;
+    }
   }
 }
 
@@ -76,6 +88,7 @@
   margin-top: 1rem;
 
   #{$all-buttons} {
+    font-size: 24px;
     font-family: 'Roboto', sans-serif;
     color: $blue;
     background-color: $off-white;
