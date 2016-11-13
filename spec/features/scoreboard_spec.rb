@@ -9,6 +9,10 @@ RSpec.describe "scoreboard page" do
   let!(:home) { create :player, name: "Candice Bergen" }
   let!(:away) { create :player, name: "Adam Mueller" }
 
+  def update_channel
+    OngoingMatchChannel.broadcast_update(table: table)
+  end
+
   let(:match) do
     create :match,
            :at_start,
@@ -23,26 +27,37 @@ RSpec.describe "scoreboard page" do
     expect(page).to have_content "No match."
 
     match
+    update_channel
 
     using_wait_time 15 do
       expect(page).to have_content "Candice Bergen versus Adam Mueller"
     end
 
     # Select service.
-    physical_table.home_button
+    home_button
 
     expect(page).to have_content '0'
 
-    3.times { physical_table.home_button }
-    physical_table.away_button
+    3.times { home_button }
+    away_button
 
     expect(page).to have_content '3'
     expect(page).to have_content '1'
 
-    8.times { physical_table.home_button }
+    8.times { home_button }
 
     expect(page).to have_content 'Candice Bergen defeated Adam Mueller'
     expect(page).to have_content '11 to 1'
+  end
+
+  def away_button
+    physical_table.away_button
+    update_channel
+  end
+
+  def home_button
+    physical_table.home_button
+    update_channel
   end
 
   def physical_table

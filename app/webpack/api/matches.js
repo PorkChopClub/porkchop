@@ -51,57 +51,36 @@ const deserializeMatch = (json) => {
 /* eslint-enable no-param-reassign */
 
 export const ongoingMatch = (tableId) => {
-  let lastTimeSucceeded = Date.now()
-
+  let lastResponse = null
   const callbacks = []
-  const notifyCallbacks = (value) =>
+  const notifyCallbacks = (value) => {
+    lastResponse = value
     callbacks.forEach((callback) => callback(value))
-  const handleSuccess = (value) => {
-    // eslint-disable-next-line no-use-before-define
-    refetchOngoingMatch()
-    notifyCallbacks(value)
-    if (value) lastTimeSucceeded = Date.now()
   }
 
   cable.subscriptions.create({ channel: 'OngoingMatchChannel', table_id: tableId }, {
-    connected: () => {
-      // eslint-disable-next-line no-console
-      console.log('listening to MatchChannel')
-    },
-    received: (data) => {
-      // eslint-disable-next-line no-console
-      console.log(data)
+    received: (json) => {
+      const data = JSON.parse(json)
+      const match = deserializeMatch(data)
+      notifyCallbacks(match)
     }
   })
 
-  const handleFailure = (error) => {
-    // eslint-disable-next-line no-use-before-define
-    refetchOngoingMatch()
-    throw error
-  }
-  const fetchOngoingMatch = () =>
+  const initialFetch = () =>
     fetch(`/api/v2/tables/${tableId}/matches/ongoing`)
       .then(checkStatus)
       .then(parseJSON)
       .then(deserializeMatch)
-      .then(handleSuccess)
-      .catch(handleFailure)
-  const refetchOngoingMatch = () => {
-    const secondsPassed = (Date.now() - lastTimeSucceeded) / 1000
-    let interval
-    if (secondsPassed > 120) {
-      interval = 10000
-    } else if (secondsPassed > 60) {
-      interval = 1000
-    } else if (secondsPassed > 30) {
-      interval = 250
-    } else {
-      interval = 50
+      .then(notifyCallbacks)
+
+  initialFetch()
+
+  return {
+    subscribe: (callback) => {
+      callbacks.push(callback)
+      if (lastResponse) {
+        callback(lastResponse)
+      }
     }
-    setTimeout(fetchOngoingMatch, interval)
   }
-
-  fetchOngoingMatch()
-
-  return { subscribe: (callback) => callbacks.push(callback) }
 }
