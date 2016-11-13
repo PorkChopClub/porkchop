@@ -24,3 +24,6 @@
 
 # Generated JS
 /app/assets/javascripts/*
+
+# Carrierwave uploads
+/public/uploads
