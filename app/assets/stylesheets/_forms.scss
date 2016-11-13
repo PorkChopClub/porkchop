@@ -55,6 +55,22 @@
       }
     }
 
+    &.boolean label {
+      border: 1px solid #ddd;
+      border-bottom-width: 2px;
+      border-radius: 3px;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        border-color: $medium-grey;
+      }
+
+      input {
+        margin: 0 0.5rem 0 0;
+      }
+    }
+
     abbr[title=required] {
       text-decoration: none;
       color: $red;
