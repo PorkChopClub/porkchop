@@ -1,5 +1,6 @@
 .player-summary.porkbox-light
-  = image_tag @player.avatar_url, class: "player-summary-avatar"
+  - if @player.profile_picture?
+    = image_tag @player.profile_picture.url, class: "player-summary-avatar"
   .player-summary-content
     %h1= @player.name
     - if @player == current_player
