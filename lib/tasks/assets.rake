@@ -3,6 +3,6 @@ namespace :assets do
 end
 
 task :webpack do
-  sh "npm install"
-  sh "npm run compile"
+  sh "yarn install"
+  sh "yarn run compile"
 end
