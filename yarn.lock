@@ -1244,6 +1244,10 @@ es6-map@^0.1.3:
     es6-symbol "~3.1.0"
     event-emitter "~0.3.4"
 
+es6-promise@~4.0.3:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.0.5.tgz#7882f30adde5b240ccfa7f7d78c548330951ae42"
+
 es6-set@^0.1.4, es6-set@~0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/es6-set/-/es6-set-0.1.4.tgz#9516b6761c2964b92ff479456233a247dc707ce8"
@@ -1722,7 +1726,7 @@ hash.js@^1.0.0:
   dependencies:
     inherits "^2.0.1"
 
-hasha@^2.2.0:
+hasha@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/hasha/-/hasha-2.2.0.tgz#78d7cbfc1e6d66303fe79837365984517b2f6ee1"
   dependencies:
@@ -2450,13 +2454,14 @@ pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
 
-phantomjs-prebuilt@2.1.8:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/phantomjs-prebuilt/-/phantomjs-prebuilt-2.1.8.tgz#96cdac3e453765f143f8a58406021bd741ad062d"
+phantomjs-prebuilt:
+  version "2.1.13"
+  resolved "https://registry.yarnpkg.com/phantomjs-prebuilt/-/phantomjs-prebuilt-2.1.13.tgz#66556ad9e965d893ca5a7dc9e763df7e8697f76d"
   dependencies:
+    es6-promise "~4.0.3"
     extract-zip "~1.5.0"
     fs-extra "~0.30.0"
-    hasha "^2.2.0"
+    hasha "~2.2.0"
     kew "~0.7.0"
     progress "~1.1.8"
     request "~2.74.0"
