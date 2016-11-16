@@ -4,9 +4,14 @@ The [Stembolt](https://stembolt.com/) ping pong scoreboard and stat-tracking app
 
 ## Development
 
-Requirements: a reasonable version on NodeJS, whatever Ruby version is
-specified in the `Gemfile`, and a Redis server (on an Ubuntu system, all you
-need to do is `sudo apt-get install redis-server`).
+### Requirements
+* a reasonable version on NodeJS
+* whatever Ruby version is specified in the `Gemfile`
+* PostgreSQL database
+* Redis server (on an Ubuntu system, all you need to do is `sudo apt-get install redis-server`)
+* Yarn dependency manager (if you already have NodeJS you just need to `npm install --global yarn`)
+
+### Setup
 
 ```shell
 # Run these to these to get the project setup:
@@ -16,12 +21,34 @@ $ ./bin/setup
 $ bundle exec rails s -p 2277
 $ bundle exec sidekiq
 $ npm run watch
+
 # If you want to use LiveReload, also run:
 $ bundle exec guard
 ```
 
-# Style Guides
+## Style Guides
 
-This project inherits from Airbnb's JavaScript style guide, with a few changes.
-Run `npm run lint` to see your violations. Use `npm run autofix` to fix any
-that can be automatically fixed.
+### JavaScript
+
+This project inherits from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript), with a few changes.
+
+```shell
+# To see your violations run
+$ npm run lint
+
+# To fix any that can be automatically fixed
+$ npm run autofix
+```
+
+### Ruby
+
+We use [Rubocop](https://github.com/bbatsov/rubocop) to enforce the [Relaxed.Ruby.Style](http://relaxed.ruby.style/) guide, with a few changes.
+
+```shell
+# To see your violations run
+$ bundle exec rubocop
+
+# To fix any that can be automatically fixed
+$ bundle exec rubocop -a
+
+```
