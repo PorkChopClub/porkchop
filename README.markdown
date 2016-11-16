@@ -25,8 +25,29 @@ $ npm run watch
 $ bundle exec guard
 ```
 
-# Style Guides
+## Style Guides
 
-This project inherits from Airbnb's JavaScript style guide, with a few changes.
-Run `npm run lint` to see your violations. Use `npm run autofix` to fix any
-that can be automatically fixed.
+### JavaScript
+
+This project inherits from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript), with a few changes.
+
+```shell
+# To see your violations run
+$ npm run lint
+
+# To fix any that can be automatically fixed
+$ npm run autofix
+```
+
+### Ruby
+
+We use [Rubocop](https://github.com/bbatsov/rubocop) to enforce the [Relaxed.Ruby.Style](http://relaxed.ruby.style/) guide, with a few changes.
+
+```shell
+# To see your violations run
+$ bundle exec rubocop
+
+# To fix any that can be automatically fixed
+$ bundle exec rubocop -a
+
+```
