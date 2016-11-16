@@ -9,6 +9,7 @@ The [Stembolt](https://stembolt.com/) ping pong scoreboard and stat-tracking app
 * whatever Ruby version is specified in the `Gemfile`
 * PostgreSQL database
 * Redis server (on an Ubuntu system, all you need to do is `sudo apt-get install redis-server`)
+* Yarn dependency manager (if you already have NodeJS you just need to `npm install --global yarn`)
 
 ### Setup
 
