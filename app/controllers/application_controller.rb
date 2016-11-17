@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [
-      :nickname,
-      :profile_picture,
-      :profile_picture_cache
-    ])
+                                        :nickname,
+                                        :profile_picture,
+                                        :profile_picture_cache
+                                      ])
   end
 
   def ongoing_match
