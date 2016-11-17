@@ -25,6 +25,8 @@
           = image_tag(f.object.profile_picture_url)
 
     = f.file_field :profile_picture
+    - if f.object.legacy_avatar_url.present?
+      %p= link_to "Your old avatar can be found here.", f.object.legacy_avatar_url
 
   .player-edit-password-fields.form-field-group
     %h2.form-field-group-title Password Update
