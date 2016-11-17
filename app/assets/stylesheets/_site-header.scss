@@ -1,0 +1,36 @@
+$site-header-height: 44px;
+
+.site-header-wrap {
+  @include linear-gradient(to right, $dark-blue, $mint);
+}
+
+.site-header {
+  @include display(flex);
+  height: $site-header-height;
+  padding: 0 1rem;
+  margin-bottom: 3px;
+  background-color: $off-white;
+}
+
+.site-header-paddle {
+  @include flex-grow(0);
+  width: auto;
+  height: $site-header-height;
+  margin-right: 1rem;
+}
+
+.site-header-title {
+  @include flex-grow(0);
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: $site-header-height;
+
+  span {
+    font-size: 0.9rem;
+  }
+
+  a:hover {
+    text-decoration: none;
+    border-bottom: 2px solid $dark-blue;
+  }
+}
