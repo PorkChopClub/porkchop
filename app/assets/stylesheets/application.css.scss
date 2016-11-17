@@ -15,9 +15,11 @@
 
 @import "layout";
 @import "header";
+@import "page-header";
 @import "footer";
 @import "header-controls";
 @import "flashes";
+@import "forms";
 
 @import "homepage";
 
@@ -36,5 +38,6 @@
 
 @import "players/index";
 @import "players/show";
+@import "players/edit";
 
 @import "shared/leaderboard";

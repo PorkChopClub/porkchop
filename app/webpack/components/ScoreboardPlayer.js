@@ -12,7 +12,7 @@ export default ({ player, score, hasService }) => {
   })
 
   const avatarStyle = {
-    'background-image': `url(${player['avatar-url']})`
+    'background-image': `url(${player['portrait-url']})`
   }
 
   return (

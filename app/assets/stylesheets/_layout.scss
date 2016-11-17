@@ -1,4 +1,10 @@
+$header-width: 1000px;
+$header-outer-padding: 1rem;
+
+$main-area-width: 800px;
+$main-area-outer-padding: 1rem;
+
 .outer-container {
-  max-width: 800px;
   margin: 0 auto;
+  max-width: $main-area-width;
 }

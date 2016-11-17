@@ -47,4 +47,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Allow ActionCable connections on the recommended development port.
+  Rails.application.config.action_cable.allowed_request_origins = ['http://localhost:2277']
 end

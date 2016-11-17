@@ -3,7 +3,7 @@ json.match do
 
   json.home_score @ongoing_match.home_score
   json.home_player_name @ongoing_match.home_player.try!(:nickname) || @ongoing_match.home_player.try!(:name)
-  json.home_player_avatar_url @ongoing_match.home_player.avatar_url unless @ongoing_match.home_player.avatar_url.blank?
+  json.home_player_avatar_url @ongoing_match.home_player.profile_picture.url unless @ongoing_match.home_player.profile_picture?
   json.home_player_overlays do
     json.flames begin
       points = @ongoing_match.points.order(created_at: :desc)
@@ -14,7 +14,7 @@ json.match do
 
   json.away_score @ongoing_match.away_score
   json.away_player_name @ongoing_match.away_player.try!(:nickname) || @ongoing_match.away_player.try!(:name)
-  json.away_player_avatar_url @ongoing_match.away_player.avatar_url unless @ongoing_match.away_player.avatar_url.blank?
+  json.away_player_avatar_url @ongoing_match.away_player.profile_picture.url unless @ongoing_match.away_player.profile_picture?
   json.away_player_overlays do
     json.flames begin
       points = @ongoing_match.points.order(created_at: :desc)
@@ -42,5 +42,5 @@ json.match do
 end
 
 json.next_match do
-  json.players @next_match.players, :name, :nickname, :avatar_url
+  json.players @next_match.players, :name, :nickname
 end

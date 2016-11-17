@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029232109) do
+ActiveRecord::Schema.define(version: 20161112235827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20161029232109) do
     t.string   "name"
     t.datetime "created_at",                                                        null: false
     t.datetime "updated_at",                                                        null: false
-    t.string   "avatar_url",             default: "http://i.imgur.com/ya5NxSH.png"
+    t.string   "legacy_avatar_url",      default: "http://i.imgur.com/ya5NxSH.png"
     t.string   "nickname"
     t.boolean  "active",                 default: false
     t.string   "email",                  default: "",                               null: false
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20161029232109) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "profile_picture"
     t.index ["confirmation_token"], name: "index_players_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree

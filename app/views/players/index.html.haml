@@ -1,7 +1,8 @@
-.players-listing
+.players-listing.outer-container
   - @players.each do |player|
     = link_to player_path(player), class: 'list-player' do
-      = image_tag player.avatar_url, class: "list-player-avatar"
+      - if player.profile_picture?
+        = image_tag player.profile_picture.url, class: "list-player-avatar"
       .list-player-details
         .name= player.name
         - if player.nickname.present?

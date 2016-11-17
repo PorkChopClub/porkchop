@@ -9,6 +9,8 @@ class Player < ActiveRecord::Base
          :trackable,
          :validatable
 
+  mount_uploader :profile_picture, ProfilePictureUploader
+
   scope :active, -> { where(active: true) }
 
   has_many :points, foreign_key: 'victor_id'

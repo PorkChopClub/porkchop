@@ -11,6 +11,8 @@ gem 'pg'
 gem 'puma'
 gem 'sidekiq'
 gem 'kaminari'
+gem 'fog-aws'
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 
 # CSS
 gem 'sass-rails', '~> 5.0'
