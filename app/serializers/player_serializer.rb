@@ -4,8 +4,6 @@ class PlayerSerializer < ActiveModel::Serializer
              :name,
              :portrait_url
 
-  attribute :legacy_avatar_url, key: :avatar_url
-
   def portrait_url
     if object.profile_picture?
       object.profile_picture.url
