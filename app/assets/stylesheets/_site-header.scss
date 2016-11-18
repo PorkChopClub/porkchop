@@ -1,7 +1,7 @@
 $site-header-height: 44px;
 
 .site-header-wrap {
-  @include linear-gradient(to right, $dark-blue, $mint);
+  @include linear-gradient(to right, $blue, $red);
 }
 
 .site-header {
@@ -29,8 +29,12 @@ $site-header-height: 44px;
     font-size: 0.9rem;
   }
 
-  a:hover {
-    text-decoration: none;
-    border-bottom: 2px solid $dark-blue;
+  a {
+    color: $blue-text;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: 2px solid $red;
+    }
   }
 }
