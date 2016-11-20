@@ -40,14 +40,14 @@
          id="stop5811" />
       <stop
          id="stop5846"
-         offset="0.17462766"
+         offset="0.25879678"
          style="stop-color:#4b5996;stop-opacity:1" />
       <stop
          id="stop5844"
-         offset="0.42308155"
+         offset="0.39481348"
          style="stop-color:#e9380d;stop-opacity:1" />
       <stop
-         style="stop-color:#ff3f59;stop-opacity:1"
+         style="stop-color:#ff3f6f;stop-opacity:1"
          offset="1"
          id="stop5813" />
     </linearGradient>
@@ -55,8 +55,8 @@
        inkscape:collect="always"
        xlink:href="#linearGradient5809"
        id="linearGradient5815"
-       x1="75.718666"
-       y1="477.16016"
+       x1="64.70504"
+       y1="473.03006"
        x2="323.52515"
        y2="49.005608"
        gradientUnits="userSpaceOnUse" />

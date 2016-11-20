@@ -4,3 +4,12 @@
     %h1.site-header-title
       = link_to "/" do
         PorkChop<span>.club</span>
+    .site-header-current-match
+      1 Kevin vs Jared 10
+    .site-header-session-controls
+      - if current_player
+        = link_to "Log out", destroy_player_session_path, method: :delete
+      - else
+        = link_to "Log in", new_player_session_path
+    .site-header-menu-button
+      button

@@ -2,6 +2,8 @@ $site-header-height: 44px;
 
 .site-header-wrap {
   @include linear-gradient(to right, $blue, $red);
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.15);
+  z-index: $z-index-header;
 }
 
 .site-header {
@@ -13,14 +15,12 @@ $site-header-height: 44px;
 }
 
 .site-header-paddle {
-  @include flex-grow(0);
   width: auto;
   height: $site-header-height;
   margin-right: 1rem;
 }
 
 .site-header-title {
-  @include flex-grow(0);
   font-size: 1.4rem;
   font-weight: bold;
   line-height: $site-header-height;
@@ -37,4 +37,14 @@ $site-header-height: 44px;
       border-bottom: 2px solid $red;
     }
   }
+}
+
+.site-header-current-match {
+  @include flex-grow(1);
+  text-align: center;
+  line-height: $site-header-height;
+  color: $medium-grey;
+}
+
+.site-header-menu-button {
 }
