@@ -74,26 +74,29 @@ $site-header-height: 44px;
     }
 
     &.red {
-      @include linear-gradient(30deg, shade($red, 20%), $red, tint($red, 20%));
+      @include linear-gradient(30deg, shade($red, 15%), $red, tint($red, 15%));
 
       &:hover {
-        @include linear-gradient(30deg, shade($red, 30%), $red, tint($red, 30%));
+        background-image: none;
+        background-color: shade($red, 15%);
       }
     }
 
     &.green {
-      @include linear-gradient(30deg, shade($green, 20%), $green, tint($green, 20%));
+      @include linear-gradient(30deg, shade($green, 15%), $green, tint($green, 15%));
 
       &:hover {
-        @include linear-gradient(30deg, shade($green, 30%), $green, tint($green, 30%));
+        background-image: none;
+        background-color: shade($green, 15%);
       }
     }
 
     &.blue {
-      @include linear-gradient(30deg, shade($blue, 20%), $blue, tint($blue, 20%));
+      @include linear-gradient(30deg, shade($blue, 15%), $blue, tint($blue, 15%));
 
       &:hover {
-        @include linear-gradient(30deg, shade($blue, 30%), $blue, tint($blue, 30%));
+        background-image: none;
+        background-color: shade($blue, 15%);
       }
     }
   }
