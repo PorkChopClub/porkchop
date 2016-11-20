@@ -39,11 +39,8 @@ $site-header-height: 44px;
   }
 }
 
-.site-header-current-match {
+.site-header-padding {
   @include flex-grow(1);
-  text-align: center;
-  line-height: $site-header-height;
-  color: $medium-grey;
 }
 
 .site-header-controls {

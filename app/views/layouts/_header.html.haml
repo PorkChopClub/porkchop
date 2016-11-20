@@ -4,8 +4,7 @@
     %h1.site-header-title
       = link_to "/" do
         PorkChop<span>.club</span>
-    .site-header-current-match
-      1 Kevin vs Jared 10
+    .site-header-padding
     .site-header-controls
       - if current_player
         = link_to "Start playing", "/", method: :put, class: "blue"
