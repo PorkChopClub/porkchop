@@ -6,10 +6,10 @@
         PorkChop<span>.club</span>
     .site-header-current-match
       1 Kevin vs Jared 10
-    .site-header-session-controls
+    .site-header-controls
       - if current_player
-        = link_to "Log out", destroy_player_session_path, method: :delete
+        = link_to "Start playing", "/", method: :put, class: "blue"
+        = link_to "Log out", destroy_player_session_path, method: :delete, class: "red"
       - else
-        = link_to "Log in", new_player_session_path
-    .site-header-menu-button
-      button
+        = link_to "Log in", new_player_session_path, class: "red"
+      %a.site-header-menu-button.green &bull;&bull;&bull;
