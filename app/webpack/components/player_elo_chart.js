@@ -12,13 +12,13 @@ $(() => {
       {
         label: 'ELO',
 
-        backgroundColor: 'rgba(153,134,142,0.2)',
-        borderColor: 'rgba(153,134,142,1)',
+        backgroundColor: 'rgba(34, 119, 255, 0.5)',
+        borderColor: 'rgba(34, 119, 255, 1)',
         data: rawData,
 
         pointRadius: 0,
-        pointHoverRadius: 10,
-        pointHitRadius: 10
+        pointHoverRadius: 20,
+        pointHitRadius: 20
       }
     ]
   }
