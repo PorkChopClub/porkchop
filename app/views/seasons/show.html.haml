@@ -1,16 +1,10 @@
-.season-summary.porkbox-light.clearfix
-  %h1= "#{@season.league.name}: Season #{@season.id}"
+.page-header
+  .page-header-inner
+    %h1.page-header-title= "#{@season.league.name}: Season #{@season.id}"
 
+.outer-container
   - if @season.finalized_at
     %p This season has finished.
 
   .season-summary-standings
-    %h2 Standings
     = render "seasons/standings", season: @season
-
-.porkbox-light.clearfix
-  %h2 Remaining Matches
-  %ul
-    - @season.remaining_matchups.reject { |matchup, count| count == 0 }.sort_by { |_matchup, count| count }.reverse.each do |matchup, count|
-      %li
-        #{matchup.players.map(&:name).join(" vs. ")} &#10005; #{count}
