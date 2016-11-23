@@ -28,7 +28,8 @@
         %td(data-label="Longest Winning Streak:")= @stats.longest_winning_streak
         %td(data-label="Longest Losing Streak:")= @stats.longest_losing_streak
 
-%canvas.player-elo-chart.porkbox-light{ data: { ratings: @player.elo_ratings.sorted_ratings } }
+.porkbox-light.clearfix
+  %canvas.player-elo-chart{ data: { ratings: @player.elo_ratings.sorted_ratings } }
 
 .porkbox-light.clearfix
   .player-win-percentages

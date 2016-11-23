@@ -4,10 +4,11 @@ $light-grey: #DDDDDD;
 $medium-grey: #555555;
 $dark-grey: #29262D;
 
-$color-porkchop-blue: #24306F;
-$color-porkchop-red: #CD3117;
+$color-porkchop-blue: #2277FF;
+$color-porkchop-red: #FF3F59;
 
 $red: $color-porkchop-red;
 $blue: $color-porkchop-blue;
-$green: #286F31;
+$blue-text: shade($blue, 15%);
+$green: #17DA89;
 $yellow: #F7CE00;

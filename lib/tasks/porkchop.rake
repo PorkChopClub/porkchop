@@ -3,7 +3,7 @@ namespace :porkchop do
   task press_buttons: [:environment] do
     loop do
       sleep rand(1.0..5.0)
-      match = PingPong::Match.new(Match.ongoing.first)
+      match = Match.ongoing.first
       controls = PingPong::TableControls.new(match)
       case rand(2)
       when 0

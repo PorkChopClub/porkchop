@@ -60,7 +60,7 @@
   @include desktop {
     width: 50%;
     float: left;
-    padding-top: modular-scale(2);
+    padding-top: modular-scale(0);
 
     &:first-child {
       padding-right: modular-scale(2);

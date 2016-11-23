@@ -1,11 +1,15 @@
+.page-header
+  .page-header-inner
+    %h1.page-header-title= @player.name
+    - if @player == current_player
+      .page-header-links
+        = link_to "Edit Player", edit_player_registration_path
+
 .outer-container
   .player-summary.porkbox-light
     - if @player.profile_picture?
       = image_tag @player.profile_picture.url, class: "player-summary-avatar"
     .player-summary-content
-      %h1= @player.name
-      - if @player == current_player
-        = link_to "(edit)", edit_player_registration_path, class: "player-edit-link"
       - if @player.nickname.present?
         %p= "Nickname: #{@player.nickname}"
       %ul

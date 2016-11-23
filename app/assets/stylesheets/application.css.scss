@@ -4,6 +4,7 @@
 
 @import "setup/layout";
 @import "setup/palette";
+@import "setup/z-indexes";
 
 @import "animations";
 @import "base";
@@ -14,7 +15,7 @@
 @import "porkbox";
 
 @import "layout";
-@import "header";
+@import "site-header";
 @import "page-header";
 @import "footer";
 @import "header-controls";

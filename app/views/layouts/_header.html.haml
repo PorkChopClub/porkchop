@@ -1,1 +1,12 @@
-%nav#main-navigation.main-navigation{ data: { "logged-in": (!!current_player).to_s, "show-controls": (!!current_player.try!(:admin?)).to_s  } }
+.site-header-wrap
+  %nav.site-header
+    = image_tag "header-paddle.svg", class: 'site-header-paddle'
+    %h1.site-header-title
+      = link_to "/" do
+        PorkChop<span>.club</span>
+    .site-header-padding
+    .site-header-controls
+      - if current_player
+        = link_to "Log out", destroy_player_session_path, method: :delete, class: "red"
+      - else
+        = link_to "Log in", new_player_session_path, class: "red"
