@@ -7,8 +7,6 @@
     .site-header-padding
     .site-header-controls
       - if current_player
-        = link_to "Start playing", "/", method: :put, class: "blue"
         = link_to "Log out", destroy_player_session_path, method: :delete, class: "red"
       - else
         = link_to "Log in", new_player_session_path, class: "red"
-      %a.site-header-menu-button.green &bull;&bull;&bull;
