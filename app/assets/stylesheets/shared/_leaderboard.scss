@@ -1,5 +1,6 @@
 .leaderboard-list {
   width: 100%;
+  border-collapse: collapse;
 
   thead {
     @include phone {
@@ -35,7 +36,7 @@
 }
 
 .elo-change-positive {
-  color: green;
+  color: shade($green, 20%);
 
   &:before {
     content: "+";
@@ -43,5 +44,5 @@
 }
 
 .elo-change-negative {
-  color: red;
+  color: $red;
 }
