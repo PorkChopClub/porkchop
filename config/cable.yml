@@ -3,7 +3,7 @@ production:
   adapter: postgresql
 
 development:
-  adapter: postgresql
+  adapter: redis
 
 test:
   adapter: async
