@@ -24,7 +24,7 @@ class OngoingMatchChannel < ApplicationCable::Channel
         }
         ActiveModelSerializers::SerializableResource.new(match, options).to_json
       else
-        { data: nil }.to_json
+        nil.to_json
       end
     end
   end
