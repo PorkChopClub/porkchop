@@ -1,26 +1,17 @@
-import { ajaxPoll } from 'baconjs'
+import cable from '../cable'
+import { fromBinder } from 'baconjs'
 
-const EMPTY_MATCH = {
-  home_score: '',
-  away_score: '',
-  home_player_name: '',
-  away_player_name: '',
-  home_player_nickname: '',
-  away_player_nickname: '',
-  home_player_service: false,
-  away_player_service: false,
-  home_player_overlays: { flames: false },
-  away_player_overlays: { flames: false },
-  comment: '',
-  instructions: 'Waiting for players',
-  league_match: false,
-  warmup: false
+export default (tableId) => {
+  return fromBinder((sink) => {
+    cable.subscriptions.create({ channel: 'OngoingMatchChannel', table_id: tableId }, {
+      received: (json) => {
+        const data = JSON.parse(json)
+        sink(data)
+      }
+    })
+
+    fetch(`/api/v2/tables/${tableId}/matches/ongoing`)
+      .then((response) => response.json())
+      .then((json) => sink(json))
+  })
 }
-
-const ajaxOptions = { url: '/api/ongoing_match.json' }
-const matchPolls = ajaxPoll(ajaxOptions, 300)
-
-export default matchPolls
-  .map('.match')
-  .mapError(EMPTY_MATCH)
-  .toProperty()
