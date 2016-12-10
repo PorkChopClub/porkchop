@@ -1,0 +1,16 @@
+html,
+body {
+  overflow: hidden;
+}
+
+.scoreboard {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  @include radial-gradient(
+    circle at 50% 50%,
+    #ffffff 40%,
+    #eeeeee 85%,
+    #cccccc
+  );
+}
