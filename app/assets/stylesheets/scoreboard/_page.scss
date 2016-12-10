@@ -1,11 +1,10 @@
 .scoreboard-page {
-  display: none;
   display: absolute;
   overflow: hidden;
   width: 100%;
   height: 100%;
 
-  &.active {
-    display: block;
+  &:not(.active) {
+    display: none;
   }
 }

@@ -1,0 +1,22 @@
+.scoreboard-ongoing-match {
+  @include display(flex);
+  @include flex-direction(row);
+}
+
+.ongoing-match-player {
+  @include flex-grow(1);
+
+  .name {
+  }
+
+  .score {
+  }
+
+  .portrait {
+    width: 100px;
+    height: 100px;
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

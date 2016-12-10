@@ -2,15 +2,12 @@ import $ from 'jquery'
 
 import scoreboardTemplate from './templates/scoreboard.hbs'
 import ongoingMatch from './observables/ongoingMatch'
-import {
-  homeScore,
-  awayScore
-} from './observables/match'
+import ongoingMatchComponent from './components/ongoingMatchComponent'
 
 const tableId = document.body.dataset.tableId;
 const match = ongoingMatch(tableId)
 
 $(document.body).html(scoreboardTemplate())
 
-homeScore(match).log()
-awayScore(match).log()
+match.log()
+ongoingMatchComponent($('.scoreboard-ongoing-match'), match)
