@@ -16,6 +16,9 @@ const ongoingMatchComponent = ($el, match) => {
 
   awayName(match).assign($el.find('.ongoing-match-player.away .name'), 'text')
   awayScore(match).assign($el.find('.ongoing-match-player.away .score'), 'text')
+  awayPortrait(match)
+    .map((url) => `url(${url})`)
+    .assign($el.find('.ongoing-match-player.away .portrait'), 'css', 'background-image')
 }
 
 export default ongoingMatchComponent
