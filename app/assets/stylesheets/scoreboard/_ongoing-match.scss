@@ -38,16 +38,17 @@
   }
 
   &.away {
-    @include player-background($light-grey);
+    @include player-background(#CCC);
   }
 
   .name {
     position: absolute;
     top: 0;
-    padding: 20px 10px 10px 10px;
+    padding: 20px 40px;
     font-size: 48px;
-    color: $medium-grey;
-    text-align: center;
+    font-weight: bold;
+    color: $off-white;
+    text-shadow: 0 0 15px rgba($dark-grey, 0.5);
   }
 
   &.away .name { right: 0; }
