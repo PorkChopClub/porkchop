@@ -10,4 +10,5 @@ const match = ongoingMatch(tableId)
 $(document.body).html(scoreboardTemplate())
 
 match.log()
+
 ongoingMatchComponent($('.scoreboard-ongoing-match'), match)
