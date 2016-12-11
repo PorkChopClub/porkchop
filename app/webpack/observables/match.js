@@ -6,3 +6,6 @@ export const awayName = (match) => match.map('.away_player.name')
 
 export const homePortrait = (match) => match.map('.home_player.portrait_url')
 export const awayPortrait = (match) => match.map('.away_player.portrait_url')
+
+export const homeService = (match) => match.map('.home_service')
+export const awayService = (match) => match.map('.away_service')

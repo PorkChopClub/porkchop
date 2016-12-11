@@ -20,25 +20,22 @@
   @include flex-direction(row);
 }
 
+@mixin player-background($color) {
+  @include radial-gradient(
+    circle at 50% 50%,
+    $color 50%,
+    shade($color, 10%) 75%,
+    shade($color, 35%)
+  );
+}
+
 .ongoing-match-player {
   @include flex-grow(1);
   position: relative;
+  @include player-background(#CCC);
 
-  @mixin player-background($color) {
-    @include radial-gradient(
-      circle at 50% 50%,
-      $color 50%,
-      shade($color, 10%) 75%,
-      shade($color, 35%)
-    );
-  }
-
-  &.home {
+  &.has-service {
     @include player-background($blue);
-  }
-
-  &.away {
-    @include player-background(#CCC);
   }
 
   .name {
