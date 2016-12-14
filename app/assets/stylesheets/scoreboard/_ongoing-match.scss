@@ -1,4 +1,11 @@
 .scoreboard-ongoing-match {
+  $color: $blue;
+  @include radial-gradient(
+    circle at 50% 50%,
+    $color 40%,
+    shade($color, 10%) 75%,
+    shade($color, 35%)
+  );
 }
 
 .ongoing-match-versus {
@@ -32,9 +39,12 @@
 .ongoing-match-player {
   @include flex-grow(1);
   position: relative;
-  @include player-background(#CCC);
 
-  &.has-service {
+  &.receiving {
+    @include player-background(#CCC);
+  }
+
+  &.serving {
     @include player-background($blue);
   }
 

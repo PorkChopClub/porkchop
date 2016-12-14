@@ -9,6 +9,8 @@ const match = ongoingMatch(tableId)
 
 $(document.body).html(scoreboardTemplate())
 
+match.log()
+
 match
   .map((match) => {
     if (match) {
@@ -24,7 +26,6 @@ match
   )
   .onValue(({ currentState, previousState }) => {
     $(`.scoreboard-page.scoreboard-${previousState}`).removeClass('active');
-
     $(`.scoreboard-page.scoreboard-${currentState}`).addClass('active');
   })
 
