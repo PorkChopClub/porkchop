@@ -9,8 +9,6 @@ const match = ongoingMatch(tableId)
 
 $(document.body).html(scoreboardTemplate())
 
-match.log()
-
 match
   .map((match) => {
     if (match) {
