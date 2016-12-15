@@ -8,10 +8,16 @@
     .site-header-controls
       - if current_player
         - if current_player.active?
-          = link_to "Leave the queue", play_path, method: :delete, class: "blue"
+          = link_to play_path, method: :delete, class: "red" do
+            %span.label Take me out
+            = fa_icon "user-times"
         - else
-          = link_to "Join the queue", play_path, method: :post, class: "green"
+          = link_to play_path, method: :post, class: "green" do
+            %span.label Put me in
+            = fa_icon "user-plus"
 
-        = link_to "Log out", destroy_player_session_path, method: :delete, class: "red"
+        = link_to destroy_player_session_path, method: :delete, class: "blue" do
+          %span.label Log out
+          = fa_icon "sign-out"
       - else
         = link_to "Log in", new_player_session_path, class: "red"

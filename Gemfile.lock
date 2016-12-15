@@ -128,6 +128,8 @@ GEM
     fog-xml (0.1.2)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    font-awesome-rails (4.7.0.1)
+      railties (>= 3.2, < 5.1)
     formatador (0.2.5)
     games_back (1.0.1)
     globalid (0.3.7)
@@ -392,6 +394,7 @@ DEPENDENCIES
   faraday
   flamegraph
   fog-aws
+  font-awesome-rails
   games_back (~> 1.0)
   guard-livereload (~> 2.5)
   hamlit

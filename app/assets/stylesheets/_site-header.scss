@@ -58,6 +58,14 @@ $site-header-height: 44px;
 
     $site-header-controls-button-radius: 6px;
 
+    .label {
+      margin-right: 0.25em;
+
+      @include phone {
+        display: none;
+      }
+    }
+
     &:hover {
       text-decoration: none;
     }

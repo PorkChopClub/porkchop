@@ -1,6 +1,7 @@
 @import "normalize-rails";
 @import "modular-scale";
 @import "bourbon";
+@import "font-awesome";
 
 @import "setup/layout";
 @import "setup/palette";
@@ -18,7 +19,6 @@
 @import "site-header";
 @import "page-header";
 @import "footer";
-@import "header-controls";
 @import "flashes";
 @import "forms";
 
