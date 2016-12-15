@@ -28,6 +28,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'hamlit'
 gem 'simple_form'
+gem 'font-awesome-rails'
 
 gem 'slack-notifier'
 gem 'bugsnag'
