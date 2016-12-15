@@ -7,6 +7,11 @@
     .site-header-padding
     .site-header-controls
       - if current_player
+        - if current_player.active?
+          = link_to "Leave the queue", play_path, method: :delete, class: "blue"
+        - else
+          = link_to "Join the queue", play_path, method: :post, class: "green"
+
         = link_to "Log out", destroy_player_session_path, method: :delete, class: "red"
       - else
         = link_to "Log in", new_player_session_path, class: "red"
