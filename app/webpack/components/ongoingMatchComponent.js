@@ -12,7 +12,10 @@ import {
 const ongoingMatchComponent = ($el, match) => {
   const setPlayerServiceState = (player, serviceState) => {
     serviceState
-      .scan({}, ({ currentState: previousState }, currentState) => ({ currentState, previousState }))
+      .scan(
+        {},
+        ({ currentState: previousState }, currentState) => ({ currentState, previousState })
+      )
       .onValue(({ currentState, previousState }) => {
         $el.find(`.ongoing-match-player.${player}`).removeClass(previousState)
         $el.find(`.ongoing-match-player.${player}`).addClass(currentState)

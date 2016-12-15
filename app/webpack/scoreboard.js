@@ -4,7 +4,7 @@ import scoreboardTemplate from './templates/scoreboard.hbs'
 import ongoingMatch from './observables/ongoingMatch'
 import ongoingMatchComponent from './components/ongoingMatchComponent'
 
-const tableId = document.body.dataset.tableId;
+const tableId = document.body.dataset.tableId
 const match = ongoingMatch(tableId)
 
 $(document.body).html(scoreboardTemplate())
@@ -23,8 +23,8 @@ match
     ({ currentState: previousState }, currentState) => ({ currentState, previousState })
   )
   .onValue(({ currentState, previousState }) => {
-    $(`.scoreboard-page.scoreboard-${previousState}`).removeClass('active');
-    $(`.scoreboard-page.scoreboard-${currentState}`).addClass('active');
+    $(`.scoreboard-page.scoreboard-${previousState}`).removeClass('active')
+    $(`.scoreboard-page.scoreboard-${currentState}`).addClass('active')
   })
 
 ongoingMatchComponent($('.scoreboard-ongoing-match'), match)

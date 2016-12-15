@@ -21,7 +21,7 @@ const serviceState = (field) =>
         return 'serving'
       case false:
         return 'receiving'
-      case null:
+      default:
         return 'no-service'
     }
   })
