@@ -19,5 +19,8 @@
         = link_to destroy_player_session_path, method: :delete, class: "blue" do
           %span.label Log out
           = fa_icon "sign-out"
+
+        = link_to edit_player_registration_path, class: "green" do
+          = fa_icon "cog"
       - else
         = link_to "Log in", new_player_session_path, class: "red"
