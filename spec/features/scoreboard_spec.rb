@@ -30,7 +30,9 @@ RSpec.describe "scoreboard page" do
     update_channel
 
     using_wait_time 15 do
-      expect(page).to have_content "Candice Bergen versus Adam Mueller"
+      expect(page).to have_content "Candice Bergen"
+      expect(page).to have_content "versus"
+      expect(page).to have_content "Adam Mueller"
     end
 
     # Select service.
@@ -45,9 +47,6 @@ RSpec.describe "scoreboard page" do
     expect(page).to have_content '1'
 
     8.times { home_button }
-
-    expect(page).to have_content 'Candice Bergen defeated Adam Mueller'
-    expect(page).to have_content '11 to 1'
   end
 
   def away_button

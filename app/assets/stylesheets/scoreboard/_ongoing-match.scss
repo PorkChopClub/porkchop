@@ -1,0 +1,87 @@
+.scoreboard-ongoing-match {
+  $color: $blue;
+  @include radial-gradient(
+    circle at 50% 50%,
+    $color 40%,
+    shade($color, 10%) 75%,
+    shade($color, 35%)
+  );
+}
+
+.ongoing-match-versus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%));
+  color: $off-white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 96px;
+  text-shadow: 0 0 15px rgba($dark-grey, 0.25);
+}
+
+.ongoing-match-players {
+  width: 100%;
+  height: 100%;
+  @include display(flex);
+  @include flex-direction(row);
+}
+
+@mixin player-background($color) {
+  @include radial-gradient(
+    circle at 50% 50%,
+    $color 50%,
+    shade($color, 10%) 75%,
+    shade($color, 35%)
+  );
+}
+
+.ongoing-match-player {
+  @include flex-grow(1);
+  position: relative;
+
+  &.receiving {
+    @include player-background(#CCC);
+  }
+
+  &.serving {
+    @include player-background($blue);
+  }
+
+  .name {
+    position: absolute;
+    top: 0;
+    padding: 20px 40px;
+    font-size: 48px;
+    font-weight: bold;
+    color: $off-white;
+    text-shadow: 0 0 15px rgba($dark-grey, 0.5);
+  }
+
+  &.away .name { right: 0; }
+  &.home .name { left: 0; }
+
+  .score {
+    $color: $off-white;
+    position: absolute;
+    bottom: 0;
+    font-size: 512px;
+    color: $color;
+    text-shadow: 0 0 15px rgba($dark-grey, 0.5);
+    line-height: 1;
+    font-weight: bold;
+    padding: 0 50px;
+  }
+
+  &.away .score { right: 0; }
+  &.home .score { left: 0; }
+
+  .portrait {
+    width: 100%;
+    height: 100%;
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    @include filter(drop-shadow(0 0 15px rgba($dark-grey, 0.5)));
+  }
+}

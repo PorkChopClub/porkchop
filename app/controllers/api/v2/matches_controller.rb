@@ -7,7 +7,7 @@ class Api::V2::MatchesController < ApplicationController
     if @match
       render json: @match, include: [:home_player, :away_player]
     else
-      render json: { data: nil }
+      render json: nil
     end
   end
 

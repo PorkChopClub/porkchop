@@ -4,7 +4,7 @@ body {
 }
 
 .scoreboard {
-  @include radial-gradient(circle at 50% 50%, #fff 50%, #eee 80%, #bbb);
   width: 1920px;
   height: 1080px;
+  position: relative;
 }

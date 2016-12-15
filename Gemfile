@@ -51,14 +51,14 @@ group :development do
   gem 'flamegraph', require: false
   gem 'rack-mini-profiler', require: false
   gem 'letter_opener'
-  gem 'rack-livereload'
+  gem 'rack-livereload', require: false
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'rubocop', '0.41.2', require: false
 end
 
 group :development, :test do
   gem 'dotenv-rails'
-  gem 'rspec-rails', '~> 3.5.0.beta3'
+  gem 'rspec-rails', '~> 3.6.0.beta1'
   gem 'rails-controller-testing'
   gem 'pry-rails'
 

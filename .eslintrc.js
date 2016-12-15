@@ -25,6 +25,7 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "no-unused-vars": ["error", { "varsIgnorePattern": "^h$" }],
-    "no-else-return": "off"
+    "no-else-return": "off",
+    "no-shadow": "off"
   }
 };

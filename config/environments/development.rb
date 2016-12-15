@@ -2,7 +2,14 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # LiveReload!
-  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload, live_reload_port: 35999
+  if ENV['LIVERELOAD']
+    require 'rack-livereload'
+    config.middleware.insert_after(
+      ActionDispatch::Static,
+      Rack::LiveReload,
+      live_reload_port: 35999
+    )
+  end
 
   config.active_job.queue_adapter = :sidekiq
 
