@@ -1,20 +1,21 @@
 .site-flash-wrap {
   color: white;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
+  font-weight: bold;
+  font-size: 1.2rem;
 
   &.notice {
-    background-color: lighten($blue, 15);
+    @include linear-gradient(to right, $blue, $green);
   }
 
   &.alert {
-    background-color: $yellow;
-    color: $dark-grey;
+    @include linear-gradient(to right, $blue, $red);
   }
 
   &.error {
-    background-color: lighten($red, 5);
+    @include linear-gradient(to right, $yellow, $red);
   }
 }
 
