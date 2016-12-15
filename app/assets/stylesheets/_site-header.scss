@@ -61,7 +61,7 @@ $site-header-height: 44px;
     .label {
       margin-right: 0.25em;
 
-      @include phone {
+      @include mobile {
         display: none;
       }
     }
