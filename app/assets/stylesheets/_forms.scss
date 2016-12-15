@@ -104,22 +104,22 @@
   margin-top: 1rem;
 
   #{$all-buttons} {
-    font-size: 24px;
+    font-size: 20px;
     font-family: 'Roboto', sans-serif;
-    color: $blue;
-    background-color: $off-white;
+    font-weight: bold;
     -webkit-appearance: none;
-    outline: none;
-    border: 1px solid $blue;
-    border-bottom-width: 2px;
+    border: 2px solid shade($blue, 15%);
+    border-bottom-width: 4px;
     margin-right: 0.5rem;
     border-radius: 3px;
-    padding: 0.125rem 0.5rem;
+    padding: 0.25rem 0.75rem;
     cursor: pointer;
+    background-color: $blue;
+    color: $off-white;
 
     &:hover, &:active {
-      background-color: $blue;
-      color: $off-white;
+      margin-top: 2px;
+      border-bottom-width: 2px;
     }
 
     &:first-child {
