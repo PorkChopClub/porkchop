@@ -31,7 +31,6 @@ RSpec.describe "scoreboard page" do
 
     using_wait_time 15 do
       expect(page).to have_content "Candice Bergen"
-      expect(page).to have_content "versus"
       expect(page).to have_content "Adam Mueller"
     end
 
