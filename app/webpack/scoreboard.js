@@ -3,18 +3,22 @@ import $ from 'jquery'
 import scoreboardTemplate from './templates/scoreboard.hbs'
 import ongoingMatch from './observables/ongoingMatch'
 import ongoingMatchComponent from './components/ongoingMatchComponent'
+import preMatchComponent from './components/preMatchComponent'
 
 const tableId = document.body.dataset.tableId
 const match = ongoingMatch(tableId)
 
 $(document.body).html(scoreboardTemplate())
 
+// FIXME: This is bad Bacon.js code.
 match
   .map((match) => {
-    if (match) {
-      return 'ongoing-match'
-    } else {
+    if (!match) {
       return 'no-match'
+    } else if (match.seconds_old <= 60 && !match.service_selected) {
+      return 'pre-match'
+    } else {
+      return 'ongoing-match'
     }
   })
   .skipDuplicates()
@@ -28,3 +32,4 @@ match
   })
 
 ongoingMatchComponent($('.scoreboard-ongoing-match'), match)
+preMatchComponent($('.scoreboard-pre-match'), match)

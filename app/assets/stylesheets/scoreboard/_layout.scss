@@ -7,4 +7,12 @@ body {
   width: 1920px;
   height: 1080px;
   position: relative;
+
+  $color: shade($blue, 15%);
+  @include radial-gradient(
+    circle at 50% 50%,
+    $color 40%,
+    shade($color, 10%) 75%,
+    shade($color, 35%)
+  );
 }

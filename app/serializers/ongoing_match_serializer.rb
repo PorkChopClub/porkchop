@@ -2,7 +2,8 @@ class OngoingMatchSerializer < MatchSerializer
   attributes :home_service,
              :away_service,
              :service_selected,
-             :finished?
+             :finished?,
+             :seconds_old
 
   def home_service
     return unless object.first_service? || object.finished?
@@ -17,5 +18,9 @@ class OngoingMatchSerializer < MatchSerializer
 
   def service_selected
     !object.first_service.nil?
+  end
+
+  def seconds_old
+    Time.zone.now.to_i - object.created_at.to_i
   end
 end
