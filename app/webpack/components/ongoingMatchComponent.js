@@ -17,8 +17,45 @@ const ongoingMatchComponent = ($el, match) => {
         ({ currentState: previousState }, currentState) => ({ currentState, previousState })
       )
       .onValue(({ currentState, previousState }) => {
-        $el.find(`.ongoing-match-player.${player}`).removeClass(previousState)
-        $el.find(`.ongoing-match-player.${player}`).addClass(currentState)
+        const $player = $el.find(`.ongoing-match-player.${player}`)
+        if (currentState === 'serving' &&
+            (previousState === 'no-service' || previousState === 'receiving')) {
+          $player.removeClass('receiving')
+          $player.addClass(currentState)
+
+          setTimeout(() => {
+            $player.removeClass(currentState)
+            $player.addClass('receiving')
+          }, 200)
+
+          setTimeout(() => {
+            $player.removeClass('receiving')
+            $player.addClass(currentState)
+          }, 400)
+
+          setTimeout(() => {
+            $player.removeClass(currentState)
+            $player.addClass('receiving')
+          }, 600)
+
+          setTimeout(() => {
+            $player.removeClass('receiving')
+            $player.addClass(currentState)
+          }, 800)
+
+          setTimeout(() => {
+            $player.removeClass(currentState)
+            $player.addClass('receiving')
+          }, 1000)
+
+          setTimeout(() => {
+            $player.removeClass('receiving')
+            $player.addClass(currentState)
+          }, 1200)
+        } else {
+          $player.removeClass(previousState)
+          $player.addClass(currentState)
+        }
       })
   }
 
