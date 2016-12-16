@@ -1,4 +1,4 @@
-import { interval } from 'baconjs';
+import { interval } from 'baconjs'
 
 const matchField = (field) =>
   (match) =>
@@ -27,7 +27,7 @@ export const secondsOld = (match) => {
         return count + event.payload
       }
     })
-};
+}
 
 export const homeScore = matchField('.home_score')
 export const awayScore = matchField('.away_score')

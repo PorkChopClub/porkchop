@@ -9,8 +9,8 @@ const formatTime = (totalSeconds) => {
   const seconds = totalSeconds - (minutes * 60)
 
   return [
-    (minutes < 10 ? "0" + minutes : minutes),
-    (seconds  < 10 ? "0" + seconds : seconds)
+    (minutes < 10 ? `0${minutes}` : minutes),
+    (seconds < 10 ? `0${seconds}` : seconds)
   ].join(':')
 }
 
