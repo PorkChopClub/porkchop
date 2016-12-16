@@ -20,6 +20,7 @@ class OngoingMatchChannel < ApplicationCable::Channel
     def payload_json(match)
       if match
         options = {
+          serializer: OngoingMatchSerializer,
           include: [:home_player, :away_player]
         }
         ActiveModelSerializers::SerializableResource.new(match, options).to_json
