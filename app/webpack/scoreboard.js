@@ -16,7 +16,7 @@ const match = ongoingMatch(tableId)
 
 $(document.body).html(scoreboardTemplate())
 
-const newMatch = secondsOld(match).map((n) => n <= 120)
+const newMatch = secondsOld(match).map((n) => n <= 5)
 const started = serviceSelected(match)
 const noMatch = match.map((match) => !match)
 

@@ -1,8 +1,16 @@
 .scoreboard-pre-match {
   opacity: 1;
-  @include transition(opacity 1s);
+
+  $color: shade($blue, 15%);
+  @include radial-gradient(
+    circle at 50% 50%,
+    $color 40%,
+    shade($color, 10%) 75%,
+    shade($color, 35%)
+  );
 
   &:not(.active) {
+    @include transition(opacity 1s);
     opacity: 0;
     display: block;
   }
@@ -12,11 +20,16 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  @include transform(translateX(-50%));
   color: $off-white;
   font-weight: bold;
   font-size: 128px;
   text-shadow: 0 0 15px rgba($dark-grey, 0.35);
+  @include transition(transform 500ms);
+  @include transform(translate(-50%, 100%));
+
+  .active & {
+    @include transform(translateX(-50%));
+  }
 }
 
 .pre-match-player-name {
