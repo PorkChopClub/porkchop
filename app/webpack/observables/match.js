@@ -1,9 +1,33 @@
+import { interval } from 'baconjs'
+
 const matchField = (field) =>
   (match) =>
     match
       .filter((match) => !!match)
       .map(field)
       .skipDuplicates()
+
+export const serviceSelected = matchField('.service_selected')
+
+export const secondsOld = (match) => {
+  const lastAge =
+    matchField('.seconds_old')(match)
+      .map((n) => ({ type: 'RESET', payload: n }))
+
+  const counter =
+    interval(1000, 1)
+      .map((n) => ({ type: 'INCREMENT', payload: n }))
+
+  return counter
+    .merge(lastAge)
+    .scan(0, (count, event) => {
+      if (event.type === 'RESET') {
+        return event.payload
+      } else {
+        return count + event.payload
+      }
+    })
+}
 
 export const homeScore = matchField('.home_score')
 export const awayScore = matchField('.away_score')

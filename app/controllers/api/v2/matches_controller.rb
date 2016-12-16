@@ -5,7 +5,7 @@ class Api::V2::MatchesController < ApplicationController
     @match = @table.ongoing_match
     authorize! :read, @match
     if @match
-      render json: @match, include: [:home_player, :away_player]
+      render json: @match, serializer: OngoingMatchSerializer, include: [:home_player, :away_player]
     else
       render json: nil
     end

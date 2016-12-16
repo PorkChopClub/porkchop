@@ -1,11 +1,4 @@
 .scoreboard-ongoing-match {
-  $color: $blue;
-  @include radial-gradient(
-    circle at 50% 50%,
-    $color 40%,
-    shade($color, 10%) 75%,
-    shade($color, 35%)
-  );
 }
 
 .ongoing-match-versus {
@@ -15,9 +8,8 @@
   @include transform(translate(-50%, -50%));
   color: $off-white;
   font-weight: bold;
-  font-style: italic;
-  font-size: 96px;
-  text-shadow: 0 0 15px rgba($dark-grey, 0.25);
+  font-size: 128px;
+  text-shadow: 0 0 15px rgba($dark-grey, 0.35);
 }
 
 .ongoing-match-players {
@@ -71,6 +63,11 @@
     line-height: 1;
     font-weight: bold;
     padding: 0 50px;
+    @include transition(transform 150ms);
+
+    &.tiny {
+      @include transform(scale(0));
+    }
   }
 
   &.away .score { right: 0; }
