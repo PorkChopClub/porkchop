@@ -15,9 +15,8 @@
   @include transform(translate(-50%, -50%));
   color: $off-white;
   font-weight: bold;
-  font-style: italic;
-  font-size: 96px;
-  text-shadow: 0 0 15px rgba($dark-grey, 0.25);
+  font-size: 128px;
+  text-shadow: 0 0 15px rgba($dark-grey, 0.35);
 }
 
 .ongoing-match-players {
