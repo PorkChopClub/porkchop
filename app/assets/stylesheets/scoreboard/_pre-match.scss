@@ -1,0 +1,33 @@
+.scoreboard-pre-match {
+  opacity: 1;
+  @include transition(opacity 1s);
+
+  &:not(.active) {
+    opacity: 0;
+    display: block;
+  }
+}
+
+.pre-match-timer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  @include transform(translateX(-50%));
+  color: $off-white;
+  font-weight: bold;
+  font-size: 128px;
+  text-shadow: 0 0 15px rgba($dark-grey, 0.35);
+}
+
+.pre-match-player-name {
+  position: absolute;
+  top: 0;
+  padding: 20px 40px;
+  font-size: 48px;
+  font-weight: bold;
+  color: $off-white;
+  text-shadow: 0 0 15px rgba($dark-grey, 0.5);
+
+  &.away { right: 0; }
+  &.home { left: 0; }
+}

@@ -7,11 +7,11 @@ const matchField = (field) =>
       .map(field)
       .skipDuplicates()
 
+export const serviceSelected = matchField('.service_selected')
+
 export const secondsOld = (match) => {
   const lastAge =
-    match
-      .filter((match) => !!match)
-      .map('.seconds_old')
+    matchField('.seconds_old')(match)
       .map((n) => ({ type: 'RESET', payload: n }))
 
   const counter =
@@ -28,8 +28,6 @@ export const secondsOld = (match) => {
       }
     })
 };
-  
-// matchField('.seconds_old')
 
 export const homeScore = matchField('.home_score')
 export const awayScore = matchField('.away_score')
