@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "watch": "webpack --watch --progress",
-    "compile": "webpack --optimize-minimize --optimize-dedupe",
+    "compile": "webpack",
     "lint": "eslint app/webpack",
     "autofix": "eslint --fix app/webpack"
   },
