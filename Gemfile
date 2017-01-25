@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 ruby '2.3.3'
 
+# FIXME: This is because 2.2.x is blowing up on Travis. Remove when it doesn't.
+gem 'rainbow', '>= 2.1.0', '< 2.2.0'
+
 # This should be first.
 gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
 
