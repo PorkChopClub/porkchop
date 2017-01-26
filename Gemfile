@@ -57,7 +57,6 @@ group :development do
   gem 'letter_opener'
   gem 'rack-livereload', require: false
   gem 'guard-livereload', '~> 2.5', require: false
-  gem 'rubocop', '0.41.2', require: false
 end
 
 group :development, :test do
