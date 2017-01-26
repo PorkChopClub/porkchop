@@ -8,9 +8,7 @@
   "private": true,
   "scripts": {
     "watch": "webpack --watch --progress",
-    "compile": "webpack",
-    "lint": "eslint app/webpack",
-    "autofix": "eslint --fix app/webpack"
+    "compile": "webpack"
   },
   "repository": {
     "type": "git",
@@ -42,13 +40,5 @@
     "preact": "^4.8.0",
     "webpack": "^2.1.0-beta.25",
     "whatwg-fetch": "^1.0.0"
-  },
-  "devDependencies": {
-    "babel-eslint": "^6.1.2",
-    "eslint": "^2.13.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.10.2",
-    "eslint-plugin-jsx-a11y": "^1.5.5",
-    "eslint-plugin-react": "^5.2.2"
   }
 }

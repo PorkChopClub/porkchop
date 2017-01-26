@@ -9,7 +9,6 @@ before_script:
   - npm install -g yarn
   - yarn install
 script:
-  - npm run lint
   - bundle exec rspec
   - bundle exec codeclimate-test-reporter
 env:
