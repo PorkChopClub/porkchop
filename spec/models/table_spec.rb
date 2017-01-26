@@ -19,5 +19,15 @@ RSpec.describe Table, type: :model do
       let!(:ongoing_match) { create :new_match, table: table }
       it { is_expected.to eq ongoing_match }
     end
+
+    context "when there are multiple ongoing matches" do
+      let!(:other_table_match) { create :new_match }
+      let!(:finished_match) { create :complete_match, table: table }
+      let!(:ongoing_match_one) { create :new_match, table: table, created_at: 2.minutes.ago }
+      let!(:ongoing_match_two) { create :new_match, table: table, created_at: 1.minute.ago }
+      let!(:ongoing_match_three) { create :new_match, table: table, created_at: 3.minutes.ago }
+
+      it { is_expected.to eq ongoing_match_three }
+    end
   end
 end

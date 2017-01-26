@@ -12,6 +12,6 @@ class Table < ApplicationRecord
   validates :name, presence: true
 
   def ongoing_match
-    matches.ongoing.first
+    matches.ongoing.order(:created_at).first
   end
 end
