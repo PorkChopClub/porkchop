@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 ruby '2.3.3'
 
+# FIXME: This is because 2.2.x is blowing up on Travis. Remove when it doesn't.
+gem 'rainbow', '>= 2.1.0', '< 2.2.0'
+
 # This should be first.
 gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
 
@@ -54,7 +57,6 @@ group :development do
   gem 'letter_opener'
   gem 'rack-livereload', require: false
   gem 'guard-livereload', '~> 2.5', require: false
-  gem 'rubocop', '0.41.2', require: false
 end
 
 group :development, :test do
@@ -68,9 +70,9 @@ end
 
 group :test do
   # Test fast or die trying.
-  gem "simplecov", require: false
+  gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', '~> 1.0.0'
-  gem 'capybara', require: false
+  gem 'capybara', '~> 2.10.1', require: false
   gem 'capybara-screenshot', require: false
   gem 'poltergeist', require: false
   gem 'database_cleaner', require: false

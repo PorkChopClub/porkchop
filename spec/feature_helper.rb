@@ -6,7 +6,6 @@ require 'capybara-screenshot/rspec'
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(
     app,
-    phantomjs: File.expand_path("../../node_modules/.bin/phantomjs", __FILE__),
     phantomjs_options: ['--load-images=no'],
     window_size: [1920, 1080],
     js_errors: true
