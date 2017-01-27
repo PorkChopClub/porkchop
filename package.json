@@ -19,9 +19,10 @@
   "homepage": "http://porkchop.club",
   "dependencies": {
     "actioncable": "^5.0.0",
-    "babel-core": "^6.13.2",
-    "babel-loader": "^6.2.5",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.16.0",
+    "babel-preset-env": "^1.1.4",
     "chart.js": "^2.2.2",
     "exports-loader": "^0.6.3",
     "imports-loader": "^0.6.5",
