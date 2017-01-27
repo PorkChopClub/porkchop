@@ -6,8 +6,8 @@ module.exports = function(options) {
   config.context = __dirname;
 
   const entry = (name) => [
+    "jquery-ujs",
     "babel-polyfill",
-    "rails-ujs",
     `./app/webpack/${name}.js`
   ]
 
@@ -25,7 +25,9 @@ module.exports = function(options) {
 
   config.plugins = [
     new webpack.ProvidePlugin({
-      'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+      jQuery: 'jquery',
+      $: 'jquery'
     })
   ];
 

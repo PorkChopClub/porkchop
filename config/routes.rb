@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get 'play', to: 'activations#activate'
+  # get 'play', to: 'activations#activate'
   post 'play', to: 'activations#activate'
   delete 'play', to: 'activations#deactivate'
 
