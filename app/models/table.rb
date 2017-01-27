@@ -14,4 +14,8 @@ class Table < ApplicationRecord
   def ongoing_match
     matches.ongoing.order(:created_at).first
   end
+
+  def upcoming_matches
+    matches.ongoing.order(created_at: :desc).offset(1)
+  end
 end

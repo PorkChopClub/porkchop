@@ -30,4 +30,31 @@ RSpec.describe Table, type: :model do
       it { is_expected.to eq ongoing_match_three }
     end
   end
+
+  describe "upcoming matches" do
+    subject { table.upcoming_matches }
+
+    let(:table) { create :table }
+
+    context "when there are no matches happening" do
+      let!(:finished_match) { create :complete_match, table: table }
+      it { is_expected.to eq [] }
+    end
+
+    context "when there is a match happening but none upcoming" do
+      let!(:other_table_match) { create :new_match }
+      let!(:finished_match) { create :complete_match, table: table }
+      let!(:ongoing_match) { create :new_match, table: table }
+      it { is_expected.to eq [] }
+    end
+
+    context "when there are matches upcoming" do
+      let!(:other_table_match) { create :new_match }
+      let!(:finished_match) { create :complete_match, table: table }
+      let!(:ongoing_match_one) { create :new_match, table: table, created_at: 2.minutes.ago }
+      let!(:ongoing_match_two) { create :new_match, table: table, created_at: 1.minute.ago }
+      let!(:ongoing_match_three) { create :new_match, table: table, created_at: 3.minutes.ago }
+      it { is_expected.to eq [ongoing_match_one, ongoing_match_three] }
+    end
+  end
 end
