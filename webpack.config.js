@@ -7,6 +7,7 @@ module.exports = function(options) {
 
   const entry = (name) => [
     "babel-polyfill",
+    "rails-ujs",
     `./app/webpack/${name}.js`
   ]
 
