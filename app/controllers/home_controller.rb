@@ -21,6 +21,7 @@ class HomeController < ApplicationController
   def elo_range
     @elo_range ||= (30.days.ago.to_date..Date.current)
   end
+  helper_method :elo_range
 
   def elo_data
     @all_elo_ratings ||=
@@ -48,7 +49,5 @@ class HomeController < ApplicationController
       end.
       to_h
   end
-
   helper_method :elo_data
-  helper_method :elo_range
 end
