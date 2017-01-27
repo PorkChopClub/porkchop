@@ -14,6 +14,8 @@ import {
 const tableId = document.body.dataset.tableId
 const match = ongoingMatch(tableId)
 
+match.log()
+
 $(document.body).html(scoreboardTemplate())
 
 const newMatch = secondsOld(match).map((n) => n <= 120)

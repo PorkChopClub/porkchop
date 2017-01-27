@@ -54,7 +54,7 @@ RSpec.describe Table, type: :model do
       let!(:ongoing_match_one) { create :new_match, table: table, created_at: 2.minutes.ago }
       let!(:ongoing_match_two) { create :new_match, table: table, created_at: 1.minute.ago }
       let!(:ongoing_match_three) { create :new_match, table: table, created_at: 3.minutes.ago }
-      it { is_expected.to eq [ongoing_match_one, ongoing_match_three] }
+      it { is_expected.to eq [ongoing_match_one, ongoing_match_two] }
     end
   end
 end

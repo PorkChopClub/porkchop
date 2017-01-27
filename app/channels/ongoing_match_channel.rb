@@ -21,7 +21,16 @@ class OngoingMatchChannel < ApplicationCable::Channel
       if match
         options = {
           serializer: OngoingMatchSerializer,
-          include: [:home_player, :away_player]
+          include: [
+            :home_player,
+            :away_player,
+            {
+              upcoming_matches: [
+                :home_player,
+                :away_player
+              ]
+            }
+          ]
         }
         ActiveModelSerializers::SerializableResource.new(match, options).to_json
       else

@@ -5,6 +5,8 @@ class OngoingMatchSerializer < MatchSerializer
              :finished?,
              :seconds_old
 
+  has_many :upcoming_matches
+
   def home_service
     return unless object.first_service? || object.finished?
     points_count = object.points.count
@@ -22,5 +24,9 @@ class OngoingMatchSerializer < MatchSerializer
 
   def seconds_old
     Time.zone.now.to_i - object.created_at.to_i
+  end
+
+  def upcoming_matches
+    object.table.upcoming_matches.limit(3)
   end
 end
