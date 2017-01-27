@@ -1,3 +1,5 @@
+import './banner'
+
 import $ from 'jquery'
 import Chart from 'chart.js'
 

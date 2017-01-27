@@ -11,8 +11,10 @@ module.exports = function(options) {
   ]
 
   config.entry = {
-    scoreboard: entry('scoreboard'),
-    default: entry('default')
+    default: entry('default'),
+    homepage: entry('homepage'),
+    player_show: entry('playerShow'),
+    scoreboard: entry('scoreboard')
   };
 
   config.output = {

@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @javascript_entrypoint = "homepage"
     authorize! :read, :home
   end
 
