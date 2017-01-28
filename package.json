@@ -23,11 +23,14 @@
     "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.16.0",
     "babel-preset-env": "^1.1.4",
+    "babel-preset-react": "^6.22.0",
     "chart.js": "^2.2.2",
     "exports-loader": "^0.6.3",
     "imports-loader": "^0.6.5",
     "jquery": "^3.1.0",
     "jquery-ujs": "^1.2.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "webpack": "^2.1.0-beta.25",
     "whatwg-fetch": "^1.0.0"
   }
