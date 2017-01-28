@@ -3,6 +3,7 @@ import './banner'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 
+import cable from './cable'
 import store from './stores/scoreboard'
 import App from './components/scoreboard/App'
 
