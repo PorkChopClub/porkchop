@@ -1,5 +1,5 @@
-import { createStore } from 'redux'
+import createStore from '../utils/createStore'
 
-const reducer = (state = 0, action) => state
-
-export default createStore(reducer)
+export default createStore({
+  ongoingMatch: (state = 0, action) => state
+})
