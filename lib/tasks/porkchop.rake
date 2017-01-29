@@ -13,6 +13,7 @@ namespace :porkchop do
         puts "Away button!"
         controls.away_button
       end
+      OngoingMatchChannel.broadcast_update
     end
   end
 
