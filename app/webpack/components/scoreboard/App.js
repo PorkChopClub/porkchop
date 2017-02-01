@@ -1,13 +1,3 @@
-import OngoingMatch from './OngoingMatch'
-import MatchPreview from './MatchPreview'
-import MatchResult from './MatchResult'
-import NoMatch from './NoMatch'
+import Scoreboard from './Scoreboard'
 
-export default (props) => (
-  <div className="scoreboard">
-    <OngoingMatch/>
-    <MatchPreview/>
-    <MatchResult/>
-    <NoMatch/>
-  </div>
-)
+export default props => <Scoreboard/>
