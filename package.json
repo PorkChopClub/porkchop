@@ -25,6 +25,7 @@
     "babel-preset-env": "^1.1.4",
     "babel-preset-react": "^6.22.0",
     "chart.js": "^2.2.2",
+    "classnames": "^2.2.5",
     "exports-loader": "^0.6.3",
     "imports-loader": "^0.6.5",
     "jquery": "^3.1.0",

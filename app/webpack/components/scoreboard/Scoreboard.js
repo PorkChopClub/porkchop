@@ -7,13 +7,14 @@ import NoMatch from './NoMatch'
 
 const mapStateToProps = ({ ongoingMatch }) => {
   return {
-    isGameHappening: !!ongoingMatch
+    isGameHappening: !!ongoingMatch,
+    ongoingMatch,
   }
 }
 
-const visibleComponent = ({ isGameHappening }) => {
+const visibleComponent = ({ isGameHappening, ongoingMatch }) => {
   if (isGameHappening) {
-    return <OngoingMatch/>
+    return <OngoingMatch match={ongoingMatch}/>
   } else {
     return <NoMatch/>
   }

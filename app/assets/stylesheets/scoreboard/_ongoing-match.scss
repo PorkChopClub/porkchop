@@ -40,6 +40,10 @@
     @include player-background($blue);
   }
 
+  &.no-service {
+    background-image: none;
+  }
+
   .name {
     position: absolute;
     top: 0;
