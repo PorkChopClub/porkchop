@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.4.0'
 
 # FIXME: This is because 2.2.x is blowing up on Travis. Remove when it doesn't.
 gem 'rainbow', '>= 2.1.0', '< 2.2.0'
