@@ -32,8 +32,6 @@ Rails.application.routes.draw do
 
     resources :players, only: :index
 
-    resource :matchmaking, only: [:show]
-
     resources :activations, only: [:index] do
       member do
         put "activate"
