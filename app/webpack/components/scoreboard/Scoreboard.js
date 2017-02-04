@@ -34,9 +34,9 @@ const visibleComponent = (props) => {
     return <MatchResult/>
   } else if (!isMatchStarted && secondsOld < 90) {
     return <MatchPreview/>
-  } else {
-    return <OngoingMatch match={ongoingMatch}/>
   }
+
+  return <OngoingMatch match={ongoingMatch}/>
 }
 
 const Scoreboard = (props) => {
