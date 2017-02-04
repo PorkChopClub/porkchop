@@ -5,13 +5,19 @@ import MatchPreview from './MatchPreview'
 import MatchResult from './MatchResult'
 import NoMatch from './NoMatch'
 
-import { ongoingMatch, secondsOld, isMatchHappening } from '../../selectors/ongoingMatch'
+import {
+  ongoingMatch,
+  secondsOld,
+  isMatchHappening,
+  isMatchStarted
+} from '../../selectors/ongoingMatch'
 
 const mapStateToProps = (state) => {
   return {
     isMatchHappening: isMatchHappening(state),
     secondsOld: secondsOld(state),
-    ongoingMatch: ongoingMatch(state)
+    ongoingMatch: ongoingMatch(state),
+    isMatchStarted: isMatchStarted(state)
   }
 }
 
@@ -19,18 +25,17 @@ const visibleComponent = (props) => {
   const {
     isMatchHappening,
     secondsOld,
-    ongoingMatch
+    ongoingMatch,
+    isMatchStarted
   } = props
-  if (isMatchHappening) {
-    if (secondsOld < 30) {
-      return <MatchResult/>
-    } else if (secondsOld < 90) {
-      return <MatchPreview/>
-    } else {
-      return <OngoingMatch match={ongoingMatch}/>
-    }
+  if (!isMatchHappening) { return <NoMatch/> }
+
+  if (!isMatchStarted && secondsOld < 30) {
+    return <MatchResult/>
+  } else if (!isMatchStarted && secondsOld < 90) {
+    return <MatchPreview/>
   } else {
-    return <NoMatch/>
+    return <OngoingMatch match={ongoingMatch}/>
   }
 }
 

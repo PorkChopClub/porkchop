@@ -2,6 +2,14 @@ import { createSelector } from 'reselect'
 
 export const ongoingMatch = (state) => state.ongoingMatch
 
+export const isServiceSelected = createSelector(
+  ongoingMatch,
+  (ongoingMatch) => {
+    if (!ongoingMatch) { return false; }
+    return ongoingMatch.service_selected
+  }
+)
+
 export const secondsOld = createSelector(
   ongoingMatch,
   (ongoingMatch) => {
@@ -13,6 +21,13 @@ export const secondsOld = createSelector(
 export const warmUpSecondsLeft = createSelector(
   secondsOld,
   (secondsOld) => Math.max(90 - secondsOld, 0)
+)
+
+export const isMatchStarted = createSelector(
+  warmUpSecondsLeft, isServiceSelected,
+  (warmUpSecondsLeft, isServiceSelected) => {
+    return isServiceSelected || warmUpSecondsLeft === 0
+  }
 )
 
 export const isMatchHappening = createSelector(

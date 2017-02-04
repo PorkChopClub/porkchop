@@ -1,6 +1,7 @@
 class Api::V2::MatchesController < ApplicationController
   before_action :load_table
   before_action :authorize_ongoing_match, only: :setup
+  after_action :update_match_channel, except: :show
 
   def ongoing
     match = @table.ongoing_match
