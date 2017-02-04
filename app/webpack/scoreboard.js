@@ -12,7 +12,7 @@ store.dispatch(trackOngoingMatch(tableId))
 
 render(
   <Provider store={store}>
-    <App/>
+    <App tableId={tableId}/>
   </Provider>,
   document.getElementById('scoreboard')
 )

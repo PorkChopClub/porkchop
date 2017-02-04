@@ -1,9 +1,9 @@
 import Scoreboard from './Scoreboard'
 import TableControls from './TableControls'
 
-export default props => (
+export default ({ tableId }) => (
   <div>
     <Scoreboard/>
-    <TableControls/>
+    <TableControls tableId={tableId}/>
   </div>
 )
