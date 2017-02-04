@@ -14,14 +14,18 @@ const mapStateToProps = ({ ongoingMatch }) => {
 
 const visibleComponent = ({ isGameHappening, ongoingMatch }) => {
   if (isGameHappening) {
-    return <OngoingMatch match={ongoingMatch}/>
+    const { secondsOld } = ongoingMatch;
+    if (secondsOld < 30) {
+      return <MatchResult/>
+    } else if (secondsOld < 90) {
+      return <MatchPreview match={ongoingMatch}/>
+    } else {
+      return <OngoingMatch match={ongoingMatch}/>
+    }
   } else {
     return <NoMatch/>
   }
 }
-// FIXME: Display these too.
-// <MatchPreview/>
-// <MatchResult/>
 
 const Scoreboard = (props) => {
   return (

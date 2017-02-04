@@ -1,9 +1,9 @@
 import { handleActions } from 'redux-actions'
 
 import {
-  matchUpdated
+  ongoingMatchUpdated
 } from '../actions/ongoingMatch'
 
 export default handleActions({
-  [matchUpdated]: (state, action) => action.payload
+  [ongoingMatchUpdated]: (state, action) => action.payload
 }, null)
