@@ -5,16 +5,23 @@ import MatchPreview from './MatchPreview'
 import MatchResult from './MatchResult'
 import NoMatch from './NoMatch'
 
-const mapStateToProps = ({ ongoingMatch }) => {
+import { ongoingMatch, secondsOld, isMatchHappening } from '../../selectors/ongoingMatch'
+
+const mapStateToProps = (state) => {
   return {
-    isGameHappening: !!ongoingMatch,
-    ongoingMatch,
+    isMatchHappening: isMatchHappening(state),
+    secondsOld: secondsOld(state),
+    ongoingMatch: ongoingMatch(state)
   }
 }
 
-const visibleComponent = ({ isGameHappening, ongoingMatch }) => {
-  if (isGameHappening) {
-    const { secondsOld } = ongoingMatch;
+const visibleComponent = (props) => {
+  const {
+    isMatchHappening,
+    secondsOld,
+    ongoingMatch
+  } = props
+  if (isMatchHappening) {
     if (secondsOld < 30) {
       return <MatchResult/>
     } else if (secondsOld < 90) {
