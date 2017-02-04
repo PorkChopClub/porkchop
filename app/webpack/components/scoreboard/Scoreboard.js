@@ -25,7 +25,7 @@ const visibleComponent = (props) => {
     if (secondsOld < 30) {
       return <MatchResult/>
     } else if (secondsOld < 90) {
-      return <MatchPreview match={ongoingMatch}/>
+      return <MatchPreview/>
     } else {
       return <OngoingMatch match={ongoingMatch}/>
     }

@@ -10,6 +10,11 @@ export const secondsOld = createSelector(
   }
 )
 
+export const warmUpSecondsLeft = createSelector(
+  secondsOld,
+  (secondsOld) => Math.max(90 - secondsOld, 0)
+)
+
 export const isMatchHappening = createSelector(
   ongoingMatch,
   (ongoingMatch) => {
@@ -17,3 +22,30 @@ export const isMatchHappening = createSelector(
   }
 )
 
+export const homePlayer = createSelector(
+  ongoingMatch,
+  (ongoingMatch) => {
+    return ongoingMatch ? ongoingMatch.home_player : null
+  }
+)
+
+export const homePlayerName = createSelector(
+  homePlayer,
+  (homePlayer) => {
+    return homePlayer ? homePlayer.name : null
+  }
+)
+
+export const awayPlayer = createSelector(
+  ongoingMatch,
+  (ongoingMatch) => {
+    return ongoingMatch ? ongoingMatch.away_player : null
+  }
+)
+
+export const awayPlayerName = createSelector(
+  awayPlayer,
+  (awayPlayer) => {
+    return awayPlayer ? awayPlayer.name : null
+  }
+)
