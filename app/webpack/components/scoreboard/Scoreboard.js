@@ -39,12 +39,10 @@ const visibleComponent = (props) => {
   return <OngoingMatch match={ongoingMatch}/>
 }
 
-const Scoreboard = (props) => {
-  return (
-    <div className="scoreboard">
-      {visibleComponent(props)}
-    </div>
-  )
-}
+const Scoreboard = (props) =>  (
+  <div className="scoreboard">
+    {visibleComponent(props)}
+  </div>
+)
 
 export default connect(mapStateToProps)(Scoreboard)
