@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         resources :matches, only: [] do
           collection do
             get :ongoing
+            post :setup
           end
         end
       end
