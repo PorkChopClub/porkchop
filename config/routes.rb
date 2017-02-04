@@ -30,8 +30,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :players, only: :index
-
     resources :activations, only: [:index] do
       member do
         put "activate"
