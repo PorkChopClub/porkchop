@@ -32,15 +32,6 @@ Rails.application.routes.draw do
 
     resources :players, only: :index
 
-    resource :ongoing_match, only: [:show, :destroy] do
-      put "home_point"
-      put "away_point"
-      put "toggle_service"
-      put "rewind"
-      put "finalize"
-      put "matchmake"
-    end
-
     resource :matchmaking, only: [:show]
 
     resources :activations, only: [:index] do
