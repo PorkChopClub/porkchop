@@ -2,6 +2,14 @@ import { createAction } from 'redux-actions'
 
 import cable from '../cable'
 
+export const clockTick = createAction('ONGOING_MATCH_TICK')
+
+export const startTimer = () => (dispatch) =>
+  setInterval(
+    () => dispatch(clockTick()),
+    1000
+  )
+
 export const ongoingMatchUpdated = createAction('ONGOING_MATCH_UPDATED')
 
 export const trackOngoingMatch = (tableId) => (dispatch) => {
@@ -17,4 +25,6 @@ export const trackOngoingMatch = (tableId) => (dispatch) => {
   fetch(`/api/v2/tables/${tableId}/matches/ongoing`)
     .then((response) => response.json())
     .then((json) => dispatchMatchUpdate(json))
+
+  dispatch(startTimer())
 }
