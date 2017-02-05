@@ -23,9 +23,8 @@ const TableControls = (props) => {
   } = props
 
   return (
-    <div>
-      <h1>Table Controls</h1>
-      <button onClick={onSetupClick(tableId)}>Test</button>
+    <div className="scoreboard-table-controls">
+      <button className="table-controls-button green" onClick={onSetupClick(tableId)}>Setup match!</button>
     </div>
   )
 }
