@@ -1,8 +1,6 @@
 .scoreboard-table-controls {
   font-size: 1.5rem;
-  position: relative;
   padding: 2rem;
-  box-shadow: 0 -20px 0 rgba($dark-grey, 0.15);
   $color: $off-white;
   @include radial-gradient(
     circle at 50% 50%,
