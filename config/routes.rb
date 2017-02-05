@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v2 do
       resources :tables, only: [] do
+        resources :active_players, only: [:index, :destroy, :create]
+
         resources :matches, only: [] do
           collection do
             get :ongoing
