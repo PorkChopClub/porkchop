@@ -4,6 +4,24 @@ RSpec.describe Table, type: :model do
   it { is_expected.to have_many :matches }
   it { is_expected.to validate_presence_of :name }
 
+  describe "#active_players" do
+    subject { table.active_players }
+
+    let!(:active_player_one) { create :active_player }
+    let!(:active_player_two) { create :active_player }
+    let!(:inactive_player) { create :player }
+
+    context "when it is the default table" do
+      let(:table) { create :default_table }
+      it { is_expected.to contain_exactly active_player_one, active_player_two }
+    end
+
+    context "when it is not the default table" do
+      let(:table) { create :table }
+      it { is_expected.to be_empty }
+    end
+  end
+
   describe "#ongoing_match" do
     subject { table.ongoing_match }
 
