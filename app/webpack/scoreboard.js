@@ -18,3 +18,6 @@ render(
   </Provider>,
   document.getElementById('scoreboard')
 )
+
+import { activePlayers } from './api/v2/table'
+activePlayers(tableId).then((json) => console.log(json))
