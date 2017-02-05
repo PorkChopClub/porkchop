@@ -1,4 +1,11 @@
 .scoreboard-ongoing-match {
+  background-color: shade($green, 10%);
+  @include radial-gradient(
+    circle at 50% 50%,
+    transparent 40%,
+    shade(transparent, 15%) 75%,
+    shade(transparent, 35%)
+  );
 }
 
 .ongoing-match-versus {
