@@ -4,27 +4,31 @@ import {
   matchmake
 } from '../../actions/table'
 
+import {
+  tableId,
+  isMatchmaking
+} from '../../selectors/table'
+
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    isMatchmaking: isMatchmaking(state)
+  }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { tableId }) => {
   return {
-    onSetupClick: (tableId) => () => {
-      dispatch(matchmake(tableId))
-    }
+    onSetupClick: () => dispatch(matchmake(tableId))
   }
 }
 
 const TableControls = (props) => {
-  const {
-    tableId,
-    onSetupClick
-  } = props
+  const { onSetupClick } = props
 
   return (
     <div className="scoreboard-table-controls">
-      <button className="table-controls-button green" onClick={onSetupClick(tableId)}>Setup match!</button>
+      <button className="table-controls-button green" onClick={onSetupClick}>
+        Setup match!
+      </button>
     </div>
   )
 }
