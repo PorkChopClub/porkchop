@@ -5,12 +5,13 @@
   height: 75vh;
   font-size: 1.5rem;
   padding: 2rem;
-  $color: $off-white;
+  $color: $medium-grey;
+
   @include radial-gradient(
     circle at 50% 50%,
     $color 40%,
-    shade($color, 5%) 75%,
-    shade($color, 15%)
+    shade($color, 15%) 75%,
+    shade($color, 35%)
   );
 }
 
