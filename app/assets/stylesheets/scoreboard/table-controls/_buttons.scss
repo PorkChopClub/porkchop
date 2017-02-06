@@ -29,6 +29,12 @@
   &.green { @include table-controls-button($green) }
   &.yellow { @include table-controls-button($yellow) }
 
+  &.grey {
+    @include table-controls-button(shade($light-grey, 10%));
+    color: $dark-grey;
+    text-shadow: none;
+  }
+
   &.white {
     color: $dark-grey;
     background-color: $off-white;
@@ -42,6 +48,33 @@
     &:hover,
     &:active {
       border: 4px solid tint($dark-grey, 50%);
+    }
+  }
+
+  &.white {
+    color: $dark-grey;
+    background-color: $off-white;
+    border: 4px solid transparent;
+
+    &:focus {
+      outline: 0;
+      border: 4px solid shade($off-white, 25%);
+    }
+
+    &:hover,
+    &:active {
+      border: 4px solid tint($dark-grey, 50%);
+    }
+  }
+
+  &.small {
+    font-size: 55%;
+
+    &,
+    &:focus,
+    &:hover,
+    &:active {
+      border-width: 2px;
     }
   }
 }

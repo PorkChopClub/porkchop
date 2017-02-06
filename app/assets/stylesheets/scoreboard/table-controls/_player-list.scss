@@ -1,7 +1,9 @@
 .table-controls-player-list-heading {
   @include margin(0.5em 0);
+  @include padding(0 0 0.25em 0);
   color: $off-white;
   text-shadow: 0 0 5px $dark-grey;
+  border-bottom: 4px solid $off-white;
 }
 
 .table-controls-player-list {
@@ -10,10 +12,6 @@
 
   li {
     display: inline;
-    @include margin(0);
-  }
-
-  li + li {
-    margin-left: 1em;
+    @include margin(0 0.5em 0 0);
   }
 }
