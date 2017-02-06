@@ -5,13 +5,12 @@ import {
 } from '../../actions/table'
 
 import {
-  tableId,
   isMatchmaking
 } from '../../selectors/table'
 
 const mapStateToProps = (state) => {
   return {
-    isMatchmaking: isMatchmaking(state)
+    isMatchmaking: isMatchmaking(state),
   }
 }
 
