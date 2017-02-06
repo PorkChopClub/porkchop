@@ -20,7 +20,14 @@ export const matchmake = (tableId) => (dispatch, getState) => {
 }
 
 export const trackTable = (tableId) => (dispatch, getState) => {
+  const refreshPlayers = (tableId) => {
+    activePlayers(tableId)
+      .then((json) => setActivePlayers(json))
+      .then((event) => dispatch(event))
+  }
+
   dispatch(setTableId(tableId))
+  refreshPlayers(tableId)
 
   let interval = trackingInterval(getState())
 
@@ -28,11 +35,7 @@ export const trackTable = (tableId) => (dispatch, getState) => {
 
   interval = setInterval(() => {
     const tableId = tableIdSelector(getState())
-    if (!tableId) { return }
-
-    activePlayers(tableId)
-      .then((json) => setActivePlayers(json))
-      .then((event) => dispatch(event))
+    if (tableId) { refreshPlayers(tableId) }
   }, 10*1000)
 
   dispatch(setTrackingInterval(interval))
