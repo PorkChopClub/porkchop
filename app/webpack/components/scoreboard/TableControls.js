@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 
 import ActivePlayersList from './ActivePlayersList'
+import InactivePlayersList from './InactivePlayersList'
 
 import {
   matchmake
@@ -31,6 +32,7 @@ const TableControls = (props) => {
         Setup match!
       </button>
       <ActivePlayersList/>
+      <InactivePlayersList/>
     </div>
   )
 }

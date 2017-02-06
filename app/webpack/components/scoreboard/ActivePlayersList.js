@@ -19,7 +19,7 @@ const ActivePlayersList = (props) => {
 
   return (
     <div>
-      <h2 className="table-controls-player-list-heading">Active Players</h2>
+      <h2 className="table-controls-player-list-heading">Ready to Play</h2>
       <ul className="table-controls-player-list">
         {players}
       </ul>
