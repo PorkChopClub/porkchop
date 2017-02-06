@@ -226,8 +226,8 @@ RSpec.describe Player, type: :model do
     end
   end
 
-  describe "#inactive?" do
-    subject { player.inactive? }
+  describe "#retired?" do
+    subject { player.retired? }
 
     let(:player) { create :player }
 

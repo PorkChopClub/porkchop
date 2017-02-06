@@ -85,7 +85,7 @@ class Player < ActiveRecord::Base
     streaks.active.first
   end
 
-  def inactive?
+  def retired?
     matches.finalized.where('finalized_at > ?', 4.months.ago).count < 10
   end
 
