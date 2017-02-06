@@ -225,4 +225,37 @@ RSpec.describe Player, type: :model do
       expect(subject).to eq streak
     end
   end
+
+  describe "#inactive?" do
+    subject { player.inactive? }
+
+    let(:player) { create :player }
+
+    before do
+      10.times do
+        match = create :complete_match, home_player: player
+        match.update! finalized_at: 5.months.ago
+      end
+    end
+
+    context "when the player has played no games" do
+      it { is_expected.to eq true }
+    end
+
+    context "when the player has played at least 10 games in the last 4 months" do
+      before do
+        10.times { create :complete_match, home_player: player }
+      end
+
+      it { is_expected.to eq false }
+    end
+
+    context "when the player has played less than 10 games in the last 4 months" do
+      before do
+        9.times { create :complete_match, home_player: player }
+      end
+
+      it { is_expected.to eq true }
+    end
+  end
 end
