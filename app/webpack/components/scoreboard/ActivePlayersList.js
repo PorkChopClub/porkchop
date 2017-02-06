@@ -11,14 +11,19 @@ const ActivePlayersList = (props) => {
 
   const players = activePlayers.map((player) => (
     <li key={player.id}>
-      {player.name}
+      <button className="table-controls-button blue">
+        {player.name}
+      </button>
     </li>
   ))
 
   return (
-    <ul>
-      {players}
-    </ul>
+    <div>
+      <h2 className="table-controls-player-list-heading">Active Players</h2>
+      <ul className="table-controls-player-list">
+        {players}
+      </ul>
+    </div>
   )
 }
 

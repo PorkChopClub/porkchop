@@ -1,0 +1,31 @@
+.table-controls-button {
+  font-weight: 700;
+  border: 0;
+  color: $off-white;
+  -webkit-appearance: none;
+  display: inline-block;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px -1px $dark-grey;
+  @include padding(0.125em 0.5em)
+
+  @mixin table-controls-button($color) {
+    background-color: $color;
+    border: 4px solid transparent;
+    text-shadow: 0 0 3px shade($color, 50%);
+
+    &:focus {
+      outline: 0;
+      border: 4px solid tint($color, 50%);
+    }
+
+    &:hover,
+    &:active {
+      border: 4px solid $off-white;
+    }
+  }
+
+  &.red { @include table-controls-button($red) }
+  &.blue { @include table-controls-button($blue) }
+  &.green { @include table-controls-button($green) }
+  &.yellow { @include table-controls-button($yellow) }
+}
