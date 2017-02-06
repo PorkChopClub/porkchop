@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 
+import ActivePlayersList from './ActivePlayersList'
+
 import {
   matchmake
 } from '../../actions/table'
@@ -28,6 +30,7 @@ const TableControls = (props) => {
       <button className="table-controls-button green" onClick={onSetupClick}>
         Setup match!
       </button>
+      <ActivePlayersList/>
     </div>
   )
 }
