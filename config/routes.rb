@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v2 do
+      resources :players, only: :index
+
       resources :tables, only: [] do
         resources :active_players, only: [:index, :destroy, :create]
 
