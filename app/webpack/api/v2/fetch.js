@@ -6,5 +6,9 @@ export default (path, options = {}) => {
     headers: { 'X-CSRF-Token': token() }
   }
 
-  return fetch(path, { ...defaultOptions, ...options }).then((response) => response.json())
+  const jsonPromise =
+    fetch(path, { ...defaultOptions, ...options })
+      .then((response) => response.json())
+
+  return jsonPromise
 }

@@ -5,11 +5,11 @@ import { Provider } from 'react-redux'
 
 import store from './stores/scoreboard'
 import { trackOngoingMatch } from './actions/ongoingMatch'
-import { setTableId } from './actions/table'
+import { trackTable } from './actions/table'
 import App from './components/scoreboard/App'
 
 const tableId = document.body.dataset.tableId
-store.dispatch(setTableId(tableId))
+store.dispatch(trackTable(tableId))
 store.dispatch(trackOngoingMatch(tableId))
 
 render(
@@ -18,6 +18,3 @@ render(
   </Provider>,
   document.getElementById('scoreboard')
 )
-
-import { activePlayers } from './api/v2/table'
-activePlayers(tableId).then((json) => console.log(json))
