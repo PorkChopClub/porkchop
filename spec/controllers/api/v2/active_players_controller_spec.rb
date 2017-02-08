@@ -60,5 +60,40 @@ RSpec.describe Api::V2::ActivePlayersController do
     end
   end
 
-  describe "DELETE #destroy"
+  describe "DELETE #destroy" do
+    subject do
+      delete :destroy,
+             params: { table_id: table_id, id: player_id }
+    end
+
+    before { sign_in create(:admin_player) }
+
+    context "when the table exists" do
+      let(:table_id) { table.to_param }
+      let(:table) { create :default_table }
+
+      context "when the player exists" do
+        let(:player_id) { player.id }
+        let(:player) { create :player, active: true }
+
+        it { is_expected.to have_http_status :ok }
+
+        it "deactivates the player" do
+          expect { subject }.to change { player.reload.active? }.from(true).to(false)
+        end
+      end
+
+      context "when the player doesn't exist" do
+        let(:player_id) { "space-dog-laika" }
+        it { is_expected.to have_http_status :not_found }
+      end
+    end
+
+    context "when the table doesn't exist" do
+      let(:table_id) { "potato" }
+      let(:player_id) { 1 }
+
+      it { is_expected.to have_http_status :not_found }
+    end
+  end
 end
