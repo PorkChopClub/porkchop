@@ -113,6 +113,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
+    ffaker (2.4.0)
     ffi (1.9.17)
     flamegraph (0.9.5)
     fog-aws (1.2.0)
@@ -395,6 +396,7 @@ DEPENDENCIES
   elo2
   factory_girl_rails
   faraday
+  ffaker
   flamegraph
   fog-aws
   font-awesome-rails
