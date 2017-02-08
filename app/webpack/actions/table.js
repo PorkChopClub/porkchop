@@ -1,9 +1,14 @@
 import { createAction } from 'redux-actions'
 
 import { setup } from '../api/v2/ongoingMatch'
-import { activePlayers } from '../api/v2/table'
+import { activePlayers, activatePlayer as apiActivatePlayer } from '../api/v2/table'
 
-import { tableId as tableIdSelector, trackingInterval } from '../selectors/table'
+import {
+  tableId as tableIdSelector,
+  trackingInterval,
+  activePlayers as activePlayersSelector
+} from '../selectors/table'
+import players from '../selectors/players'
 
 export const setTableId = createAction('TABLE_SET_ID')
 export const setActivePlayers = createAction('TABLE_SET_ACTIVE_PLAYERS')
@@ -11,12 +16,18 @@ export const startMatchSetup = createAction('TABLE_MATCH_SETUP_START')
 export const finishMatchSetup = createAction('TABLE_MATCH_SETUP_FINISH')
 export const setTrackingInterval = createAction('TABLE_SET_TRACKING_INTERVAL')
 
+export const activatePlayer = ({ tableId, playerId }) => (dispatch, getState) => {
+  const activePlayers = activePlayersSelector(getState())
+  const activatedPlayer = players(getState()).find((player) => player.id === playerId)
+
+  dispatch(setActivePlayers([activatedPlayer, ...activePlayers]))
+  apiActivatePlayer({ tableId, playerId })
+    .then((json) => dispatch(setActivePlayers(json)))
+}
+
 export const matchmake = (tableId) => (dispatch, getState) => {
   dispatch(startMatchSetup())
-  setup(tableId).then((json) => {
-    console.log(json);
-    dispatch(finishMatchSetup())
-  })
+  setup(tableId).then((json) => { dispatch(finishMatchSetup()) })
 }
 
 export const trackTable = (tableId) => (dispatch, getState) => {

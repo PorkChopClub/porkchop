@@ -2,6 +2,8 @@ import { connect } from 'react-redux'
 
 import { inactivePlayers } from '../../selectors/table'
 
+import { activatePlayer } from '../../actions/table'
+
 const mapStateToProps = (state) => {
   const players = inactivePlayers(state)
   const retiredPlayers = players.filter(({ isRetired }) => isRetired)
@@ -10,16 +12,22 @@ const mapStateToProps = (state) => {
   return { retiredPlayers, unretiredPlayers }
 }
 
-const InactivePlayersList = (props) => {
-  const { retiredPlayers, unretiredPlayers } = props
+const mapDispatchToProps = (dispatch, { tableId }) => ({
+  activatePlayer: (playerId) => () => dispatch(activatePlayer({ tableId, playerId }))
+})
 
-  const retiredPlayerListItems = retiredPlayers.map((player) => (
-    <li key={player.id}>
-      <button className="table-controls-button grey small">
-        {player.name}
-      </button>
-    </li>
-  ))
+const InactivePlayersList = (props) => {
+  const { retiredPlayers, unretiredPlayers, activatePlayer } = props
+
+  const retiredPlayerListItems = retiredPlayers.map((player) => {
+    return (
+      <li key={player.id}>
+        <button className="table-controls-button grey small" onClick={activatePlayer(player.id)}>
+          {player.name}
+        </button>
+      </li>
+    )
+  })
 
   const unretiredPlayerListItems = unretiredPlayers.map((player) => (
     <li key={player.id}>
@@ -42,4 +50,4 @@ const InactivePlayersList = (props) => {
   )
 }
 
-export default connect(mapStateToProps)(InactivePlayersList)
+export default connect(mapStateToProps, mapDispatchToProps)(InactivePlayersList)

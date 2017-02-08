@@ -24,15 +24,15 @@ const mapDispatchToProps = (dispatch, { tableId }) => {
 }
 
 const TableControls = (props) => {
-  const { onSetupClick } = props
+  const { onSetupClick, tableId } = props
 
   return (
     <div className="scoreboard-table-controls">
       <button className="table-controls-button green" onClick={onSetupClick}>
         Setup match!
       </button>
-      <ActivePlayersList/>
-      <InactivePlayersList/>
+      <ActivePlayersList tableId={tableId}/>
+      <InactivePlayersList tableId={tableId}/>
     </div>
   )
 }
