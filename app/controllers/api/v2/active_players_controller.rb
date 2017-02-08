@@ -29,7 +29,7 @@ module Api
 
       def load_player
         @player = Player.find(params[:id] || params[:active_player][:id])
-        authorize! :update, @table
+        authorize! :update, @player
       rescue ActiveRecord::RecordNotFound
         render json: nil, status: :not_found
       end
