@@ -31,7 +31,7 @@ const InactivePlayersList = (props) => {
 
   const unretiredPlayerListItems = unretiredPlayers.map((player) => (
     <li key={player.id}>
-      <button className="table-controls-button white">
+      <button className="table-controls-button white" onClick={activatePlayer(player.id)}>
         {player.name}
       </button>
     </li>
