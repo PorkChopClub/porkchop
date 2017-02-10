@@ -6,7 +6,7 @@ RSpec.describe ActivationsController do
       before { sign_in player }
 
       context "when the player is not active" do
-        let(:player) { create :player, :confirmed }
+        let(:player) { create :player }
 
         it { is_expected.to redirect_to "/" }
 
@@ -29,7 +29,7 @@ RSpec.describe ActivationsController do
       end
 
       context "when the player is already active" do
-        let(:player) { create :player, :confirmed, active: true }
+        let(:player) { create :player, active: true }
 
         it { is_expected.to redirect_to "/" }
 
@@ -73,7 +73,7 @@ RSpec.describe ActivationsController do
       before { sign_in player }
 
       context "when the current player is in the queue" do
-        let(:player) { create :player, :confirmed, active: true }
+        let(:player) { create :player, active: true }
 
         it { is_expected.to redirect_to "/" }
 
@@ -96,7 +96,7 @@ RSpec.describe ActivationsController do
       end
 
       context "when the current player is not in the queue" do
-        let(:player) { create :player, :confirmed }
+        let(:player) { create :player }
 
         it { is_expected.to redirect_to "/" }
 
