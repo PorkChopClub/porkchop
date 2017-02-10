@@ -2,7 +2,7 @@ namespace :porkchop do
   desc "Pretend someone is pressing buttons on the table"
   task press_buttons: [:environment] do
     loop do
-      sleep rand(1.0..5.0)
+      sleep rand(3.0..5.0)
       match = Match.ongoing.first
       controls = PingPong::TableControls.new(match)
       case rand(2)
