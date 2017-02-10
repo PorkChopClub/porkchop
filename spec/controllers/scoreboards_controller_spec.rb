@@ -4,6 +4,8 @@ RSpec.describe ScoreboardsController, type: :controller do
   describe "GET show" do
     subject { get :show, params: { id: table_id } }
 
+    before { sign_in create(:admin_player) }
+
     context "when the table does exist" do
       let(:table_id) { create(:table).id }
       it { is_expected.to have_http_status :ok }
