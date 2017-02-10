@@ -31,10 +31,6 @@ class Player < ActiveRecord::Base
       order(%{(SELECT rating FROM "elo_ratings" WHERE player_id = "players"."id" ORDER BY "elo_ratings"."created_at" DESC LIMIT 1 ) DESC})
   end
 
-  def admin?
-    confirmed? && /@stembolt.com\z/ =~ email
-  end
-
   def matches
     Match.where "matches.home_player_id = :id OR matches.away_player_id = :id",
                 id: id
