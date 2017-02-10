@@ -14,7 +14,6 @@ const mapDispatchToProps = (dispatch, { tableId }) => ({
 const ActivePlayersList = (props) => {
   const { activePlayers, deactivatePlayer } = props
 
-  console.log(deactivatePlayer)
   const players = activePlayers.map((player) => (
     <li key={player.id}>
       <button className="table-controls-button blue" onClick={deactivatePlayer(player.id)}>
