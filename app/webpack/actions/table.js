@@ -1,7 +1,10 @@
 import { createAction } from 'redux-actions'
 
 import { setup } from '../api/v2/ongoingMatch'
-import { activePlayers, activatePlayer as apiActivatePlayer } from '../api/v2/table'
+import {
+  activePlayers,
+  activatePlayer as apiActivatePlayer,
+  deactivatePlayer as apiDeactivatePlayer} from '../api/v2/table'
 
 import {
   tableId as tableIdSelector,
@@ -22,6 +25,13 @@ export const activatePlayer = ({ tableId, playerId }) => (dispatch, getState) =>
 
   dispatch(setActivePlayers([activatedPlayer, ...activePlayers]))
   apiActivatePlayer({ tableId, playerId })
+    .then((json) => dispatch(setActivePlayers(json)))
+}
+
+export const deactivatePlayer = ({ tableId, playerId }) => (dispatch, getState) => {
+  const activePlayers = activePlayersSelector(getState()).filter((player) => player.id !== playerId)
+  dispatch(setActivePlayers(activePlayers))
+  apiDeactivatePlayer({ tableId, playerId })
     .then((json) => dispatch(setActivePlayers(json)))
 }
 
