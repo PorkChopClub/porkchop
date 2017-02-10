@@ -22,7 +22,7 @@ FactoryGirl.define do
     factory :active_player, traits: [:active]
 
     factory :admin_player, traits: [:confirmed] do
-      sequence(:email) { |n| "cbergen#{n}@stembolt.com" }
+      admin true
     end
   end
 end
