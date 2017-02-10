@@ -30,9 +30,11 @@ const visibleComponent = (props) => {
   } = props
   if (!isMatchHappening) { return <NoMatch/> }
 
-  if (!isMatchStarted && secondsOld < 30) {
-    return <MatchResult/>
-  } else if (!isMatchStarted && secondsOld < 90) {
+  // FIXME:
+  // if (!isMatchStarted && secondsOld < 30) {
+  //   return <MatchResult/>
+  // } else
+  if (!isMatchStarted && secondsOld < 90) {
     return <MatchPreview/>
   }
 
