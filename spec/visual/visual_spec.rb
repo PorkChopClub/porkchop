@@ -17,32 +17,12 @@ RSpec.describe "Visuals", type: :feature do
     end
 
     it "scoreboard" do
+      login_as create(:admin_player)
+
       visit scoreboard_path(match.table)
 
       sleep 1
       observe! 'scoreboard'
-    end
-  end
-
-  context 'as admin' do
-    before do
-      create :default_table
-      login_as create(:admin_player), scope: :player
-    end
-
-    it "create, and score game" do
-      FactoryGirl.create :player, name: "Dave", active: true
-      FactoryGirl.create :player, name: "Anne", active: true
-
-      visit '/scoreboard/edit'
-
-      sleep 1
-      observe! 'New Match'
-
-      click_on 'Matchmake'
-
-      sleep 1
-      observe! 'Controls'
     end
   end
 end
