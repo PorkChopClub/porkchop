@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get 'play', to: 'activations#activate'
+  # get 'play', to: 'activations#activate'
   post 'play', to: 'activations#activate'
   delete 'play', to: 'activations#deactivate'
 
@@ -20,27 +20,19 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v2 do
+      resources :players, only: :index
+
       resources :tables, only: [] do
+        resources :active_players, only: [:index, :destroy, :create]
+
         resources :matches, only: [] do
           collection do
             get :ongoing
+            post :setup
           end
         end
       end
     end
-
-    resources :players, only: :index
-
-    resource :ongoing_match, only: [:show, :destroy] do
-      put "home_point"
-      put "away_point"
-      put "toggle_service"
-      put "rewind"
-      put "finalize"
-      put "matchmake"
-    end
-
-    resource :matchmaking, only: [:show]
 
     resources :activations, only: [:index] do
       member do

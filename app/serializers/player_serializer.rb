@@ -4,6 +4,8 @@ class PlayerSerializer < ActiveModel::Serializer
              :name,
              :portrait_url
 
+  attribute :retired?, key: :isRetired
+
   def portrait_url
     if object.profile_picture?
       object.profile_picture.url

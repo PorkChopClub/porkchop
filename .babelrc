@@ -1,9 +1,11 @@
 {
+  "plugins": ["transform-object-rest-spread"],
   "presets": [
-    ["es2015", { "modules": false }]
-  ],
-  "plugins": [
-    ["transform-object-rest-spread"],
-    ["babel-plugin-transform-decorators-legacy"]
+    "react",
+    ["env", {
+      "targets": {
+        "browsers": "> 3% in US"
+      }
+    }]
   ]
 }

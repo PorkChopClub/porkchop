@@ -3,7 +3,6 @@ class Player < ActiveRecord::Base
 
   devise :database_authenticatable,
          :registerable,
-         :confirmable,
          :recoverable,
          :rememberable,
          :trackable,
@@ -29,10 +28,6 @@ class Player < ActiveRecord::Base
       group('"players"."id"').
       having(%{SUM(CASE WHEN finalized_at > '#{14.days.ago.to_s :db}' THEN 1 ELSE 0 END) > 4 AND COUNT(*) >= 20}).
       order(%{(SELECT rating FROM "elo_ratings" WHERE player_id = "players"."id" ORDER BY "elo_ratings"."created_at" DESC LIMIT 1 ) DESC})
-  end
-
-  def admin?
-    confirmed? && /@stembolt.com\z/ =~ email
   end
 
   def matches
@@ -83,6 +78,10 @@ class Player < ActiveRecord::Base
 
   def current_streak
     streaks.active.first
+  end
+
+  def retired?
+    matches.finalized.where('finalized_at > ?', 4.months.ago).count < 10
   end
 
   private

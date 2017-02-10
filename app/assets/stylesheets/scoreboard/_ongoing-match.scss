@@ -1,4 +1,11 @@
 .scoreboard-ongoing-match {
+  background-color: shade($green, 10%);
+  @include radial-gradient(
+    circle at 50% 50%,
+    transparent 40%,
+    shade(transparent, 15%) 75%,
+    shade(transparent, 35%)
+  );
 }
 
 .ongoing-match-versus {
@@ -19,25 +26,31 @@
   @include flex-direction(row);
 }
 
-@mixin player-background($color) {
-  @include radial-gradient(
-    circle at 50% 50%,
-    $color 50%,
-    shade($color, 10%) 75%,
-    shade($color, 35%)
-  );
-}
-
 .ongoing-match-player {
   @include flex-grow(1);
   position: relative;
 
+  &.receiving,
+  &.serving,
+  &.no-service {
+    @include radial-gradient(
+      circle at 50% 50%,
+      transparent 50%,
+      shade(transparent, 5%) 75%,
+      shade(transparent, 25%)
+    );
+  }
+
   &.receiving {
-    @include player-background(#CCC);
+    background-color: #CCC;
   }
 
   &.serving {
-    @include player-background($blue);
+    background-color: $blue;
+  }
+
+  &.no-service {
+    background-image: none;
   }
 
   .name {

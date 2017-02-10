@@ -6,14 +6,16 @@ module.exports = function(options) {
   config.context = __dirname;
 
   const entry = (name) => [
+    "jquery-ujs",
     "babel-polyfill",
-    "./app/webpack/shared.js",
     `./app/webpack/${name}.js`
   ]
 
   config.entry = {
-    scoreboard: entry('scoreboard'),
-    default: entry('default')
+    default: entry('default'),
+    homepage: entry('homepage'),
+    player_show: entry('playerShow'),
+    scoreboard: entry('scoreboard')
   };
 
   config.output = {
@@ -23,7 +25,10 @@ module.exports = function(options) {
 
   config.plugins = [
     new webpack.ProvidePlugin({
-      'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+      jQuery: 'jquery',
+      $: 'jquery',
+      React: 'react'
     })
   ];
 
@@ -32,9 +37,6 @@ module.exports = function(options) {
       { test: /\.js$/,
         exclude: /node_modules/,
         loader: "babel-loader"
-      },
-      { test: /\.hbs$/,
-        loader: "handlebars-loader"
       }
     ]
   }

@@ -1,16 +1,24 @@
+require 'ffaker'
+
 FactoryGirl.define do
   factory :player do
     sequence(:email) { |n| "cbergen#{n}@example.com" }
     password "password"
-    sequence(:name) { |n| "Candice Bergen ##{n}" }
-    legacy_avatar_url "http://bit.ly/15E65sT"
-
-    trait :confirmed do
-      confirmed_at { 1.hour.ago }
+    name { FFaker::Name.name }
+    legacy_avatar_url do
+      width = rand(40..1000)
+      height = rand(40..1000)
+      "https://www.placecage.com/#{width}/#{height}"
     end
 
-    factory :admin_player, traits: [:confirmed] do
-      sequence(:email) { |n| "cbergen#{n}@stembolt.com" }
+    trait :active do
+      active true
+    end
+
+    factory :active_player, traits: [:active]
+
+    factory :admin_player do
+      admin true
     end
   end
 end

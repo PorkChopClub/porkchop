@@ -22,6 +22,8 @@ RSpec.describe "scoreboard page" do
   end
 
   scenario "recording a normal game" do
+    login_as create(:admin_player)
+
     visit scoreboard_path(table)
 
     expect(page).to have_content "No match."

@@ -1,18 +1,13 @@
 html,
 body {
-  overflow: hidden;
+  &::-webkit-scrollbar { width: 0 !important }
 }
 
 .scoreboard {
   width: 1920px;
   height: 1080px;
   position: relative;
-
-  $color: shade($blue, 15%);
-  @include radial-gradient(
-    circle at 50% 50%,
-    $color 40%,
-    shade($color, 10%) 75%,
-    shade($color, 35%)
-  );
+  box-shadow: 0 10px 20px rgba($dark-grey, 0.5);
+  margin-bottom: 75vh;
+  z-index: 1;
 }

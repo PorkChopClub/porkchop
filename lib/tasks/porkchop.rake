@@ -2,7 +2,7 @@ namespace :porkchop do
   desc "Pretend someone is pressing buttons on the table"
   task press_buttons: [:environment] do
     loop do
-      sleep rand(1.0..5.0)
+      sleep rand(3.0..5.0)
       match = Match.ongoing.first
       controls = PingPong::TableControls.new(match)
       case rand(2)
@@ -13,6 +13,7 @@ namespace :porkchop do
         puts "Away button!"
         controls.away_button
       end
+      OngoingMatchChannel.broadcast_update
     end
   end
 
@@ -29,7 +30,7 @@ namespace :porkchop do
     Player.update_all active: true
     Match.setup!
 
-    14.downto(0).each do |n|
+    30.downto(0).each do |n|
       puts "Generating matches #{n} days ago."
       finalized_at =
         n.days.ago.at_beginning_of_day +
@@ -37,7 +38,7 @@ namespace :porkchop do
         rand(0..59).minutes +
         rand(0..59).seconds
 
-      rand(0..4).times do
+      rand(0..8).times do
         match = Match.ongoing.last!
 
         scores = [11, rand(0..9)].shuffle

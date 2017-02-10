@@ -1,46 +1,22 @@
-import $ from 'jquery'
-import { combineWith } from 'baconjs'
+import './banner'
 
-import scoreboardTemplate from './templates/scoreboard.hbs'
-import ongoingMatch from './observables/ongoingMatch'
-import ongoingMatchComponent from './components/ongoingMatchComponent'
-import preMatchComponent from './components/preMatchComponent'
-import {
-  secondsOld,
-  serviceSelected
-} from './observables/match'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 
+import store from './stores/scoreboard'
+import { trackOngoingMatch } from './actions/ongoingMatch'
+import { trackTable } from './actions/table'
+import { trackPlayers } from './actions/players'
+import App from './components/scoreboard/App'
 
 const tableId = document.body.dataset.tableId
-const match = ongoingMatch(tableId)
+store.dispatch(trackTable(tableId))
+store.dispatch(trackOngoingMatch(tableId))
+store.dispatch(trackPlayers())
 
-$(document.body).html(scoreboardTemplate())
-
-const newMatch = secondsOld(match).map((n) => n <= 120)
-const started = serviceSelected(match)
-const noMatch = match.map((match) => !match)
-
-combineWith(
-  [newMatch, started, noMatch],
-  (newMatch, started, noMatch) => {
-    if (noMatch) {
-      return 'no-match'
-    } else if (newMatch && !started) {
-      return 'pre-match'
-    } else {
-      return 'ongoing-match'
-    }
-  }
+render(
+  <Provider store={store}>
+    <App/>
+  </Provider>,
+  document.getElementById('scoreboard')
 )
-  .skipDuplicates()
-  .scan(
-    { currentState: 'no-match' },
-    ({ currentState: previousState }, currentState) => ({ currentState, previousState })
-  )
-  .onValue(({ currentState, previousState }) => {
-    $(`.scoreboard-page.scoreboard-${previousState}`).removeClass('active')
-    $(`.scoreboard-page.scoreboard-${currentState}`).addClass('active')
-  })
-
-ongoingMatchComponent($('.scoreboard-ongoing-match'), match)
-preMatchComponent($('.scoreboard-pre-match'), match)
