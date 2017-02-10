@@ -18,11 +18,4 @@ RSpec.describe ScoreboardsController, type: :controller do
       end
     end
   end
-
-  describe "GET edit" do
-    subject { get :edit }
-    before { sign_in create(:admin_player) }
-    let(:match) { FactoryGirl.create :match }
-    it { is_expected.to have_http_status :success }
-  end
 end
