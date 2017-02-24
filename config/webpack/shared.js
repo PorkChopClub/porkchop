@@ -15,7 +15,11 @@ config = {
   entry: glob.sync(path.join('app', 'javascript', 'packs', '*.js*')).reduce(
     function(map, entry) {
       var basename = path.basename(entry, extname(entry))
-      map[basename] = path.resolve(entry)
+      map[basename] = [
+        "jquery-ujs",
+        "babel-polyfill",
+        path.resolve(entry)
+      ]
       return map
     }, {}
   ),
@@ -47,6 +51,12 @@ config = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+      jQuery: 'jquery',
+      $: 'jquery',
+      React: 'react'
+    }),
     new webpack.EnvironmentPlugin(Object.keys(process.env))
   ],
 
