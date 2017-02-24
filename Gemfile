@@ -27,6 +27,8 @@ gem 'normalize-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 
+gem 'webpacker'
+
 # Frontend
 gem 'jbuilder', '~> 2.0'
 gem 'hamlit'

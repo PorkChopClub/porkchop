@@ -7,8 +7,8 @@
   },
   "private": true,
   "scripts": {
-    "watch": "webpack --watch --progress",
-    "compile": "webpack"
+    "watch": "bin/webpack-watcher",
+    "compile": "bin/webpack"
   },
   "repository": {
     "type": "git",
@@ -19,19 +19,22 @@
   "homepage": "http://porkchop.club",
   "dependencies": {
     "actioncable": "^5.0.0",
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-polyfill": "^6.16.0",
     "babel-preset-env": "^1.1.4",
+    "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "chart.js": "^2.2.2",
     "classnames": "^2.2.5",
     "exports-loader": "^0.6.3",
+    "glob": "^7.1.1",
     "imports-loader": "^0.6.5",
     "jquery": "^3.1.0",
     "jquery-ujs": "^1.2.2",
     "lodash": "^4.17.4",
+    "path-complete-extname": "^0.1.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
@@ -39,7 +42,9 @@
     "redux-actions": "^1.2.1",
     "redux-thunk": "^2.2.0",
     "reselect": "^2.5.4",
-    "webpack": "^2.1.0-beta.25",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1",
+    "webpack-merge": "^3.0.0",
     "whatwg-fetch": "^1.0.0"
   }
 }
