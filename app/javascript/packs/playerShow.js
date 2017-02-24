@@ -1,4 +1,4 @@
-import './banner'
+import 'banner'
 
 import Chart from 'chart.js'
 
