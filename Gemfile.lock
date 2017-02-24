@@ -418,7 +418,7 @@ DEPENDENCIES
   rack-cors
   rack-livereload
   rack-mini-profiler
-  rails (~> 5.0.0)
+  rails (~> 5.0.1)
   rails-controller-testing
   rainbow (>= 2.1.0, < 2.2.0)
   redis-rails

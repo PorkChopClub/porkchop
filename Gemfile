@@ -8,7 +8,7 @@ gem 'rainbow', '>= 2.1.0', '< 2.2.0'
 # This should be first.
 gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
 
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.0.1'
 gem 'rack-cors'
 gem 'pg'
 gem 'puma'
