@@ -33,8 +33,14 @@ config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
+          plugins: ["transform-object-rest-spread"],
           presets: [
-            [ 'latest', { 'es2015': { 'modules': false } } ]
+            "react",
+            ["env", {
+              "targets": {
+                "browsers": "> 3% in US"
+              }
+            }]
           ]
         }
       },
