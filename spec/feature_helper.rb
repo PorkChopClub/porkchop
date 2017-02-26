@@ -18,8 +18,7 @@ Capybara.server = :puma
 RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.before(:suite) do
-    Porkchop::Application.load_tasks
-    Rake::Task[:webpack].invoke
+    system "#{Rails.root}/bin/webpack"
     Warden.test_mode!
   end
   config.after :each do
