@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import { sortBy } from 'lodash'
+import sortPlayers from 'utils/sortPlayers'
 
 import {
   setTableId,
@@ -10,7 +10,7 @@ import {
 } from '../actions/table'
 
 const updateActivePlayers = (state, { payload: activePlayers }) => {
-  const sortedActivePlayers = sortBy(activePlayers, ({ name }) => name)
+  const sortedActivePlayers = sortPlayers(activePlayers)
   return { ...state, activePlayers: sortedActivePlayers }
 }
 
