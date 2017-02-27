@@ -6,6 +6,7 @@ class OngoingMatchSerializer < MatchSerializer
              :seconds_old
 
   belongs_to :next_matchup
+  belongs_to :betting_info
 
   def home_service_state
     if unstarted_or_finished?
