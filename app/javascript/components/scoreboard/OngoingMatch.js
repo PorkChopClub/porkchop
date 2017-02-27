@@ -10,9 +10,17 @@ const playerStyle = (player, match) => ({
   backgroundImage: `url(${match[`${player}_player`].portrait_url})`
 })
 
-export default ({ match }) => {
-  const nextMatchPlayers = match.next_matchup.player_names.join(" vs ")
+const nextMatchPlayers = (match) => match.next_matchup.player_names.join(" vs ")
+const centerText = (match) => {
+  if (match['finished?']) {
+    return "Final Score"
+  } else if (!match.service_selected) {
+    return "Time to play!"
+  }
+  return "vs"
+}
 
+export default ({ match }) => {
   return (
     <div className="scoreboard-ongoing-match scoreboard-page">
       <div className="ongoing-match-frame">
@@ -30,11 +38,11 @@ export default ({ match }) => {
           </div>
         </div>
 
-        <div className="ongoing-match-versus">vs</div>
+        <div className="ongoing-match-versus">{centerText(match)}</div>
       </div>
 
       <div className="ongoing-match-next-match">
-        Next up: {nextMatchPlayers}
+        Next up: {nextMatchPlayers(match)}
       </div>
     </div>
   )
