@@ -65,9 +65,16 @@ export const awayPlayerName = createSelector(
   }
 )
 
-export const nextMatchup = createSelector(
+export const bettingInfo = createSelector(
   ongoingMatch,
   (ongoingMatch) => {
-    ongoingMatch ? ongoingMatch.next_matchup.player_names : null
+    return ongoingMatch ? ongoingMatch.betting_info : null
+  }
+)
+
+export const spread = createSelector(
+  bettingInfo,
+  (bettingInfo) => {
+    return bettingInfo ? bettingInfo.spread : ""
   }
 )
