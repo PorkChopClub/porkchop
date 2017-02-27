@@ -64,3 +64,10 @@ export const awayPlayerName = createSelector(
     return awayPlayer ? awayPlayer.name : null
   }
 )
+
+export const nextMatchup = createSelector(
+  ongoingMatch,
+  (ongoingMatch) => {
+    ongoingMatch ? ongoingMatch.next_matchup.player_names : null
+  }
+)
