@@ -53,12 +53,7 @@ class Api::V2::MatchesController < ApplicationController
       include: [
         :home_player,
         :away_player,
-        {
-          upcoming_matches: [
-            :home_player,
-            :away_player
-          ]
-        }
+        :next_matchup
       ],
       status: success_status
     )
