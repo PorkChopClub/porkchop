@@ -1,5 +1,6 @@
 class Matchup
   include ActiveModel::Validations
+  include ActiveModel::Serialization
 
   EPOCH = Time.zone.at(0)
 

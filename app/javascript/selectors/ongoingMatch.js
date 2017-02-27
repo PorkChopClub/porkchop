@@ -64,3 +64,17 @@ export const awayPlayerName = createSelector(
     return awayPlayer ? awayPlayer.name : null
   }
 )
+
+export const bettingInfo = createSelector(
+  ongoingMatch,
+  (ongoingMatch) => {
+    return ongoingMatch ? ongoingMatch.betting_info : null
+  }
+)
+
+export const spread = createSelector(
+  bettingInfo,
+  (bettingInfo) => {
+    return bettingInfo ? bettingInfo.spread : ""
+  }
+)

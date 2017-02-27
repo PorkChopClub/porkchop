@@ -24,12 +24,8 @@ class OngoingMatchChannel < ApplicationCable::Channel
           include: [
             :home_player,
             :away_player,
-            {
-              upcoming_matches: [
-                :home_player,
-                :away_player
-              ]
-            }
+            :next_matchup,
+            :betting_info
           ]
         }
         ActiveModelSerializers::SerializableResource.new(match, options).to_json

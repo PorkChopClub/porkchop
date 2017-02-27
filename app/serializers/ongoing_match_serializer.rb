@@ -5,7 +5,8 @@ class OngoingMatchSerializer < MatchSerializer
              :finished?,
              :seconds_old
 
-  has_many :upcoming_matches
+  belongs_to :next_matchup
+  belongs_to :betting_info
 
   def home_service_state
     if unstarted_or_finished?
@@ -31,12 +32,12 @@ class OngoingMatchSerializer < MatchSerializer
     Time.zone.now.to_i - object.created_at.to_i
   end
 
-  def upcoming_matches
-    object.table.upcoming_matches.limit(3)
-  end
-
   def service_selected
     service_selected?
+  end
+
+  def next_matchup
+    Matchmaker.choose
   end
 
   private
