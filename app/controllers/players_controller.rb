@@ -8,7 +8,7 @@ class PlayersController < ApplicationController
 
   def show
     @stats = Stats::Personal.new(@player)
-    @javascript_entrypoint = "player_show"
+    @javascript_entrypoint = "playerShow"
   end
 
   private
