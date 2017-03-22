@@ -5,14 +5,12 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  # get 'play', to: 'activations#activate'
   post 'play', to: 'activations#activate'
   delete 'play', to: 'activations#deactivate'
 
   resource :scoreboard, only: :edit
   resources :scoreboards, only: :show
 
-  resources :matches, only: [:index, :show]
   resources :players, only: [:index, :show] do
     resources :matches, controller: "player_matches", only: :index
   end
