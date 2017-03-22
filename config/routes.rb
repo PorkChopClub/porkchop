@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :players, only: [:index, :show] do
     resources :matches, controller: "player_matches", only: :index
   end
-  resources :seasons, only: [:show]
 
   namespace :api do
     namespace :v2 do
