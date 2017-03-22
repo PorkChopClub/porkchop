@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   post 'play', to: 'activations#activate'
   delete 'play', to: 'activations#deactivate'
 
-  resource :scoreboard, only: :edit
   resources :scoreboards, only: :show
 
   resources :players, only: [:index, :show] do
@@ -29,13 +28,6 @@ Rails.application.routes.draw do
             post :setup
           end
         end
-      end
-    end
-
-    resources :activations, only: [:index] do
-      member do
-        put "activate"
-        put "deactivate"
       end
     end
 
