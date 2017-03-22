@@ -1,14 +1,11 @@
 !!! 5
 %html
   = render "layouts/head"
-%body.layout-good
-  = render "layouts/header"
 
+%body.layout-good
   = render "layouts/flashes"
 
   .site-content
     = yield
-
-  = render "layouts/footer"
 
   = render 'layouts/javascript'
