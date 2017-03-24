@@ -29,9 +29,6 @@
         %td(data-label="Longest Losing Streak:")= @stats.longest_losing_streak
 
 .porkbox-light.clearfix
-  %canvas.player-elo-chart{ data: { ratings: @player.elo_ratings.sorted_ratings } }
-
-.porkbox-light.clearfix
   .player-win-percentages
     %h2 Win Ratio by Opponent
     %table.player-win-percentage-list.alternating-rows
