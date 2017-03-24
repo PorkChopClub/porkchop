@@ -1,41 +1,4 @@
 @import "normalize-rails";
-@import "modular-scale";
 @import "bourbon";
-@import "font-awesome";
 
-@import "setup/layout";
-@import "setup/palette";
-@import "setup/z-indexes";
-
-@import "animations";
 @import "base";
-@import "tables";
-@import "typography";
-@import "responsive";
-@import "buttons";
-@import "porkbox";
-
-@import "layout";
-@import "page-header";
-@import "flashes";
-@import "forms";
-
-@import "homepage";
-
-@import "seasons/list";
-
-@import "matches/index";
-@import "matches/show";
-@import "matches/list";
-
-@import "player_matches/list";
-
-@import "scoreboards/edit";
-
-@import "activations/edit";
-
-@import "players/index";
-@import "players/show";
-@import "players/edit";
-
-@import "shared/leaderboard";
