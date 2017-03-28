@@ -858,8 +858,8 @@ browserify-rsa@^4.0.0:
     randombytes "^2.0.1"
 
 browserify-sign@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/browserify-sign/-/browserify-sign-4.0.0.tgz#10773910c3c206d5420a46aad8694f820b85968f"
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/browserify-sign/-/browserify-sign-4.0.3.tgz#b41d5330ba52d5c67855773e273dd3cf14a7e497"
   dependencies:
     bn.js "^4.1.1"
     browserify-rsa "^4.0.0"
@@ -919,8 +919,8 @@ camelcase@^3.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
 caniuse-db@^1.0.30000639:
-  version "1.0.30000640"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000640.tgz#7b7fd3cf13c0d9d41f8754b577b202113e2be7ca"
+  version "1.0.30000642"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000642.tgz#182a8963f5f7bd18dd0d9bde2f68599cc2157d46"
 
 caseless@~0.12.0:
   version "0.12.0"
