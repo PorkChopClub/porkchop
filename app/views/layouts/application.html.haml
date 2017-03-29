@@ -3,7 +3,9 @@
   = render "layouts/head"
 
 %body.layout-good
-  %nav.pullout-navigation
+  %nav.pullout-navigation(data-js-pullout-navigation)
+    .pullout-navigation-item
+      = link_to "Home", root_path
   .site-wrap
     = render "layouts/flashes"
 
