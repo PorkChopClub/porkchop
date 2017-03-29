@@ -2,10 +2,10 @@
 %html
   = render "layouts/head"
 
-%body.layout-good
-  %nav.pullout-navigation(data-js-pullout-navigation)
-    .pullout-navigation-item
-      = link_to "Home", root_path
+%body(data-js-pullout-navigation-active)
+  .pullout-navigation-overlay(data-js-pullout-navigation-active)
+  = render "pullout_navigation"
+
   .site-wrap
     = render "layouts/flashes"
 

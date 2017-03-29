@@ -3,7 +3,7 @@ import { map } from 'rxjs/operator/map'
 import { scan } from 'rxjs/operator/scan'
 
 $(() => {
-  const pulloutSelector = '[data-js-pullout-navigation]';
+  const pulloutActiveSelector = '[data-js-pullout-navigation-active]';
   const toggleSelector = '[data-js-pullout-navigation-toggle]';
 
   const toggles = Observable.create(observer => {
@@ -16,6 +16,7 @@ $(() => {
 
   const showPullout = toggles::scan((acc) => !acc, false)
 
-  showPullout.subscribe((isShowing) =>
-    $(pulloutSelector).toggleClass('active', isShowing))
+  showPullout.subscribe((isShowing) => {
+    $(pulloutActiveSelector).toggleClass('pullout-navigation-active', isShowing)
+  })
 })

@@ -1,0 +1,50 @@
+body.pullout-navigation-active {
+  overflow: hidden;
+}
+
+.pullout-navigation-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color 125ms;
+
+  &.pullout-navigation-active {
+    display: block;
+    background-color: rgba(#FFF, 0.7);
+  }
+}
+
+.pullout-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  background-color: var(--color-blue);
+  overflow: hidden;
+  transition: width 125ms;
+
+  &.pullout-navigation-active {
+    width: 250px;
+  }
+}
+
+.pullout-navigation-inner {
+  width: 250px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
+.pullout-navigation-item {
+  padding: 1rem;
+
+  & + & {
+    border-top: 1px solid white;
+  }
+}
