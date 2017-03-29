@@ -1,4 +1,9 @@
 @import "normalize-rails";
 @import "bourbon";
 
+@import "variables";
 @import "base";
+@import "typography";
+
+@import "layout";
+@import "site-header";

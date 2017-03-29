@@ -64,7 +64,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'pry-rails'
 
-  gem 'ffaker', require: false
+  gem 'ffaker'
   gem 'factory_girl_rails', require: false
 end
 
