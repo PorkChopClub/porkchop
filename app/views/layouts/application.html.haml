@@ -3,11 +3,13 @@
   = render "layouts/head"
 
 %body.layout-good
-  = render "layouts/flashes"
+  %nav.pullout-navigation
+  .site-wrap
+    = render "layouts/flashes"
 
-  = render "site_header"
+    = render "site_header"
 
-  .site-content
-    = yield
+    .site-content
+      = yield
 
-  = render 'layouts/javascript'
+    = render 'layouts/javascript'
