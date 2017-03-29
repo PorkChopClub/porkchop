@@ -1,4 +1,40 @@
 .site-header {
+  --header-width-max: calc(var(--site-width-max) + 5.5rem);
+  --site-header-height: 2.5rem;
+  display: flex;
+  align-items: center;
   max-width: var(--header-width-max);
   margin: 0 auto;
+}
+
+.site-header-button-container {
+  flex: 0 0 auto;
+  padding: var(--site-padding) 0.75rem;
+
+  &:first-child { padding-left: 0; }
+  &:last-child { padding-right: 0; }
+}
+
+// FIXME: Style these for real.
+.site-header-button {
+  --size: 2rem;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--color-text-default);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-blue);
+  }
+}
+
+.site-header-title {
+  flex: 1 0 auto;
+  margin: 0;
+  font-size: 1.125rem;
+
+  a {
+    text-decoration: none;
+    color: var(--color-text-default);
+  }
 }

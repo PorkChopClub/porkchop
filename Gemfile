@@ -22,6 +22,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails'
 gem 'bourbon'
 gem 'normalize-rails'
+gem 'autoprefixer-rails'
 
 # Javascript
 gem 'webpacker'

@@ -56,6 +56,8 @@ GEM
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
+    autoprefixer-rails (6.7.7.1)
+      execjs
     bcrypt (3.1.11)
     bourbon (4.3.3)
       sass (~> 3.4)
@@ -105,6 +107,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.3)
     excon (0.55.0)
+    execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.8.0)
@@ -372,6 +375,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
+  autoprefixer-rails
   bourbon
   bugsnag
   cancancan

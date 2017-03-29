@@ -1,4 +1,9 @@
 :root {
-  --header-width-max: 600px;
   --site-width-max: 500px;
+  --site-padding: 0.75rem;
+
+  --color-black: #333333;
+  --color-blue: #4499FF;
+
+  --color-text-default: var(--color-black);
 }
