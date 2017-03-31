@@ -9,10 +9,7 @@
 
 .site-header-button-container {
   flex: 0 0 auto;
-  padding: var(--site-padding) 0.75rem;
-
-  &:first-child { padding-left: 0; }
-  &:last-child { padding-right: 0; }
+  padding: var(--site-padding) 0.75rem var(--site-padding) 0;
 }
 
 // FIXME: Style these for real.

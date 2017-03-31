@@ -1,23 +1,9 @@
-%nav.pullout-navigation(data-js-pullout-navigation-active)
+%nav.pullout-navigation.primary(data-js-pullout-navigation-active)
   .pullout-navigation-inner
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
-    .pullout-navigation-item= link_to "Home", root_path
+    = link_to "Home", root_path, class: "pullout-navigation-item"
+    - if current_player
+      = link_to "Change Password", edit_player_registration_path, class: "pullout-navigation-item"
+      = link_to "Log Out", destroy_player_session_path, method: :delete, class: "pullout-navigation-item"
+    - else
+      = link_to "Sign Up", new_player_registration_path, class: "pullout-navigation-item"
+      = link_to "Log In", new_player_session_path, class: "pullout-navigation-item"

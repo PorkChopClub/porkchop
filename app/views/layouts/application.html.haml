@@ -3,7 +3,10 @@
   = render "layouts/head"
 
 %body(data-js-pullout-navigation-active)
+  .play-now-button Play Now
+
   .pullout-navigation-overlay(data-js-pullout-navigation-active data-js-pullout-navigation-toggle)
+
   = render "pullout_navigation"
 
   .site-wrap
@@ -11,7 +14,8 @@
 
     = render "site_header"
 
-    .site-content
+    .site-content(data-js-pullout-navigation-active)
       = yield
 
-    = render 'layouts/javascript'
+  = render 'layouts/javascript'
+
