@@ -4,10 +4,24 @@
 
   --color-black: #333333;
   --color-blue: #7711EE;
+  --color-green: #00FF55;
   --color-pink: #FF44AA;
   --color-red: #FF5577;
+  --color-teal: #31B6A4;
   --color-white: #FFFFFF;
   --color-yellow: #FFAA55;
 
   --color-text-default: var(--color-black);
+  --color-text-inverted: var(--color-white);
+
+  --color-information: var(--color-green);
+  --color-warning: var(--color-yellow);
+  --color-error: var(--color-red);
+
+  --color-porkchop-primary: var(--color-red);
+  --color-porkchop-secondary: var(--color-teal);
+
+  --color-player-activation: var(--color-yellow);
+  --color-player-experience: var(--color-blue);
+  --color-player-rating: var(--color-pink);
 }
