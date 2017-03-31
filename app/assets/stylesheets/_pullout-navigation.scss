@@ -3,16 +3,14 @@ body.pullout-navigation-active {
 }
 
 .pullout-navigation-overlay {
-  display: none;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
-  transition: background-color 125ms;
+  transition: background-color 300ms;
 
   &.pullout-navigation-active {
-    display: block;
+    left: 0;
     background-color: rgba(#FFF, 0.75);
   }
 }
