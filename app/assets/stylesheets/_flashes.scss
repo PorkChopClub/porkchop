@@ -1,0 +1,25 @@
+.site-flash {
+  max-width: var(--site-width-max);
+  margin: 0 auto;
+  font-size: 1.125rem;
+  font-weight: bold;
+  padding: var(--site-padding);
+  margin-top: var(--site-padding);
+  text-align: center;
+  border: 2px solid transparent;
+
+  &.notice {
+    border-color: var(--color-blue);
+    color: var(--color-blue);
+  }
+
+  &.alert {
+    border-color: var(--color-yellow);
+    color: var(--color-yellow);
+  }
+
+  &.error {
+    border-color: var(--color-red);
+    color: var(--color-red);
+  }
+}

@@ -3,7 +3,10 @@
   = render "layouts/head"
 
 %body(data-js-pullout-navigation-active)
-  .play-now-button Play Now
+  - if current_player.active?
+    = link_to "Stop Playing", play_path, method: :delete, class: "play-now-button"
+  - else
+    = link_to "Play Now", play_path, method: :post, class: "play-now-button"
 
   .pullout-navigation-overlay(data-js-pullout-navigation-active data-js-pullout-navigation-toggle)
 
