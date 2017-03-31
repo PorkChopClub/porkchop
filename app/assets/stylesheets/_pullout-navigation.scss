@@ -23,8 +23,8 @@ body.pullout-navigation-active {
   width: 0;
   background-color: var(--color-text-inverted);
   overflow: hidden;
-  transition: box-shadow 250ms cubic-bezier(.82, .17, .78, 1.23),
-              width      250ms cubic-bezier(.82, .17, .78, 1.23);
+  transition: box-shadow  50ms cubic-bezier(.82, .17, .78, 1.23),
+              width      150ms cubic-bezier(.82, .17, .78, 1.23);
 
   &.pullout-navigation-active {
     width: 300px;
