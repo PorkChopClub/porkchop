@@ -1,52 +1,32 @@
-.porkbox-light
-  %table.player-stats
-    %thead
-      %tr
-        %th
-        %th(colspan="4") Record
-        %th(colspan="2") Elo Ratings
-        %th(colspan="2") Streaks
-      %tr
-        %th
-        %th GP
-        %th W
-        %th L
-        %th W%
-        %th(title="Highest Elo Rating") HER
-        %th(title="Lowest Elo Rating") LER
-        %th(title="Longest Winning Streak") LWS
-        %th(title="Longest Losing Streak") LLS
-    %tbody
-      %tr
-        %td Career
-        %td(data-label="GP:")= @player.matches.finalized.count
-        %td(data-label="W:")= @player.victories.count
-        %td(data-label="L:")= @player.losses.count
-        %td(data-label="W%:")= @stats.win_ratio
-        %td(data-label="Highest Elo:")= @stats.highest_elo_rating
-        %td(data-label="Lowest Elo:")= @stats.lowest_elo_rating
-        %td(data-label="Longest Winning Streak:")= @stats.longest_winning_streak
-        %td(data-label="Longest Losing Streak:")= @stats.longest_losing_streak
+%h2 Record
 
-.porkbox-light.clearfix
-  .player-win-percentages
-    %h2 Win Ratio by Opponent
-    %table.player-win-percentage-list.alternating-rows
-      %thead
-        %tr
-          %th Opponent
-          %th W
-          %th L
-          %th(title="Winning Percentage") W%
-      %tbody
-        - @stats.win_ratio_by_opponent.each do |opponent, ratio|
-          %tr
-            %td= opponent.name
-            %td= @stats.record_against(opponent)[0]
-            %td= @stats.record_against(opponent)[1]
-            %td= ratio
+%p Games played: #{@player.matches.finalized.count}
+%p Wins: #{@player.victories.count}
+%p Losses: #{@player.losses.count}
+%p Win percentage: #{@stats.win_ratio}
 
-  .player-match-history
-    %h2 Last 10 Matches
-    = render "player_matches/list", matches: @player.matches.finalized.order(finalized_at: :desc).limit(10)
-    %p= link_to "All Matches →", player_matches_path(@player)
+%h2 Elo Ratings
+
+%p Elo: #{@player.elo}
+%p Highest Elo: #{@stats.highest_elo_rating}
+%p Lowest Elo: #{@stats.lowest_elo_rating}
+
+%h2 Streaks
+
+- if @player.current_streak
+  %p Current streak: #{[@player.current_streak.streak_type, @player.current_streak.streak_length].join}
+%p Longest winning streak: #{@stats.longest_winning_streak}
+%p Longest losing streak: #{@stats.longest_losing_streak}
+
+%h2 Win Ratio by Opponent
+- @stats.win_ratio_by_opponent.each do |opponent, ratio|
+  %p
+    = opponent.name
+    = [@stats.record_against(opponent)[0], @stats.record_against(opponent)[1]].join("-")
+    = ratio
+
+%h2 Last 10 Matches
+
+= render "player_matches/list", matches: @player.matches.finalized.order(finalized_at: :desc).limit(10)
+
+%p= link_to "All Matches →", player_matches_path(@player)
