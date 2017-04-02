@@ -18,6 +18,7 @@ class Player < ActiveRecord::Base
   has_many :season_memberships
   has_many :seasons, through: :season_memberships
   has_many :streaks, class_name: "Stats::Streak"
+  has_many :experiences
 
   validates :name, presence: true
 
@@ -78,6 +79,10 @@ class Player < ActiveRecord::Base
 
   def retired?
     matches.finalized.where('finalized_at > ?', 4.months.ago).count < 10
+  end
+
+  def xp
+    experiences.sum(:xp)
   end
 
   private

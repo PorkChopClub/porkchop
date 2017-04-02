@@ -173,6 +173,19 @@ RSpec.describe Player, type: :model do
     end
   end
 
+  describe "#xp" do
+    subject(:xp) { player.xp }
+
+    let(:player) { create :player }
+
+    it "is the sum of their experiences xp" do
+      create :experience, player: player, reason: :completed_match
+      create :experience, player: player, reason: :completed_match
+      create :experience, player: player, reason: :won_match
+      expect(xp).to eq 235
+    end
+  end
+
   describe "#retired?" do
     subject { player.retired? }
 
