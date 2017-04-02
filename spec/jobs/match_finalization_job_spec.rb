@@ -13,6 +13,18 @@ RSpec.describe MatchFinalizationJob, type: :job do
           from(nil).to(match.home_player)
       end
 
+      it "awards victors's experience" do
+        expect { subject }.
+          to change { match.home_player.xp }.
+          from(0).to(135)
+      end
+
+      it "awards the loser's experience" do
+        expect { subject }.
+          to change { match.away_player.xp }.
+          from(0).to(100)
+      end
+
       it "finalizes the match" do
         expect { subject }.
           to change { match.finalized? }.
