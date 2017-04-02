@@ -43,6 +43,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^2.5.4",
     "rxjs": "^5.2.0",
+    "webfontloader": "^1.6.27",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1",
     "webpack-merge": "^3.0.0",

@@ -18,6 +18,7 @@ config = {
       map[basename] = [
         "jquery-ujs",
         "babel-polyfill",
+        "fonts",
         path.resolve(entry)
       ]
       return map
