@@ -21,8 +21,6 @@ class Player < ActiveRecord::Base
 
   validates :name, presence: true
 
-  after_save :record_rating
-
   def self.ranked
     joins('INNER JOIN "matches" ON ("home_player_id" = "players"."id" OR "away_player_id" = "players"."id")').
       group('"players"."id"').
@@ -58,8 +56,6 @@ class Player < ActiveRecord::Base
     Player.where(id: opponent_ids)
   end
 
-  attr_writer :elo
-
   def elo
     elo_ratings.most_recent_rating || BASE_ELO
   end
@@ -85,11 +81,6 @@ class Player < ActiveRecord::Base
   end
 
   private
-
-  def record_rating
-    return unless @elo
-    elo_ratings.create(rating: @elo)
-  end
 
   def opponent_ids
     matches.

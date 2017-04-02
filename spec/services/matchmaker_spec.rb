@@ -39,8 +39,8 @@ RSpec.describe Matchmaker do
 
     let(:matchmaker) { Matchmaker.new(players) }
     let(:players) { [bert, ernie] }
-    let(:ernie) { FactoryGirl.create :player, name: "Ernie", elo: 400, active: true }
-    let(:bert) { FactoryGirl.create :player, name: "Bert", elo: 1200, active: true }
+    let(:ernie) { FactoryGirl.create :player, name: "Ernie", active: true }
+    let(:bert) { FactoryGirl.create :player, name: "Bert", active: true }
 
     it "returns an arbitrary representation of the result of the matchup ranking" do
       expect(subject).to eq [{

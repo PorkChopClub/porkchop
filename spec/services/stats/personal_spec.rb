@@ -2,29 +2,29 @@ require 'rails_helper'
 
 RSpec.describe Stats::Personal do
   let(:stats) { described_class.new(player) }
-  let(:player) { FactoryGirl.create :player }
+  let(:player) { create :player }
 
   describe "#record_against" do
     subject { stats.record_against candice }
 
-    let(:candice) { FactoryGirl.create :player, name: "Candice" }
+    let(:candice) { create :player, name: "Candice" }
 
     let!(:match1) do
-      FactoryGirl.create :complete_match,
-                         home_player: player,
-                         away_player: candice
+      create :complete_match,
+             home_player: player,
+             away_player: candice
     end
 
     let!(:match2) do
-      FactoryGirl.create :complete_match,
-                         home_player: player,
-                         away_player: candice
+      create :complete_match,
+             home_player: player,
+             away_player: candice
     end
 
     let!(:match3) do
-      FactoryGirl.create :complete_match,
-                         home_player: candice,
-                         away_player: player
+      create :complete_match,
+             home_player: candice,
+             away_player: player
     end
 
     it { is_expected.to eq [2, 1] }
@@ -33,44 +33,44 @@ RSpec.describe Stats::Personal do
   describe "#win_ratio_by_opponent" do
     subject { stats.win_ratio_by_opponent }
 
-    let(:candice) { FactoryGirl.create :player, name: "Candice" }
-    let(:shirley) { FactoryGirl.create :player, name: "Shirley" }
-    let(:georgie) { FactoryGirl.create :player, name: "Georgie" }
+    let(:candice) { create :player, name: "Candice" }
+    let(:shirley) { create :player, name: "Shirley" }
+    let(:georgie) { create :player, name: "Georgie" }
 
     let!(:match1) do
-      FactoryGirl.create :complete_match,
-                         home_player: player,
-                         away_player: candice
+      create :complete_match,
+             home_player: player,
+             away_player: candice
     end
 
     let!(:match2) do
-      FactoryGirl.create :complete_match,
-                         home_player: player,
-                         away_player: candice
+      create :complete_match,
+             home_player: player,
+             away_player: candice
     end
 
     let!(:match3) do
-      FactoryGirl.create :complete_match,
-                         home_player: shirley,
-                         away_player: player
+      create :complete_match,
+             home_player: shirley,
+             away_player: player
     end
 
     let!(:match4) do
-      FactoryGirl.create :complete_match,
-                         home_player: shirley,
-                         away_player: player
+      create :complete_match,
+             home_player: shirley,
+             away_player: player
     end
 
     let!(:match5) do
-      FactoryGirl.create :complete_match,
-                         home_player: player,
-                         away_player: shirley
+      create :complete_match,
+             home_player: player,
+             away_player: shirley
     end
 
     let!(:match6) do
-      FactoryGirl.create :complete_match,
-                         home_player: georgie,
-                         away_player: player
+      create :complete_match,
+             home_player: georgie,
+             away_player: player
     end
 
     it "is a hash of the win ratios by opponents" do
@@ -85,15 +85,15 @@ RSpec.describe Stats::Personal do
 
     context "when the player has played games" do
       let!(:match1) do
-        FactoryGirl.create :complete_match, home_player: player
+        create :complete_match, home_player: player
       end
 
       let!(:match2) do
-        FactoryGirl.create :complete_match, home_player: player
+        create :complete_match, home_player: player
       end
 
       let!(:match3) do
-        FactoryGirl.create :complete_match, away_player: player
+        create :complete_match, away_player: player
       end
 
       it { is_expected.to eq ".667" }
@@ -108,20 +108,20 @@ RSpec.describe Stats::Personal do
     subject { stats.record }
 
     let!(:match1) do
-      FactoryGirl.create :complete_match,
-                         home_player: player,
-                         victor: player
+      create :complete_match,
+             home_player: player,
+             victor: player
     end
 
     let!(:match2) do
-      FactoryGirl.create :complete_match,
-                         home_player: player,
-                         victor: player
+      create :complete_match,
+             home_player: player,
+             victor: player
     end
 
     let!(:match3) do
-      FactoryGirl.create :complete_match,
-                         away_player: player
+      create :complete_match,
+             away_player: player
     end
 
     it { is_expected.to eq [2, 1] }
@@ -131,8 +131,8 @@ RSpec.describe Stats::Personal do
     subject { stats.last_10_results }
 
     before do
-      FactoryGirl.create_list :complete_match, 2, home_player: player
-      FactoryGirl.create :complete_match, away_player: player
+      create_list :complete_match, 2, home_player: player
+      create :complete_match, away_player: player
     end
 
     it { is_expected.to eq [2, 1] }
@@ -142,9 +142,10 @@ RSpec.describe Stats::Personal do
     subject { stats.highest_elo_rating }
 
     before do
-      FactoryGirl.create :elo_rating,
-                         player: player,
-                         rating: 1100
+      create :elo_rating,
+             player: player,
+             match: create(:match),
+             rating: 1100
     end
 
     it { is_expected.to eq 1100 }
@@ -154,9 +155,10 @@ RSpec.describe Stats::Personal do
     subject { stats.lowest_elo_rating }
 
     before do
-      FactoryGirl.create :elo_rating,
-                         player: player,
-                         rating: 900
+      create :elo_rating,
+             player: player,
+             match: create(:match),
+             rating: 900
     end
 
     it { is_expected.to eq 900 }
@@ -166,8 +168,8 @@ RSpec.describe Stats::Personal do
     subject { stats.longest_winning_streak }
 
     before do
-      FactoryGirl.create_list :streak, 2, :finished, player: player
-      FactoryGirl.create :streak, streak_length: 4, player: player
+      create_list :streak, 2, :finished, player: player
+      create :streak, streak_length: 4, player: player
     end
 
     it { is_expected.to eq 4 }
@@ -177,15 +179,15 @@ RSpec.describe Stats::Personal do
     subject { stats.longest_losing_streak }
 
     before do
-      FactoryGirl.create_list :streak,
-                              2,
-                              :finished,
-                              player: player,
-                              streak_type: "L"
-      FactoryGirl.create :streak,
-                         streak_length: 5,
-                         streak_type: "L",
-                         player: player
+      create_list :streak,
+                  2,
+                  :finished,
+                  player: player,
+                  streak_type: "L"
+      create :streak,
+             streak_length: 5,
+             streak_type: "L",
+             player: player
     end
 
     it { is_expected.to eq 5 }

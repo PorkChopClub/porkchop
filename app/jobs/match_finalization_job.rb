@@ -7,13 +7,16 @@ class MatchFinalizationJob < ApplicationJob
     return if match.finalized?
     return unless match.finished?
 
-    match.victor = match.leader
-    match.finalize!
-    update_streaks!
-    adjust_elo!
+    Match.transaction do
+      match.victor = match.leader
+      match.finalize!
+      update_streaks!
+      adjust_elo!
+      send_notification!
+      update_match_channel
+    end
+
     matchmake!
-    send_notification!
-    update_match_channel
   end
 
   private
@@ -28,7 +31,7 @@ class MatchFinalizationJob < ApplicationJob
     EloAdjustment.new(
       victor: match.victor,
       loser: match.loser,
-      matches: match.all_matches_before
+      match: match
     ).adjust!
   end
 

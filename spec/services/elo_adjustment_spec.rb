@@ -5,12 +5,13 @@ RSpec.describe EloAdjustment do
     described_class.new(
       victor: victor,
       loser: loser,
-      matches: Match.all
+      match: match
     )
   end
 
-  let(:victor) { FactoryGirl.create :player }
-  let(:loser) { FactoryGirl.create :player }
+  let(:match) { create :complete_match }
+  let(:victor) { match.victor }
+  let(:loser) { match.loser }
 
   describe "#adjust!" do
     subject { adjustment.adjust! }
@@ -25,39 +26,6 @@ RSpec.describe EloAdjustment do
         subject
         expect(loser.reload.elo).to eq 980
       end
-    end
-
-    context "when the players have very different ratings" do
-      let(:victor) { FactoryGirl.create :player, elo: 700 }
-      let(:loser) { FactoryGirl.create :player, elo: 1200 }
-
-      it "increases the victor's rating" do
-        subject
-        expect(victor.reload.elo).to eq 738
-      end
-
-      it "decreases the loser's rating" do
-        subject
-        expect(loser.reload.elo).to eq 1162
-      end
-    end
-  end
-
-  describe "#victor_elo_change" do
-    subject { adjustment.victor_elo_change }
-
-    it "returns the change in elo for the victor" do
-      subject
-      expect(subject).to eq 20
-    end
-  end
-
-  describe "#loser_elo_change" do
-    subject { adjustment.loser_elo_change }
-
-    it "returns the change in elo for the loser" do
-      subject
-      expect(subject).to eq(-20)
     end
   end
 end
