@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :experience do
     player
-    match
+    association(:match, factory: :complete_match)
     reason :completed_match
   end
 end
