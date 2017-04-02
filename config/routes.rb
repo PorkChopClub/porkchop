@@ -10,9 +10,7 @@ Rails.application.routes.draw do
 
   resources :scoreboards, only: :show
 
-  resources :players, only: [:index, :show] do
-    resources :matches, controller: "player_matches", only: :index
-  end
+  resources :players, only: [:index, :show]
 
   namespace :api do
     namespace :v2 do
