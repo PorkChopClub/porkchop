@@ -37,17 +37,15 @@ ActiveRecord::Schema.define(version: 20170402062910) do
   end
 
   create_table "experiences", force: :cascade do |t|
-    t.integer  "xp",          null: false
-    t.string   "reason",      null: false
-    t.string   "source_type", null: false
-    t.integer  "source_id",   null: false
-    t.integer  "player_id",   null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "xp",         null: false
+    t.string   "reason",     null: false
+    t.integer  "match_id",   null: false
+    t.integer  "player_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_experiences_on_match_id", using: :btree
     t.index ["player_id"], name: "index_experiences_on_player_id", using: :btree
-    t.index ["reason", "source_id", "source_type"], name: "index_experiences_on_reason_and_source_id_and_source_type", unique: true, using: :btree
-    t.index ["source_id"], name: "index_experiences_on_source_id", using: :btree
-    t.index ["source_type", "source_id"], name: "index_experiences_on_source_type_and_source_id", using: :btree
+    t.index ["reason", "player_id", "match_id"], name: "index_experiences_on_reason_and_player_id_and_match_id", unique: true, using: :btree
   end
 
   create_table "leagues", force: :cascade do |t|
@@ -157,6 +155,7 @@ ActiveRecord::Schema.define(version: 20170402062910) do
   add_foreign_key "betting_infos", "players", column: "favourite_id"
   add_foreign_key "elo_ratings", "matches"
   add_foreign_key "elo_ratings", "players"
+  add_foreign_key "experiences", "matches"
   add_foreign_key "experiences", "players"
   add_foreign_key "leagues", "tables"
   add_foreign_key "matches", "players", column: "away_player_id"
