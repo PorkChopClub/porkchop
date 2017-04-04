@@ -123,27 +123,6 @@ RSpec.describe Player, type: :model do
     it { is_expected.to match_array [away, home] }
   end
 
-  describe "#elo=" do
-    let(:player) { FactoryGirl.create :player, elo: 666 }
-
-    context "without saving" do
-      it "does not change the player's rating" do
-        expect do
-          player.elo = 1000
-        end.not_to change { player.reload.elo }
-      end
-    end
-
-    context "without saving" do
-      it "does not change the player's rating" do
-        expect do
-          player.elo = 1000
-          player.save
-        end.to change { player.reload.elo }.from(666).to(1000)
-      end
-    end
-  end
-
   describe "#elo" do
     subject { player.elo }
 
@@ -153,16 +132,18 @@ RSpec.describe Player, type: :model do
 
     context "when the player has recorded ratings" do
       let!(:old_rating) do
-        FactoryGirl.create :elo_rating,
-                           player: player,
-                           rating: 10,
-                           created_at: 1.minute.ago
+        create :elo_rating,
+               player: player,
+               rating: 10,
+               created_at: 1.minute.ago,
+               match: create(:match)
       end
 
       let!(:newest_rating) do
-        FactoryGirl.create :elo_rating,
-                           player: player,
-                           rating: 1200
+        create :elo_rating,
+               player: player,
+               rating: 1200,
+               match: create(:match)
       end
 
       it "returns the rating of the most recent one" do
@@ -189,6 +170,19 @@ RSpec.describe Player, type: :model do
     it "returns the currently active streak" do
       subject
       expect(subject).to eq streak
+    end
+  end
+
+  describe "#xp" do
+    subject(:xp) { player.xp }
+
+    let(:player) { create :player }
+
+    it "is the sum of their experiences xp" do
+      create :experience, player: player, reason: :completed_match
+      create :experience, player: player, reason: :completed_match
+      create :experience, player: player, reason: :won_match
+      expect(xp).to eq 235
     end
   end
 

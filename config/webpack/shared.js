@@ -18,6 +18,7 @@ config = {
       map[basename] = [
         "jquery-ujs",
         "babel-polyfill",
+        "fonts",
         path.resolve(entry)
       ]
       return map
@@ -33,7 +34,10 @@ config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          plugins: ["transform-object-rest-spread"],
+          plugins: [
+            "transform-function-bind",
+            "transform-object-rest-spread"
+          ],
           presets: [
             "react",
             ["env", {

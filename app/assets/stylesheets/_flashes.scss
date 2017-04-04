@@ -1,27 +1,25 @@
-.site-flash-wrap {
-  color: white;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
+.site-flash {
+  max-width: var(--site-width-max);
+  margin: 0 auto;
+  font-size: 1.125rem;
   font-weight: bold;
-  font-size: 1.2rem;
+  padding: var(--site-padding);
+  margin-top: var(--site-padding);
+  text-align: center;
+  border: 2px solid transparent;
 
   &.notice {
-    @include linear-gradient(to right, $blue, $green);
+    border-color: var(--color-information);
+    color: var(--color-information);
   }
 
   &.alert {
-    @include linear-gradient(to right, $blue, $red);
+    border-color: var(--color-warning);
+    color: var(--color-warning);
   }
 
   &.error {
-    @include linear-gradient(to right, $yellow, $red);
+    border-color: var(--color-error);
+    color: var(--color-error);
   }
-}
-
-.site-flash {
-  @include margin(0 auto);
-  @include padding(0.5rem 0);
-  max-width: 500px;
-  text-align: center;
 }

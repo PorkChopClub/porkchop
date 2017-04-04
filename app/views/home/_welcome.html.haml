@@ -1,0 +1,11 @@
+%p
+  PorkChop is the table tennis scoreboard and statistic tracking app we use at
+  #{link_to("Stembolt", "https://www.stembolt.com")}.
+%p
+  Games played: #{Match.count}
+%p
+  First game: #{l(Match.minimum(:created_at).to_date)}
+%p
+  = link_to "Join in!", new_player_registration_path
+%p
+  = link_to "Sign in!", new_player_session_path

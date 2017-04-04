@@ -22,11 +22,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails'
 gem 'bourbon'
 gem 'normalize-rails'
+gem 'autoprefixer-rails'
 
 # Javascript
-gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
-
 gem 'webpacker'
 
 # Frontend
@@ -67,7 +65,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'pry-rails'
 
-  gem 'ffaker', require: false
+  gem 'ffaker'
   gem 'factory_girl_rails', require: false
 end
 

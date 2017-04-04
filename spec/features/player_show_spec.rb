@@ -8,6 +8,5 @@ RSpec.describe "scoreboard page", js: true do
 
     expect(page).to have_content(player.name)
     expect(page).to have_content("Elo: 1000")
-    expect(page).to have_content("This player hasn't even played a game yet.")
   end
 end

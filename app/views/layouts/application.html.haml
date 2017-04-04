@@ -1,14 +1,25 @@
 !!! 5
 %html
   = render "layouts/head"
-%body.layout-good
-  = render "layouts/header"
 
-  = render "layouts/flashes"
+%body(data-js-pullout-navigation-active)
+  - if current_player
+    - if current_player.active?
+      = link_to "Stop Playing", play_path, method: :delete, class: "play-now-button"
+    - else
+      = link_to "Play Now", play_path, method: :post, class: "play-now-button"
 
-  .site-content
-    = yield
+  .pullout-navigation-overlay(data-js-pullout-navigation-active data-js-pullout-navigation-toggle)
 
-  = render "layouts/footer"
+  = render "pullout_navigation"
+
+  .site-wrap
+    = render "layouts/flashes"
+
+    = render "site_header"
+
+    .site-content(data-js-pullout-navigation-active)
+      = yield
 
   = render 'layouts/javascript'
+

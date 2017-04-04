@@ -9,7 +9,7 @@ namespace :porkchop do
         EloAdjustment.new(
           victor: match.victor,
           loser: match.loser,
-          matches: match.all_matches_before
+          match: match
         ).adjust!
 
         EloRating.
@@ -22,6 +22,7 @@ namespace :porkchop do
           match_result: "W",
           finished_at: match.finalized_at
         ).adjust!
+
         Stats::StreakAdjustment.new(
           player: match.loser,
           match_result: "L",

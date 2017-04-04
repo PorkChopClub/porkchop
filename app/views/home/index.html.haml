@@ -1,12 +1,4 @@
-.outer-container
-  = cache Match.finalized.order(:finalized_at).last do
-    .homepage-leaderboard-list.porkbox-light
-      %h2 Leaderboard
-      = render "shared/leaderboard", players: ranked_players
-
-    .homepage-chart.porkbox-light
-      %canvas.elo-chart{ data: { labels: elo_range.map{ |x| l(x, format: :short) }.to_json, ratings: elo_data.to_json } }
-
-    .homepage-recent-matches.porkbox-light
-      %h2 Recent matches
-      = render "matches/list", matches: recent_matches
+- if current_player
+  = render "players/progress", player: current_player
+- else
+  = render "welcome"

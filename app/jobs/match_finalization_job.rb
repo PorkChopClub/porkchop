@@ -7,18 +7,42 @@ class MatchFinalizationJob < ApplicationJob
     return if match.finalized?
     return unless match.finished?
 
-    match.victor = match.leader
-    match.finalize!
-    update_streaks!
-    adjust_elo!
-    matchmake!
+    Match.transaction do
+      match.victor = match.leader
+      match.finalize!
+
+      award_complete_match_experience
+      award_won_match_experience
+
+      update_streaks!
+
+      adjust_elo!
+    end
+
     send_notification!
     update_match_channel
+    matchmake!
   end
 
   private
 
   attr_reader :match
+
+  def award_complete_match_experience
+    [match.home_player, match.away_player].each do |player|
+      player.experiences.create!(
+        match: match,
+        reason: :completed_match
+      )
+    end
+  end
+
+  def award_won_match_experience
+    match.victor.experiences.create!(
+      match: match,
+      reason: :won_match
+    )
+  end
 
   def send_notification!
     SlackGameEndJob.perform_later(match)
@@ -28,7 +52,7 @@ class MatchFinalizationJob < ApplicationJob
     EloAdjustment.new(
       victor: match.victor,
       loser: match.loser,
-      matches: match.all_matches_before
+      match: match
     ).adjust!
   end
 

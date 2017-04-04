@@ -2,26 +2,5 @@
 
 body {
   margin: 0;
-}
-
-select {
-  color: darken($dark-grey, 10);
-}
-
-a {
-  &:link,
-  &:visited {
-    color: $blue-text;
-    text-decoration: none;
-  }
-
-  &:hover,
-  &:active {
-    color: $blue;
-    text-decoration: underline;
-  }
-}
-
-.clearfix {
-  @include clearfix;
+  color: var(--color-text-default);
 }

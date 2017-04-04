@@ -14,14 +14,14 @@ class Player < ActiveRecord::Base
 
   has_many :points, foreign_key: 'victor_id'
   has_many :victories, class_name: "Match", foreign_key: 'victor_id'
-  has_many :elo_ratings
-  has_many :season_memberships
+  has_many :elo_ratings, dependent: :destroy
+  has_many :season_memberships, dependent: :destroy
   has_many :seasons, through: :season_memberships
-  has_many :streaks, class_name: "Stats::Streak"
+  has_many :streaks, class_name: "Stats::Streak", dependent: :destroy
+  has_many :experiences, dependent: :destroy
+  has_many :timeline_events, dependent: :destroy
 
   validates :name, presence: true
-
-  after_save :record_rating
 
   def self.ranked
     joins('INNER JOIN "matches" ON ("home_player_id" = "players"."id" OR "away_player_id" = "players"."id")').
@@ -58,8 +58,6 @@ class Player < ActiveRecord::Base
     Player.where(id: opponent_ids)
   end
 
-  attr_writer :elo
-
   def elo
     elo_ratings.most_recent_rating || BASE_ELO
   end
@@ -84,12 +82,11 @@ class Player < ActiveRecord::Base
     matches.finalized.where('finalized_at > ?', 4.months.ago).count < 10
   end
 
-  private
-
-  def record_rating
-    return unless @elo
-    elo_ratings.create(rating: @elo)
+  def xp
+    experiences.sum(:xp)
   end
+
+  private
 
   def opponent_ids
     matches.

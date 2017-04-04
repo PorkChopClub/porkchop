@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210063539) do
+ActiveRecord::Schema.define(version: 20170402062910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,22 @@ ActiveRecord::Schema.define(version: 20170210063539) do
     t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "match_id",   null: false
+    t.index ["match_id"], name: "index_elo_ratings_on_match_id", using: :btree
     t.index ["player_id", "created_at"], name: "index_elo_ratings_on_player_id_and_created_at", using: :btree
     t.index ["player_id"], name: "index_elo_ratings_on_player_id", using: :btree
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.integer  "xp",         null: false
+    t.string   "reason",     null: false
+    t.integer  "match_id",   null: false
+    t.integer  "player_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_experiences_on_match_id", using: :btree
+    t.index ["player_id"], name: "index_experiences_on_player_id", using: :btree
+    t.index ["reason", "player_id", "match_id"], name: "index_experiences_on_reason_and_player_id_and_match_id", unique: true, using: :btree
   end
 
   create_table "leagues", force: :cascade do |t|
@@ -139,7 +153,10 @@ ActiveRecord::Schema.define(version: 20170210063539) do
 
   add_foreign_key "betting_infos", "matches"
   add_foreign_key "betting_infos", "players", column: "favourite_id"
+  add_foreign_key "elo_ratings", "matches"
   add_foreign_key "elo_ratings", "players"
+  add_foreign_key "experiences", "matches"
+  add_foreign_key "experiences", "players"
   add_foreign_key "leagues", "tables"
   add_foreign_key "matches", "players", column: "away_player_id"
   add_foreign_key "matches", "players", column: "home_player_id"

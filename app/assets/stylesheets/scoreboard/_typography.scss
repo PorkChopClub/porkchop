@@ -1,0 +1,19 @@
+$sans-serif: 'Roboto', sans-serif;
+
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+body {
+  font-family: $sans-serif;
+  font-weight: $font-weight-medium;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $sans-serif;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+}

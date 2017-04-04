@@ -1,25 +1,31 @@
-$sans-serif: 'Roboto', sans-serif;
-
-$font-weight-medium: 500;
-$font-weight-bold: 700;
-
 body {
-  font-family: $sans-serif;
-  font-weight: $font-weight-medium;
-  line-height: 1.5;
+  font-family: Roboto, sans-serif;
 }
 
 h1,
 h2,
-h3,
-h4 {
-  font-family: $sans-serif;
-  font-weight: $font-weight-bold;
-  margin: 0;
-  line-height: 1.2;
+h3 {
+  margin: 2rem 0 1rem 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
-h1 { font-size: modular-scale(3); }
-h2 { font-size: modular-scale(2); }
-h3 { font-size: modular-scale(1); }
-h4 { font-size: modular-scale(0); }
+h1 {
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+h4 {
+  font-size: 1rem;
+  margin: 1rem 0;
+  text-transform: uppercase;
+}

@@ -1,12 +1,10 @@
 @import "normalize-rails";
 @import "bourbon";
 
-@import "setup/palette";
-
-@import "animations";
 @import "base";
-@import "typography";
 
+@import "scoreboard/palette";
+@import "scoreboard/typography";
 @import "scoreboard/layout";
 @import "scoreboard/page";
 @import "scoreboard/no-match";

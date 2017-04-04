@@ -1,0 +1,13 @@
+.play-now-button {
+  display: block;
+  position: fixed;
+  background-color: var(--color-player-activation);
+  color: var(--color-text-inverted);
+  right: 0;
+  bottom: 0;
+  padding: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 1.5rem rgba(0, 0, 0, 0.125);
+  text-decoration: none;
+}
