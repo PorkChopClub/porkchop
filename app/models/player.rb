@@ -14,11 +14,11 @@ class Player < ActiveRecord::Base
 
   has_many :points, foreign_key: 'victor_id'
   has_many :victories, class_name: "Match", foreign_key: 'victor_id'
-  has_many :elo_ratings
-  has_many :season_memberships
+  has_many :elo_ratings, dependent: :destroy
+  has_many :season_memberships, dependent: :destroy
   has_many :seasons, through: :season_memberships
-  has_many :streaks, class_name: "Stats::Streak"
-  has_many :experiences
+  has_many :streaks, class_name: "Stats::Streak", dependent: :destroy
+  has_many :experiences, dependent: :destroy
   has_many :timeline_events, dependent: :destroy
 
   validates :name, presence: true
