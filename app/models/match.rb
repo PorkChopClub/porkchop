@@ -15,6 +15,7 @@ class Match < ActiveRecord::Base
   enum first_service: { first_service_by_home_player: 1, first_service_by_away_player: 2 }
 
   has_many :points, dependent: :destroy
+  has_many :timeline_events, dependent: :destroy
 
   has_one :season_match, dependent: :destroy
   has_one :season, through: :season_match

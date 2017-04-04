@@ -19,6 +19,7 @@ class Player < ActiveRecord::Base
   has_many :seasons, through: :season_memberships
   has_many :streaks, class_name: "Stats::Streak"
   has_many :experiences
+  has_many :timeline_events, dependent: :destroy
 
   validates :name, presence: true
 
