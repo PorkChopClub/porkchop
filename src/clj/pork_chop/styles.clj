@@ -3,4 +3,4 @@
 
 (defstyles style
   [:h1 {:text-decoration "underline"
-        :color "green"}])
+        :color "red"}])
