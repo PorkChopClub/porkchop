@@ -1,17 +1,3 @@
 engines:
-  rubocop:
+  kibit:
     enabled: true
-  fixme:
-    enabled: true
-  duplication:
-    enabled: true
-    config:
-      languages:
-        - ruby
-ratings:
-  paths:
-    - app/**
-    - lib/**
-exclude_paths:
-  - spec/**/*
-  - vendor/**/
