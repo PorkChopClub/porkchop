@@ -1,9 +1,0 @@
-# Action Cable uses Redis by default to administer connections, channels, and sending/receiving messages over the WebSocket.
-production:
-  adapter: postgresql
-
-development:
-  adapter: redis
-
-test:
-  adapter: async

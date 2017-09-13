@@ -1,1 +1,0 @@
-json.percentages @percentages
