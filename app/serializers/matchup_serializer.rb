@@ -2,6 +2,21 @@ class MatchupSerializer < ActiveModel::Serializer
   attribute :player_names
 
   def player_names
-    object.players.map(&:name)
+    ordered_players.map(&:name)
+  end
+
+  private
+
+  attr_reader :player1, :player2
+
+  def ordered_players
+    @player1, @player2 = *object.players.sort_by(&:name)
+    player1_at_home? ? [player1, player2] : [player2, player1]
+  end
+
+  def player1_at_home?
+    player1_at_home = player1.matches_against(player2).none? ||
+                      player1.matches_against(player2).
+                      order(created_at: :asc).last.away_player == player1
   end
 end
