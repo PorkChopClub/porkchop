@@ -10,11 +10,13 @@ class MatchupSerializer < ActiveModel::Serializer
   attr_reader :player1, :player2
 
   def ordered_players
+    return [] unless object.players.any?
     @player1, @player2 = *object.players.sort_by(&:name)
     player1_at_home? ? [player1, player2] : [player2, player1]
   end
 
   def player1_at_home?
+    return false unless object.players.any?
     player1_at_home = player1.matches_against(player2).none? ||
                       player1.matches_against(player2).
                       order(created_at: :asc).last.away_player == player1
