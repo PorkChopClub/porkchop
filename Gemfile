@@ -66,6 +66,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6.0.beta1'
   gem 'rails-controller-testing'
   gem 'pry-rails'
+  gem 'pry-stack_explorer'
 
   gem 'ffaker', require: false
   gem 'factory_girl_rails', require: false
