@@ -10,8 +10,8 @@ before_install:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:test:prepare
-  - nvm install 6.2
-  - nvm use 6.2
+  - nvm install 9.11
+  - nvm use 9.11
   - npm install -g yarn
   - yarn install
 script:
