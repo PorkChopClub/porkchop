@@ -385,9 +385,9 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
-  bourbon
+  bourbon (~> 4.2)
   bugsnag
-  cancancan
+  cancancan (~> 1.16)
   capybara (~> 2.10.1)
   capybara-screenshot
   carrierwave (>= 1.0.0.rc, < 2.0)
@@ -412,7 +412,7 @@ DEPENDENCIES
   letter_opener
   mime-types (~> 2.6.1)
   normalize-rails
-  pg
+  pg (~> 0.20)
   platform-api!
   poltergeist
   pry-rails
@@ -429,15 +429,15 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sassc-rails
   shoulda-matchers
-  sidekiq
-  simple_form
+  sidekiq (~> 4.2)
+  simple_form (~> 3.4)
   simplecov
   slack-notifier
   stackprof
   timecop
   uglifier (>= 1.3.0)
   visdiff
-  webpacker
+  webpacker (= 1.0)
 
 RUBY VERSION
    ruby 2.4.0p0

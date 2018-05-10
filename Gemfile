@@ -10,9 +10,9 @@ gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
 
 gem 'rails', '~> 5.0.1'
 gem 'rack-cors'
-gem 'pg'
+gem 'pg', '~> 0.20'
 gem 'puma'
-gem 'sidekiq'
+gem 'sidekiq', '~> 4.2'
 gem 'kaminari'
 gem 'fog-aws'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
@@ -20,19 +20,19 @@ gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 # CSS
 gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails'
-gem 'bourbon'
+gem 'bourbon', '~> 4.2'
 gem 'normalize-rails'
 
 # Javascript
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 
-gem 'webpacker'
+gem 'webpacker', '= 1.0'
 
 # Frontend
 gem 'jbuilder', '~> 2.0'
 gem 'hamlit'
-gem 'simple_form'
+gem 'simple_form', '~> 3.4'
 gem 'font-awesome-rails'
 
 gem 'slack-notifier'
@@ -40,7 +40,7 @@ gem 'bugsnag'
 gem 'elo2'
 gem 'faraday'
 gem 'devise'
-gem 'cancancan'
+gem 'cancancan', '~> 1.16'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'games_back', '~> 1.0'
 
