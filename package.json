@@ -2,7 +2,7 @@
   "name": "porkchop",
   "version": "1.2.3",
   "engines": {
-    "node": ">=6.3.0",
+    "node": "^9.0.0",
     "npm": "3.10.x"
   },
   "private": true,
