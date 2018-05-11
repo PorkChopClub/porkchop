@@ -20,8 +20,15 @@ class Matchmaker
                max: total_possible_matchups * 2.0,
                factor: 0.33 / total_possible_matchups)
 
+      match_counts = players.map(&:matches_since_last_played)
+      matches_played =
+        if match_counts.any?(&:infinite?)
+          Float::INFINITY
+        else
+          match_counts.sum
+        end
       add_term(name: "Combined matches since players last played",
-               base_value: players.sum(&:matches_since_last_played),
+               base_value: matches_played,
                max: (total_player_count - 1) * 2.0,
                factor: 1.5 / (total_player_count - 1))
     end
