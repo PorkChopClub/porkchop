@@ -50,6 +50,7 @@ group :production do
   # We use letsencrypt to configure SSL certs on herku
   gem 'platform-api', git: 'http://github.com/jalada/platform-api', branch: 'master'
   gem 'letsencrypt-rails-heroku'
+  gem 'heroics', '< 0.0.22'
 end
 
 group :development do
