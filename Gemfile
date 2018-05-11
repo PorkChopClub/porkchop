@@ -8,7 +8,7 @@ gem 'rainbow', '>= 2.1.0', '< 2.2.0'
 # This should be first.
 gem 'mime-types', '~> 2.6.1', require: 'mime/types/columnar'
 
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.0'
 gem 'rack-cors'
 gem 'pg', '~> 0.20'
 gem 'puma'
@@ -32,7 +32,7 @@ gem 'webpacker', '= 1.0'
 # Frontend
 gem 'jbuilder', '~> 2.0'
 gem 'hamlit'
-gem 'simple_form', '~> 3.4'
+gem 'simple_form', '~> 4.0'
 gem 'font-awesome-rails'
 
 gem 'slack-notifier'
