@@ -27,6 +27,14 @@ export const trackOngoingMatch = (tableId) => (dispatch) => {
     connected: () => dispatch(ongoingMatchConnected()),
   })
 
+  setInterval(() => {
+    if (Date.now() - cable.connection.monitor.pingedAt > 5000) {
+      dispatch(ongoingMatchDisconnected())
+    } else {
+      dispatch(ongoingMatchConnected())
+    }
+  }, 200)
+
   fetch(`/api/v2/tables/${tableId}/matches/ongoing`)
     .then((response) => response.json())
     .then((json) => dispatchMatchUpdate(json))
