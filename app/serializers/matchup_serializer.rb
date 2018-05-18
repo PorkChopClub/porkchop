@@ -17,8 +17,8 @@ class MatchupSerializer < ActiveModel::Serializer
 
   def player1_at_home?
     return false unless object.players.any?
-    player1_at_home = player1.matches_against(player2).none? ||
-                      player1.matches_against(player2).
+    player1_at_home = player1.matches_against(player2, finalized: false).none? ||
+                      player1.matches_against(player2, finalized: false).
                       order(created_at: :asc).last.away_player == player1
   end
 end

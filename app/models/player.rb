@@ -47,11 +47,13 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def matches_against(opponent)
-    matches.finalized.where(
+  def matches_against(opponent, finalized: true)
+    query = matches.where(
       "away_player_id = :opponent OR home_player_id = :opponent",
       opponent: opponent
     )
+    query = query.finalized if finalized
+    query
   end
 
   def opponents
