@@ -28,7 +28,7 @@ RSpec.describe Betting::Spread do
       end
 
       it "calculates the spread" do
-        expect(calculator.spread).to eq 0.5
+        expect(calculator.spread).to eq -0.5
         expect(calculator.favourite).to eq adam
       end
     end
@@ -39,7 +39,7 @@ RSpec.describe Betting::Spread do
       end
 
       it "calculates the spread" do
-        expect(calculator.spread).to eq 0.5
+        expect(calculator.spread).to eq -0.5
         expect(calculator.favourite).to eq jared
       end
     end
