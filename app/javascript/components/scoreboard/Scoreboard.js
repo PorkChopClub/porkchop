@@ -21,8 +21,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const nextMatchPlayers = (match) => match.next_matchup.player_names.join(" vs ")
-
 const visibleComponent = (props) => {
   const {
     isMatchHappening,
@@ -39,14 +37,21 @@ const visibleComponent = (props) => {
   return <OngoingMatch match={ongoingMatch}/>
 }
 
-const Scoreboard = (props) =>  (
-  <div className="scoreboard">
-    {visibleComponent(props)}
+const nextMatchPlayers = (match) => match && match.next_matchup.player_names
+const nextUpText = (players) => players.length ? `Next up: ${players.join(" vs ")}` : "No upcoming match."
 
-    {ongoingMatch && <div className="ongoing-match-next-match">
-      Next up: {nextMatchPlayers(props.ongoingMatch)}
-    </div>}
-  </div>
-)
+const Scoreboard = (props) => {
+  const players = nextMatchPlayers(props.ongoingMatch)
+
+  return (
+    <div className="scoreboard">
+      {visibleComponent(props)}
+
+      <div className="ongoing-match-next-match">
+        {nextUpText(players)}
+      </div>
+    </div>
+  )
+}
 
 export default connect(mapStateToProps)(Scoreboard)
