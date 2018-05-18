@@ -21,6 +21,8 @@ const mapStateToProps = (state) => {
   }
 }
 
+const nextMatchPlayers = (match) => match.next_matchup.player_names.join(" vs ")
+
 const visibleComponent = (props) => {
   const {
     isMatchHappening,
@@ -40,6 +42,10 @@ const visibleComponent = (props) => {
 const Scoreboard = (props) =>  (
   <div className="scoreboard">
     {visibleComponent(props)}
+
+    {ongoingMatch && <div className="ongoing-match-next-match">
+      Next up: {nextMatchPlayers(props.ongoingMatch)}
+    </div>}
   </div>
 )
 

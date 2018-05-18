@@ -10,7 +10,6 @@ const playerStyle = (player, match) => ({
   backgroundImage: `url(${match[`${player}_player`].portrait_url})`
 })
 
-const nextMatchPlayers = (match) => match.next_matchup.player_names.join(" vs ")
 const centerText = (match) => {
   if (match['finished?']) {
     return "Final Score"
@@ -39,10 +38,6 @@ export default ({ match }) => {
         </div>
 
         <div className="ongoing-match-versus">{centerText(match)}</div>
-      </div>
-
-      <div className="ongoing-match-next-match">
-        Next up: {nextMatchPlayers(match)}
       </div>
     </div>
   )
