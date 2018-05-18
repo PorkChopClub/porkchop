@@ -12,6 +12,9 @@ export const startTimer = () => (dispatch) =>
 
 export const ongoingMatchUpdated = createAction('ONGOING_MATCH_UPDATED')
 
+export const ongoingMatchConnected = createAction('ONGOING_MATCH_CONNECTED')
+export const ongoingMatchDisconnected = createAction('ONGOING_MATCH_DISCONNECTED')
+
 export const trackOngoingMatch = (tableId) => (dispatch) => {
   const dispatchMatchUpdate = (match) => dispatch(ongoingMatchUpdated(match))
 
@@ -19,7 +22,9 @@ export const trackOngoingMatch = (tableId) => (dispatch) => {
     received: (json) => {
       const data = JSON.parse(json)
       dispatchMatchUpdate(data)
-    }
+    },
+    disconnected: () => dispatch(ongoingMatchDisconnected()),
+    connected: () => dispatch(ongoingMatchConnected()),
   })
 
   fetch(`/api/v2/tables/${tableId}/matches/ongoing`)
