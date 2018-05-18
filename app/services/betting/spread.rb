@@ -12,7 +12,7 @@ module Betting
 
     def spread
       return if match_count < Betting::MINIMUM_MATCH_COUNT
-      (raw_spread.abs - 0.5).round + 0.5
+      -((raw_spread.abs - 0.5).round + 0.5)
     end
 
     def favourite
