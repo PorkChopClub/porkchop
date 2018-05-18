@@ -41,7 +41,7 @@ const nextMatchPlayers = (match) => match && match.next_matchup.player_names
 const nextUpText = (players) => players.length ? `Next up: ${players.join(" vs ")}` : "No upcoming match."
 
 const Scoreboard = (props) => {
-  const players = nextMatchPlayers(props.ongoingMatch)
+  const players = nextMatchPlayers(props.ongoingMatch) || []
 
   return (
     <div className="scoreboard">
