@@ -30,7 +30,7 @@ const NoConnection = () => (
 )
 
 const App = ({ tableId, connected }) => {
-  const contents = connected ? [<Scoreboard/>, <TableControls tableId={tableId}/>] : <NoConnection />
+  const contents = connected ? [<Scoreboard key={1} />, <TableControls tableId={tableId} key={2} />] : <NoConnection />
 
   return (
     <div>{contents}</div>
